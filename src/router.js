@@ -15,7 +15,7 @@ const routes = [
     component: home
   },
   {
-    path: '/portobello',
+    path: '/board',
     name: 'portobello-app',
     component: portobelloApp
   },
