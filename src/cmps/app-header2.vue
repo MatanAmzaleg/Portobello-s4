@@ -1,8 +1,9 @@
 <template>
   <header>
     <nav>
-      <button>
-        <font-awesome-icon icon="fa-brands fa-trello"/>Portobello
+      <button class="logo">
+        <font-awesome-icon class="icon" icon="fa-brands fa-trello"/>
+        <span class="title">Portobello</span>
       </button>
       <button>
         Workspace
