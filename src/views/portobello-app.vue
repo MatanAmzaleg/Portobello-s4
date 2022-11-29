@@ -3,7 +3,7 @@
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
         <p>
-          {{board.name}}
+          {{board.title}}
         </p>
 
         <button @click="removeBoard(board._id)">x</button>
@@ -17,7 +17,7 @@
     <hr />
     <form @submit.prevent="addBoard()">
       <h2>Add board</h2>
-      <input type="text" v-model="boardToAdd.name" />
+      <input type="text" v-model="boardToAdd.title" />
       <button>Save</button>
     </form>
   </div>
