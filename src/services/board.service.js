@@ -20,7 +20,8 @@ window.boardService = boardService
 
 
 async function query(filterBy = { txt: ''}) {
-    return httpService.get(STORAGE_KEY, filterBy)
+    var boards = await storageService.query(STORAGE_KEY)
+    // return httpService.get(STORAGE_KEY, filterBy)
 
     // var boards = await storageService.query(STORAGE_KEY)
     // if (filterBy.txt) {
@@ -30,7 +31,7 @@ async function query(filterBy = { txt: ''}) {
     // if (filterBy.price) {
     //     boards = boards.filter(board => board.price <= filterBy.price)
     // }
-    // return boards
+    return boards
 
 }
 function getById(boardId) {
