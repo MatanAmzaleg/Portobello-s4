@@ -4,7 +4,7 @@
     <p>Get going faster with a template from the Trello community or</p>
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
-        <article class="board">
+        <article class="board" @click="">
           <p>
             {{board.title}}
           </p>
@@ -97,11 +97,13 @@ export default {
 .container.home{
   max-width: 825px;
   margin-inline: auto;
+  margin: 40px auto 0;
 
   .board-list{
     display: flex;
+    flex-wrap: wrap;
     margin-top: 24px;
-    gap: 10px;
+    gap: 16.5px;
     padding: 0;
 
     li{
@@ -109,7 +111,7 @@ export default {
     }
 
     .board{
-      width: 194px;
+      width: 193px;
       height: 96px;
       padding: 8px;
       background-color:rgb(152, 212, 192);
