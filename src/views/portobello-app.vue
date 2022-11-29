@@ -1,17 +1,14 @@
 <template>
   <div class="container home">
+    <h1>#i Most popular templates</h1>
+    <p>Get going faster with a template from the Trello community or</p>
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
-        <p>
-          {{board.title}}
-        </p>
-
-        <button @click="removeBoard(board._id)">x</button>
-        <button @click="updateBoard(board)">Update</button>
-        <hr />
-        <button @click="addBoardMsg(board._id)">Add board msg</button>
-        <button @click="printBoardToConsole(board)">Print msgs to console</button>
-
+        <article class="board">
+          <p>
+            {{board.title}}
+          </p>
+        </article>
       </li>
     </ul>
     <hr />
@@ -96,9 +93,30 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss">
 .container.home{
-  max-width: 1100px;
+  max-width: 825px;
   margin-inline: auto;
+
+  .board-list{
+    display: flex;
+    margin-top: 24px;
+    gap: 10px;
+    padding: 0;
+
+    li{
+      list-style-type: none;
+    }
+
+    .board{
+      width: 194px;
+      height: 96px;
+      padding: 8px;
+      background-color:rgb(152, 212, 192);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
 }
 </style>
