@@ -4,7 +4,7 @@
     <p>Get going faster with a template from the Trello community or</p>
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
-        <article class="board" @click="">
+        <article class="board" :board="board" @click="moveToBoard(board._id)">
           <p>
             {{board.title}}
           </p>
@@ -24,6 +24,7 @@
 import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
 import {boardService} from '../services/board.service.js'
 import { getActionRemoveBoard, getActionUpdateBoard, getActionAddBoardMsg } from '../store/board.store'
+import boardDetails from './board-details.vue'
 export default {
   data() {
     return {
@@ -85,8 +86,15 @@ export default {
     },
     printBoardToConsole(board) {
       console.log('Board msgs:', board.msgs)
+    },
+    moveToBoard(boardId){
+      console.log(boardId);
+      this.$router.push(`/board/${boardId}`)
     }
-  }
+  },
+  components: {
+    boardDetails,
+  },
 
   
 }

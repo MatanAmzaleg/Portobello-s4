@@ -3,6 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import home from './views/home.vue'
 import chat from './views/chat.vue'
 import portobelloApp from './views/portobello-app.vue'
+import boardDetails from './views/board-details.vue'
 import reviewApp from './views/review-app.vue'
 import loginSignup from './views/login-signup.vue'
 import userDetails from './views/user-details.vue'
@@ -18,6 +19,11 @@ const routes = [
     path: '/board',
     name: 'portobello-app',
     component: portobelloApp
+  },
+  {
+    path: '/board/:id',
+    name: 'board-details',
+    component: boardDetails
   },
   {
     path: '/review',
