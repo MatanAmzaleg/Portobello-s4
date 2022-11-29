@@ -1,17 +1,15 @@
 <template>
   <section v-if="currBoard" class="board-details">
     <Container
-      class="flex overflow-x-auto gap-8 p-8"
+      class="group-container"
       group-name="cols"
       tag="div"
-      orientation="horizontal"
       @drop="onColumnDrop($event)"
     >
       <Draggable v-for="column in scene.children" :key="column.id">
         <div class="group">
           <div class="group-title">
             <span class="text-lg">{{ column.name }}</span>
-
           </div>
           <!-- column -->
           <Container
@@ -47,6 +45,7 @@
             >
               <p>{{ item.name }}</p>
             </draggable>
+            <button class="add-task-btn">+ Add a card</button>
           </Container>
         </div>
       </Draggable>
@@ -146,6 +145,12 @@ export default {
 </script>
 
 <style lang="scss">
+.group-container {
+  display: flex;
+  gap: 16px;
+  margin: 15px 0px 8px;
+  padding: 0px 0px 8px 16px;
+}
 .group {
   width: 272px;
   background-color: #ebecf0;
@@ -154,21 +159,39 @@ export default {
   .group-title {
     height: 40px;
     display: flex;
-    gap: 16px;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+
+    span{
+      padding-inline: 16px;
+    }
   }
 }
 
 .task {
-    background-color: #FFFFFF;
-    word-wrap: break-word;
-    clear: both;
-    display: block;
-    padding: 0 0 4px;
-    overflow: hidden;
-    text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
+  background-color: #ffffff;
+  word-wrap: break-word;
+  clear: both;
+  display: block;
+  padding: 6px 8px 2px;
+  margin: 0 8px 4px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
+}
+
+.add-task-btn {
+  width: 80%;
+  text-align: left;
+  height: 100%;
+  margin: 2px 0 8px 8px;
+  padding: 4px 8px;
+  border-radius: 3px;
+
+  &:hover {
+    background-color: #e2e2e4;
+  }
 }
 </style>
