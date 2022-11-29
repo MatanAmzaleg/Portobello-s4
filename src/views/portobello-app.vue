@@ -94,3 +94,11 @@ export default {
   
 }
 </script>
+
+
+<style>
+.container.home{
+  max-width: 1100px;
+  margin-inline: auto;
+}
+</style>
