@@ -1,0 +1,114 @@
+[
+    {
+        "group": [
+            {
+                "_id": "g101",
+                "title": "In Progress",
+                "tasks": [
+                    {
+                        "_id": "t101",
+                        "task": "Gather customer quotes/testimonials",
+                        "description": "",
+                        "members": [
+                            "Matan",
+                            "Bar",
+                            "Lior"
+                        ],
+                        "labels": [],
+                        "checkList": [
+                            0
+                        ],
+                        "comments": [
+                            {
+                                "_id": "m101",
+                                "by": "Bar",
+                                "txt": "add labels",
+                                "createdAt": 123456789
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "_id": "g102",
+                "title": "To Do",
+                "tasks": [
+                    {
+                        "_id": "t102",
+                        "task": "Update assorted references on existing Marketing pages",
+                        "description": "",
+                        "members": [],
+                        "labels": [
+                            ""
+                        ],
+                        "checkList": [
+                            {
+                                "_id": "c101",
+                                "isActive": true,
+                                "txt": "Page 1"
+                            },
+                            {
+                                "_id": "c102",
+                                "isActive": true,
+                                "txt": "Page 2"
+                            },
+                            {
+                                "_id": "c103",
+                                "isActive": true,
+                                "txt": "Page 3"
+                            }
+                        ],
+                        "comments": [
+                            {
+                                "_id": "m102",
+                                "by": "Matan",
+                                "txt": "add members",
+                                "createdAt": 123456789
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "_id": "g103",
+                "title": "Launched",
+                "tasks": [
+                    {
+                        "_id": "t103",
+                        "task": "Messaging Doc",
+                        "description": "",
+                        "members": ["Bar"],
+                        "labels": [],
+                        "checkList": [],
+                        "comments": [
+                            {
+                                "_id": "m103",
+                                "by": "Lior",
+                                "txt": "new task",
+                                "createdAt": 123456789
+                            }
+                        ]
+                    },
+                    {
+                        "_id": "t104",
+                        "task": "Target Product Launch Date: December 1, 2019",
+                        "description": "",
+                        "members": ["Lior"],
+                        "labels": [],
+                        "checkList": [],
+                        "comments": []
+                    },
+                    {
+                        "_id": "t105",
+                        "task": "Marketing docs and assets",
+                        "description": "Everything you need for our big launch is available here! Attach Google Drive folders, Confluence pages, Slack channels and more.",
+                        "members": ["Matan"],
+                        "labels": [],
+                        "checkList": [],
+                        "comments": []
+                    }
+                ]
+            }
+        ]
+    }
+]
