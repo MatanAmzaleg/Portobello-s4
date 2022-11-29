@@ -7,7 +7,6 @@ import boardDetails from './views/board-details.vue'
 import reviewApp from './views/review-app.vue'
 import loginSignup from './views/login-signup.vue'
 import userDetails from './views/user-details.vue'
-import dragAndDrop2 from './cmps/drag-and-drop2.vue'
 
 const routes = [
   {
@@ -45,11 +44,6 @@ const routes = [
     name: 'user-details',
     component: userDetails
   },
-  {
-    path: '/drag&drop2',
-    name: 'drag-and-drop2',
-    component: dragAndDrop2
-  }
 ]
 
 

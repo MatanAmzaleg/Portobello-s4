@@ -7,16 +7,11 @@
       orientation="horizontal"
       @drop="onColumnDrop($event)"
     >
-      <Draggable
-        class="bg-gray-200 dark:bg-gray-700 rounded-lg w-96 flex-shrink-0 shadow-xl"
-        v-for="column in scene.children"
-        :key="column.id"
-      >
-        <div class="flex flex-col">
-          <div
-            class="cursor-move rounded-t-lg p-4 space-x-4 bg-primary text-white flex space-x-2"
-          >
+      <Draggable v-for="column in scene.children" :key="column.id">
+        <div class="group">
+          <div class="group-title">
             <span class="text-lg">{{ column.name }}</span>
+
           </div>
           <!-- column -->
           <Container
@@ -30,7 +25,7 @@
             :drop-placeholder="{
               className: `bg-primary bg-opacity-20  
               border-dotted border-2 
-              border-primary rounded-lg mx-4 my-2`,
+              border-primary mx-4 my-2`,
               animationDuration: '200',
               showOnTop: true,
             }"
@@ -48,9 +43,9 @@
               v-for="item in column.children"
               :key="item.id"
               :item="item"
-              class="card"
+              class="task"
             >
-              <p>{{item.name}}</p>
+              <p>{{ item.name }}</p>
             </draggable>
           </Container>
         </div>
@@ -69,44 +64,42 @@ export default {
   name: "board-details",
   data() {
     return {
-      scene:null,
+      scene: null,
       currBoard: null,
     };
   },
- async created() {
-    try{
-        const { id } = this.$route.params;
-        if (id) {
-            const board = await boardService.getById(id)
-                this.currBoard = board
-            }
-         else this.boardToEdit = boardService.getEmptyBoard()
-         this.scene = {
-      type: "container",
-      props: {
-        orientation: "horizontal",
-      },
-      children: generateItems(this.currBoard.groups.length, (i) => ({
-        id: `${this.currBoard.groups[i].id}`,
+  async created() {
+    try {
+      const { id } = this.$route.params;
+      if (id) {
+        const board = await boardService.getById(id);
+        this.currBoard = board;
+      } else this.boardToEdit = boardService.getEmptyBoard();
+      this.scene = {
         type: "container",
-        name: `${this.currBoard.groups[i].title}`,
         props: {
-          orientation: "vertical",
+          orientation: "horizontal",
         },
-        children: generateItems(this.currBoard.groups[i].tasks.length, (j) => ({
-          type: "draggable",
-          id: `${this.currBoard.groups[i].tasks[j].id}`,
-          loading: false,
-          name: `${this.currBoard.groups[i].tasks[j].title}`,
-          data: generateWords(Math.random() * 12 + 2),
+        children: generateItems(this.currBoard.groups.length, (i) => ({
+          id: `${this.currBoard.groups[i].id}`,
+          type: "container",
+          name: `${this.currBoard.groups[i].title}`,
+          props: {
+            orientation: "vertical",
+          },
+          children: generateItems(
+            this.currBoard.groups[i].tasks.length,
+            (j) => ({
+              type: "draggable",
+              id: `${this.currBoard.groups[i].tasks[j].id}`,
+              loading: false,
+              name: `${this.currBoard.groups[i].tasks[j].title}`,
+              data: generateWords(Math.random() * 12 + 2),
+            })
+          ),
         })),
-      })),
-    };
-    }
-    catch{
-
-    }
-
+      };
+    } catch {}
   },
   components: { Container, Draggable },
   methods: {
@@ -145,9 +138,37 @@ export default {
         ];
       };
     },
-    printScene(){
-        console.log(this.scene);
-    }
+    printScene() {
+      console.log(this.scene);
+    },
   },
 };
 </script>
+
+<style lang="scss">
+.group {
+  width: 272px;
+  background-color: #ebecf0;
+  border-radius: 3px;
+
+  .group-title {
+    height: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.task {
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+    clear: both;
+    display: block;
+    padding: 0 0 4px;
+    overflow: hidden;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+</style>
