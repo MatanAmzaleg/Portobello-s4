@@ -1,4 +1,4 @@
-header {
+header.app-header {
     background-color: $clr1;
     display: flex;
     justify-content: space-between;
@@ -73,7 +73,7 @@ header {
 
             .title {
                 font-size: 18px;
-                font-family: NunitoSansBold;
+                font-family: NunitoSans-Bold;
             }
         }
 
