@@ -46,7 +46,7 @@
               class="task"
             >
               <router-link
-                :to="`${currBoard._id}/g/${column.id}/t/${item.id}`"
+                :to="`/g/${column.id}/t/${item.id}`"
                 >{{ item.name }}</router-link
               >
             </draggable>

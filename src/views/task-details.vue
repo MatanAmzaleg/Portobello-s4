@@ -1,6 +1,9 @@
 <template>
   <section class="task-details">
-    <h1>{{task.id}}</h1>
+    <h1>{{task.task}}</h1>
+    <h1>{{task._id}}</h1>
+    <h1>{{task.description}}</h1>
+    <h1>hello</h1>
   </section>
 </template>
 
