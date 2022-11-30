@@ -56,6 +56,7 @@ export const boardStore = {
     },
     actions: {
         async addBoard(context, { board }) {
+            console.log(board);
             try {
                 board = await boardService.save(board)
                 context.commit(getActionAddBoard(board))

@@ -11,7 +11,7 @@
       <Draggable v-for="column in scene.groups" :key="column.id">
         <div class="group">
           <div class="group-title">
-            <span class="text-lg">{{ column.name }}</span>
+            <span class="text-lg">{{ column.title }}</span>
           </div>
           <!-- column -->
           <Container
@@ -46,8 +46,8 @@
               class="task"
             >
               <router-link
-                :to="`${currBoard._id}/${column.id}/task/${item.id}`"
-                >{{ item.name }}</router-link
+                :to="`${currBoard._id}/g/${column.id}/t/${item.id}`"
+                >{{ item.title }}</router-link
               >
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
@@ -92,7 +92,7 @@ export default {
         groups: generateItems(this.currBoard.groups.length, (i) => ({
           id: `${this.currBoard.groups[i].id}`,
           type: "container",
-          name: `${this.currBoard.groups[i].title}`,
+          title: `${this.currBoard.groups[i].title}`,
           props: {
             orientation: "vertical",
           },
@@ -102,7 +102,7 @@ export default {
               type: "draggable",
               id: `${this.currBoard.groups[i].tasks[j].id}`,
               loading: false,
-              name: `${this.currBoard.groups[i].tasks[j].title}`,
+              title: `${this.currBoard.groups[i].tasks[j].title}`,
               data: generateWords(Math.random() * 12 + 2),
             })
           ),
@@ -117,7 +117,7 @@ export default {
       scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
       const board = this.createBoardFromScene;
-      // this.$store.commit("addBoard", board);
+      this.$store.dispatch({type:"addBoard", board});
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
@@ -171,6 +171,7 @@ export default {
         _id: currBoard._id,
         groups: scene.groups,
       };
+      console.log(board);
       return board;
     },
   },
