@@ -81,8 +81,8 @@ export default {
   async created() {
     try {
       const { boardId } = this.$route.params;
-      if (id) {
-        const board = await boardService.getById(id);
+      if (boardId) {
+        const board = await boardService.getById(boardId);
         this.currBoard = board;
       } else this.boardToEdit = boardService.getEmptyBoard();
       this.scene = {
