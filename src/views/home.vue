@@ -12,6 +12,7 @@
       </div>
     </div>
     <img
+      class="trello-example"
       src="https://translate.google.com/website?sl=en&tl=iw&hl=iw&prev=search&u=https://images.ctfassets.net/rz1oowkt5gyp/4BOU9h5tEyu4KMlcohLQ8B/53535ddf408664bb7de6367cafed3584/HeroBoard__BoardView_4x.png?w%3D1140%26fm%3Dwebp" />
     <div class="product">
       <div class="product-info">
