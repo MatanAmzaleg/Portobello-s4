@@ -55,15 +55,16 @@
               >
             </draggable>
             <textarea
-              v-if="isAddTask"
+              v-if="(column.id === currGroup)"
               class="textarea"
               placeholder="Enter a title for this card"
               cols="30"
               rows="3"
+              v-model="newTaskTxt"
             ></textarea>
             <div class="card-composure flex">
               <button
-                v-if="!isAddTask"
+                v-if="(column.id !== currGroup)"
                 class="add-task-btn"
                 @click="changeAddStatus(column.id)"
               >
@@ -74,14 +75,14 @@
                 Add a card
               </button>
               <div class="pressed-buttons">
-                <button class="add-card-btn" v-if="isAddTask" @click="">
+                <button class="add-card-btn" v-if="(column.id === currGroup)" @click="addTask">
                   Add card
                 </button>
-                <button
-                  v-if="isAddTask"
-                  @click="isAddTask = !isAddTask"
-                >
-                <font-awesome-icon class="close-add-task-btn" icon="fa-solid fa-xmark" />
+                <button v-if="(column.id === currGroup)" @click="(currGroup=null)">
+                  <font-awesome-icon
+                    class="close-add-task-btn"
+                    icon="fa-solid fa-xmark"
+                  />
                 </button>
               </div>
             </div>
@@ -103,9 +104,10 @@ export default {
   name: "group-list",
   data() {
     return {
-      currGroup: null,
       scene: null,
       isAddTask: false,
+      currGroup:null,
+      newTaskTxt:"",
     };
   },
   props: {
@@ -177,16 +179,13 @@ export default {
         ];
       };
     },
+     changeAddStatus(groupId) {
+        this.currGroup = groupId
 
-    async changeAddStatus(groupId){
-        try{
-            const group = await boardService.getById(groupId) 
-            console.log(group);
-
-        }catch{
-
-        }
-
+    },
+    addTask(){
+        console.log(this.newTaskTxt);
+        this.$emit('addTask', this.newTaskTxt)
     }
   },
   computed: {
