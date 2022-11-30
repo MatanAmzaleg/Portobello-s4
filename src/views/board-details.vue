@@ -141,6 +141,7 @@ export default {
         scene.groups.splice(itemIndex, 1, newColumn);
         this.scene = scene;
         const board = this.createBoardFromScene;
+        this.$store.dispatch({type:"addBoard", board});
       }
     },
     getCardPayload(columnId) {
