@@ -2,9 +2,7 @@ import { createApp } from 'vue'
 
 import { router } from './router.js'
 import { store } from './store/store.js'
-
-import { boardService } from './services/board.service.js'
-
+import Popper from "vue3-popper";
 import './assets/styles/main.scss'
 import rootCmp from './root-cmp.vue'
 
@@ -19,5 +17,6 @@ const app = createApp(rootCmp)
     .component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
 app.use(store)
+app.component("Popper", Popper);
 
 app.mount('#app')
