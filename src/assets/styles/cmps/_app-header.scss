@@ -3,28 +3,53 @@ header {
     display: flex;
     justify-content: space-between;
     max-height: 44px;
+    padding: 6px 4px;
+
     .loggedin-user {
         // background-color: $clr1;
         padding: 2px 8px;
         border-radius: 1em;
         align-self: flex-end;
         color: whitesmoke;
-        span{
+
+        span {
             background-color: $clr2;
             padding: 4px;
             margin: 10px;
             border-radius: 50%;
         }
+
         img {
             width: 2em;
             height: 2em;
             border-radius: 50%;
         }
     }
+
     nav {
-        // background-color: $clr4;
-        padding: 5px 0;
+        width: 100%;
         display: flex;
+        justify-content: space-between;
+
+        .trello {
+            button {
+                padding: 3px 6px;
+                margin-right: 4px;
+            }
+        }
+
+        .user {
+            button {
+                padding: 3px 6px;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 20px
+            }
+        }
+
+        section {
+            display: flex;
+        }
 
         button {
             display: flex;
@@ -32,16 +57,18 @@ header {
             align-items: center;
             border-radius: 3px;
             margin: 0;
+
             &:hover {
                 background-color: $clr3;
             }
         }
+
         .logo {
             display: flex;
-            gap: 5px;
 
             .icon {
                 font-size: 18px;
+                color: $clr4;
             }
 
             .title {
@@ -49,14 +76,24 @@ header {
                 font-family: NunitoSansBold;
             }
         }
+
+        span {
+            color: $clr4;
+            padding: 0 6px;
+        }
+
+        svg {
+            color: $clr4;
+        }
     }
+
     nav a:not(:first-child) {
         border-top: 1px solid $clr1;
-        padding: 0 5px;
         margin: 10px;
     }
+
     nav .active {
         color: $clr1;
     }
-    
+
 }
