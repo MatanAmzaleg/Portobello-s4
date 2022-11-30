@@ -24,7 +24,7 @@
       </div>
       <div class="add-comment">
         <font-awesome-icon icon="fa-solid fa-user" />
-        <input type="text" />
+        <input ref="input" type="text" />
       </div>
       <div v-if="isDetailsShown" class="task-comments">
       <h1>DETAILSSSS</h1>
@@ -33,6 +33,8 @@
     <section class="task-options">
       <font-awesome-icon @click="closeModal" class="exit-btn" icon="fa-solid fa-xmark" />
       <labelPicker :labels="this.task.labelsId" />
+      <memberPicker :members="this.task.members" />
+      <datePicker />
     </section>
   </div>
 </template>
@@ -40,6 +42,8 @@
 <script>
 import { boardService } from "../services/board.service";
 import labelPicker from "../cmps/label-picker.vue"
+import memberPicker from "../cmps/member-picker.vue"
+import datePicker from "../cmps/date-picker.vue"
 export default {
   async created() {
     let boardId = "b101";
@@ -68,7 +72,9 @@ export default {
     }
   },
   components:{
-    labelPicker
+    labelPicker,
+    memberPicker,
+    datePicker
   }
 };
 </script>
@@ -117,6 +123,8 @@ export default {
 .task-options {
   padding: 20px;
   position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: red;
   .exit-btn {
     position: absolute;

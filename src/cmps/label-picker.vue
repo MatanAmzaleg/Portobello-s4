@@ -9,8 +9,9 @@
       <small>Labels</small>
       <li v-for="label in labels">
       <div class="label">
-        <label :style="{'background-color':label.color}"> {{label.title}}</label>
-        <input type="checkbox" :style="{'background-color': label.color}">
+        <input @input="addLabel(label.id)" type="checkbox" :style="{'background-color': label.color}">
+        <label :style="{'background-color':label.color}"></label>
+        <font-awesome-icon class="pen-btn" icon="fa-solid fa-pencil" />
       </div>
       </li>
       </div>
@@ -26,49 +27,42 @@ export default {
     created(){
         this.currLabels = this.taskLabels
     },
+    methods:{
+        addLabel(labelId){
+            console.log(labelId)
+        }
+    },
     data(){
         return{
             labels: [
                 {
-                    "title": "Manager task",
-                    "color": "#61bd4f",
+                    "color": "#D5EDD2",
                     "id": "JsY1qR"
                 },
                 {
-                    "title": "Low priority",
-                    "color": "#f2d600",
+                    "color": "#FAF3C0",
                     "id": "d6cjhb"
                 },
                 {
-                    "title": "Medium priority",
-                    "color": "#ff9f1a",
+                    "color": "#FDE6C6",
                     "id": "YIQPhe"
                 },
                 {
-                    "title": "High priority",
-                    "color": "#eb5a46",
+                    "color": "#F6D3CE",
                     "id": "DNfXVp"
                 },
                 {
-                    "title": "Bug",
-                    "color": "#c377e0",
+                    "color": "#EDDBF4",
                     "id": "oKpZV4"
                 },
                 {
-                    "title": "Adjustment",
-                    "color": "#0079bf",
+                    "color": "#BCD9EA",
                     "id": "rZnFvJ"
                 },
                 {
-                    "title": "Design",
-                    "color": "#ff78cb",
+                    "color": "#BDECF3",
                     "id": "kT8v8m"
                 },
-                {
-                    "title": "Styles",
-                    "color": "#b3bac5",
-                    "id": "AYKlTC"
-                }
             ],
             currLabels: [] 
         }
@@ -77,15 +71,43 @@ export default {
 </script>
 <style lang="scss">
     .label-picker{
-        padding: 20px;
-        width: 200px;
+        border: 1px solid black;
+        font-size: 14px;
+        padding: 12px;
+        width: 304px;
         text-align: center;
         background-color: white;
         .labels{
             text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            ul{
+                padding: 0;
+                margin: 0;
+            }
             li{
                 list-style: none;
                 cursor: pointer;
+            }
+            .label{
+                display: flex;
+                // align-items: center;
+                height: 30px;
+                gap: 12px;
+                // flex-direction: row;
+                label{
+                    width: 210px;
+                }
+                input{
+                    width: 17px;
+                }
+                .pen-btn{
+                    margin-top: auto;
+                    margin-bottom: auto;
+                }
             }
         }
     }
