@@ -44,7 +44,7 @@
               :item="item"
               class="task"
             >
-              <p>{{ item.name }}</p>
+            <router-link :to="`/board/${currBoard._id}/t/${item.id}`">{{ item.name }}</router-link>
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
           </Container>
@@ -52,10 +52,12 @@
       </Draggable>
     </Container>
   </section>
+
   <button @click="printScene">Print</button>
 </template>
 
 <script>
+import taskDetails from "./task-details.vue";
 import { boardService } from "../services/board.service";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
@@ -101,7 +103,7 @@ export default {
       };
     } catch {}
   },
-  components: { Container, Draggable },
+  components: { Container, Draggable , taskDetails},
   methods: {
     onColumnDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
@@ -141,6 +143,10 @@ export default {
     printScene() {
       console.log(this.scene);
     },
+    // openTaskDetails(task){
+    //   this.$router.push(`/board/${this.currBoard._id}/t/${task.id}`)
+    //   console.log(task);
+    // }
   },
 };
 </script>
@@ -164,10 +170,14 @@ export default {
     justify-content: space-between;
     cursor: pointer;
 
-    span{
+    span {
       padding-inline: 16px;
     }
   }
+}
+
+.group:not(:last-child) {
+  margin-inline-end: 16px;
 }
 
 .task {
