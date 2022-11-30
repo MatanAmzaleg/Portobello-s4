@@ -22,14 +22,19 @@
                     </router-link>
                 </section>
                 <section class="actions">
-                    <button>
-                        Log in
+                    <button class="humburger">
+                        <font-awesome-icon icon="fa-solid fa-bars" class="icon"/>
                     </button>
-                    <router-link to="/board">
-                        <button class="btn-start">
-                            Get Portobello for free
+                    <section class="user">
+                        <button>
+                            Log in
                         </button>
-                    </router-link>
+                        <router-link to="/board" class="btn-start">
+                            <button class="btn-start">
+                                Get Portobello for free
+                            </button>
+                        </router-link>
+                    </section>
                 </section>
             </nav>
         </div>

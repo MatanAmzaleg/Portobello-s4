@@ -1,8 +1,10 @@
 header.home-header {
-    background-color: $clr4;
+    height: 70px;
     display: flex;
     justify-content: space-between;
-    height: 70px;
+    position: sticky;
+    top: 0;
+    background-color: $clr4;
 
     div {
         width: 100%;
@@ -13,7 +15,6 @@ header.home-header {
             box-shadow: rgb(9 30 66 / 15%) 0px 1rem 1rem 0px;
         }
     }
-
 
     nav {
         height: 100%;
@@ -34,23 +35,62 @@ header.home-header {
             }
         }
 
-        .actions {
+        .actions{
             height: 100%;
+            display: flex;
 
             button {
                 height: 100%;
-                font-family: NunitoSans-Regular;
-                font-size: 1.4rem;
+                font-family: sans-serif;
+                font-size: 1.2rem;
                 padding: 0.5rem 1.5rem;
                 color: $clr5;
             }
 
-            .btn-start{
+            .btn-start {
                 background-color: $clr6;
                 color: $clr4;
-                
+
                 &:hover {
                     background-color: $clr7
+                }
+            }
+
+            .icon {
+                font-size: 26px;
+            }
+        }
+    }
+
+    @include for-max-wide-layout {
+        nav{
+            .actions {
+                .user {
+                    display: none;
+                }
+    
+                .humburger {
+                    display: block;
+                }
+            }
+        }
+    }
+
+    @include for-min-wide-layout {
+        height: 60px;
+
+        nav {
+            margin: 0px auto;
+            max-width: 1320px;
+        
+              
+            .actions {
+                .humburger {
+                    display: none;
+                }
+    
+                .user {
+                    display: block;
                 }
             }
         }
