@@ -6,7 +6,7 @@
         <h3>Keep everything in the same place—even if your team isn’t.</h3>
         <div class="home-page-sign">
           <input type="email" placeholder="Email">
-          <router-link to="/board"><button>Sign up - it`s free!</button></router-link>
+          <router-link to="/board" class="btn-sign"><button>Sign up - it`s free!</button></router-link>
         </div>
         <!-- <router-link to="/board" class="btn-start"><button>Start Demo</button></router-link> -->
       </div>
