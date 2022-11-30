@@ -46,7 +46,7 @@
               class="task"
             >
             <p>{{ item.name }}</p>
-            <router-link @click="updateCurrTask(item)" :to="`/board/${currBoard._id}/t/${item.id}`">{{ item.name }}</router-link>
+            <router-link @click="updateCurrTask(item)" :to="`task/${item.id}`">{{ item.name }}</router-link>
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
           </Container>
@@ -55,7 +55,7 @@
     </Container>
     <task-details></task-details>
   </section>
-
+  <router-view />
   <button @click="printScene">Print</button>
 </template>
 
