@@ -25,18 +25,13 @@ const routes = [
     name: 'board-details',
     component: boardDetails,
     children: [
-      {
-        path: '/g/:groupId/t/:taskId',
-        name: 'task-details',
-        component: taskDetails,
-      }
     ]
   },
-  // {
-  //   path: '/board/:id/t/:id',
-  //   name: 'task-details',
-  //   component: taskDetails
-  // },
+  {
+    path: '/task/:taskId',
+    name: 'task-details',
+    component: taskDetails,
+  },
   {
     path: '/review',
     name: 'review',
