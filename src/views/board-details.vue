@@ -8,7 +8,7 @@
       orientation="horizontal"
       @drop="onColumnDrop($event)"
     >
-      <Draggable v-for="column in scene.children" :key="column.id">
+      <Draggable v-for="column in scene.groups" :key="column.id">
         <div class="group">
           <div class="group-title">
             <span class="text-lg">{{ column.name }}</span>
@@ -40,7 +40,7 @@
           >
             <!-- Items -->
             <draggable
-              v-for="item in column.children"
+              v-for="item in column.tasks"
               :key="item.id"
               :item="item"
               class="task"
@@ -80,7 +80,7 @@ export default {
   },
   async created() {
     try {
-      const { id } = this.$route.params;
+      const { boardId } = this.$route.params;
       if (id) {
         const board = await boardService.getById(id);
         this.currBoard = board;
@@ -90,14 +90,14 @@ export default {
         props: {
           orientation: "horizontal",
         },
-        children: generateItems(this.currBoard.groups.length, (i) => ({
+        groups: generateItems(this.currBoard.groups.length, (i) => ({
           id: `${this.currBoard.groups[i].id}`,
           type: "container",
           name: `${this.currBoard.groups[i].title}`,
           props: {
             orientation: "vertical",
           },
-          children: generateItems(
+          tasks: generateItems(
             this.currBoard.groups[i].tasks.length,
             (j) => ({
               type: "draggable",
@@ -115,20 +115,19 @@ export default {
   methods: {
     onColumnDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
-      scene.children = applyDrag(scene.children, dropResult);
+      scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
       const board = this.createBoardFromScene;
-      this.$store.commit("addBoard", board);
+      // this.$store.commit("addBoard", board);
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
         const scene = Object.assign({}, this.scene);
-        const column = scene.children.filter((p) => p.id === columnId)[0];
-        const itemIndex = scene.children.indexOf(column);
+        const column = scene.groups.filter((p) => p.id === columnId)[0];
+        const itemIndex = scene.groups.indexOf(column);
         const newColumn = Object.assign({}, column);
-        const board = this.createBoardFromScene;
-
+        
         // check if element was ADDED in current column
         if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
           // your action / api call
@@ -138,15 +137,16 @@ export default {
             dropResult.payload.loading = false;
           }, Math.random() * 5000 + 1000);
         }
-
-        newColumn.children = applyDrag(newColumn.children, dropResult);
-        scene.children.splice(itemIndex, 1, newColumn);
+        
+        newColumn.tasks = applyDrag(newColumn.tasks, dropResult);
+        scene.groups.splice(itemIndex, 1, newColumn);
         this.scene = scene;
+        const board = this.createBoardFromScene;
       }
     },
     getCardPayload(columnId) {
       return (index) => {
-        return this.scene.children.filter((p) => p.id === columnId)[0].children[
+        return this.scene.groups.filter((p) => p.id === columnId)[0].tasks[
           index
         ];
       };
@@ -160,9 +160,9 @@ export default {
     createBoardFromScene() {
       const scene = this.scene;
       delete scene.props, delete scene.type;
-      scene.children.forEach((group) => {
+      scene.groups.forEach((group) => {
         delete group.props, delete group.type;
-        group.children.forEach((task) => {
+        group.tasks.forEach((task) => {
           delete task.loading, delete task.type, delete task.data;
         });
       });
@@ -170,9 +170,8 @@ export default {
       const board = {
         title: currBoard.title,
         _id: currBoard._id,
-        groups: scene,
+        groups: scene.groups,
       };
-      console.log(board);
       return board;
     },
   },
