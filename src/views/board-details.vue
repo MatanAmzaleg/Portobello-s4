@@ -45,7 +45,6 @@
               :item="item"
               class="task"
             >
-            <p>{{ item.name }}</p>
             <router-link @click="updateCurrTask(item)" :to="`task/${item.id}`">{{ item.name }}</router-link>
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
@@ -114,6 +113,7 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.children = applyDrag(scene.children, dropResult);
       this.scene = scene;
+      this.$store.commit('saveBoard', this.scene)
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
@@ -148,10 +148,6 @@ export default {
     printScene() {
       console.log(this.scene);
     },
-    // openTaskDetails(task){
-    //   this.$router.push(`/board/${this.currBoard._id}/t/${task.id}`)
-    //   console.log(task);
-    // }
   },
 };
 </script>
