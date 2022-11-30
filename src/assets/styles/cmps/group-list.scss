@@ -125,4 +125,43 @@
     }
   }
 
+
+  .add-group{
+    display: flex;
+    flex-direction: column;
+    width: 272px;
+    height: fit-content;
+    background-color: #7e8a9d5d;
+    border-radius: 4px;
+    .add-group-btn{
+      text-align: left;
+      background-color: inherit;
+      padding: 14px 8px;
+      border-radius: 2px;
+    }
+    .add-task-icon{
+    }
+    .add-group-input{
+      width: 240px;
+      height: 36px;
+      outline: 1px solid #0079BF;
+      margin: auto;
+      margin-top:5px ;
+      padding-inline: 7px;
+    }
+
+    .add-task-btn{
+      width: 80px;
+      height: 32px;
+      margin: 8px 10px 8px 0px ;
+      border-radius: 3px;
+      color: #ffffff;
+      background-color:#0079BF ;
+  
+      &:hover{
+          background-color: #026AA7;
+      }
+    }
+  }
+
 }

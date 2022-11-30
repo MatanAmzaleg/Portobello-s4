@@ -4,7 +4,7 @@
     <p>Get going faster with a template from the Trello community or</p>
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
-        <article class="board" :board="board" @click="moveToBoard(board._id)">
+        <article class="board"  @click="moveToBoard(board._id)">
           <p>
             {{board.title}}
           </p>
@@ -28,7 +28,7 @@ import boardDetails from './board-details.vue'
 export default {
   data() {
     return {
-      boardToAdd: boardService.getEmptyBoard()
+      boardToAdd: boardService.getEmptyBoard(),
     }
   },
   computed: {

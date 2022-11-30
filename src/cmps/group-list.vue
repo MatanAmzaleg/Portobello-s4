@@ -55,7 +55,7 @@
               >
             </draggable>
             <textarea
-              v-if="(column.id === currGroup)"
+              v-if="column.id === currGroup"
               class="textarea"
               placeholder="Enter a title for this card"
               cols="30"
@@ -64,7 +64,7 @@
             ></textarea>
             <div class="card-composure flex">
               <button
-                v-if="(column.id !== currGroup)"
+                v-if="column.id !== currGroup"
                 class="add-task-btn"
                 @click="changeAddStatus(column.id)"
               >
@@ -75,10 +75,17 @@
                 Add a card
               </button>
               <div class="pressed-buttons">
-                <button class="add-card-btn" v-if="(column.id === currGroup)" @click="addTask">
+                <button
+                  class="add-card-btn"
+                  v-if="column.id === currGroup"
+                  @click="addTask"
+                >
                   Add card
                 </button>
-                <button v-if="(column.id === currGroup)" @click="(currGroup=null)">
+                <button
+                  v-if="column.id === currGroup"
+                  @click="currGroup = null"
+                >
                   <font-awesome-icon
                     class="close-add-task-btn"
                     icon="fa-solid fa-xmark"
@@ -89,12 +96,30 @@
           </Container>
         </div>
       </Draggable>
+      <article class="add-group">
+        <button class="add-group-btn" v-if="!isAddNewGroup" @click="(isAddNewGroup = true)">
+          <font-awesome-icon class="add-task-icon2" icon="fa-solid fa-plus" />
+          Add another list
+        </button>
+        <input v-model="newGroupTxt" v-if="isAddNewGroup" class="add-group-input" placeholder="Enter list title..." type="text">
+        <div class="card-composure flex">
+          <div class="pressed-buttons">
+            <button @click="addGroup" v-if="isAddNewGroup" class="add-card-btn">Add list</button>
+            <button v-if="isAddNewGroup" @click="(isAddNewGroup = false)">
+              <font-awesome-icon
+                class="close-add-task-btn"
+                icon="fa-solid fa-xmark"
+              />
+            </button>
+          </div>
+        </div>
+      </article>
     </Container>
   </section>
 </template>
 
 <script>
-import { boardService } from "../services/board.service";
+import { utilService } from "../services/util.service";
 import groupPreview from "../cmps/group-preview.vue";
 import taskDetails from "../views/task-details.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
@@ -105,9 +130,10 @@ export default {
   data() {
     return {
       scene: null,
-      isAddTask: false,
-      currGroup:null,
-      newTaskTxt:"",
+      currGroup: null,
+      newTaskTxt: "",
+      isAddNewGroup:false,
+      newGroupTxt:"",
     };
   },
   props: {
@@ -169,7 +195,10 @@ export default {
         scene.groups.splice(itemIndex, 1, newColumn);
         this.scene = scene;
         const board = this.createBoardFromScene;
-        this.$store.dispatch({ type: "addBoard", board });
+        this.$store.dispatch({
+          type: "addBoard",
+          board: JSON.parse(JSON.stringify(board)),
+        });
       }
     },
     getCardPayload(columnId) {
@@ -179,13 +208,27 @@ export default {
         ];
       };
     },
-     changeAddStatus(groupId) {
-        this.currGroup = groupId
-
+    changeAddStatus(groupId) {
+      this.currGroup = groupId;
     },
-    addTask(){
-        console.log(this.newTaskTxt);
-        this.$emit('addTask', this.newTaskTxt)
+    addTask() {
+      console.log(this.currGroup);
+      const task = { title: this.newTaskTxt, id: utilService.makeId() };
+      const board = JSON.parse(JSON.stringify(this.currBoard));
+      console.log(board);
+      const groupIdx = board.groups.findIndex(
+        (group) => group.id === this.currGroup
+      );
+      board.groups[groupIdx].tasks.push(task);
+
+      this.$emit("add-Task", board);
+    },
+    addGroup(){
+      console.log(this.newGroupTxt);
+      const group = { title: this.newGroupTxt, id: utilService.makeId() , tasks:[]};
+      const board = JSON.parse(JSON.stringify(this.currBoard));
+      board.groups.push(group);
+      this.$emit("add-Task", board);
     }
   },
   computed: {
