@@ -45,7 +45,11 @@
               :item="item"
               class="task"
             >
-            <router-link @click="updateCurrTask(item)" :to="`task/${item.id}`">{{ item.name }}</router-link>
+              <router-link
+                @click="updateCurrTask(item)"
+                :to="`${column.id}/task/${item.id}`"
+                >{{ item.name }}</router-link
+              >
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
           </Container>
@@ -59,7 +63,7 @@
 </template>
 
 <script>
-import boardHeader from "../cmps/board-header.vue"
+import boardHeader from "../cmps/board-header.vue";
 import taskDetails from "./task-details.vue";
 import { boardService } from "../services/board.service";
 import { Container, Draggable } from "vue3-smooth-dnd";
@@ -71,7 +75,7 @@ export default {
     return {
       scene: null,
       currBoard: null,
-      currTask:null,
+      currTask: null,
     };
   },
   async created() {
@@ -107,13 +111,14 @@ export default {
       };
     } catch {}
   },
-  components: { Container, Draggable , taskDetails, boardHeader},
+  components: { Container, Draggable, taskDetails, boardHeader },
   methods: {
     onColumnDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
       scene.children = applyDrag(scene.children, dropResult);
       this.scene = scene;
-      this.$store.commit('saveBoard', this.scene)
+      const board = this.createBoardFromScene;
+      this.$store.commit("addBoard", board);
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
@@ -122,6 +127,7 @@ export default {
         const column = scene.children.filter((p) => p.id === columnId)[0];
         const itemIndex = scene.children.indexOf(column);
         const newColumn = Object.assign({}, column);
+        const board = this.createBoardFromScene;
 
         // check if element was ADDED in current column
         if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
@@ -145,8 +151,29 @@ export default {
         ];
       };
     },
+
     printScene() {
       console.log(this.scene);
+    },
+  },
+  computed: {
+    createBoardFromScene() {
+      const scene = this.scene;
+      delete scene.props, delete scene.type;
+      scene.children.forEach((group) => {
+        delete group.props, delete group.type;
+        group.children.forEach((task) => {
+          delete task.loading, delete task.type, delete task.data;
+        });
+      });
+      const currBoard = this.currBoard;
+      const board = {
+        title: currBoard.title,
+        _id: currBoard._id,
+        groups: scene,
+      };
+      console.log(board);
+      return board;
     },
   },
 };
