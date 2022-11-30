@@ -16,9 +16,7 @@ export default {
   name: "board-details",
   data() {
     return {
-      scene: null,
       currBoard: null,
-      isAddTask: false,
     };
   },
   async created() {
