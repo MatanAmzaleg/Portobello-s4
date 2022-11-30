@@ -8,7 +8,7 @@
           <input type="email" placeholder="Email">
           <router-link to="/board"><button>Sign up - it`s free!</button></router-link>
         </div>
-        <router-link to="/board" class="btn-start"><button>Start Demo</button></router-link>
+        <!-- <router-link to="/board" class="btn-start"><button>Start Demo</button></router-link> -->
       </div>
     </div>
     <img
