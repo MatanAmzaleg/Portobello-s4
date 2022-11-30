@@ -4,6 +4,9 @@ import { utilService } from "./util.service.js";
 import { userService } from "./user.service.js";
 import { storageService } from "./async-storage.service.js";
 
+import data from '../../fixed-dta.json' assert {type: 'json'};
+
+
 const STORAGE_KEY = "board";
 
 export const boardService = {
@@ -50,12 +53,12 @@ function getById(boardId) {
 
 function getTask(boardId, groupId, taskId) {
   return storageService.get(STORAGE_KEY, boardId)
-    .then(board =>board.groups.find(group => group.id === groupId ))
+    .then(board => board.groups.find(group => group.id === groupId))
     .then(group => group.tasks.find(task => task.id === taskId))
 }
 function removeTask(boardId, groupId, taskId) {
   return storageService.remove(STORAGE_KEY, boardId)
-    .then(board =>board.groups.find(group => group.id === groupId ))
+    .then(board => board.groups.find(group => group.id === groupId))
     .then(group => group.tasks.find(task => task.id === taskId))
 }
 
@@ -135,12 +138,16 @@ function getEmptyBoard() {
   };
 }
 
+
+
 // test data
 
-// ;(async ()=>{
-//     setTimeout(async ()=>{
-//         await boardService.save(getEmptyBoard())
-//         await boardService.save(getEmptyBoard())
+; (async () => {
+  setTimeout(async () => {
+    let boardie = data
+    // console.log(boardie[0]);
+    await boardService.save(boardie[0])
+    // await boardService.save(getEmptyBoard())
 
-//     }, 50)
-// })()
+  }, 50)
+})()
