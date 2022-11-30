@@ -142,12 +142,12 @@ function getEmptyBoard() {
 
 // test data
 
-; (async () => {
-  setTimeout(async () => {
-    let boardie = data
-    // console.log(boardie[0]);
-    await boardService.save(boardie[0])
-    // await boardService.save(getEmptyBoard())
+// ; (async () => {
+//   setTimeout(async () => {
+//     let boardie = data
+//     // console.log(boardie[0]);
+//     await boardService.save(boardie[0])
+//     // await boardService.save(getEmptyBoard())
 
-  }, 50)
-})()
+//   }, 50)
+// })()

@@ -29,10 +29,12 @@ export function getActionAddBoardMsg(boardId) {
 
 export const boardStore = {
     state: {
-        boards: []
+        boards: [],
+        currBoard:null,
     },
     getters: {
         boards({boards}) { return boards },
+        currBoard({currBoard}) {return currBoard}
     },
     mutations: {
         setBoards(state, { boards }) {
@@ -53,13 +55,20 @@ export const boardStore = {
             if (!board.msgs) board.msgs = []
             board.msgs.push(msg)
         },
+        setCurrBoard(state, board){
+            console.log(board);
+            state.currBoard = board
+            console.log(state.currBoard);
+        }
     },
     actions: {
         async addBoard(context, { board }) {
+            console.log("🚀 ~ file: board.store.js:59 ~ addBoard ~ board", board)
             console.log(board);
             try {
                 board = await boardService.save(board)
                 context.commit(getActionAddBoard(board))
+                context.commit("setCurrBoard", board)
                 return board
             } catch (err) {
                 console.log('boardStore: Error in addBoard', err)
@@ -103,6 +112,17 @@ export const boardStore = {
                 throw err
             }
         },
+        async setCurrBoard ({commit}, boardId){
+            console.log(boardId);
+            try{
+                const board = await boardService.getById(boardId)
+                commit("setCurrBoard", board)
+
+            }catch(err){
+                console.log('boardStore: Error in setCurrBoard', err)
+                throw err
+            }
+        }
 
     }
 }
