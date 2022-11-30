@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="app-header">
     <nav>
       <section class="trello">
         <router-link to="/">
