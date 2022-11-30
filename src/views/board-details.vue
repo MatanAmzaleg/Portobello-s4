@@ -4,6 +4,7 @@
       class="group-container"
       group-name="cols"
       tag="div"
+      orientation="horizontal"
       @drop="onColumnDrop($event)"
     >
       <Draggable v-for="column in scene.children" :key="column.id">
