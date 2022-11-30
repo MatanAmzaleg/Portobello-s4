@@ -10,8 +10,11 @@
 @import "basics/base";
 @import "basics/links";
 
+// Views
+// @import "views/board-details.scss";
+
 // Components
 @import "cmps/app-header";
 @import "cmps/user-msg";
 @import "cmps/review-list";
-@import "cmps/car-list";
+@import "cmps/group-list";
