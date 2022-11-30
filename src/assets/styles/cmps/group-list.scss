@@ -1,0 +1,128 @@
+.board-details {
+  .group-container {
+    display: flex;
+    gap: 16px;
+    margin: 15px 0px 8px;
+    padding: 0px 0px 8px 16px;
+  }
+  .group {
+    width: 272px;
+    background-color: #ebecf0;
+    border-radius: 3px;
+
+    .group-title {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      line-height: 24px;
+      padding-inline: 16px 8px;
+
+      .ellipsis-icon{
+        color: #67748a;
+        padding: 8px;
+        width: 16px;
+        height: 16px;
+        border-radius: 3px;
+
+        &:hover{
+            background-color:#DADBE2;
+        }
+      }
+
+      h2 {
+        color: #455570;
+        font-size: 15px;
+        line-height: 24px;
+        font-family: NunitoSansLight;
+      }
+    }
+  }
+
+  .group:not(:last-child) {
+    margin-inline-end: 16px;
+  }
+
+  .task {
+    background-color: #ffffff;
+    word-wrap: break-word;
+    clear: both;
+    display: block;
+    padding: 6px 8px 2px;
+    margin: 0 8px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
+  }
+
+  .card-composure{
+    justify-content: space-between;
+
+      .add-task-btn {
+        width: 200px;
+        text-align: left;
+        height: 28px;
+        font-size: 14px;
+        margin: 2px 0 8px 8px;
+        padding: 4px 8px;
+        border-radius: 3px;
+        color: #7e8a9d;
+    
+        .add-task-icon{
+            margin-inline-end: 3px;
+            width: 16px;
+            height: 16px;
+        }
+    
+        &:hover {
+          background-color: #DADBE2;
+        }
+      }
+  }
+
+  .task-router-link {
+    color: #67748a;
+  }
+
+  .textarea{
+    resize: none;
+    display: flex;
+    align-items: center;
+    width: 240px;
+    margin-inline: auto;
+    margin-top:8px ;
+    border: none;
+    padding: 6px 8px 2px;
+    outline:none ;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
+  }
+
+  .pressed-buttons{
+    display: flex;
+    margin-inline: 8px;
+
+    .add-card-btn{
+      width: 80px;
+      height: 32px;
+      margin: 8px 10px 8px 0px ;
+      border-radius: 3px;
+      color: #ffffff;
+      background-color:#0079BF ;
+  
+      &:hover{
+          background-color: #026AA7;
+      }
+    }
+
+    .close-add-task-btn{
+        color: #6B778C;
+        font-size:24px ;
+        line-height: 20px;
+        width: 20px;
+    }
+  }
+
+}
