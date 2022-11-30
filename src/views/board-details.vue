@@ -1,4 +1,5 @@
 <template>
+  <board-header :board="board"></board-header>
   <section v-if="currBoard" class="board-details">
     <Container
       class="group-container"
@@ -44,6 +45,7 @@
               :item="item"
               class="task"
             >
+            <p>{{ item.name }}</p>
             <router-link @click="updateCurrTask(item)" :to="`/board/${currBoard._id}/t/${item.id}`">{{ item.name }}</router-link>
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
@@ -58,6 +60,7 @@
 </template>
 
 <script>
+import boardHeader from "../cmps/board-header.vue"
 import taskDetails from "./task-details.vue";
 import { boardService } from "../services/board.service";
 import { Container, Draggable } from "vue3-smooth-dnd";
@@ -105,7 +108,7 @@ export default {
       };
     } catch {}
   },
-  components: { Container, Draggable , taskDetails},
+  components: { Container, Draggable , taskDetails, boardHeader},
   methods: {
     onColumnDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
