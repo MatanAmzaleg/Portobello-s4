@@ -44,13 +44,14 @@
               :item="item"
               class="task"
             >
-            <router-link :to="`/board/${currBoard._id}/t/${item.id}`">{{ item.name }}</router-link>
+            <router-link @click="updateCurrTask(item)" :to="`/board/${currBoard._id}/t/${item.id}`">{{ item.name }}</router-link>
             </draggable>
             <button class="add-task-btn">+ Add a card</button>
           </Container>
         </div>
       </Draggable>
     </Container>
+    <task-details></task-details>
   </section>
 
   <button @click="printScene">Print</button>
@@ -68,6 +69,7 @@ export default {
     return {
       scene: null,
       currBoard: null,
+      currTask:null,
     };
   },
   async created() {
