@@ -1,5 +1,5 @@
 <template>
-  <div class="task">
+  <div class="task-container">
     <section class="task-details">
       <div class="task-info">
         <div class="info-header">
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss">
-.task {
+.task-container {
   display: grid;
   grid-template-columns: 0.7fr 0.3fr;
   grid-template-areas: "task options";
