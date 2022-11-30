@@ -24,10 +24,16 @@
             minmax(auto, $narrow-breakpoint)
             minmax(20px, 1fr);
     }
-    @include for-max-wide-layout {
+    @include for-extra-normal-layout {
         grid-template-columns: 
             minmax(20px, 1fr)
             minmax(auto, $normal-breakpoint)
+            minmax(20px, 1fr);
+    }
+    @include for-max-wide-layout {
+        grid-template-columns: 
+            minmax(20px, 1fr)
+            minmax(auto, $extra-normal-breakpoint)
             minmax(20px, 1fr);
     }
     @include for-min-wide-layout {

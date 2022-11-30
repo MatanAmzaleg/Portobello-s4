@@ -17,15 +17,20 @@
         @content;
     }
 }
+@mixin for-extra-normal-layout {
+    @media (min-width: calc($normal-breakpoint + 40px)) {
+        @content;
+    }
+}
 
 @mixin for-max-wide-layout {
-    @media (max-width: calc($normal-breakpoint + 40px)) {
+    @media (max-width: calc($extra-normal-breakpoint + 40px)) {
         @content;
     }
 }
 
 @mixin for-min-wide-layout {
-    @media (min-width: calc($normal-breakpoint + 40px)) {
+    @media (min-width: calc($extra-normal-breakpoint + 40px)) {
         @content;
     }
 }
