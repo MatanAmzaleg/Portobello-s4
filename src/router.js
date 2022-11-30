@@ -21,15 +21,16 @@ const routes = [
     component: portobelloApp
   },
   {
-    path: '/board/:id',
+    path: '/board/:boardId',
     name: 'board-details',
     component: boardDetails,
-    children:[{
-      path: 'task/:id',
-      name: 'task-details',
-      component: taskDetails
-    }
-    ] 
+    children: [
+      {
+        path: 'task/:taskId',
+        name: 'task-details',
+        component: taskDetails,
+      }
+    ]
   },
   // {
   //   path: '/board/:id/t/:id',

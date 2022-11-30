@@ -13,6 +13,7 @@ export const boardService = {
   remove,
   getEmptyBoard,
   addBoardMsg,
+  getTask
 };
 window.boardService = boardService;
 
@@ -33,6 +34,12 @@ async function query(filterBy = { txt: "" }) {
 function getById(boardId) {
   return storageService.get(STORAGE_KEY, boardId);
   // return httpService.get(`board/${boardId}`)
+}
+
+function getTask(boardId,groupId,taskId){
+  return storageService.get(STORAGE_KEY,boardId)
+      .then(board => {board.groups.find(group => group.id === groupId)})
+      .then(group => group.tasks.find(task => task.id === taskId))
 }
 
 async function remove(boardId) {
