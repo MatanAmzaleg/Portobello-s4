@@ -46,8 +46,7 @@
               class="task"
             >
               <router-link
-                @click="updateCurrTask(item)"
-                :to="`${column.id}/task/${item.id}`"
+                :to="`${currBoard._id}/${column.id}/task/${item.id}`"
                 >{{ item.name }}</router-link
               >
             </draggable>
