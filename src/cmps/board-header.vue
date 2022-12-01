@@ -4,7 +4,7 @@
       <h1>Trello</h1>
       <button class="is-starred"><font-awesome-icon class="star-icon" icon="fa-regular fa-star" /></button>
       |
-      <h1>BoardName</h1>
+      <input class="board-name-input" type="text" :value="board.title">
     </div>
     <div class="right-section">
       <popper>
@@ -17,7 +17,7 @@
       </div>
       <section class="keyword-filter">
         <p class="mini-title">Keyword</p>
-        <input class="keyword-input" type="search" placeholder="Enter a keyword...">
+        <input @input="setFilter" v-model="filterBy.txt" class="keyword-input" type="search" placeholder="Enter a keyword...">
         <p class="smaller">Search cards, members, labels, and more.</p>
       </section>
       <section class="members-filter">
@@ -79,7 +79,7 @@
     </section>
   </template>
 </popper>
-|
+ |
       <button class="ellipsis-btn"><font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /></button>
     </div>
   </section>
@@ -91,12 +91,22 @@ export default {
     },
     data(){
         return{
-            currBoard: null
+            currBoard: null,
+            filterBy:{
+              txt:''
+            }
         }
-    }
+    },
+    mounted(){
+      console.log(this.board);
+    },
+    methods: {
+      setFilter(){
+        console.log(this.filterBy);
+        this.$emit("setFilter",this.filterBy )
+      }
+    },
 
 }
 </script>
-<style lang="scss">
 
-</style>

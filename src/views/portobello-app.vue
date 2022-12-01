@@ -4,7 +4,7 @@
     <p>Get going faster with a template from the Trello community or</p>
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
-        <article class="board"  @click="moveToBoard(board._id)">
+        <article class="board"  @click="moveToBoard(board)">
           <p>
             {{board.title}}
           </p>
@@ -86,9 +86,10 @@ export default {
     printBoardToConsole(board) {
       console.log('Board msgs:', board.msgs)
     },
-    moveToBoard(boardId){
-      console.log(boardId);
-      this.$router.push(`/board/${boardId}`)
+    moveToBoard(board){
+      console.log(board);
+      this.$store.dispatch({type:"setCurrBoard", board})
+      this.$router.push(`/board/${board._id}`)
     }
   },
   components: {

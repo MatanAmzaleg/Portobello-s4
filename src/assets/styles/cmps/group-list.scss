@@ -1,6 +1,5 @@
 .board-details {
-
-  .group-list{
+  .group-list {
     overflow-x: auto;
     height: 90vh;
   }
@@ -23,20 +22,20 @@
       line-height: 24px;
       padding-inline: 16px 8px;
 
-      .ellipsis-icon{
-        color: #67748a;
+      .ellipsis-icon {
+        color: #707C90;
         padding: 8px;
-        width: 16px;
-        height: 16px;
+        width: 15px;
+        height: 13px;
         border-radius: 3px;
 
-        &:hover{
-            background-color:#DADBE2;
+        &:hover {
+          background-color: #dadbe2;
         }
       }
 
       h2 {
-        color: #455570;
+        color: #657189;
         font-size: 15px;
         line-height: 24px;
         font-family: NunitoSansLight;
@@ -61,76 +60,75 @@
     box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
   }
 
-  .card-composure{
+  .card-composure {
     justify-content: space-between;
 
-      .add-task-btn {
-        width: 200px;
-        text-align: left;
-        height: 28px;
-        font-size: 14px;
-        margin: 2px 0 8px 8px;
-        padding: 4px 8px;
-        border-radius: 3px;
-        color: #7e8a9d;
-    
-        .add-task-icon{
-            margin-inline-end: 3px;
-            width: 16px;
-            height: 16px;
-        }
-    
-        &:hover {
-          background-color: #DADBE2;
-        }
+    .add-task-btn {
+      width: 200px;
+      text-align: left;
+      height: 28px;
+      font-size: 14px;
+      margin: 2px 0 8px 8px;
+      padding: 4px 8px;
+      border-radius: 3px;
+      color: #7e8a9d;
+
+      .add-task-icon {
+        margin-inline-end: 3px;
+        width: 16px;
+        height: 16px;
       }
+
+      &:hover {
+        background-color: #dadbe2;
+      }
+    }
   }
 
   .task-router-link {
     color: #67748a;
   }
 
-  .textarea{
+  .textarea {
     resize: none;
     display: flex;
     align-items: center;
     width: 240px;
     margin-inline: auto;
-    margin-top:8px ;
+    margin-top: 8px;
     border: none;
     padding: 6px 8px 2px;
-    outline:none ;
+    outline: none;
     border-radius: 3px;
     box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
   }
 
-  .pressed-buttons{
+  .pressed-buttons {
     display: flex;
     margin-inline: 8px;
 
-    .add-card-btn{
+    .add-card-btn {
       width: 80px;
       height: 32px;
-      margin: 8px 10px 8px 0px ;
+      margin: 8px 10px 8px 0px;
       border-radius: 3px;
       color: #ffffff;
-      background-color:#0079BF ;
-  
-      &:hover{
-          background-color: #026AA7;
+      background-color: #0079bf;
+
+      &:hover {
+        background-color: #026aa7;
       }
     }
 
-    .close-add-task-btn{
-        color: #6B778C;
-        font-size:24px ;
-        line-height: 20px;
-        width: 20px;
+    .close-add-task-btn {
+      color: #6b778c;
+      font-size: 24px;
+      line-height: 20px;
+      width: 20px;
     }
   }
 
-
-  .add-group{
+  .add-group {
     display: flex;
     flex-direction: column;
     width: 272px;
@@ -138,36 +136,34 @@
     background-color: #7e8a9d5d;
     border-radius: 4px;
     // margin-inline-end: 16px;
-    .add-group-btn{
+    .add-group-btn {
       text-align: left;
       background-color: inherit;
       padding: 14px 8px;
       border-radius: 2px;
       width: 272px;
       // margin-inline-end: 16px;
-
     }
-    .add-group-input{
+    .add-group-input {
       width: 240px;
       height: 36px;
-      outline: 1px solid #0079BF;
+      outline: 1px solid #0079bf;
       margin: auto;
-      margin-top:5px ;
+      margin-top: 5px;
       padding-inline: 7px;
     }
 
-    .add-task-btn{
+    .add-task-btn {
       width: 80px;
       height: 32px;
-      margin: 8px 10px 8px 0px ;
+      margin: 8px 10px 8px 0px;
       border-radius: 3px;
       color: #ffffff;
-      background-color:#0079BF ;
-  
-      &:hover{
-          background-color: #026AA7;
+      background-color: #0079bf;
+
+      &:hover {
+        background-color: #026aa7;
       }
     }
   }
-
 }
