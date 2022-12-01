@@ -23,7 +23,7 @@
                 </section>
                 <section class="actions">
                     <button class="humburger">
-                        <font-awesome-icon icon="fa-solid fa-bars" class="icon"/>
+                        <font-awesome-icon icon="fa-solid fa-bars" class="icon" />
                     </button>
                     <section class="user">
                         <button>

@@ -12,11 +12,15 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
 library.add(fas, far, fab)
 const app = createApp(rootCmp)
     .component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
 app.use(store)
+app.use(ElementPlus)
 app.component("Popper", Popper);
 
 app.mount('#app')

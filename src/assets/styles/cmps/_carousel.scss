@@ -1,0 +1,20 @@
+.el-carousel {
+    aspect-ratio: 72.4/48.7;
+    height: 100%;
+    width: 90%;
+    
+    .el-carousel__container {
+        height: 100% !important;
+        width: 100%;
+    }
+    
+    .carousel-img {
+        aspect-ratio: 72.4/48.7;
+        height: -webkit-fill-available;
+        width: -webkit-fill-available;
+    }
+
+    ul {
+        display: none;
+    }
+}
