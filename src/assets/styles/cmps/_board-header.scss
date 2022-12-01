@@ -1,70 +1,182 @@
-.board-header{
+.board-header {
+  .mini-title {
+    font-weight: 600;
+    font-size: 13px;
+    color: #647188;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  .smaller {
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+
+  input[type="radio"] {
+    width: 14px;
+    height: 14px;
+    appearance: none;
+    outline: 2px solid #333;
+    border: 3px solid white;
+    margin-inline-end: 10px;
+
+    &:checked{
+        background: #333; 
+    }
+
+    
+  }
+
+  display: flex;
+  height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 8px;
+  cursor: default;
+  button {
+    height: 32px;
+    background-color: #2e709764;
+    padding: 6px;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: #3787b564;
+    }
+  }
+  .left-section {
     display: flex;
-    height: 48px;
     align-items: center;
-    justify-content: space-between;
-    padding-inline: 8px;
-    cursor:default;
-    button{
-        height: 32px;
-        background-color: #2e709764;
-        padding: 6px;
+    justify-content: center;
+
+    > * {
+      margin: 5px;
+    }
+
+    .is-starred {
+      width: 32px;
+
+      &:hover {
+        .star-icon {
+          scale: 1.2;
+        }
+      }
+    }
+  }
+  .right-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > * {
+      margin: 5px;
+    }
+
+    .filter-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      .filter-icon {
+        position: relative;
+        bottom: 1px;
+        width: 13px;
+        height: 13px;
+        margin-inline-end: 5px;
+      }
+    }
+
+    .ellipsis-icon {
+      height: 18px;
+      width: 18px;
+      padding: 1px;
+      display: grid;
+      place-items: center;
+    }
+  }
+
+  .filter-popper {
+    max-height: 780px;
+    width: 360px;
+    padding-inline: 12px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    color: #838ea0;
+    box-shadow: 0px 1px 2px 0px rgb(154 154 154 / 75%);
+
+    .header {
+      height: 41px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      border-bottom: 1px solid #dfe2e7;
+      margin-bottom: 4px;
+
+      .x-mark-btn {
+        background-color: inherit;
+        position: absolute;
+        right: 0;
+        padding-inline-end: 13px;
+
+        .x-mark-icon {
+          color: #838ea0;
+          font-size: 16px;
+        }
+      }
+    }
+
+    .keyword-filter {
+      width: 100%;
+
+      p {
+        font-size: 13px;
+      }
+
+      .keyword-input {
+        width: 360px;
+        height: 36px;
+        border: 2px solid #dfe2e7;
         border-radius: 3px;
+        padding-inline: 12px;
 
-        &:hover{
-            background-color: #3787b564; 
+        &:focus {
+          outline: 2px solid #0079bf;
+          border: none;
+          border-radius: 2px;
         }
+      }
+
+      .smaller {
+        font-size: 12px;
+      }
     }
-    .left-section{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  }
 
-        >*{
-            margin: 5px;
-        }
+  .members-filter {
 
-        .is-starred{
-            width: 32px;
+  }
 
-            &:hover{
-                .star-icon{
-                    
-                    scale: 1.2;
-                }
-            }
-            
-        }
+  .date-filter{
+
+  }
+
+  .labels-filter{
+    button{
+        width: 320px;
     }
-    .right-section{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    margin-bottom: 5px;
+  }
 
-        >*{
-            margin: 5px;
-        }
-
-        .filter-btn{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 72px;
-            .filter-icon{
-                position: relative;
-                bottom: 1px;
-                width: 13px;
-                height: 13px;
-                margin-inline-end: 5px;
-            }
-        }
-
-        .ellipsis-icon{
-            height: 18px;
-            width: 18px;
-            padding: 1px;
-            display: grid;
-            place-items: center;
-        }
+  label{
+    display: flex;
+    align-items: center;
+    > * {
+      margin: 4px;
     }
+  }
 }
