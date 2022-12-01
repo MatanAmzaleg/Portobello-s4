@@ -103,6 +103,7 @@ header.app-header {
                 .icon {
                     height: 100%;
                     display: flex;
+                    top: 0;
                     position: absolute;
                     color: var(--ds-text-subtlest, #FFFFFF);
                     align-items: center;
@@ -146,12 +147,12 @@ header.app-header {
                     }
                 }
 
-                // input:focus + .icon > .icon-svg{
-                //     position: fixed;
-                //     z-index: 10;
-                //     left: 2vw;
-                //     color: black;
-                // }
+                input:focus + .icon > .icon-svg{
+                    position: fixed;
+                    z-index: 10;
+                    left: 2vw;
+                    color: black;
+                }
             }
 
             @include for-mobile-layout {

@@ -66,6 +66,7 @@
       </button>
       <section class="user">
         <div class="search">
+          <input type="search" placeholder="Search" />
           <span class="icon">
             <svg class="icon-svg" width="24" height="24" viewBox="0 0 24 24" role="presentation">
               <path
@@ -73,7 +74,6 @@
                 fill="currentColor" fill-rule="evenodd"></path>
             </svg>
           </span>
-          <input type="search" placeholder="Search" />
         </div>
         <notifications />
       </section>
