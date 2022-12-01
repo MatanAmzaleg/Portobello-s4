@@ -15,16 +15,10 @@ export default {
         content: String,
         selectedGuide: String
     },
-    data() {
-        return {
-            selected: false
-        }
-    },
     computed: {
         isSelected() {
-            console.log('this.selectedGuide', this.selectedGuide)
-            return this.selectedGuide === this.title? 'is-selected' : ''
+            return this.selectedGuide === this.title ? 'is-selected' : ''
         }
-    }
+    },
 }
 </script>

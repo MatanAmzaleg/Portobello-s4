@@ -28,7 +28,7 @@
         <div class="product-guide-preview">
           <div class="guide-cards">
             <div class="guide-card" v-for="card in guide.cards">
-              <button-data :title="card.title" :content="card.content" @setSelectedGuide="setSelectedGuide" :selectedGuide="guide.selectedGuide"/>
+              <button-data :title="card.title" :content="card.content" @setSelectedGuide="setSelectedGuide" :selectedGuide="getSelectedGuide"/>
             </div>
           </div>
           <carousel class="guide-carousel" :imgs="guide.imgs"></carousel>
@@ -67,10 +67,14 @@ export default {
       },
     }
   },
+  computed: {
+    getSelectedGuide() {
+      return this.guide.selectedGuide
+    }
+  },
   methods: {
     setSelectedGuide(guide){
-      this.selectedGuide = guide
-      console.log(guide)
+      this.guide.selectedGuide = guide
     }
   },
   components: {
