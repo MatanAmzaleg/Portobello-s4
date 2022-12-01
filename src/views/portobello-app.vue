@@ -66,7 +66,6 @@ export default {
     async updateBoard(board) {
       try {
         board = {...board}
-        board.price = +prompt('New price?', board.price)
         await this.$store.dispatch(getActionUpdateBoard(board))
         showSuccessMsg('Board updated')
 

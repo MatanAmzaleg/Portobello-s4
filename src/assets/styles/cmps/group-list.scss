@@ -1,9 +1,13 @@
 .board-details {
+
+  .group-list{
+    overflow-x: auto;
+    height: 90vh;
+  }
   .group-container {
     display: flex;
     gap: 16px;
-    margin: 15px 0px 8px;
-    padding: 0px 0px 8px 16px;
+    padding: 0px 16px 8px 16px;
   }
   .group {
     width: 272px;
@@ -133,11 +137,15 @@
     height: fit-content;
     background-color: #7e8a9d5d;
     border-radius: 4px;
+    margin-inline-end: 16px;
     .add-group-btn{
       text-align: left;
       background-color: inherit;
       padding: 14px 8px;
       border-radius: 2px;
+      width: 272px;
+      margin-inline-end: 16px;
+
     }
     .add-task-icon{
     }

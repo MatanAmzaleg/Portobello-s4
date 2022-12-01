@@ -1,7 +1,7 @@
 <template>
   <section class="group-list">
     <Container
-      class="group-container"
+      class="group-container h-full overflow-x-auto"
       group-name="cols"
       tag="div"
       orientation="horizontal"
@@ -33,12 +33,12 @@
               showOnTop: true,
             }"
             drag-class="bg-primary dark:bg-primary 
-              border-2 border-primary-hover text-white 
-              transition duration-100 ease-in z-50
-              transform rotate-6 scale-110"
+            border-2 border-primary-hover text-white 
+            transition duration-100 ease-in z-50
+            transform rotate-6 scale-110"
             drop-class="transition duration-100 
-              ease-in z-50 transform 
-              -rotate-2 scale-90"
+            ease-in z-50 transform 
+            -rotate-2 scale-90"
             @drop="(e) => onCardDrop(column.id, e)"
           >
             <!-- Items -->
@@ -97,15 +97,27 @@
         </div>
       </Draggable>
       <article class="add-group">
-        <button class="add-group-btn" v-if="!isAddNewGroup" @click="(isAddNewGroup = true)">
+        <button
+          class="add-group-btn"
+          v-if="!isAddNewGroup"
+          @click="isAddNewGroup = true"
+        >
           <font-awesome-icon class="add-task-icon2" icon="fa-solid fa-plus" />
           Add another list
         </button>
-        <input v-model="newGroupTxt" v-if="isAddNewGroup" class="add-group-input" placeholder="Enter list title..." type="text">
+        <input
+          v-model="newGroupTxt"
+          v-if="isAddNewGroup"
+          class="add-group-input"
+          placeholder="Enter list title..."
+          type="text"
+        />
         <div class="card-composure flex">
           <div class="pressed-buttons">
-            <button @click="addGroup" v-if="isAddNewGroup" class="add-card-btn">Add list</button>
-            <button v-if="isAddNewGroup" @click="(isAddNewGroup = false)">
+            <button @click="addGroup" v-if="isAddNewGroup" class="add-card-btn">
+              Add list
+            </button>
+            <button v-if="isAddNewGroup" @click="isAddNewGroup = false">
               <font-awesome-icon
                 class="close-add-task-btn"
                 icon="fa-solid fa-xmark"
@@ -132,8 +144,8 @@ export default {
       scene: null,
       currGroup: null,
       newTaskTxt: "",
-      isAddNewGroup:false,
-      newGroupTxt:"",
+      isAddNewGroup: false,
+      newGroupTxt: "",
     };
   },
   props: {
@@ -141,6 +153,7 @@ export default {
   },
   async created() {
     try {
+      this.$store.dispatch({ type: "loadBoards" });
       this.scene = {
         type: "container",
         props: {
@@ -223,13 +236,18 @@ export default {
 
       this.$emit("add-Task", board);
     },
-    addGroup(){
+    addGroup() {
       console.log(this.newGroupTxt);
-      const group = { title: this.newGroupTxt, id: utilService.makeId() , tasks:[]};
+      const group = {
+        title: this.newGroupTxt,
+        id: utilService.makeId(),
+        tasks: [],
+      };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);
       this.$emit("add-Task", board);
-    }
+      this.newGroupTxt = "";
+    },
   },
   computed: {
     createBoardFromScene() {

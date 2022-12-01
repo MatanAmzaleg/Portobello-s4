@@ -1,0 +1,70 @@
+.board-header{
+    display: flex;
+    height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 8px;
+    cursor:default;
+    button{
+        height: 32px;
+        background-color: #2e709764;
+        padding: 6px;
+        border-radius: 3px;
+
+        &:hover{
+            background-color: #3787b564; 
+        }
+    }
+    .left-section{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        >*{
+            margin: 5px;
+        }
+
+        .is-starred{
+            width: 32px;
+
+            &:hover{
+                .star-icon{
+                    
+                    scale: 1.2;
+                }
+            }
+            
+        }
+    }
+    .right-section{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        >*{
+            margin: 5px;
+        }
+
+        .filter-btn{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            .filter-icon{
+                position: relative;
+                bottom: 1px;
+                width: 13px;
+                height: 13px;
+                margin-inline-end: 5px;
+            }
+        }
+
+        .ellipsis-icon{
+            height: 18px;
+            width: 18px;
+            padding: 1px;
+            display: grid;
+            place-items: center;
+        }
+    }
+}
