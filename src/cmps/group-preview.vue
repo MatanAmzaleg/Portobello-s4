@@ -7,7 +7,7 @@
       </div>
       <!-- column -->
       <Container
-        class="flex-grow overflow-y-auto overflow-x-hidden"
+        class="flex-grow overflow-y-auto overflow-x-hidden task-list "
         orientation="vertical"
         group-name="col-items"
         :shouldAcceptDrop="
@@ -43,40 +43,40 @@
             >{{ item.title }}</router-link
           >
         </draggable>
-        <textarea
-          v-if="column.id === currGroup"
-          class="textarea"
-          placeholder="Enter a title for this card"
-          cols="30"
-          rows="3"
-          v-model="newTaskTxt"
-        ></textarea>
-        <div class="card-composure flex">
-          <button
-            v-if="column.id !== currGroup"
-            class="add-task-btn"
-            @click="changeAddStatus(column.id)"
-          >
-            <font-awesome-icon class="add-task-icon" icon="fa-solid fa-plus" />
-            Add a card
-          </button>
-          <div class="pressed-buttons">
-            <button
-              class="add-card-btn"
-              v-if="column.id === currGroup"
-              @click="addTask"
-            >
-              Add card
-            </button>
-            <button v-if="column.id === currGroup" @click="currGroup = null">
-              <font-awesome-icon
-                class="close-add-task-btn"
-                icon="fa-solid fa-xmark"
-              />
-            </button>
-          </div>
-        </div>
       </Container>
+      <textarea
+        v-if="column.id === currGroup"
+        class="textarea"
+        placeholder="Enter a title for this card"
+        cols="30"
+        rows="3"
+        v-model="newTaskTxt"
+      ></textarea>
+      <div class="card-composure flex">
+        <button
+          v-if="column.id !== currGroup"
+          class="add-task-btn"
+          @click="changeAddStatus(column.id)"
+        >
+          <font-awesome-icon class="add-task-icon" icon="fa-solid fa-plus" />
+          Add a card
+        </button>
+        <div class="pressed-buttons">
+          <button
+            class="add-card-btn"
+            v-if="column.id === currGroup"
+            @click="addTask"
+          >
+            Add card
+          </button>
+          <button v-if="column.id === currGroup" @click="currGroup = null">
+            <font-awesome-icon
+              class="close-add-task-btn"
+              icon="fa-solid fa-xmark"
+            />
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 </template>

@@ -1,11 +1,11 @@
 <template >
-  <section class="board-details" v-if="getCurrBoard">
-    <board-header @setFilter="setFilter" :board="getCurrBoard"></board-header>
-    <section v-if="getCurrBoard" class="board-details">
+  <section class="board-details" v-if="currBoard">
+    <board-header @setFilter="setFilter" :board="currBoard"></board-header>
+    <section v-if="currBoard" class="board-details">
       <group-list
         :filterBy="filterBy"
         @addTask="addTask"
-        :currBoard="getCurrBoard"
+        :currBoard="currBoard"
       ></group-list>
   </section>
   </section>
@@ -21,13 +21,18 @@ export default {
   data() {
     return {
       filterBy: {},
+      currBoard:null,
     };
   },
   async created() {
     try {
       const { boardId } = this.$route.params;
+      const board = await this.$store.dispatch({type:"setCurrBoard",boardId})
+      this.currBoard = board;
+      console.log("🚀 ~ file: board-details.vue:32 ~ created ~ this.currBoard", this.currBoard)
+      
+      
       // const board = await boardService.getById(boardId);
-      // this.currBoard = board;
     } catch (err) {
       console.log(err);
     }
@@ -35,9 +40,10 @@ export default {
   methods: {
     addTask(board) {
       console.log(board)
-      this.$store.dispatch({
+      this.currBoard = board
+     this.$store.dispatch({
         type: "addBoard",
-        board: JSON.parse(JSON.stringify(board)),
+        board,
       });
     },
     setFilter(filterBy) {

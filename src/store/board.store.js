@@ -34,18 +34,20 @@ export const boardStore = {
     },
     getters: {
         boards({boards}) { return boards },
-        currBoard({currBoard}) {console.log(currBoard); return currBoard}
+        currBoard({currBoard}) {return currBoard}
     },
     mutations: {
         setBoards(state, { boards }) {
             state.boards = boards
         },
         addBoard(state, { board }) {
-            state.boards.push(board)
+            // state.boards.push(board)
+            state.currBoard = board
         },
         updateBoard(state, { board }) {
             const idx = state.boards.findIndex(c => c.id === board._id)
             state.boards.splice(idx, 1, board)
+            state.currBoard = board
         },
         removeBoard(state, { boardId }) {
             state.boards = state.boards.filter(board => board._id !== boardId)
@@ -109,11 +111,14 @@ export const boardStore = {
                 throw err
             }
         },
-        async setCurrBoard ({commit}, {board}){
-            console.log(board);
+        async setCurrBoard ({commit}, {boardId}){
+            console.log(boardId);
             console.log("hi");
             try{
+                const board = await boardService.getById(boardId)
+                console.log("🚀 ~ file: board.store.js:119 ~ setCurrBoard ~ board", board)
                 commit("setCurrBoard", board)
+                return board
 
             }catch(err){
                 console.log('boardStore: Error in setCurrBoard', err)

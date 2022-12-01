@@ -8,8 +8,14 @@
       @drop="onColumnDrop($event)"
     >
       <Draggable v-for="column in scene.groups" :key="column.id">
-        <group-preview @addTask="(addTask)" @addBoard="addBoard" :scene="scene" :currBoard="currBoard" :column="column">helo</group-preview>
-       
+        <group-preview
+          @addTask="addTask"
+          @addBoard="addBoard"
+          :scene="scene"
+          :currBoard="currBoard"
+          :column="column"
+          >helo</group-preview
+        >
       </Draggable>
       <article class="add-group">
         <button
@@ -68,7 +74,7 @@ export default {
   },
   async created() {
     try {
-      this.$store.dispatch({ type: "loadBoards" });
+      // this.$store.dispatch({ type: "loadBoards" });
       this.scene = {
         type: "container",
         props: {
@@ -99,15 +105,15 @@ export default {
       scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
       const board = utilService.createBoardFromScene(this.scene);
-      board._id = this.currBoard._id
-      board.title = this.currBoard.title
+      board._id = this.currBoard._id;
+      board.title = this.currBoard.title;
       this.$store.dispatch({ type: "addBoard", board });
     },
-    addBoard(board){
+    addBoard(board) {
       this.$store.dispatch({ type: "addBoard", board });
-    } ,
-    addTask(board){
-      this.$emit("addTask", board)
+    },
+    addTask(board) {
+      this.$emit("addTask", board);
     },
     addGroup() {
       console.log(this.newGroupTxt);
@@ -121,7 +127,6 @@ export default {
       this.$emit("addTask", board);
       this.newGroupTxt = "";
     },
-    
   },
 };
 </script>
