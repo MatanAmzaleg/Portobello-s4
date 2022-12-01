@@ -18,6 +18,7 @@ export const boardService = {
   addBoardMsg,
   getTask,
   getGroupById,
+  saveTask
 };
 window.boardService = boardService;
 
@@ -40,13 +41,13 @@ function getById(boardId) {
   // return httpService.get(`board/${boardId}`)
 }
 
- async function getGroupById(boardId, groupId){
-  try{
+async function getGroupById(boardId, groupId) {
+  try {
     const board = await getById(boardId)
     console.log(board);
     return board.groups.find(group => group.id === groupId)
 
-  }catch{
+  } catch {
 
   }
 }
@@ -60,6 +61,27 @@ function removeTask(boardId, groupId, taskId) {
   return storageService.remove(STORAGE_KEY, boardId)
     .then(board => board.groups.find(group => group.id === groupId))
     .then(group => group.tasks.find(task => task.id === taskId))
+}
+function saveTask(boardId, groupId, taskToSave) {
+  if(taskToSave.id){
+    return storageService.get(STORAGE_KEY, boardId)
+          .then(board =>{
+            let groupIdx  = board.groups.findIndex(group => group.id === groupId)
+            let taskIdx  = board.groups[groupIdx].tasks.findIndex(task => task.id === taskToSave.id)
+            board.groups[groupIdx].tasks[taskIdx] = taskToSave
+            return board
+          })
+          .then(newBoard => storageService.put(STORAGE_KEY,newBoard))
+  }
+  else{
+    return storageService.get(STORAGE_KEY, boardId)
+    .then(board =>{
+      let groupIdx  = board.groups.findIndex(group => group.id === groupId)
+      board.groups[groupIdx].tasks.push(taskToSave)
+      return board
+    })
+    .then(newBoard => storageService.put(STORAGE_KEY,newBoard))
+  }
 }
 
 async function remove(boardId) {
@@ -141,13 +163,13 @@ function getEmptyBoard() {
 
 
 // test data
-
+//     let boardie = data
+// storageService._save(STORAGE_KEY,boardie)
 // ; (async () => {
 //   setTimeout(async () => {
-//     let boardie = data
 //     // console.log(boardie[0]);
 //     await boardService.save(boardie[0])
 //     // await boardService.save(getEmptyBoard())
-
+//     console.log(boardie[0]);
 //   }, 50)
 // })()

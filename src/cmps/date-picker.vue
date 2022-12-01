@@ -1,6 +1,9 @@
 <template lang="">
     <Popper>
+    <div class="task-option-btn">
+        <font-awesome-icon :style="{'height': 12+'px'}" icon="fa-regular fa-clock" />
       <button>Date</button>
+    </div>
       <template #content>
       <div class="date-picker">
         <h1>Date</h1>
@@ -27,6 +30,14 @@
   }
   </script>
   <style lang="scss">
+    .task-option-btn{
+      display: flex;
+      gap: 5px;
+      background-color: var(--ds-background-neutral,#091e420a);
+     text-align: left;
+      padding: 6px 12px;
+      width: 170px;
+    }
           .member-picker{
           padding: 20px;
           width: 200px;
