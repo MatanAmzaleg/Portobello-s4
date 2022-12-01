@@ -3,7 +3,6 @@
   <section v-if="currBoard" class="board-details">
     <group-list @addTask="addTask" :currBoard="currBoard"></group-list>
   </section>
-  <button @click="printScene">Print</button>
 </template>
 
 <script>
