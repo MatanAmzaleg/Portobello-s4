@@ -28,10 +28,12 @@
         <div class="product-guide-preview">
           <div class="guide-cards">
             <div class="guide-card" v-for="card in guide.cards">
-              <button-data :title="card.title" :content="card.content" @setSelectedGuide="setSelectedGuide" :selectedGuide="getSelectedGuide"/>
+              <button-data :title="card.title" :content="card.content" @setSelectedGuide="setSelectedGuide"
+                :selectedGuide="getSelectedGuide" />
             </div>
           </div>
-          <carousel class="guide-carousel" :imgs="guide.imgs"></carousel>
+          <carousel class="guide-carousel" :imgs="guide.imgs" :carouselActiveItem="getCarouselActiveItem"
+            @updateSelectedCarousel="updateSelectedCarousel"></carousel>
         </div>
       </section>
     </div>
@@ -49,8 +51,8 @@ export default {
       guide: {
         imgs: [
           "https://res.cloudinary.com/ca-cloud/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1669886243/Trello/guide-01_reaa50.jpg",
-          "https://res.cloudinary.com/ca-cloud/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1669886243/Trello/guide-03_aqoqhq.jpg",
           "https://res.cloudinary.com/ca-cloud/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1669886243/Trello/guide-02_kzfibw.jpg",
+          "https://res.cloudinary.com/ca-cloud/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1669886243/Trello/guide-03_aqoqhq.jpg",
         ],
         cards: [
           {
@@ -63,18 +65,53 @@ export default {
             title: 'Cards', content: 'Cards represent tasks and ideas and hold all the information to get the job done. As you make progress, move cards across lists to show their status.'
           },
         ],
-        selectedGuide: 'Boards'
+        selectedGuide: 'Boards',
+        carouselActiveItem: 0
       },
     }
   },
   computed: {
     getSelectedGuide() {
       return this.guide.selectedGuide
+    },
+    getCarouselActiveItem() {
+      return this.guide.carouselActiveItem
     }
   },
   methods: {
-    setSelectedGuide(guide){
+    setSelectedGuide(guide) {
       this.guide.selectedGuide = guide
+      switch (guide) {
+        case 'Boards': {
+          this.guide.carouselActiveItem = 0
+          break;
+        }
+        case 'Lists': {
+          this.guide.carouselActiveItem = 1
+          break;
+        }
+        case 'Cards': {
+          this.guide.carouselActiveItem = 2
+          break;
+        }
+      }
+    },
+    updateSelectedCarousel(idx) {
+      this.guide.carouselActiveItem = idx
+      switch (idx) {
+        case 0: {
+          this.guide.selectedGuide = 'Boards'
+          break;
+        }
+        case 1: {
+          this.guide.selectedGuide = 'Lists'
+          break;
+        }
+        case 2: {
+          this.guide.selectedGuide = 'Cards'
+          break;
+        }
+      }
     }
   },
   components: {
