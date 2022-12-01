@@ -1,6 +1,10 @@
 <template lang="">
   <Popper>
+
+  <div class="task-option-btn">
+    <font-awesome-icon  :style="{'height': 12+'px'}" icon="fa-solid fa-tag" />
     <button>Labels</button>
+  </div>
     <template #content>
     <div class="label-picker">
       <h1>Labels</h1>
@@ -22,14 +26,16 @@
 <script>
 export default {
     props:{
-        taskLabels: Array
+       labelIds: Array
     },
     created(){
-        this.currLabels = this.taskLabels
+        console.log(this.labelIds,'1');
+        this.taskLabelsIds = this.labelIds
     },
     methods:{
         addLabel(labelId){
-            console.log(labelId)
+            this.taskLabelsIds.push(labelId)
+            this.$emit('save-label',this.taskLabelsIds)
         }
     },
     data(){
@@ -64,7 +70,8 @@ export default {
                     "id": "kT8v8m"
                 },
             ],
-            currLabels: [] 
+            labelIds: [
+            ] 
         }
     }
 }

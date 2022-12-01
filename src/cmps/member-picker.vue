@@ -1,6 +1,9 @@
 <template lang="">
   <Popper>
-    <button>Members</button>
+  <div class="task-option-btn">
+    <font-awesome-icon :style="{'height': 12+'px'}" icon="fa-solid fa-user" />       
+     <button>Members</button>
+  </div>
     <template #content>
     <div class="member-picker">
       <h1>Members</h1>
@@ -38,6 +41,6 @@ export default {
         padding: 20px;
         width: 310px;
         text-align: center;
-        background-color: white;
+        background-color: lightblue;
     }
 </style>
