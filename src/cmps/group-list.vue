@@ -126,7 +126,6 @@ export default {
       this.currGroup = groupId;
     },
     addTask() {
-      console.log(this.currGroup);
       const task = { title: this.newTaskTxt, id: utilService.makeId() };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       console.log(board);

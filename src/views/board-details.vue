@@ -7,6 +7,7 @@
         @addTask="addTask"
         :currBoard="currBoard"
       ></group-list>
+      <router-view :currBoard="currBoard" ></router-view>
   </section>
   </section>
 </template>

@@ -116,18 +116,26 @@ export const boardStore = {
                 throw err
             }
         },
-        async setCurrBoard ({commit}, boardId){
-            console.log(boardId);
-            console.log("hi");
+        async setCurrBoard ({commit}, {boardId}){
             try{
                 const board = await boardService.getById(boardId)
                 console.log("🚀 ~ file: board.store.js:119 ~ setCurrBoard ~ board", board)
-                commit("setCurrBoard", board)
+                commit({type: "setCurrBoard", board})
                 return board
 
             }catch(err){
                 console.log('boardStore: Error in setCurrBoard', err)
                 throw err
+            }
+        },
+        async loadTask({commit},{board,taskId}){
+            try{
+                const task = await boardService.getTaskById(board,taskId)
+                commit({type:'setTask',task})
+                return task
+            }
+            catch(err){
+                console.log(err);
             }
         }
 
