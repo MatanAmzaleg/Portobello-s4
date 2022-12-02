@@ -8,96 +8,14 @@
       @drop="onColumnDrop($event)"
     >
       <Draggable v-for="column in scene.groups" :key="column.id">
-        <div class="group">
-          <div class="group-title">
-            <h2 class="text-lg">{{ column.title }}</h2>
-            <font-awesome-icon
-              class="ellipsis-icon"
-              icon="fa-solid fa-ellipsis"
-            />
-          </div>
-          <!-- column -->
-          <Container
-            class="flex-grow overflow-y-auto overflow-x-hidden"
-            orientation="vertical"
-            group-name="col-items"
-            :shouldAcceptDrop="
-              (e, payload) => e.groupName === 'col-items' && !payload.loading
-            "
-            :get-child-payload="getCardPayload(column.id)"
-            :drop-placeholder="{
-              className: `bg-primary bg-opacity-20  
-              border-dotted border-2 
-              border-primary mx-4 my-2`,
-              animationDuration: '200',
-              showOnTop: true,
-            }"
-            drag-class="bg-primary dark:bg-primary 
-            border-2 border-primary-hover text-white 
-            transition duration-100 ease-in z-50
-            transform rotate-6 scale-110"
-            drop-class="transition duration-100 
-            ease-in z-50 transform 
-            -rotate-2 scale-90"
-            @drop="(e) => onCardDrop(column.id, e)"
-          >
-            <!-- Items -->
-            <draggable
-              v-for="item in column.tasks"
-              :key="item.id"
-              :item="item"
-              class="task rotate-6"
-            >
-            <span class="task-router-link" @click.stop="goToTask(item.id)">
-              {{ item.title }}
-            </span>
-              <!-- <router-link
-                class="task-router-link"
-                :to="`${currBoard._id}/g/${column.id}/t/${item.id}`"
-                >{{ item.title }}</router-link
-              > -->
-            </draggable>
-            <textarea
-              v-if="column.id === currGroup"
-              class="textarea"
-              placeholder="Enter a title for this card"
-              cols="30"
-              rows="3"
-              v-model="newTaskTxt"
-            ></textarea>
-            <div class="card-composure flex">
-              <button
-                v-if="column.id !== currGroup"
-                class="add-task-btn"
-                @click="changeAddStatus(column.id)"
-              >
-                <font-awesome-icon
-                  class="add-task-icon"
-                  icon="fa-solid fa-plus"
-                />
-                Add a card
-              </button>
-              <div class="pressed-buttons">
-                <button
-                  class="add-card-btn"
-                  v-if="column.id === currGroup"
-                  @click="addTask"
-                >
-                  Add card
-                </button>
-                <button
-                  v-if="column.id === currGroup"
-                  @click="currGroup = null"
-                >
-                  <font-awesome-icon
-                    class="close-add-task-btn"
-                    icon="fa-solid fa-xmark"
-                  />
-                </button>
-              </div>
-            </div>
-          </Container>
-        </div>
+        <group-preview
+          @addTask="addTask"
+          @addBoard="addBoard"
+          :scene="scene"
+          :currBoard="currBoard"
+          :column="column"
+          >helo</group-preview
+        >
       </Draggable>
       <article class="add-group">
         <button
@@ -135,7 +53,7 @@
 
 <script>
 import { utilService } from "../services/util.service";
-import groupPreview from "../cmps/group-preview.vue";
+import groupPreview from "./group-preview.vue";
 import taskDetails from "../views/task-details.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
@@ -156,7 +74,7 @@ export default {
   },
   async created() {
     try {
-      this.$store.dispatch({ type: "loadBoards" });
+      // this.$store.dispatch({ type: "loadBoards" });
       this.scene = {
         type: "container",
         props: {
@@ -189,36 +107,13 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
-      const board = this.createBoardFromScene;
+      const board = utilService.createBoardFromScene(this.scene);
+      board._id = this.currBoard._id;
+      board.title = this.currBoard.title;
       this.$store.dispatch({ type: "addBoard", board });
     },
-    onCardDrop(columnId, dropResult) {
-      // check if element where ADDED or REMOVED in current collumn
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const scene = Object.assign({}, this.scene);
-        const column = scene.groups.filter((p) => p.id === columnId)[0];
-        const itemIndex = scene.groups.indexOf(column);
-        const newColumn = Object.assign({}, column);
-
-        // check if element was ADDED in current column
-        if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
-          // your action / api call
-          dropResult.payload.loading = true;
-          // simulate api call
-          setTimeout(function () {
-            dropResult.payload.loading = false;
-          }, Math.random() * 5000 + 1000);
-        }
-
-        newColumn.tasks = applyDrag(newColumn.tasks, dropResult);
-        scene.groups.splice(itemIndex, 1, newColumn);
-        this.scene = scene;
-        const board = this.createBoardFromScene;
-        this.$store.dispatch({
-          type: "addBoard",
-          board: JSON.parse(JSON.stringify(board)),
-        });
-      }
+    addBoard(board) {
+      this.$store.dispatch({ type: "addBoard", board });
     },
     getCardPayload(columnId) {
       return (index) => {
@@ -239,6 +134,7 @@ export default {
         (group) => group.id === this.currGroup
       );
       board.groups[groupIdx].tasks.push(task);
+
       this.$emit("add-Task", board);
     },
     addGroup() {
@@ -250,27 +146,8 @@ export default {
       };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);
-      this.$emit("add-Task", board);
+      this.$emit("addTask", board);
       this.newGroupTxt = "";
-    },
-  },
-  computed: {
-    createBoardFromScene() {
-      const scene = this.scene;
-      delete scene.props, delete scene.type;
-      scene.groups.forEach((group) => {
-        delete group.props, delete group.type;
-        group.tasks.forEach((task) => {
-          delete task.loading, delete task.type, delete task.data;
-        });
-      });
-      const currBoard = this.currBoard;
-      const board = {
-        title: currBoard.title,
-        _id: currBoard._id,
-        groups: scene.groups,
-      };
-      return board;
     },
   },
 };

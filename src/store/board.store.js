@@ -42,11 +42,13 @@ export const boardStore = {
             state.boards = boards
         },
         addBoard(state, { board }) {
-            state.boards.push(board)
+            // state.boards.push(board)
+            state.currBoard = board
         },
         updateBoard(state, { board }) {
             const idx = state.boards.findIndex(c => c.id === board._id)
             state.boards.splice(idx, 1, board)
+            state.currBoard = board
         },
         removeBoard(state, { boardId }) {
             state.boards = state.boards.filter(board => board._id !== boardId)
@@ -65,8 +67,6 @@ export const boardStore = {
     },
     actions: {
         async addBoard(context, { board }) {
-            console.log("🚀 ~ file: board.store.js:59 ~ addBoard ~ board", board)
-            console.log(board);
             try {
                 board = await boardService.save(board)
                 context.commit(getActionAddBoard(board))
@@ -89,7 +89,7 @@ export const boardStore = {
                 throw err
             }
         },
-        async loadBoards(context) {
+        async loadBoards(context, filterBy) {
             try {
                 const boards = await boardService.query()
                 context.commit({ type: 'setBoards', boards })
@@ -116,20 +116,14 @@ export const boardStore = {
                 throw err
             }
         },
-        async loadTask({commit},{board,taskId}){
-            try {
-                const task = boardService.getTaskById(board,taskId)
-                commit({type:'setTask',task})
-                return task
-            } catch (error) {
-                
-            }
-        },
         async setCurrBoard ({commit}, boardId){
             console.log(boardId);
+            console.log("hi");
             try{
                 const board = await boardService.getById(boardId)
+                console.log("🚀 ~ file: board.store.js:119 ~ setCurrBoard ~ board", board)
                 commit("setCurrBoard", board)
+                return board
 
             }catch(err){
                 console.log('boardStore: Error in setCurrBoard', err)
