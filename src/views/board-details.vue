@@ -1,7 +1,7 @@
 <template >
-  <section class="board-details" v-if="currBoard">
+  <section class="board-details" v-if="currBoard" :style="{'background-color':currBoard.style?.bgColor}">
     <board-header @updateBoard="updateBoard" @setFilter="setFilter" :board="currBoard"></board-header>
-    <section v-if="currBoard" :style="{'background-color':currBoard.style?.bgColor}" class="board-details">
+    <section v-if="currBoard" class="board-details">
       <group-list
         :filterBy="filterBy"
         @addTask="addTask"
