@@ -1,7 +1,8 @@
 <template>
-  <board-header :board="board"></board-header>
+  <board-header :board="currBoard"></board-header>
   <section v-if="currBoard" class="board-details">
     <group-list @addTask="addTask" :currBoard="currBoard"></group-list>
+    <router-view :currBoard="currBoard" ></router-view>
   </section>
 </template>
 

@@ -48,11 +48,14 @@
               :item="item"
               class="task rotate-6"
             >
-              <router-link
+            <span class="task-router-link" @click.stop="goToTask(item.id)">
+              {{ item.title }}
+            </span>
+              <!-- <router-link
                 class="task-router-link"
                 :to="`${currBoard._id}/g/${column.id}/t/${item.id}`"
                 >{{ item.title }}</router-link
-              >
+              > -->
             </draggable>
             <textarea
               v-if="column.id === currGroup"
@@ -179,6 +182,9 @@ export default {
   },
   components: { Container, Draggable, taskDetails, groupPreview },
   methods: {
+    goToTask(taskId){
+      this.$router.push(`/board/${this.currBoard._id}/task/${taskId}`)
+    },
     onColumnDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
       scene.groups = applyDrag(scene.groups, dropResult);
@@ -233,7 +239,6 @@ export default {
         (group) => group.id === this.currGroup
       );
       board.groups[groupIdx].tasks.push(task);
-
       this.$emit("add-Task", board);
     },
     addGroup() {

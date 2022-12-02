@@ -1,6 +1,6 @@
 <template>
-  <div class="task-edit-screen">
-    <div class="task-edit-container">
+  <div class="task-edit-screen" @click="exitTask">
+    <div class="task-edit-container" @click.stop>
       <div
         v-if="task.style?.bgColor"
         class="task-cover"
@@ -11,7 +11,7 @@
       <div class="task-section task-title">
         <font-awesome-icon class="title-icon" icon="fa-solid fa-bars-progress" />
         <div class="task-title-wrapper">
-          <input @change="saveTask" v-model="task.title" type="text" />
+          <input v-model="task.title" @input="updateTask" type="text" />
           <h5>in group {{ this.groupId }}</h5>
         </div>
       </div>
@@ -20,7 +20,7 @@
           <div class="task-section task-info">
             <span></span>
             <div class="task-info-wrapper">
-              <small>members</small>
+              <miniUsers v-if="task.byMember" :users="task.byMember" />
               <small>labels</small>
               <h2>Due date</h2>
             </div>
@@ -54,7 +54,7 @@
         </section>
       </section>
 
-      <span class="task-exit-btn">X</span>
+      <span @click="exitTask" class="task-exit-btn">X</span>
     </div>
   </div>
 </template>
@@ -65,15 +65,16 @@ import labelPicker from "../cmps/label-picker.vue";
 import memberPicker from "../cmps/member-picker.vue";
 import datePicker from "../cmps/date-picker.vue";
 import coverPicker from "../cmps/cover.picker.vue";
+import miniUsers from "../cmps/mini-users.vue";
 export default {
+  props:{
+    currBoard:Object
+  },
   async created() {
-    let boardId = "b101";
-    let groupId = "g102";
-    this.groupId = groupId;
-    this.boardId = boardId;
-    let taskId = "c104";
-    this.task = await boardService.getTask(boardId, groupId, taskId);
-    console.log(this.task.labelIds);
+    let {taskId} = this.$route.params
+    let  task = await this.$store.dispatch({type:"loadTask",board:this.currBoard,taskId}) 
+    this.task = JSON.parse(JSON.stringify(task))
+    console.log(this.task);
   },
   data() {
     return {
@@ -83,8 +84,21 @@ export default {
     };
   },
   methods: {
+    exitTask(){
+      this.$router.push(`/board/${this.currBoard._id}`)
+    },  
     toggleDetails() {
       this.isDetailsShown = !this.isDetailsShown;
+    },
+    updateTask(){
+      const board = JSON.parse(JSON.stringify(this.currBoard))
+      let taskIdx 
+      let groupIdx = board.groups.findIndex(group => group.tasks.some((task,idx)=> {
+        if(task.id === this.task.id) taskIdx = idx
+        return task.id === this.task.id
+      }))
+      board.groups[groupIdx].tasks[taskIdx] = this.task
+      this.$store.dispatch({type:'updateBoard',board})
     },
     closeModal() {
       this.$router.push("/board");
@@ -102,16 +116,12 @@ export default {
     },
     saveTaskLabels(labels) {
       this.task.labelIds = labels;
-      boardService
-        .saveTask(this.boardId, this.groupId, this.task)
-        .then((x) => console.log("saved"));
+      this.updateTask()
+
     },
     saveTaskCover(color) {
-      console.log("here", color);
-      this.task.style.bgColor = color;
-      boardService
-        .saveTask(this.boardId, this.groupId, this.task)
-        .then((x) => console.log("saved"));
+      this.task.style.bgColor = color
+      this.updateTask()
     },
   },
   computed: {
@@ -124,6 +134,7 @@ export default {
     memberPicker,
     datePicker,
     coverPicker,
+    miniUsers
   },
 };
 </script>

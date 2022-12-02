@@ -55,7 +55,7 @@ export default {
     },
     methods:{
         setCover(color){
-            this.$emit('set-cover',color)
+            this.$emit('setCover',color)
         }
     }
     

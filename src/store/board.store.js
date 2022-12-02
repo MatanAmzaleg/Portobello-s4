@@ -31,6 +31,7 @@ export const boardStore = {
     state: {
         boards: [],
         currBoard:null,
+        currTask:null
     },
     getters: {
         boards({boards}) { return boards },
@@ -56,9 +57,10 @@ export const boardStore = {
             board.msgs.push(msg)
         },
         setCurrBoard(state, board){
-            console.log(board);
             state.currBoard = board
-            console.log(state.currBoard);
+        },
+        setTask(state,{task}){
+            state.currTask = task
         }
     },
     actions: {
@@ -76,9 +78,11 @@ export const boardStore = {
             }
         },
         async updateBoard(context, { board }) {
+            console.log("🚀 ~ file: board.store.js:83 ~ updateBoard ~ board", board)
             try {
                 board = await boardService.save(board)
                 context.commit(getActionUpdateBoard(board))
+                context.commit("setCurrBoard", board)
                 return board
             } catch (err) {
                 console.log('boardStore: Error in updateBoard', err)
@@ -110,6 +114,15 @@ export const boardStore = {
             } catch (err) {
                 console.log('boardStore: Error in addBoardMsg', err)
                 throw err
+            }
+        },
+        async loadTask({commit},{board,taskId}){
+            try {
+                const task = boardService.getTaskById(board,taskId)
+                commit({type:'setTask',task})
+                return task
+            } catch (error) {
+                
             }
         },
         async setCurrBoard ({commit}, boardId){

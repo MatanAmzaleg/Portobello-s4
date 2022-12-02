@@ -17,6 +17,7 @@ export const boardService = {
   getEmptyBoard,
   addBoardMsg,
   getTask,
+  getTaskById,
   getGroupById,
   saveTask
 };
@@ -50,6 +51,21 @@ async function getGroupById(boardId, groupId) {
   } catch {
 
   }
+}
+
+function getTaskById(board,taskId){
+  var task
+  console.log('holllla service',board);
+  board.groups.forEach(group => {
+    group.tasks.forEach((t) =>{
+      if(t.id === taskId) {
+        
+        task = t
+      }
+    })
+  });
+
+  return task
 }
 
 function getTask(boardId, groupId, taskId) {
@@ -163,8 +179,8 @@ function getEmptyBoard() {
 
 
 // test data
-//     let boardie = data
-// storageService._save(STORAGE_KEY,boardie)
+    // let boardie = data
+    // storageService._save(STORAGE_KEY,boardie)
 // ; (async () => {
 //   setTimeout(async () => {
 //     // console.log(boardie[0]);

@@ -4,7 +4,7 @@
       <h1>Trello</h1>
       <button class="is-starred"><font-awesome-icon class="star-icon" icon="fa-regular fa-star" /></button>
       |
-      <h1>BoardName</h1>
+      <h1>{{board.title}}</h1>
     </div>
     <div class="right-section">
       <popper>
