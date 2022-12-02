@@ -7,8 +7,8 @@
       </div>
       <!-- column -->
       <Container
-      v-if="column.tasks.length"
-        class="flex-grow overflow-y-auto overflow-x-hidden task-list "
+        v-if="column.tasks.length"
+        class="flex-grow overflow-y-auto overflow-x-hidden task-list"
         orientation="vertical"
         group-name="col-items"
         :shouldAcceptDrop="
@@ -32,13 +32,15 @@
         @drop="(e) => onCardDrop(column.id, e)"
       >
         <!-- Items -->
-        <draggable
+        <draggable @click="goToTask(item.id)"
           v-for="item in column.tasks"
           :key="item.id"
           :item="item"
           class="task rotate-6"
         >
-          <span @click="goToTask(item.id)" class="task-router-link">{{ item.title }}</span>
+          <span class="task-router-link">{{
+            item.title
+          }}</span>
         </draggable>
       </Container>
       <textarea
@@ -106,8 +108,8 @@ export default {
   },
   components: { Container, Draggable, taskDetails },
   methods: {
-    goToTask(taskId){
-      this.$router.push(`${this.currBoard._id}/task/${taskId}`)
+    goToTask(taskId) {
+      this.$router.push(`${this.currBoard._id}/task/${taskId}`);
     },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
@@ -128,10 +130,9 @@ export default {
         newColumn.tasks = applyDrag(newColumn.tasks, dropResult);
         scene.groups.splice(itemIndex, 1, newColumn);
         this.newScene = scene;
-        const board = utilService.createBoardFromScene(scene);
-        board._id = this.currBoard._id
-        board.title = this.currBoard.title
-        this.$emit("addBoard", board)
+        let board = utilService.createBoardFromScene(this.scene);
+        board = { ...this.currBoard, groups: board.groups };
+        this.$emit("addBoard", board);
       }
     },
     getCardPayload(columnId) {
@@ -154,13 +155,15 @@ export default {
       );
       board.groups[groupIdx].tasks.push(task);
       this.$emit("addTask", board);
+      this.newTaskTxt = "";
+      this.currGroup = null;
     },
     addGroup() {
       console.log(this.newGroupTxt);
       const group = {
         title: this.newGroupTxt,
         id: utilService.makeId(),
-        tasks:[],
+        tasks: [],
       };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);
@@ -168,7 +171,6 @@ export default {
       this.newGroupTxt = "";
     },
   },
-  computed: {
-  },
+  computed: {},
 };
 </script>
