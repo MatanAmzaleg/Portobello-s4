@@ -29,10 +29,7 @@ export default {
     try {
       const { boardId } = this.$route.params;
       const board = await this.$store.dispatch({type:"setCurrBoard",boardId})
-      this.currBoard = board;
-      console.log("🚀 ~ file: board-details.vue:32 ~ created ~ this.currBoard", this.currBoard)
-      
-      
+      this.currBoard = board;      
       // const board = await boardService.getById(boardId);
     } catch (err) {
       console.log(err);

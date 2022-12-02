@@ -2,35 +2,47 @@
   <div class="main-task-members-container"> 
     <div class="main-task-members-header">Members</div> 
     <div class="main-task-members"> 
-         <!-- <ul v-for="user in users">  -->
-             <!-- <li>  -->
-             <!-- <img class="main-task-member-img" :src="user.imgUrl" alt="member"/>  -->
-             <!-- </li>  -->
-         <!-- </ul>  -->
+         <ul v-for="user in usersToShow"> 
+             <li> 
+             <img class="main-task-member-img" :src="user.imgUrl" alt="member"/> 
+             </li> 
+         </ul> 
     </div>
     </div>
 </template>
 <script>
 export default {
     props:{
-        user:Object
+        memberIds:Array
+    },
+    data(){
+      return{
+        usersToShow:[]
+      }
     },
     created(){
-        console.log(this.user);
+        this.users = this.$store.getters.currBoard.members
+        let usersToShow = []
+        this.memberIds.map(memberId => {
+          let user = this.users.find(user => user._id === memberId)
+          usersToShow.push(user)
+          return user
+        })
+        this.usersToShow = usersToShow
     }
 };
 </script>
 <style lang="scss">
 .main-task-members-container {
+  ul{
+    list-style: none;
+  }
           flex-direction: column;
           padding-top: 3px;
-          margin-left: 20px;
-
           .main-task-members-header {
             margin-top: 0.8rem;
             font-size: 12px;
-            font-weight: 500;
-            // color: $clr12;
+            margin-bottom: 12px;
           }
           .main-task-members {
             display: flex;

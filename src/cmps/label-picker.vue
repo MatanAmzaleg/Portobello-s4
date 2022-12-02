@@ -29,7 +29,6 @@ export default {
        labelIds: Array
     },
     created(){
-        console.log(this.labelIds,'1');
         this.taskLabelsIds = this.labelIds
     },
     methods:{
@@ -41,35 +40,47 @@ export default {
     data(){
         return{
             labels: [
-                {
-                    "color": "#D5EDD2",
-                    "id": "JsY1qR"
-                },
-                {
-                    "color": "#FAF3C0",
-                    "id": "d6cjhb"
-                },
-                {
-                    "color": "#FDE6C6",
-                    "id": "YIQPhe"
-                },
-                {
-                    "color": "#F6D3CE",
-                    "id": "DNfXVp"
-                },
-                {
-                    "color": "#EDDBF4",
-                    "id": "oKpZV4"
-                },
-                {
-                    "color": "#BCD9EA",
-                    "id": "rZnFvJ"
-                },
-                {
-                    "color": "#BDECF3",
-                    "id": "kT8v8m"
-                },
-            ],
+  {
+    title: "Manager task",
+    color: "#61bd4f",
+    id: "JsY1qR"
+  },
+  {
+    title: "Low priority",
+    color: "#f2d600",
+    id: "d6cjhb"
+  },
+  {
+    title: "Medium priority",
+    color: "#ff9f1a",
+    id: "YIQPhe"
+  },
+  {
+    title: "High priority",
+    color: "#eb5a46",
+    id: "DNfXVp"
+  },
+  {
+    title: "Bug",
+    color: "#c377e0",
+    id: "oKpZV4"
+  },
+  {
+    title: "Adjustment",
+    color: "#0079bf",
+    id: "rZnFvJ"
+  },
+  {
+    title: "Design",
+    color: "#ff78cb",
+    id: "kT8v8m"
+  },
+  {
+    title: "Styles",
+    color: "#b3bac5",
+    id: "AYKlTC"
+  }
+],
             labelIds: [
             ] 
         }

@@ -20,8 +20,8 @@
           <div class="task-section task-info">
             <span></span>
             <div class="task-info-wrapper">
-              <miniUsers v-if="task.byMember" :users="task.byMember" />
-              <small>labels</small>
+              <miniUsers v-if="task.memberIds" :memberIds="task.memberIds" />
+              <labelsPreview v-if="task.labelIds" :labelIds="task.labelIds" />
               <h2>Due date</h2>
             </div>
           </div>
@@ -66,6 +66,7 @@ import memberPicker from "../cmps/member-picker.vue";
 import datePicker from "../cmps/date-picker.vue";
 import coverPicker from "../cmps/cover.picker.vue";
 import miniUsers from "../cmps/mini-users.vue";
+import labelsPreview from "../cmps/labels-preview.vue";
 export default {
   props:{
     currBoard:Object
@@ -74,7 +75,7 @@ export default {
     let {taskId} = this.$route.params
     let  task = await this.$store.dispatch({type:"loadTask",board:this.currBoard,taskId}) 
     this.task = JSON.parse(JSON.stringify(task))
-    console.log(this.task);
+    console.log(this.task)
   },
   data() {
     return {
@@ -97,6 +98,7 @@ export default {
         if(task.id === this.task.id) taskIdx = idx
         return task.id === this.task.id
       }))
+      console.log(groupIdx,taskIdx);
       board.groups[groupIdx].tasks[taskIdx] = this.task
       this.$store.dispatch({type:'updateBoard',board})
     },
@@ -109,18 +111,12 @@ export default {
     addMember(members) {
       this.task.members = members;
     },
-    saveTask() {
-      boardService
-        .saveTask(this.boardId, this.groupId, this.task)
-        .then((x) => console.log("saved"));
-    },
     saveTaskLabels(labels) {
       this.task.labelIds = labels;
       this.updateTask()
-
     },
     saveTaskCover(color) {
-      this.task.style.bgColor = color
+      this.task.style = {bgColor: color}
       this.updateTask()
     },
   },
@@ -134,7 +130,8 @@ export default {
     memberPicker,
     datePicker,
     coverPicker,
-    miniUsers
+    miniUsers,
+    labelsPreview
   },
 };
 </script>
