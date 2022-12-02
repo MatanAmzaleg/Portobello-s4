@@ -73,7 +73,41 @@ export default {
   },
   async created() {
     try {
-      // this.$store.dispatch({ type: "loadBoards" });
+      this.makeScene();
+    } catch {}
+  },
+  components: { Container, Draggable, taskDetails, groupPreview },
+  methods: {
+    onColumnDrop(dropResult) {
+      const scene = Object.assign({}, this.scene);
+      scene.groups = applyDrag(scene.groups, dropResult);
+      this.scene = scene;
+      let board = utilService.createBoardFromScene(this.scene);
+      board = { ...this.currBoard,groups:board.groups };
+      console.log(board);
+      this.$store.dispatch({ type: "addBoard", board });
+    },
+    addBoard(board) {
+      this.$store.dispatch({ type: "addBoard", board });
+    },
+    addTask(board) {
+      this.$emit("addTask", board);
+      this.newTaskTxt = "";
+    },
+    addGroup() {
+      console.log(this.newGroupTxt);
+      const group = {
+        title: this.newGroupTxt,
+        id: utilService.makeId(),
+        tasks: [],
+      };
+      const board = JSON.parse(JSON.stringify(this.currBoard));
+      board.groups.push(group);
+      this.$emit("addTask", board);
+      this.newGroupTxt = "";
+      this.isAddNewGroup = false;
+    },
+    makeScene() {
       this.scene = {
         type: "container",
         props: {
@@ -95,36 +129,11 @@ export default {
           })),
         })),
       };
-    } catch {}
+    },
   },
-  components: { Container, Draggable, taskDetails, groupPreview },
-  methods: {
-    onColumnDrop(dropResult) {
-      const scene = Object.assign({}, this.scene);
-      scene.groups = applyDrag(scene.groups, dropResult);
-      this.scene = scene;
-      const board = utilService.createBoardFromScene(this.scene);
-      board._id = this.currBoard._id;
-      board.title = this.currBoard.title;
-      this.$store.dispatch({ type: "addBoard", board });
-    },
-    addBoard(board) {
-      this.$store.dispatch({ type: "addBoard", board });
-    },
-    addTask(board) {
-      this.$emit("addTask", board);
-    },
-    addGroup() {
-      console.log(this.newGroupTxt);
-      const group = {
-        title: this.newGroupTxt,
-        id: utilService.makeId(),
-        tasks:[],
-      };
-      const board = JSON.parse(JSON.stringify(this.currBoard));
-      board.groups.push(group);
-      this.$emit("addTask", board);
-      this.newGroupTxt = "";
+  watch: {
+    currBoard(newBoard, oldBoard) {
+      this.makeScene();
     },
   },
 };
