@@ -1,6 +1,6 @@
 <template lang="">
   <div class="main-task-members-container">
-    <div class="main-task-members-header">Members</div>
+    <div v-if="!noHeader" class="main-task-members-header">Members</div>
     <div class="main-task-members">
       <ul v-for="user in usersToShow">
         <li>
@@ -17,12 +17,15 @@ export default {
     },
     data(){
       return{
-        usersToShow:[]
+        usersToShow:[],
+        noHeader:false,
       }
     },
     created(){
       if(!this.memberIds){
         this.usersToShow = this.$store.getters.currBoard.members
+        this.noHeader = true
+        console.log(this.noHeader);
         return
       }
         this.users = this.$store.getters.currBoard.members
