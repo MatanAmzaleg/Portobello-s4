@@ -59,7 +59,6 @@ export const boardStore = {
             board.msgs.push(msg)
         },
         setCurrBoard(state, { board }){
-            console.log('done update store')
             state.currBoard = board
         },
         setTask(state,{task}){
@@ -79,6 +78,7 @@ export const boardStore = {
             }
         },
         async updateBoard(context, { board }) {
+            console.log('board from updateBoard');
             try {
                 board = await boardService.save(board)
                 context.commit(getActionUpdateBoard(board))
