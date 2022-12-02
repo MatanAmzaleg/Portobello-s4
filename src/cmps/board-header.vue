@@ -1,12 +1,17 @@
 <template>
   <section class="board-header">
     <div class="left-section">
-      <h1>Trello</h1>
+      <span 
+      class="board-name-input"
+  role="textbox" 
+  contenteditable>
+    {{board.title}}
+</span>
       <button class="is-starred">
         <font-awesome-icon class="star-icon" icon="fa-regular fa-star" />
       </button>
-      |
-      <input class="board-name-input" type="text" :value="board.title" />
+   
+
     </div>
     <div class="right-section">
       <popper :show="isModalOpen" ref="popper">

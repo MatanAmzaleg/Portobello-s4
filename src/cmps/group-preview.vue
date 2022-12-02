@@ -7,6 +7,7 @@
       </div>
       <!-- column -->
       <Container
+      v-if="column.tasks.length"
         class="flex-grow overflow-y-auto overflow-x-hidden task-list "
         orientation="vertical"
         group-name="col-items"
@@ -159,7 +160,7 @@ export default {
       const group = {
         title: this.newGroupTxt,
         id: utilService.makeId(),
-        tasks: [],
+        tasks:[],
       };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);
