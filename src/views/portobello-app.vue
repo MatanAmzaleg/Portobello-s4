@@ -87,7 +87,6 @@ export default {
       console.log('Board msgs:', board.msgs)
     },
     moveToBoard(board){
-      console.log(board);
       this.$store.dispatch({type:"setCurrBoard", board})
       this.$router.push(`/board/${board._id}`)
     }
