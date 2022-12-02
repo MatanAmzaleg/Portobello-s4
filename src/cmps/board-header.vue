@@ -4,14 +4,15 @@
       <span 
       class="board-name-input"
   role="textbox" 
+  ref="span"
+  @input="changeBoardName"
   contenteditable>
     {{board.title}}
 </span>
-      <button class="is-starred">
-        <font-awesome-icon class="star-icon" icon="fa-regular fa-star" />
+      <button @click="changeBoardIsStarred" class="is-starred">
+        <font-awesome-icon class="star-icon" v-if="!board.isStarred" icon="fa-regular fa-star" />
+        <img class="yellow-star" src="../assets/icons/star.png"  v-if="board.isStarred" alt="">
       </button>
-   
-
     </div>
     <div class="right-section">
       <popper :show="isModalOpen" ref="popper">
@@ -23,6 +24,9 @@
           />
           Filter
         </button>
+        <div class="users">
+          <mini-users></mini-users>
+        </div>
         <template #content>
           <section class="filter-popper">
             <div class="header">
@@ -112,6 +116,7 @@
   </section>
 </template>
 <script>
+ import miniUsers from './mini-users.vue';
 export default {
   props: {
     board: Object,
@@ -122,7 +127,9 @@ export default {
       filterBy: {
         txt: "",
       },
-      isModalOpen:false
+      isModalOpen:false,
+      boardName:"",
+
     };
   },
   mounted() {
@@ -133,6 +140,21 @@ export default {
       console.log(this.filterBy);
       this.$emit("setFilter", this.filterBy);
     },
+    changeBoardName(){  
+      const boardToUpdate = JSON.parse(JSON.stringify(this.board))
+      boardToUpdate.title = this.$refs.span.innerText
+      this.$emit("updateBoard", boardToUpdate)
+      // console.log(this.$refs.span);
+      
+    },
+    changeBoardIsStarred(){
+      const boardToUpdate = JSON.parse(JSON.stringify(this.board))
+      boardToUpdate.isStarred = !boardToUpdate.isStarred
+      this.$emit("updateBoard", boardToUpdate)
+    }
+  },
+  components: {
+    miniUsers
   },
 };
 </script>

@@ -119,7 +119,7 @@ export default {
       const group = {
         title: this.newGroupTxt,
         id: utilService.makeId(),
-        tasks: [],
+        tasks:[],
       };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);

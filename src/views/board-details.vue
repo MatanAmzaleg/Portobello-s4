@@ -1,6 +1,6 @@
 <template >
   <section class="board-details" v-if="currBoard">
-    <board-header @setFilter="setFilter" :board="currBoard"></board-header>
+    <board-header @updateBoard="updateBoard" @setFilter="setFilter" :board="currBoard"></board-header>
     <section v-if="currBoard" class="board-details">
       <group-list
         :filterBy="filterBy"
@@ -48,6 +48,14 @@ export default {
       console.log(filterBy);
       this.filterBy = filterBy;
     },
+    updateBoard(board){
+      console.log("updating board ");
+      this.currBoard = board
+      this.$store.dispatch({
+        type: "updateBoard",
+        board,
+      });
+    }
   },
   computed: {
     boards() {

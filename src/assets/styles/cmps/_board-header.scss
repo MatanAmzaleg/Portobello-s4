@@ -42,8 +42,16 @@
     .is-starred {
       width: 32px;
 
+      .yellow-star{
+        width: 14px;
+        height: 14px;
+      }
+
       &:hover {
         .star-icon {
+          scale: 1.2;
+        }
+        .yellow-star{
           scale: 1.2;
         }
       }
