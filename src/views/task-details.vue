@@ -21,8 +21,7 @@
             <span></span>
             <div class="task-info-wrapper">
               <miniUsers v-if="task.memberIds" :memberIds="task.memberIds" />
-              <labelsPreview v-if="task.labelIds" :labelIds="task.labelIds" />
-              <h2>Due date</h2>
+              <labelsPreview v-if="task.labelIds" :currBoard="currBoard" :labelIds="task.labelIds" />
             </div>
           </div>
           <div class="task-section task-description">
@@ -75,7 +74,6 @@ export default {
     let {taskId} = this.$route.params
     let  task = await this.$store.dispatch({type:"loadTask",board:this.currBoard,taskId}) 
     this.task = JSON.parse(JSON.stringify(task))
-    console.log(this.task)
   },
   data() {
     return {
@@ -91,16 +89,20 @@ export default {
     toggleDetails() {
       this.isDetailsShown = !this.isDetailsShown;
     },
-    updateTask(){
-      const board = JSON.parse(JSON.stringify(this.currBoard))
-      let taskIdx 
-      let groupIdx = board.groups.findIndex(group => group.tasks.some((task,idx)=> {
-        if(task.id === this.task.id) taskIdx = idx
-        return task.id === this.task.id
-      }))
-      console.log(groupIdx,taskIdx);
-      board.groups[groupIdx].tasks[taskIdx] = this.task
-      this.$store.dispatch({type:'updateBoard',board})
+    async updateTask(){
+      try{
+        const board = JSON.parse(JSON.stringify(this.currBoard))
+        let taskIdx 
+        let groupIdx = board.groups.findIndex(group => group.tasks.some((task,idx)=> {
+          if(task.id === this.task.id) taskIdx = idx
+          return task.id === this.task.id
+        }))
+        board.groups[groupIdx].tasks[taskIdx] = this.task
+        this.currBoard = await this.$store.dispatch({type:'updateBoard',board})
+      }
+      catch(err){
+        console.log('cant Update task',err);
+      }
     },
     closeModal() {
       this.$router.push("/board");
@@ -198,6 +200,9 @@ export default {
         width: 70%;
 
         .task-section {
+          .task-info-wrapper{
+            display: flex;
+          }
           &.task-info {
             grid-column: 2;
           }

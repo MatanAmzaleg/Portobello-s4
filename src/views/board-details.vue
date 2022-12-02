@@ -54,7 +54,6 @@ export default {
       return this.$store.getters.boards;
     },
     getCurrBoard() {
-      console.log(this.$store.getters.currBoard);
       return this.$store.getters.currBoard;
     },
   },
