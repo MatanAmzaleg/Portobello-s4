@@ -39,7 +39,7 @@
         >
           <router-link
             class="task-router-link"
-            :to="`${currBoard._id}/task/${item.id}`"
+            :to="`${currBoard._id}/g/${column.id}/t/${item.id}`"
             >{{ item.title }}</router-link
           >
         </draggable>
@@ -86,7 +86,6 @@ import { utilService } from "../services/util.service";
 import taskDetails from "../views/task-details.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
-
 export default {
   name: "group-preview",
   props: {
@@ -117,7 +116,6 @@ export default {
         const column = scene.groups.filter((p) => p.id === columnId)[0];
         const itemIndex = scene.groups.indexOf(column);
         const newColumn = Object.assign({}, column);
-
         // check if element was ADDED in current column
         if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
           // your action / api call
@@ -127,7 +125,6 @@ export default {
             dropResult.payload.loading = false;
           }, Math.random() * 5000 + 1000);
         }
-
         newColumn.tasks = applyDrag(newColumn.tasks, dropResult);
         scene.groups.splice(itemIndex, 1, newColumn);
         this.newScene = scene;
@@ -156,7 +153,6 @@ export default {
         (group) => group.id === this.currGroup
       );
       board.groups[groupIdx].tasks.push(task);
-
       this.$emit("addTask", board);
     },
     addGroup() {
@@ -173,7 +169,6 @@ export default {
     },
   },
   computed: {
-
   },
 };
 </script>

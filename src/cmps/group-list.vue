@@ -57,7 +57,6 @@ import groupPreview from "./group-preview.vue";
 import taskDetails from "../views/task-details.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
-
 export default {
   name: "group-list",
   data() {
@@ -100,9 +99,6 @@ export default {
   },
   components: { Container, Draggable, taskDetails, groupPreview },
   methods: {
-    goToTask(taskId){
-      this.$router.push(`/board/${this.currBoard._id}/task/${taskId}`)
-    },
     onColumnDrop(dropResult) {
       const scene = Object.assign({}, this.scene);
       scene.groups = applyDrag(scene.groups, dropResult);
@@ -115,26 +111,8 @@ export default {
     addBoard(board) {
       this.$store.dispatch({ type: "addBoard", board });
     },
-    getCardPayload(columnId) {
-      return (index) => {
-        return this.scene.groups.filter((p) => p.id === columnId)[0].tasks[
-          index
-        ];
-      };
-    },
-    changeAddStatus(groupId) {
-      this.currGroup = groupId;
-    },
-    addTask() {
-      const task = { title: this.newTaskTxt, id: utilService.makeId() };
-      const board = JSON.parse(JSON.stringify(this.currBoard));
-      console.log(board);
-      const groupIdx = board.groups.findIndex(
-        (group) => group.id === this.currGroup
-      );
-      board.groups[groupIdx].tasks.push(task);
-
-      this.$emit("add-Task", board);
+    addTask(board) {
+      this.$emit("addTask", board);
     },
     addGroup() {
       console.log(this.newGroupTxt);
