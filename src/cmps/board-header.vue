@@ -24,9 +24,6 @@
           />
           Filter
         </button>
-        <div class="users">
-          <mini-users></mini-users>
-        </div>
         <template #content>
           <section class="filter-popper">
             <div class="header">
@@ -108,6 +105,9 @@
           </section>
         </template>
       </popper>
+      <div v-if="board.members" class="users">
+        <mini-users></mini-users>
+      </div>
       |
       <button class="ellipsis-btn">
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
