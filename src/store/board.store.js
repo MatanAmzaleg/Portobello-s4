@@ -58,7 +58,8 @@ export const boardStore = {
             if (!board.msgs) board.msgs = []
             board.msgs.push(msg)
         },
-        setCurrBoard(state, board){
+        setCurrBoard(state, { board }){
+            console.log('done update store')
             state.currBoard = board
         },
         setTask(state,{task}){
@@ -78,7 +79,7 @@ export const boardStore = {
             }
         },
         async updateBoard(context, { board }) {
-            console.log("🚀 ~ file: board.store.js:83 ~ updateBoard ~ board", board)
+            console.log(board);
             try {
                 board = await boardService.save(board)
                 context.commit(getActionUpdateBoard(board))
@@ -119,7 +120,6 @@ export const boardStore = {
         async setCurrBoard ({commit}, {boardId}){
             try{
                 const board = await boardService.getById(boardId)
-                console.log("🚀 ~ file: board.store.js:119 ~ setCurrBoard ~ board", board)
                 commit({type: "setCurrBoard", board})
                 return board
 

@@ -55,7 +55,6 @@ async function getGroupById(boardId, groupId) {
 
 function getTaskById(board,taskId){
   var task
-  console.log('holllla service',board);
   board.groups.forEach(group => {
     group.tasks.forEach((t) =>{
       if(t.id === taskId) {
