@@ -37,11 +37,7 @@
           :item="item"
           class="task rotate-6"
         >
-          <router-link
-            class="task-router-link"
-            :to="`${currBoard._id}/g/${column.id}/t/${item.id}`"
-            >{{ item.title }}</router-link
-          >
+          <span @click="goToTask(item.id)" class="task-router-link">{{ item.title }}</span>
         </draggable>
       </Container>
       <textarea
@@ -109,6 +105,9 @@ export default {
   },
   components: { Container, Draggable, taskDetails },
   methods: {
+    goToTask(taskId){
+      this.$router.push(`${this.currBoard._id}/task/${taskId}`)
+    },
     onCardDrop(columnId, dropResult) {
       // check if element where ADDED or REMOVED in current collumn
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
