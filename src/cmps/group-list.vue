@@ -73,7 +73,7 @@ export default {
   },
   async created() {
     try {
-      this.makeScene();
+      this.scene = this.makeScene;
     } catch {}
   },
   components: { Container, Draggable, taskDetails, groupPreview },
@@ -84,8 +84,12 @@ export default {
       this.scene = scene;
       let board = utilService.createBoardFromScene(this.scene);
       board = { ...this.currBoard,groups:board.groups };
+<<<<<<< HEAD
       console.log(board);
       this.$store.dispatch({ type: "updateBoard", board });
+=======
+      this.$store.dispatch({ type: "addBoard", board });
+>>>>>>> 0b51c0dcfc73ebfbd94466d8a6b31d35b583ef2f
     },
     addBoard(board) {
       this.$store.dispatch({ type: "addBoard", board });
@@ -106,8 +110,10 @@ export default {
       this.$emit("addTask", board);
       this.newGroupTxt = "";
     },
+  },
+  computed:{
     makeScene() {
-      this.scene = {
+      return {
         type: "container",
         props: {
           orientation: "horizontal",
