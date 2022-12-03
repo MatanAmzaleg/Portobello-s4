@@ -4,7 +4,7 @@
     <section v-if="currBoard" class="board-details">
       <group-list
         :filterBy="filterBy"
-        @addTask="addTask"
+        @addTask="updateBoard"
         :currBoard="currBoard"
       ></group-list>
       <router-view :currBoard="currBoard" ></router-view>
@@ -29,21 +29,22 @@ export default {
     try {
       const { boardId } = this.$route.params;
       const board = await this.$store.dispatch({type:"setCurrBoard",boardId})
-      this.currBoard = board;      
+      // this.currBoard = board;      
+      this.currBoard = this.getCurrBoard;      
       // const board = await boardService.getById(boardId);
     } catch (err) {
       console.log(err);
     }
   },
   methods: {
-    addTask(board) {
-      console.log(board)
-      this.currBoard = board
-     this.$store.dispatch({
-        type: "addBoard",
-        board,
-      });
-    },
+    // addTask(board) {
+    //   console.log(board)
+    //   this.currBoard = board
+    //  this.$store.dispatch({
+    //     type: "updateBoard",
+    //     board,
+    //   });
+    // },
     setFilter(filterBy) {
       console.log(filterBy);
       this.filterBy = filterBy;

@@ -85,14 +85,14 @@ export default {
       let board = utilService.createBoardFromScene(this.scene);
       board = { ...this.currBoard,groups:board.groups };
       console.log(board);
-      this.$store.dispatch({ type: "addBoard", board });
+      this.$store.dispatch({ type: "updateBoard", board });
     },
     addBoard(board) {
       this.$store.dispatch({ type: "addBoard", board });
     },
     addTask(board) {
       this.$emit("addTask", board);
-      this.newTaskTxt = "";
+      // this.newTaskTxt = "";
     },
     addGroup() {
       console.log(this.newGroupTxt);
@@ -105,7 +105,6 @@ export default {
       board.groups.push(group);
       this.$emit("addTask", board);
       this.newGroupTxt = "";
-      this.isAddNewGroup = false;
     },
     makeScene() {
       this.scene = {

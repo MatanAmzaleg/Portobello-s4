@@ -7,7 +7,6 @@
       </div>
       <!-- column -->
       <Container
-        v-if="column.tasks.length"
         class="flex-grow overflow-y-auto overflow-x-hidden task-list"
         orientation="vertical"
         group-name="col-items"
@@ -32,15 +31,14 @@
         @drop="(e) => onCardDrop(column.id, e)"
       >
         <!-- Items -->
-        <draggable @click="goToTask(item.id)"
+        <draggable
+          @click="goToTask(item.id)"
           v-for="item in column.tasks"
           :key="item.id"
           :item="item"
           class="task rotate-6"
         >
-          <span class="task-router-link">{{
-            item.title
-          }}</span>
+          <span class="task-router-link">{{ item.title }}</span>
         </draggable>
       </Container>
       <textarea
@@ -153,10 +151,10 @@ export default {
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup
       );
+      console.log(groupIdx);
       board.groups[groupIdx].tasks.push(task);
       this.$emit("addTask", board);
       this.newTaskTxt = "";
-      this.currGroup = null;
     },
     addGroup() {
       console.log(this.newGroupTxt);
