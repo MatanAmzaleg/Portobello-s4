@@ -1,32 +1,5 @@
 import { boardService } from '../services/board.service.js'
 
-export function getActionRemoveBoard(boardId) {
-    return {
-        type: 'removeBoard',
-        boardId
-    }
-}
-export function getActionAddBoard(board) {
-    return {
-        type: 'addBoard',
-        board
-    }
-}
-export function getActionUpdateBoard(board) {
-    return {
-        type: 'updateBoard',
-        board
-    }
-}
-
-export function getActionAddBoardMsg(boardId) {
-    return {
-        type: 'addBoardMsg',
-        boardId,
-        txt: 'Stam txt'
-    }
-}
-
 export const boardStore = {
     state: {
         boards: [],
@@ -39,6 +12,7 @@ export const boardStore = {
     },
     mutations: {
         setBoards(state, { boards }) {
+            console.log("🚀 ~ file: board.store.js:42 ~ setBoards ~ boards", boards)
             state.boards = boards
         },
         addBoard(state, { board }) {
@@ -49,6 +23,7 @@ export const boardStore = {
             const idx = state.boards.findIndex(c => c._id === board._id)
             state.boards.splice(idx, 1, board)
             state.currBoard = board
+            console.log(state.currBoard);
             console.log('board from store',board.groups[0])
         },
         removeBoard(state, { boardId }) {
@@ -61,6 +36,7 @@ export const boardStore = {
         },
         setCurrBoard(state, { board }){
             state.currBoard = board
+            console.log(state.currBoard);
         },
         setTask(state,{task}){
             state.currTask = task
@@ -70,8 +46,8 @@ export const boardStore = {
         async addBoard(context, { board }) {
             try {
                 board = await boardService.save(board)
-                context.commit(getActionAddBoard(board))
-                context.commit("setCurrBoard", board)
+                context.commit({type:"addBoard",board })
+                // context.commit("setCurrBoard", board)
                 return board
             } catch (err) {
                 console.log('boardStore: Error in addBoard', err)
@@ -81,8 +57,8 @@ export const boardStore = {
         async updateBoard(context, { board }) {
             try {
                 board = await boardService.save(board)
-                context.commit(getActionUpdateBoard(board))
-                context.commit("setCurrBoard", board)
+                context.commit({type:"updateBoard", board})
+                // context.commit("setCurrBoard", board)
                 return board
             } catch (err) {
                 console.log('boardStore: Error in updateBoard', err)
@@ -101,7 +77,7 @@ export const boardStore = {
         async removeBoard(context, { boardId }) {
             try {
                 await boardService.remove(boardId)
-                context.commit(getActionRemoveBoard(boardId))
+                context.commit({type:"removeBoard", boardId})
             } catch (err) {
                 console.log('boardStore: Error in removeBoard', err)
                 throw err

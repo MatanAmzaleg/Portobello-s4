@@ -157,7 +157,6 @@ export default {
       this.newTaskTxt = "";
     },
     addGroup() {
-      console.log(this.newGroupTxt);
       const group = {
         title: this.newGroupTxt,
         id: utilService.makeId(),

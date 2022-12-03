@@ -74,6 +74,7 @@ export default {
   async created() {
     try {
       this.makeScene();
+      console.log(this.$store.getters.currBoard);
     } catch {}
   },
   components: { Container, Draggable, taskDetails, groupPreview },
@@ -84,19 +85,15 @@ export default {
       this.scene = scene;
       let board = utilService.createBoardFromScene(this.scene);
       board = { ...this.currBoard,groups:board.groups };
-      console.log(board);
       this.$store.dispatch({ type: "updateBoard", board });
-      this.$store.dispatch({ type: "addBoard", board });
     },
     addBoard(board) {
       this.$store.dispatch({ type: "addBoard", board });
     },
     addTask(board) {
       this.$emit("addTask", board);
-      // this.newTaskTxt = "";
     },
     addGroup() {
-      console.log(this.newGroupTxt);
       const group = {
         title: this.newGroupTxt,
         id: utilService.makeId(),
@@ -104,6 +101,7 @@ export default {
       };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);
+      console.log(this.$store.getters.currBoard);
       this.$emit("addTask", board);
       this.newGroupTxt = "";
     },

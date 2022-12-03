@@ -1,14 +1,22 @@
-<template >
-  <section class="board-details" v-if="currBoard" :style="{'background-color':currBoard.style?.bgColor}">
-    <board-header @updateBoard="updateBoard" @setFilter="setFilter" :board="currBoard"></board-header>
-    <section v-if="currBoard" class="board-details">
+<template>
+  <section
+    class="board-details"
+    v-if="getCurrBoard"
+    :style="{ 'background-color': getCurrBoard.style?.bgColor }"
+  >
+    <board-header
+      @updateBoard="updateBoard"
+      @setFilter="setFilter"
+      :board="getCurrBoard"
+    ></board-header>
+    <section v-if="getCurrBoard" class="board-details">
       <group-list
         :filterBy="filterBy"
         @addTask="updateBoard"
-        :currBoard="currBoard"
+        :currBoard="getCurrBoard"
       ></group-list>
-      <router-view :currBoard="currBoard" ></router-view>
-  </section>
+      <router-view :currBoard="getCurrBoard"></router-view>
+    </section>
   </section>
 </template>
 
@@ -22,44 +30,47 @@ export default {
   data() {
     return {
       filterBy: {},
-      currBoard:null,
+      currBoard: null,
     };
   },
   async created() {
     try {
       const { boardId } = this.$route.params;
-      const board = await this.$store.dispatch({type:"setCurrBoard",boardId})
-      // this.currBoard = board;      
-      this.currBoard = this.getCurrBoard;      
-      // const board = await boardService.getById(boardId);
+      this.$store.dispatch({type:"setCurrBoard", boardId})
+      this.currBoard = this.getCurrBoard
     } catch (err) {
       console.log(err);
     }
   },
   methods: {
-    // addTask(board) {
-    //   console.log(board)
-    //   this.currBoard = board
-    //  this.$store.dispatch({
-    //     type: "updateBoard",
-    //     board,
-    //   });
-    // },
     setFilter(filterBy) {
       console.log(filterBy);
       this.filterBy = filterBy;
+      const { txt } = filterBy;
+      const regex = new RegExp(txt, "i");
+      const filteredGroups = this.currBoard.groups.filter((group) =>
+        regex.test(group.title)
+      );
+      const regBoard = this.getBoards.find((board) => {
+        return board._id === this.$route.params.boardId;
+      });
+      console.log("🚀 ~ file: board-details.vue:69 ~ regBoard ~ this.$route.params.boardId", this.$route.params.boardId)
+      console.log(regBoard);
+      console.log(filteredGroups);
+      this.currBoard = { ...regBoard, groups: filteredGroups };
+      console.log(filteredGroups);
     },
-    updateBoard(board){
+    updateBoard(board) {
       console.log("updating board ");
-      this.currBoard = board
+      this.currBoard = board;
       this.$store.dispatch({
         type: "updateBoard",
         board,
       });
-    }
+    },
   },
   computed: {
-    boards() {
+    getBoards() {
       return this.$store.getters.boards;
     },
     getCurrBoard() {

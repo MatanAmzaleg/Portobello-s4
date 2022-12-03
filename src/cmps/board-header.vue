@@ -137,15 +137,13 @@ export default {
   },
   methods: {
     setFilter() {
-      console.log(this.filterBy);
-      this.$emit("setFilter", this.filterBy);
+      console.log(this.filterBy)
+      this.$emit("setFilter", this.filterBy)
     },
     changeBoardName(){  
       const boardToUpdate = JSON.parse(JSON.stringify(this.board))
       boardToUpdate.title = this.$refs.span.innerText
-      this.$emit("updateBoard", boardToUpdate)
-      // console.log(this.$refs.span);
-      
+      this.$emit("updateBoard", boardToUpdate)    
     },
     changeBoardIsStarred(){
       const boardToUpdate = JSON.parse(JSON.stringify(this.board))

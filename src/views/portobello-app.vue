@@ -23,7 +23,7 @@
 <script>
 import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
 import {boardService} from '../services/board.service.js'
-import { getActionRemoveBoard, getActionUpdateBoard, getActionAddBoardMsg } from '../store/board.store'
+// import { getActionRemoveBoard, getActionUpdateBoard, getActionAddBoardMsg } from '../store/board.store'
 import boardDetails from './board-details.vue'
 export default {
   data() {
@@ -39,8 +39,24 @@ export default {
       return this.$store.getters.boards
     }
   },
-  created() {
+ async created() {
+  try{
     this.$store.dispatch({type: 'loadBoards'})
+    const { boardId } = this.$route.params;
+    if(boardId){
+      console.log("ok");
+      const board = await this.$store.dispatch({
+        type: "setCurrBoard",
+        boardId,
+      });
+    }
+  }
+  catch(err){
+    console.log(err);
+  }
+      // this.currBoard = board;
+      // this.currBoard = this.getCurrBoard;
+      // const board = await boardService.getById(boardId);
   },
   methods: {
     async addBoard() {
@@ -55,7 +71,7 @@ export default {
     },
     async removeBoard(boardId) {
       try {
-        await this.$store.dispatch(getActionRemoveBoard(boardId))
+        await this.$store.dispatch({type:"removeBoard",boardId})
         showSuccessMsg('Board removed')
 
       } catch(err) {
@@ -66,7 +82,7 @@ export default {
     async updateBoard(board) {
       try {
         board = {...board}
-        await this.$store.dispatch(getActionUpdateBoard(board))
+        await this.$store.dispatch({type:"updateBoard",board})
         showSuccessMsg('Board updated')
 
       } catch(err) {
@@ -74,15 +90,15 @@ export default {
         showErrorMsg('Cannot update board')
       }
     },
-    async addBoardMsg(boardId) {
-      try {
-        await this.$store.dispatch(getActionAddBoardMsg(boardId))
-        showSuccessMsg('Board msg added')
-      } catch(err) {
-        console.log(err)
-        showErrorMsg('Cannot add board msg')
-      }
-    },
+    // async addBoardMsg(boardId) {
+    //   try {
+    //     await this.$store.dispatch({type:"addBoard",boardId})
+    //     showSuccessMsg('Board msg added')
+    //   } catch(err) {
+    //     console.log(err)
+    //     showErrorMsg('Cannot add board msg')
+    //   }
+    // },
     printBoardToConsole(board) {
       console.log('Board msgs:', board.msgs)
     },
