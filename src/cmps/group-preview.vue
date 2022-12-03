@@ -6,7 +6,12 @@
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
       </div>
       <!-- column -->
-      <Container
+      <task-list @addBoard="addBoard"
+        :scene="scene"
+        :currBoard="currBoard"
+        :column="column"
+      ></task-list>
+      <!-- <Container
         class="flex-grow overflow-y-auto overflow-x-hidden task-list"
         orientation="vertical"
         group-name="col-items"
@@ -29,9 +34,9 @@
             ease-in z-50 transform 
             -rotate-2 scale-90"
         @drop="(e) => onCardDrop(column.id, e)"
-      >
-        <!-- Items -->
-        <draggable
+      > -->
+      <!-- Items -->
+      <!-- <draggable
           @click="goToTask(item.id)"
           v-for="item in column.tasks"
           :key="item.id"
@@ -40,7 +45,7 @@
         >
           <span class="task-router-link">{{ item.title }}</span>
         </draggable>
-      </Container>
+      </Container> -->
       <textarea
         v-if="column.id === currGroup"
         class="textarea"
@@ -82,7 +87,8 @@
 import { utilService } from "../services/util.service";
 import taskDetails from "../views/task-details.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
-import { applyDrag, generateItems, generateWords } from "../utils/helpers";
+import taskList from "./task-list.vue";
+// import { applyDrag, generateItems, generateWords } from "../utils/helpers";
 export default {
   name: "group-preview",
   props: {
@@ -104,47 +110,14 @@ export default {
       this.$store.dispatch({ type: "loadBoards" });
     } catch {}
   },
-  components: { Container, Draggable, taskDetails },
+  components: { Container, Draggable, taskDetails, taskList },
   methods: {
-    goToTask(taskId) {
-      this.$router.push(`${this.currBoard._id}/task/${taskId}`);
-    },
-    onCardDrop(columnId, dropResult) {
-      // check if element where ADDED or REMOVED in current collumn
-      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const scene = Object.assign({}, this.scene);
-        const column = scene.groups.filter((p) => p.id === columnId)[0];
-        const itemIndex = scene.groups.indexOf(column);
-        const newColumn = Object.assign({}, column);
-        // check if element was ADDED in current column
-        if (dropResult.removedIndex == null && dropResult.addedIndex >= 0) {
-          // your action / api call
-          dropResult.payload.loading = true;
-          // simulate api call
-          setTimeout(function () {
-            dropResult.payload.loading = false;
-          }, Math.random() * 5000 + 1000);
-        }
-        newColumn.tasks = applyDrag(newColumn.tasks, dropResult);
-        scene.groups.splice(itemIndex, 1, newColumn);
-        this.newScene = scene;
-        let board = utilService.createBoardFromScene(this.scene);
-        board = { ...this.currBoard, groups: board.groups };
-        this.$emit("addBoard", board);
-      }
-    },
-    getCardPayload(columnId) {
-      return (index) => {
-        return this.scene.groups.filter((p) => p.id === columnId)[0].tasks[
-          index
-        ];
-      };
-    },
     changeAddStatus(groupId) {
       this.currGroup = groupId;
     },
     addTask() {
       console.log(this.currGroup);
+      if(!this.newTaskTxt) return
       const task = { title: this.newTaskTxt, id: utilService.makeId() };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       console.log(board);
@@ -167,7 +140,10 @@ export default {
       this.$emit("add-Task", board);
       this.newGroupTxt = "";
     },
+    addBoard(board){
+      this.$emit("addBoard", board);
+    }
   },
-  computed: {},
+
 };
 </script>
