@@ -69,7 +69,7 @@ export const boardStore = {
         },
         board = await boardService.save(newBoard);
         context.commit({ type: "addBoard", board });
-        // context.commit("setCurrBoard", board)
+        context.commit("setCurrBoard", board)
         return board;
       } catch (err) {
         console.log("boardStore: Error in addBoard", err);

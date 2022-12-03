@@ -51,13 +51,6 @@
             </template>
           </Popper>
         </ul>
-        <hr />
-
-        <form @submit.prevent="addBoard()">
-          <h2>Add board</h2>
-          <input type="text" v-model="boardToAdd.title" />
-          <button>Save</button>
-        </form>
       </div>
     </section>
   </div>
