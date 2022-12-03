@@ -65,7 +65,7 @@
         <section class="actions">
           <div class="task-actions">
             <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
-            <memberPicker />
+            <memberPicker :members="getTaskMembers" />
             <datePicker />
             <coverPicker @setCover="saveTaskCover" />
           </div>
@@ -151,6 +151,9 @@ export default {
   computed: {
     getTaskLabels() {
       return this.task.labelIds;
+    },
+    getTaskMembers() {
+      return this.task.memberIds;
     },
   },
   components: {

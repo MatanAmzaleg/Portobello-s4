@@ -11,12 +11,10 @@
       <input type="search" placeholder="Search Members">
       <div class="labels">
       <small>Members</small>
-      <li v-for="member in members">
-      <div class="member">
+      <div v-for="member in members" class="member">
         <font-awesome-icon icon="fa-solid fa-user" />
-        <small>{{member._id}}</small>
+        <small>{{member}}</small>
       </div>
-      </li>
       </div>
     </div>
     </template>
@@ -29,6 +27,7 @@ export default {
         members: Array
     },
     created(){
+      console.log(this.members)
         this.currMembers = this.members
     },
     data(){
