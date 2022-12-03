@@ -1,11 +1,10 @@
 <template lang="">
   <Popper>
-
   <div class="task-option-btn">
     <font-awesome-icon  :style="{'height': 12+'px'}" icon="fa-solid fa-tag" />
     <button>Labels</button>
   </div>
-    <template #content>
+    <template #content v-if="labelIds">
     <div class="label-picker">
       <h1>Labels</h1>
       <input type="search">
@@ -13,7 +12,7 @@
       <small>Labels</small>
       <li v-for="label in labels">
       <div class="label">
-        <input @input="addLabel(label.id)" type="checkbox" :style="{'background-color': label.color}">
+        <input @input="addLabel(label.id)" type="checkbox">
         <label :style="{'background-color':label.color}"></label>
         <font-awesome-icon class="pen-btn" icon="fa-solid fa-pencil" />
       </div>
@@ -30,39 +29,43 @@ export default {
     },
     created(){
         this.taskLabelsIds = this.labelIds
+
     },
     methods:{
         addLabel(labelId){
             this.taskLabelsIds.push(labelId)
             this.$emit('save-label',this.taskLabelsIds)
+        },
+        checkLabel(id){
+          return false
         }
     },
     data(){
         return{
-            labels: [
+            labels:[
   {
     title: "Manager task",
-    color: "#61bd4f",
+    color: "#7bc86c",
     id: "JsY1qR"
   },
   {
     title: "Low priority",
-    color: "#f2d600",
+    color: "#faf3c0",
     id: "d6cjhb"
   },
   {
     title: "Medium priority",
-    color: "#ff9f1a",
+    color: "#fce6c6",
     id: "YIQPhe"
   },
   {
     title: "High priority",
-    color: "#eb5a46",
+    color: "#f5d3ce",
     id: "DNfXVp"
   },
   {
     title: "Bug",
-    color: "#c377e0",
+    color: "#eddbf4",
     id: "oKpZV4"
   },
   {
@@ -72,12 +75,12 @@ export default {
   },
   {
     title: "Design",
-    color: "#ff78cb",
+    color: "#bcd9ea",
     id: "kT8v8m"
   },
   {
     title: "Styles",
-    color: "#b3bac5",
+    color: "#bdecf3",
     id: "AYKlTC"
   }
 ],
@@ -89,19 +92,25 @@ export default {
 </script>
 <style lang="scss">
     .label-picker{
-        border: 1px solid black;
-        font-size: 14px;
-        padding: 12px;
-        width: 304px;
+      color: var(--ds-text, #172b4d);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    background-color: var(--ds-surface-overlay, #ffffff);
+    border-radius: 3px;
+    box-shadow: var(--ds-shadow-overlay, 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08));
+    box-sizing: border-box;
+    outline: 0;
+    overflow: hidden;
         text-align: center;
-        background-color: white;
         .labels{
-            text-align: left;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            gap: 5px;
+          text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
             ul{
                 padding: 0;
                 margin: 0;
@@ -111,13 +120,28 @@ export default {
                 cursor: pointer;
             }
             .label{
+    position: relative;
+    margin-bottom: 0;
+    border-radius: 3px;
+    padding: 3px 12px;
+    max-width: 100%;
+    min-width: 48px;
+    height: 32px;
+    // font-size: 14px;
+    // font-weight: 400;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
                 display: flex;
                 // align-items: center;
-                height: 30px;
-                gap: 12px;
+                // height: 30px;
+                // gap: 12px;
                 // flex-direction: row;
                 label{
-                    width: 210px;
+                    width: 200px;
+                    margin-left: 12px;
+                    margin-right: 12px;
                 }
                 input{
                     width: 17px;

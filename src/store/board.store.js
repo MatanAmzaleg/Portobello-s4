@@ -42,13 +42,14 @@ export const boardStore = {
             state.boards = boards
         },
         addBoard(state, { board }) {
-            // state.boards.push(board)
+            state.boards.push(board)
             state.currBoard = board
         },
         updateBoard(state, { board }) {
-            const idx = state.boards.findIndex(c => c.id === board._id)
+            const idx = state.boards.findIndex(c => c._id === board._id)
             state.boards.splice(idx, 1, board)
             state.currBoard = board
+            console.log('board from store',board.groups[0])
         },
         removeBoard(state, { boardId }) {
             state.boards = state.boards.filter(board => board._id !== boardId)
@@ -78,7 +79,6 @@ export const boardStore = {
             }
         },
         async updateBoard(context, { board }) {
-            console.log('board from updateBoard',board);
             try {
                 board = await boardService.save(board)
                 context.commit(getActionUpdateBoard(board))
