@@ -178,8 +178,8 @@ function getEmptyBoard() {
 
 
 // test data
-    // let boardie = data
-    // storageService._save(STORAGE_KEY,boardie)
+    let boardie = data
+    storageService._save(STORAGE_KEY,boardie)
 // ; (async () => {
 //   setTimeout(async () => {
 //     // console.log(boardie[0]);

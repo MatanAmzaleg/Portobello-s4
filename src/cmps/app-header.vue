@@ -62,6 +62,9 @@
             <span>Create</span>
           </button>
           <template #content>
+            <createBoardPopperTemplateVue />
+          </template>
+          <!-- <template #content>
             <div class="member-picker">
               <header>
                 <h1>Create board</h1>
@@ -132,7 +135,7 @@
                 </div>
               </div>
             </div>
-          </template>
+          </template> -->
         </Popper>
       </section>
       <button class="humburger">
@@ -156,6 +159,7 @@
 </template>
 <script>
 import notifications from './notifications.vue';
+import createBoardPopperTemplateVue from './create-board-popper-template.vue';
 export default {
   computed: {
     loggedInUser() {
@@ -163,7 +167,8 @@ export default {
     },
   },
   components: {
-    notifications
+    notifications,
+    createBoardPopperTemplateVue
   }
 }
 </script>

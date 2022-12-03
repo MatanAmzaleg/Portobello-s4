@@ -1,5 +1,5 @@
 <template>
-  <section class="board-header">
+  <section v-if="board" class="board-header">
     <div class="left-section">
       <span 
       class="board-name-input"
