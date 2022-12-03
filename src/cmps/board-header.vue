@@ -15,7 +15,7 @@
       </button>
     </div>
     <div class="right-section">
-      <popper :show="isModalOpen" ref="popper">
+      <popper :show="isModalOpen">
         <button @click="isModalOpen = true" class="filter-btn">
           <img
             class="filter-icon"
@@ -133,7 +133,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.board);
   },
   methods: {
     setFilter() {

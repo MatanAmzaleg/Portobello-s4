@@ -16,7 +16,6 @@ export const boardStore = {
   },
   mutations: {
     setBoards(state, { boards }) {
-      console.log("🚀 ~ file: board.store.js:42 ~ setBoards ~ boards", boards);
       state.boards = boards;
     },
     addBoard(state, { board }) {
@@ -27,8 +26,6 @@ export const boardStore = {
       const idx = state.boards.findIndex((c) => c._id === board._id);
       state.boards.splice(idx, 1, board);
       state.currBoard = board;
-      console.log(state.currBoard);
-      console.log("board from store", board.groups[0]);
     },
     removeBoard(state, { boardId }) {
       state.boards = state.boards.filter((board) => board._id !== boardId);
@@ -41,7 +38,6 @@ export const boardStore = {
     setCurrBoard(state, newBoard) {
       const { board, filteredBoard } = newBoard;
       state.currBoard = board ? board : filteredBoard;
-      console.log(state.currBoard);
     },
     setTask(state, { task }) {
       state.currTask = task;
@@ -116,7 +112,6 @@ export const boardStore = {
     },
     async setCurrBoard({ commit }, { boardId, filterBy }) {
       try {
-        console.log(boardId);
         const board = await boardService.getById(boardId);
         if (filterBy) {
           const { txt } = filterBy;

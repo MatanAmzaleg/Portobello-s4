@@ -74,7 +74,6 @@ export default {
   async created() {
     try {
       this.makeScene();
-      console.log(this.$store.getters.currBoard);
     } catch {}
   },
   components: { Container, Draggable, taskDetails, groupPreview },
