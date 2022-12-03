@@ -1,6 +1,7 @@
 <template>
     <div class="member-picker">
-        <header>
+        <popperModalHeaderVue title="Create board" hasBackBtn="true"/>
+        <!-- <header class="header-picker">
             <h1>Create board</h1>
             <button class="back">
                 <span>
@@ -20,7 +21,7 @@
                     </svg>
                 </span>
             </button>
-        </header>
+        </header> -->
         <div class="content">
             <div class="content-board-img">
                 <div class="board-img">
@@ -32,7 +33,7 @@
                 <label for="background-picker">Background</label>
                 <div>
                     <ul class="background-imgs">
-                        <li>
+                        <li class="li-img">
                             <button title="Custom image"
                                 style="background-image: url(&quot;https://images.unsplash.com/photo-1669250740534-1e26fb77051d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot;);">
                                 <span>
@@ -49,103 +50,82 @@
                                 </span>
                             </button>
                         </li>
-                        <li>
+                        <li class="li-img">
                             <button title="Custom image"
                                 style="background-image: url(&quot;https://images.unsplash.com/photo-1669123549422-22f62dee014d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot;);">
                             </button>
                         </li>
-                        <li>
+                        <li class="li-img">
                             <button title="Custom image"
                                 style="background-image: url(&quot;https://images.unsplash.com/photo-1669327195331-cd47e0d5eef0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot;);">
                             </button>
                         </li>
-                        <li class="ckPe00OAd2wM9L SIv9KBzGYcp2++">
+                        <li class="li-img">
                             <button title="Custom image"
                                 style="background-image: url(&quot;https://images.unsplash.com/photo-1669327857374-43aaa93dec95?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot;);">
                             </button>
                         </li>
                     </ul>
                     <ul>
-                        <li>
-                            <button 
-                                title="Blue" style="background-color: rgb(0, 121, 191);">
+                        <li class="li-color">
+                            <button title="Blue" style="background-color: rgb(0, 121, 191);">
                             </button>
                         </li>
-                        <li>
-                            <button
-                                title="Orange" style="background-color: rgb(210, 144, 52);">
+                        <li class="li-color">
+                            <button title="Orange" style="background-color: rgb(210, 144, 52);">
                             </button>
                         </li>
-                        <li>
-                            <button
-                                title="Green" style="background-color: rgb(81, 152, 57);">
+                        <li class="li-color">
+                            <button title="Green" style="background-color: rgb(81, 152, 57);">
                             </button>
                         </li>
-                        <li>
-                            <button
-                                title="Red" style="background-color: rgb(176, 70, 50);">
+                        <li class="li-color">
+                            <button title="Red" style="background-color: rgb(176, 70, 50);">
                             </button>
                         </li>
-                        <li>
-                            <button
-                                title="Purple" style="background-color: rgb(137, 96, 158);">
+                        <li class="li-color">
+                            <button title="Purple" style="background-color: rgb(137, 96, 158);">
                             </button>
                         </li>
-                        <li>
+                        <li class="li-color more">
                             <button>
-                                <span>
-                                    <span 
-                                        role="img"
-                                        style="--icon-primary-color:var(--ds-icon, #42526E); --icon-secondary-color: inherit;">
-                                        <svg
-                                            width="24" 
-                                            height="24" 
-                                            role="presentation" 
-                                            focusable="false"
-                                            viewBox="0 0 24 24" 
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"
-                                                fill="currentColor">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                </span>
+                                <svg width="100%" height="13" role="presentation" focusable="false" viewBox="0 1 24 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"
+                                        fill="#42526E">
+                                    </path>
+                                </svg>
                             </button>
                         </li>
                     </ul>
                 </div>
             </div>
-            <div class="content-board-img">
-                <div class="board-img">
-                    <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
-                        alt="" role="presentation">
-                </div>
-            </div>
-            <div class="content-board-img">
-                <div class="board-img">
-                    <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
-                        alt="" role="presentation">
-                </div>
-            </div>
-            <div class="content-board-img">
-                <div class="board-img">
-                    <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
-                        alt="" role="presentation">
-                </div>
-            </div>
-            <div class="content-board-img">
-                <div class="board-img">
-                    <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
-                        alt="" role="presentation">
-                </div>
-            </div>
-            <div class="content-board-img">
-                <div class="board-img">
-                    <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
-                        alt="" role="presentation">
-                </div>
-            </div>
         </div>
     </div>
 </template>
+
+<script>
+import popperModalHeaderVue from './popper-modal.vue';
+
+export default {
+    data() {
+        return {
+            color: [
+                "#00aecc",
+                "#519839",
+                "#4bbf6b",
+                "#d29034",
+                "#b04632",
+                "#89609e",
+                "#cd5a91",
+                "#838c91",
+            ],
+            img: []
+        }
+    },
+    components: {
+        popperModalHeaderVue,
+    }
+}
+</script>
