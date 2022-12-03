@@ -4,7 +4,7 @@
     <p>Get going faster with a template from the Trello community or</p>
     <ul class="board-list">
       <li v-for="board in boards" :key="board._id">
-        <article class="board"  @click="moveToBoard(board)">
+        <article class="board"  @click="moveToBoard(board)" :style="board.style?.bgColor? { 'background-color': board.style?.bgColor } : board.style?.imgUrl? { 'background-image': 'url( '+ board.style?.imgUrl +')', 'background-size': 'cover' } : ''">
           <p>
             {{board.title}}
           </p>

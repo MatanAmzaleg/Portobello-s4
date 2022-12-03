@@ -59,6 +59,23 @@ export const boardStore = {
         throw err;
       }
     },
+    async createNewBoard(context, { board }) {
+      try {
+        const newBoard = await boardService.getEmptyBoard();
+        newBoard.title = board.title
+        newBoard.style = {
+          "bgColor": board.style.bgColor,
+          "imgUrl": board.style.imgUrl,
+        },
+        board = await boardService.save(newBoard);
+        context.commit({ type: "addBoard", board });
+        // context.commit("setCurrBoard", board)
+        return board;
+      } catch (err) {
+        console.log("boardStore: Error in addBoard", err);
+        throw err;
+      }
+    },
     async updateBoard(context, { board }) {
       try {
         board = await boardService.save(board);

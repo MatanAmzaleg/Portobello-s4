@@ -2,7 +2,7 @@
   <section
     class="board-details"
     v-if="getCurrBoard"
-    :style="{ 'background-color': getCurrBoard.style?.bgColor }"
+    :style="getCurrBoard.style?.bgColor? { 'background-color': getCurrBoard.style?.bgColor } : getCurrBoard.style?.imgUrl? { 'background-image': 'url( '+ getCurrBoard.style?.imgUrl +')', 'background-size': 'cover' } : ''"
   >
     <board-header
       @updateBoard="updateBoard"
