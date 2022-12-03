@@ -135,7 +135,7 @@ export default {
                     title: this.boardTitle,
                     style: this.selectedBackground
                 }
-                await this.$store.dispatch({ type: 'createNewBoard', board: board })
+                await this.$store.dispatch({ type: 'createNewBoard', board })
                 showSuccessMsg('Board added')
                 this.boardToAdd = boardService.getEmptyBoard()
             } catch (err) {
