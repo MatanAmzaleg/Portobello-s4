@@ -83,7 +83,7 @@ export default {
       scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
       let board = utilService.createBoardFromScene(this.scene);
-      board = { ...this.currBoard,groups:board.groups };
+      board = { ...this.currBoard, groups: board.groups };
       this.$store.dispatch({ type: "updateBoard", board });
     },
     addBoard(board) {
@@ -122,7 +122,7 @@ export default {
             id: `${this.currBoard.groups[i].tasks[j].id}`,
             loading: false,
             title: `${this.currBoard.groups[i].tasks[j].title}`,
-            data: generateWords(Math.random() * 12 + 2),
+            task: this.currBoard.groups[i].tasks[j],
           })),
         })),
       };

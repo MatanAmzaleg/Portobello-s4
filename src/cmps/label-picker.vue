@@ -35,6 +35,7 @@ export default {
     },
     methods:{
         addLabel(labelId){
+          console.log(this.taskLabelsIds);
             this.taskLabelsIds.push(labelId)
             this.$emit('save-label',this.taskLabelsIds)
         },

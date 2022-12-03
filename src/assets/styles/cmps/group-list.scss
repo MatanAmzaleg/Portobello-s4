@@ -16,6 +16,26 @@
     overflow-x: hidden;
     width: 268px;
 
+    .task-preview {
+      .labels {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 4px;
+
+        .label {
+          min-width: 40px;
+          min-height: 8px;
+          background-color: #67748a;
+          margin-top: 4px;
+          margin-bottom: 4px;
+          padding-right: 0;
+          padding-left: 0;
+          border-radius: 4px;
+        }
+      }
+    }
+
     &::-webkit-scrollbar-track {
       border-radius: 5px;
       background-color: #f5f5f5;
@@ -188,21 +208,6 @@
 
       &:hover {
         background-color: #026aa7;
-      }
-    }
-
-    .task-preview {
-      .labels {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        margin-bottom: 4px;
-
-        .label{
-          min-width: 40px;
-          min-height: 8px;
-          background-color: #67748a;
-        }
       }
     }
   }

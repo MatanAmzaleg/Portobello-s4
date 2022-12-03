@@ -122,7 +122,8 @@ export default {
           })
         );
         board.groups[groupIdx].tasks[taskIdx] = this.task;
-        await this.$store.dispatch({ type: "addBoard", board });
+        console.log(board);
+        await this.$store.dispatch({ type: "updateBoard", board });
       } catch (err) {
         console.log("cant Update task", err);
       }
@@ -132,9 +133,11 @@ export default {
     },
     addLabel(labels) {
       this.task.labels = labels;
+      this.updateTask()
     },
     addMember(members) {
       this.task.members = members;
+      this.updateTask()
     },
     saveTaskLabels(labels) {
       this.task.labelIds = labels;
