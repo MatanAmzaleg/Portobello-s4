@@ -41,6 +41,7 @@ export default {
 </script>
 <style lang="scss">
 .main-task-members-container {
+  margin-right: 20px;
   ul {
     list-style: none;
   }

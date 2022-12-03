@@ -23,26 +23,5 @@ export default {
 };
 </script>
 <style lang="scss">
-.label-preview-container {
-  display: flex;
-  flex-direction: column;
-  align-self: center;
-  max-width: 100%;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  .label-preview-header {
-    font-size: 12px;
-  }
-  .labels-preview-list {
-    display: flex;
-  }
 
-  .label-preview {
-    width: 16px;
-    height: 32px;
-    border-radius: 0.1875em;
-    margin: 0 0.25em 0 0;
-    padding: 0px 0.75em;
-  }
-}
 </style>

@@ -31,17 +31,17 @@
           <div class="task-section task-description">
             <span class="description-icon"></span>
             <div class="task-description-wrapper">
+            <div class="task-description-title">
               <h3>Description</h3>
+              <el-button class="task-btn">Edit</el-button>
+            </div>
               <p
-            @click="isEdit = true"
-            @blur.stop="onEdit"
             contenteditable="true"
             spellcheck="false"
             class="description-info"
           >
             {{ task.description }}
           </p>
-              <!-- <textarea @change="saveTask" v-model="task.description"></textarea> -->
             </div>
           </div>
           <div class="task-section task-todo"></div>
@@ -49,13 +49,18 @@
             <span class="activity-icon"></span>
             <div class="task-activity-wrapper">
               <h3>Activity</h3>
-              <button>HELLO</button>
+              <el-button class="task-btn"  @click="(showComments = !showComments)">{{showComments ? 'Hide Details':'Show Details'}}</el-button>
             </div>
-            <div class="task-section">
               <font-awesome-icon icon="fa-regular fa-user" />
-              <input type="text" />
+            <div>
+              <input
+          placeholder="Write a comment..."
+          spellcheck="false"
+          class="activity-comment"
+        />
             </div>
           </div>
+            <div v-if="showComments" class="task-comments">HELLO</div>
         </section>
         <section class="actions">
           <div class="task-actions">
@@ -96,7 +101,7 @@ export default {
     return {
       groupId: "",
       task: {},
-      isDetailsShown: false,
+      showComments: false,
     };
   },
   methods: {
@@ -157,140 +162,5 @@ export default {
 </script>
 
 <style lang="scss">
-   .description-info {
-        margin-bottom: 10px;
-        margin-top: 5px;
-        max-width: 92%;
-        padding: 5px 10px;
-        color: #172b4d;
-        border-radius: 4px;
-        font-size: 14px;
-        background-color: #091e420a;
-        font-family: NunitoSans-regular;
-        overflow-wrap: break-word;
-        min-height: 50px;
-        &:focus {
-          background-color: #fff;
-          box-shadow: inset 0 0 0 2px #0079bf;
-        }
-        &:empty:before {
-          content: 'Add a more detailed description...';
-        }}
-
-.task-section {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 50px 1fr;
-  svg {
-    margin-block-start: 6px;
-    justify-self: center;
-  }
-}
-.task-edit-screen {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  align-items: flex-start;
-  background-color: #0009;
-  display: flex;
-  justify-content: center;
-  top: 0;
-  left: 0;
-  .task-edit-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    top: 44px;
-    min-height: 700px;
-    width: 768px;
-    background-color: #f4f5f7;
-    border-radius: 5px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
-    .header-icon,.description-icon,.activity-icon {
-        font-family: trellicons;
-        place-self: center;
-        align-self: flex-start;
-        font-size: 24px;
-      }
-      .header-icon{
-        &::before {
-          content: '\e912';
-        }
-      }
-      .description-icon {
-          &::before {
-            content: '\e922';
-          }
-        }
-       .activity-icon {
-            &::before {
-              content: '\e900';
-            }
-          }
-    .task-cover {
-      height: 117px;
-    }
-
-    .task-title {
-      margin-top: 30px;
-      width: 100%;
-      input {
-        outline: none;
-        border: none;
-        background-color: transparent;
-        width: 95%;
-        height: 30px;
-        font-size: 20px;
-        border-radius: 3px;
-        color: #172b4d;
-        &:focus {
-          background-color: #fff;
-          outline: 1px solid blue;
-        }
-      }
-    }
-
-    .task-content {
-      display: flex;
-      flex-direction: row;
-      width: 100%;
-      .content {
-        width: 70%;
-
-        .task-section {
-          .task-info-wrapper{
-            display: flex;
-          }
-          &.task-info {
-            grid-column: 2;
-          }
-        }
-      }
-
-      .actions {
-        width: 30%;
-      }
-    }
-    .task-exit-btn {
-      border-radius: 50%;
-    color: var(--ds-icon,#42526e);
-    height: 32px;
-    margin: 4px;
-    overflow: hidden;
-    padding: 4px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: background-color 85ms,color 85ms;
-    width: 32px;
-    z-index: 2;
-    display: grid;
-    place-content: center;
-      cursor: pointer;
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-      }
-    }
-  }
-}
+  
 </style>

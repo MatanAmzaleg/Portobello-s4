@@ -30,18 +30,5 @@
   }
   </script>
   <style lang="scss">
-    .task-option-btn{
-      display: flex;
-      gap: 5px;
-      background-color: var(--ds-background-neutral,#091e420a);
-     text-align: left;
-      padding: 6px 12px;
-      width: 170px;
-    }
-          .member-picker{
-          padding: 20px;
-          width: 200px;
-          text-align: center;
-          background-color: white;
-      }
+
   </style>

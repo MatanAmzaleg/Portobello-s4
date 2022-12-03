@@ -66,14 +66,4 @@ export default {
 }
 </script>
 <style lang="scss">
-    .cover-picker{
-        .covers{
-            display: flex;
-        }
-        .cover{
-            display: inline;
-            width: 40px;
-        }
-
-    }
 </style>
