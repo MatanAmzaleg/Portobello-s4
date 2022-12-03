@@ -1,0 +1,81 @@
+.home {
+    max-width: 852px;
+    margin-inline: auto;
+    margin: 40px auto 0;
+
+    h3,
+    p {
+        font-size: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    }
+
+    .board-section {
+        padding: 0 0 20px;
+    }
+
+    .recently {
+        .recently-title {
+            display: flex;
+            align-items: center;
+            gap: 7.5px;
+            padding: 0 0 7px;
+
+            span {
+                height: 32px;
+                width: 32.5px;
+                line-height: 32px;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    height: 1.1em;
+                }
+            }
+        }
+    }
+
+    .workspaces {
+        .workspaces-title {
+            margin: 27px 0 0 0;
+            color: $clr21;
+        }
+    }
+
+    .board-list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            margin: 0 1rem 1.6rem 0;
+        }
+
+        .board {
+            width: 194px;
+            height: 96px;
+            background-color: rgb(152, 212, 192);
+            border-radius: 3px;
+            // padding: 8px;
+            cursor: pointer;
+
+            .board-preview {
+                height: 100%;
+                width: 100%;
+                background-color: #00000051;
+
+                p {
+                    color: $clr4;
+                    font-family: NunitoSans-ExtraBold;
+                    padding: 8px;
+                }
+
+                &:hover {
+                    background-color: #00000089;
+                }
+            }
+
+        }
+    }
+}

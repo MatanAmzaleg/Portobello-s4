@@ -57,12 +57,12 @@
             </svg>
           </button>
         </section>
-        <Popper class="popper-create" offsetSkid="118">
+        <Popper class="popper-create" offsetSkid="118" @open:popper="toggleModal" @close:popper="toggleModal">
           <button class="btn-create">
             <span>Create</span>
           </button>
           <template #content>
-            <createBoardPopperTemplateVue />
+            <createBoardPopperTemplateVue :isModalOpen="isModalOpen"/>
           </template>
         </Popper>
       </section>
@@ -89,10 +89,20 @@
 import notifications from './notifications.vue';
 import createBoardPopperTemplateVue from './create-board-popper-template.vue';
 export default {
+  data() {
+    return {
+      isModalOpen: false
+    }
+  },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser
     },
+  },
+  methods: {
+    toggleModal() {
+      this.isModalOpen = !this.isModalOpen
+    }
   },
   components: {
     notifications,

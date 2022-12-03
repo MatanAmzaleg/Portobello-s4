@@ -27,7 +27,7 @@
         <template #content>
           <section class="filter-popper">
             <div class="header">
-              <h1>Filter</h1>
+              <p>Filter</p>
               <button class="x-mark-btn" @click="(isModalOpen = false)">
                 <font-awesome-icon
                   class="x-mark-icon"
@@ -51,17 +51,17 @@
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>No members</h4>
+                <p>No members</p>
               </label>
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>Cards assigned to me</h4>
+                <p>Cards assigned to me</p>
               </label>
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>Select members</h4>
+                <p>Select members</p>
               </label>
             </section>
             <section class="date-filter">
@@ -69,17 +69,17 @@
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>No dates</h4>
+                <p>No dates</p>
               </label>
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>Overdue</h4>
+                <p>Overdue</p>
               </label>
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>Due in the next day</h4>
+                <p>Due in the next day</p>
               </label>
             </section>
             <section class="labels-filter">
@@ -87,7 +87,7 @@
               <label class="member-label" for="">
                 <input type="checkbox" />
                 <p>photo</p>
-                <h4>No labels</h4>
+                <p>No labels</p>
               </label>
               <label class="member-label" for="">
                 <input type="checkbox" />
