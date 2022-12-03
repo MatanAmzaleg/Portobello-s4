@@ -9,24 +9,7 @@
       </div>
       <div>
         <ul class="board-list">
-          <li v-for="board in boards.slice(0, 4)" :key="board._id">
-            <article class="board" @click="moveToBoard(board)"
-              :style="board.style?.bgColor ? { 'background-color': board.style?.bgColor } : board.style?.imgUrl ? { 'background-image': 'url( ' + board.style?.imgUrl + ')', 'background-size': 'cover' } : ''">
-              <p :title="board.title">
-                {{ board.title }}
-              </p>
-            </article>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section class="board-section workspaces">
-      <div class="workspaces-title">
-        <h3>{{titleUpperCase}}</h3>
-      </div>
-      <div>
-        <ul class="board-list">
-          <li v-for="board in boards" :key="board._id">
+          <li v-for="board in boards.slice(0, 4)" :key="board._id" class="board-li">
             <article class="board" @click="moveToBoard(board)"
               :style="board.style?.bgColor ? { 'background-color': board.style?.bgColor } : board.style?.imgUrl ? { 'background-image': 'url( ' + board.style?.imgUrl + ')', 'background-size': 'cover' } : ''">
               <div class="board-preview">
@@ -37,7 +20,39 @@
             </article>
           </li>
         </ul>
+      </div>
+    </section>
+    <section class="board-section workspaces">
+      <div class="workspaces-title">
+        <h3>{{ titleUpperCase }}</h3>
+      </div>
+      <div>
+        <ul class="board-list">
+          <li v-for="board in boards" :key="board._id" class="board-li">
+            <article class="board" @click="moveToBoard(board)"
+              :style="board.style?.bgColor ? { 'background-color': board.style?.bgColor } : board.style?.imgUrl ? { 'background-image': 'url( ' + board.style?.imgUrl + ')', 'background-size': 'cover' } : ''">
+              <div class="board-preview">
+                <p class="board-preview-title">
+                  {{ board.title }}
+                </p>
+              </div>
+            </article>
+          </li>
+          <Popper class="popper-create" placement="right" @open:popper="toggleModal" @close:popper="toggleModal">
+            <article class="create-board">
+                <div class="create-board-preview">
+                  <p class="create-board-preview-title">
+                    Create new board
+                  </p>
+                </div>
+              </article>
+            <template #content>
+              <createBoardPopperTemplateVue />
+            </template>
+          </Popper>
+        </ul>
         <hr />
+
         <form @submit.prevent="addBoard()">
           <h2>Add board</h2>
           <input type="text" v-model="boardToAdd.title" />
@@ -53,6 +68,8 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 import { boardService } from '../services/board.service.js'
 // import { getActionRemoveBoard, getActionUpdateBoard, getActionAddBoardMsg } from '../store/board.store'
 import boardDetails from './board-details.vue'
+import createBoardPopperTemplateVue from '../cmps/create-board-popper-template.vue';
+
 export default {
   data() {
     return {
@@ -66,7 +83,7 @@ export default {
     boards() {
       return this.$store.getters.boards
     },
-    titleUpperCase(){
+    titleUpperCase() {
       return "Your Workspaces".toUpperCase()
     }
   },
@@ -140,6 +157,7 @@ export default {
   },
   components: {
     boardDetails,
+    createBoardPopperTemplateVue
   },
 }
 </script>
