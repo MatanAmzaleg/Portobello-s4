@@ -9,7 +9,7 @@
         <span></span>
       </div>
       <div class="task-section task-title">
-        <font-awesome-icon class="title-icon" icon="fa-solid fa-bars-progress" />
+        <span class="header-icon"></span>
         <div class="task-title-wrapper">
           <input v-model="task.title" @input="updateTask" type="text" />
           <h5>in list {{ this.groupId }}</h5>
@@ -21,23 +21,37 @@
             <span></span>
             <div class="task-info-wrapper">
               <miniUsers v-if="task.memberIds" :memberIds="task.memberIds" />
-              <labelsPreview v-if="task.labelIds" :currBoard="currBoard" :labelIds="task.labelIds" />
+              <labelsPreview
+                v-if="task.labelIds"
+                :currBoard="currBoard"
+                :labelIds="task.labelIds"
+              />
             </div>
           </div>
           <div class="task-section task-description">
-            <font-awesome-icon icon="fa-solid fa-bars-staggered" />
+            <span class="description-icon"></span>
             <div class="task-description-wrapper">
               <h3>Description</h3>
-              <textarea @change="saveTask" v-model="task.description"></textarea>
+              <p
+            @click="isEdit = true"
+            @blur.stop="onEdit"
+            contenteditable="true"
+            spellcheck="false"
+            class="description-info"
+          >
+            {{ task.description }}
+          </p>
+              <!-- <textarea @change="saveTask" v-model="task.description"></textarea> -->
             </div>
           </div>
           <div class="task-section task-todo"></div>
           <div class="task-section task-activity">
-            <font-awesome-icon icon="fa-solid fa-bars-staggered" />
+            <span class="activity-icon"></span>
             <div class="task-activity-wrapper">
               <h3>Activity</h3>
+              <button>HELLO</button>
             </div>
-            <div class="task-section ">
+            <div class="task-section">
               <font-awesome-icon icon="fa-regular fa-user" />
               <input type="text" />
             </div>
@@ -66,13 +80,17 @@ import coverPicker from "../cmps/cover.picker.vue";
 import miniUsers from "../cmps/mini-users.vue";
 import labelsPreview from "../cmps/labels-preview.vue";
 export default {
-  props:{
-    currBoard:Object
+  props: {
+    currBoard: Object,
   },
   async created() {
-    let {taskId} = this.$route.params
-    let  task = await this.$store.dispatch({type:"loadTask",board:this.currBoard,taskId}) 
-    this.task = JSON.parse(JSON.stringify(task))
+    let { taskId } = this.$route.params;
+    let task = await this.$store.dispatch({
+      type: "loadTask",
+      board: this.currBoard,
+      taskId,
+    });
+    this.task = JSON.parse(JSON.stringify(task));
   },
   data() {
     return {
@@ -82,25 +100,26 @@ export default {
     };
   },
   methods: {
-    exitTask(){
-      this.$router.push(`/board/${this.currBoard._id}`)
-    },  
+    exitTask() {
+      this.$router.push(`/board/${this.currBoard._id}`);
+    },
     toggleDetails() {
       this.isDetailsShown = !this.isDetailsShown;
     },
-    async updateTask(){
-      try{
-        let board = JSON.parse(JSON.stringify(this.currBoard))
-        let taskIdx 
-        let groupIdx = board.groups.findIndex(group => group.tasks.some((task,idx)=> {
-          if(task.id === this.task.id) taskIdx = idx
-          return task.id === this.task.id
-        }))
-        board.groups[groupIdx].tasks[taskIdx] = this.task
-        await this.$store.dispatch({type:'addBoard',board})
-      }
-      catch(err){
-        console.log('cant Update task',err);
+    async updateTask() {
+      try {
+        let board = JSON.parse(JSON.stringify(this.currBoard));
+        let taskIdx;
+        let groupIdx = board.groups.findIndex((group) =>
+          group.tasks.some((task, idx) => {
+            if (task.id === this.task.id) taskIdx = idx;
+            return task.id === this.task.id;
+          })
+        );
+        board.groups[groupIdx].tasks[taskIdx] = this.task;
+        await this.$store.dispatch({ type: "addBoard", board });
+      } catch (err) {
+        console.log("cant Update task", err);
       }
     },
     closeModal() {
@@ -114,11 +133,11 @@ export default {
     },
     saveTaskLabels(labels) {
       this.task.labelIds = labels;
-      this.updateTask()
+      this.updateTask();
     },
     saveTaskCover(color) {
-      this.task.style = {bgColor: color}
-      this.updateTask()
+      this.task.style = { bgColor: color };
+      this.updateTask();
     },
   },
   computed: {
@@ -132,12 +151,32 @@ export default {
     datePicker,
     coverPicker,
     miniUsers,
-    labelsPreview
+    labelsPreview,
   },
 };
 </script>
 
 <style lang="scss">
+   .description-info {
+        margin-bottom: 10px;
+        margin-top: 5px;
+        max-width: 92%;
+        padding: 5px 10px;
+        color: #172b4d;
+        border-radius: 4px;
+        font-size: 14px;
+        background-color: #091e420a;
+        font-family: NunitoSans-regular;
+        overflow-wrap: break-word;
+        min-height: 50px;
+        &:focus {
+          background-color: #fff;
+          box-shadow: inset 0 0 0 2px #0079bf;
+        }
+        &:empty:before {
+          content: 'Add a more detailed description...';
+        }}
+
 .task-section {
   width: 100%;
   display: grid;
@@ -167,7 +206,27 @@ export default {
     background-color: #f4f5f7;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
-
+    .header-icon,.description-icon,.activity-icon {
+        font-family: trellicons;
+        place-self: center;
+        align-self: flex-start;
+        font-size: 24px;
+      }
+      .header-icon{
+        &::before {
+          content: '\e912';
+        }
+      }
+      .description-icon {
+          &::before {
+            content: '\e922';
+          }
+        }
+       .activity-icon {
+            &::before {
+              content: '\e900';
+            }
+          }
     .task-cover {
       height: 117px;
     }
