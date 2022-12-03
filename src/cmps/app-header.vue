@@ -62,7 +62,6 @@
             <span>Create</span>
           </button>
           <template #content>
-            
             <createBoardPopperTemplateVue />
           </template>
         </Popper>
