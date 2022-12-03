@@ -3,7 +3,7 @@
         <popperModalHeaderVue title="Create board" :hasBackBtn="true" />
         <div class="content">
             <div class="content-board-img">
-                <div class="board-img">
+                <div class="board-img" :style="selectedBackground?.bgColor ? { 'background-color': selectedBackground?.bgColor } : selectedBackground?.imgUrl ? { 'background-image': 'url( ' + selectedBackground?.imgUrl + ')', 'background-size': 'cover' } : ''">
                     <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
                         alt="" role="presentation">
                 </div>
@@ -22,9 +22,9 @@
                         </li>
                     </ul>
                     <ul>
-                        <li v-for="clr in colors" class="li-color" :class="`clr-${clr}`">
-                            <button :title="clr.charAt(0).toUpperCase() + clr.slice(1)" @click="updateBgColor(clr)">
-                                <span v-if="selectedBackground.bgColor === clr">
+                        <li v-for="clr in colors" class="li-color" :class="`clr-${clr.name}`">
+                            <button :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)" @click="updateBgColor(clr.color)">
+                                <span v-if="(selectedBackground.bgColor === clr.color)">
                                     <selectedSvg />
                                 </span>
                             </button>
@@ -48,7 +48,8 @@
                 <input ref="boardName" @input="updateBoardName" />
             </div>
             <div class="board-create">
-                <button :class="boardTitle !== '' ? 'create-allowed' : 'create-not-allowed'" @click="addBoard">Create</button>
+                <button :class="boardTitle !== '' ? 'create-allowed' : 'create-not-allowed'"
+                    @click="addBoard">Create</button>
             </div>
         </div>
     </div>
@@ -57,7 +58,7 @@
 <script>
 import popperModalHeaderVue from './popper-modal.vue';
 import selectedSvg from './selected-svg.vue'
-import {showErrorMsg, showSuccessMsg} from '../services/event-bus.service'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service'
 
 export default {
     props: {
@@ -70,11 +71,26 @@ export default {
                 bgColor: "",
             },
             colors: [
-                "blue",
-                "orange",
-                "green",
-                "red",
-                "purple",
+                {
+                    name: "blue",
+                    color: "#0079bf"
+                },
+                {
+                    name: "orange",
+                    color: "#d29034"
+                },
+                {
+                    name: "green",
+                    color: "#519839"
+                },
+                {
+                    name: "red",
+                    color: "#b04632"
+                },
+                {
+                    name: "purple",
+                    color: "#89609e"
+                },
             ],
             imgs: [
                 {
