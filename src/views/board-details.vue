@@ -29,7 +29,9 @@ export default {
   name: "board-details",
   data() {
     return {
-      filterBy: {},
+      filterBy: {txt:'',
+      labels: null,
+    },
       currBoard: null,
     };
   },
@@ -46,19 +48,7 @@ export default {
     setFilter(filterBy) {
       console.log(filterBy);
       this.filterBy = filterBy;
-      const { txt } = filterBy;
-      const regex = new RegExp(txt, "i");
-      const filteredGroups = this.currBoard.groups.filter((group) =>
-        regex.test(group.title)
-      );
-      const regBoard = this.getBoards.find((board) => {
-        return board._id === this.$route.params.boardId;
-      });
-      console.log("🚀 ~ file: board-details.vue:69 ~ regBoard ~ this.$route.params.boardId", this.$route.params.boardId)
-      console.log(regBoard);
-      console.log(filteredGroups);
-      this.currBoard = { ...regBoard, groups: filteredGroups };
-      console.log(filteredGroups);
+      this.$store.dispatch({type:"setCurrBoard", boardId:this.$route.params.boardId, filterBy})
     },
     updateBoard(board) {
       console.log("updating board ");
