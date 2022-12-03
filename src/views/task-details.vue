@@ -12,7 +12,7 @@
         <font-awesome-icon class="title-icon" icon="fa-solid fa-bars-progress" />
         <div class="task-title-wrapper">
           <input v-model="task.title" @input="updateTask" type="text" />
-          <h5>in group {{ this.groupId }}</h5>
+          <h5>in list {{ this.groupId }}</h5>
         </div>
       </div>
       <section class="task-content">
@@ -53,7 +53,7 @@
         </section>
       </section>
 
-      <span @click="exitTask" class="task-exit-btn">X</span>
+      <span @click="exitTask" class="task-exit-btn"><span>X</span></span>
     </div>
   </div>
 </template>
@@ -169,7 +169,7 @@ export default {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
 
     .task-cover {
-      height: 100px;
+      height: 117px;
     }
 
     .task-title {
@@ -213,125 +213,25 @@ export default {
       }
     }
     .task-exit-btn {
-      position: absolute;
-      top: 0;
-      background-color: rgba(255, 255, 255, 0.2);
-      top: 5px;
-      right: 4px;
-      height: 30px;
       border-radius: 50%;
-      transition: background-color 0.1s, color 0.1s;
-      padding: 8px;
-      font-size: 20px;
+    color: var(--ds-icon,#42526e);
+    height: 32px;
+    margin: 4px;
+    overflow: hidden;
+    padding: 4px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: background-color 85ms,color 85ms;
+    width: 32px;
+    z-index: 2;
+    display: grid;
+    place-content: center;
       cursor: pointer;
       &:hover {
-        background-color: rgba(249, 249, 249, 0.94);
+        background-color: rgba(255, 255, 255, 0.2);
       }
     }
   }
 }
-
-// .task-edit-container{
-//   position: relative;
-//   top: 44px;
-//   min-height: 700px;
-//   width: 768px;
-//   background-color: #f4f5f7;
-//   border-radius: 5px;
-//   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
-//   display: flex;
-//   display: grid;
-//   grid-template-columns: 1fr 208px;
-//   grid-template-rows: 90px  0.2fr 0.2fr 0.3fr 0.2fr 0.3fr;
-//   grid-template-areas: 'cover cover' 'title title' 'info actions' 'desc actions' 'todo actions' 'activity actions';
-//   > *{
-//     padding: 20px;
-//   }
-//   .task-cover{
-//     max-width: 100%;
-//     grid-area: cover;
-//   }
-//   .task-title{
-//     grid-area: title;
-//     display: grid;
-//     grid-template-columns: 50px 1fr;
-//     grid-template-areas: 'icon info';
-//     .task-title-wrapper{
-//       grid-area: info;
-//       input{
-//         outline: none;
-//         border: none;
-//         background-color: transparent;
-//         width: 95%;
-//         height: 30px;
-//         font-size: 20px;
-//         border-radius: 3px;
-//         color: #172b4d;
-//         &:focus {
-//           background-color: #fff;
-//           outline:1px solid blue
-//         }
-//     }
-//   }
-// }
-// .task-info{
-//   max-width: 100%;
-//   grid-area: info;
-//   display: grid;
-//   grid-template-columns: 50px 1fr;
-//   grid-template-areas: 'icon info';
-//     .task-info-wrapper{
-//       grid-area: info;
-//     }
-//   }
-//   .task-description{
-//     max-width: 100%;
-//     grid-area: desc;
-//     display: grid;
-//   grid-template-columns: 50px 1fr;
-//   grid-template-areas: 'icon info';
-//     .task-description-wrapper{
-//         grid-area: info;
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: flex-start;
-//       }
-//       textarea{
-//         width: 90%;
-//       }
-//   }
-//   .task-todo{
-//     max-width: 100%;
-//     grid-area: todo;
-//   }
-//   .task-activity{
-//     max-width: 100%;
-//     grid-area: activity;
-//     display: grid;
-//   grid-template-columns: 50px 1fr;
-//   grid-template-areas: 'icon info';
-//     .task-activity-wrapper{
-//       grid-area: info;
-//     }
-//   }
-//   .task-actions{
-//     grid-area: actions;
-//   }
-//   .task-exit-btn {
-//     position: absolute;
-//     top: 0;
-//     background-color: rgba(255, 255, 255, 0.2);
-//     top: 5px;
-//     right: 4px;
-//     height: 30px;
-//     border-radius: 50%;
-//     transition: background-color 0.1s, color 0.1s;
-//     padding: 8px;
-//     font-size: 20px;
-//     cursor: pointer;
-//     &:hover{
-//       background-color: rgba(249, 249, 249, 0.94);
-//     }
-//   }
-// }
 </style>

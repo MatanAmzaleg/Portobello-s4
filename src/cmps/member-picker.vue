@@ -5,7 +5,8 @@
      <button>Members</button>
   </div>
     <template #content>
-    <div class="member-picker">
+    <div class="popper-content member-picker">
+      <popper-modal title="Members" />
       <h1>Members</h1>
       <input type="search" placeholder="Search Members">
       <div class="labels">
@@ -22,6 +23,7 @@
   </Popper>
 </template>
 <script>
+import popperModal from './popper-modal.vue';
 export default {
     props:{
         members: Array
@@ -33,6 +35,9 @@ export default {
         return{
             currMembers: []
         }
+    },
+    components:{
+      popperModal
     }
 }
 </script>

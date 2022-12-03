@@ -5,8 +5,8 @@
   <button>Cover</button>
 </div>
   <template #content>
-  <div class="cover-picker">
-    <h1>Cover</h1>
+  <div class="popper-content cover-picker">
+  <popper-modal title="Cover"></popper-modal>
     <div class="colors">
     <small>Colors</small>
     <div class="covers" v-for="cover in covers">
@@ -18,6 +18,7 @@
 </Popper>
 </template>
 <script>
+import popperModal from './popper-modal.vue'; 
 export default {
     data(){
         return{
@@ -57,6 +58,9 @@ export default {
         setCover(color){
             this.$emit('setCover',color)
         }
+    },
+    components:{
+        popperModal
     }
     
 }

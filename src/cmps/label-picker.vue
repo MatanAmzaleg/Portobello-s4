@@ -5,8 +5,8 @@
     <button>Labels</button>
   </div>
     <template #content v-if="labelIds">
-    <div class="label-picker">
-      <h1>Labels</h1>
+    <div class="popper-content label-picker">
+      <popper-modal title="Labels" />
       <input type="search">
       <div class="labels">
       <small>Labels</small>
@@ -23,6 +23,8 @@
   </Popper>
 </template>
 <script>
+import popperModal from './popper-modal.vue';
+
 export default {
     props:{
        labelIds: Array
@@ -39,6 +41,9 @@ export default {
         checkLabel(id){
           return false
         }
+    },
+    components:{
+      popperModal
     },
     data(){
         return{
