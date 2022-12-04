@@ -12,7 +12,7 @@
       </div>
       <span class="task-router-link">{{ item.title }}</span>
     </div>
-    <span class="task-router-link">{{ item.title }}</span>
+    <!-- <span class="task-router-link">{{ item.title }}</span> -->
   </section>
 </template>
 <script>
