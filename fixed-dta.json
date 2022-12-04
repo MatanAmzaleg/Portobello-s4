@@ -84,7 +84,35 @@
                         "priority": "",
                         "description": "",
                         "comments": [],
-                        "checklists": [],
+                        "checklists": [
+                            {
+                                "id": "YEhmF",
+                                "title": "Checklist",
+                                "todos": [
+                                    {
+                                        "id": "212jX",
+                                        "title": "Start with creating a div",
+                                        "isDone": false
+                                    },
+                                    {
+                                        "id": "213jX",
+                                        "title": "Add content to your div",
+                                        "isDone": false
+                                    },
+                                    {
+                                        "id": "214jX",
+                                        "title": "Style your div",
+                                        "isDone": false
+                                    },
+                                    {
+                                        "id": "215jX",
+                                        "title": "Let me know when it is done",
+                                        "isDone": false
+                                    }
+
+                                ]
+                            }
+                        ],
                         "memberIds": [],
                         "labelIds": [],
                         "dueDate": 16156215211,
