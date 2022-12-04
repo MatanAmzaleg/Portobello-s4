@@ -1,9 +1,8 @@
 <template lang="">
-  <section class="label-picker task-option-btn">
   <Popper>
   <div class="task-option-btn">
     <font-awesome-icon @click="showPopper = true"  :style="{'height': 12+'px'}" icon="fa-solid fa-tag" />
-    <button>Labels</button>
+    <p>Labels</p>
   </div>
     <template :show="showPopper" #content v-if="labelIds">
     <div class="popper-content label-picker">
@@ -22,7 +21,6 @@
     </div>
     </template>
   </Popper>
-  </section>
 </template>
 <script>
 import popperModal from './popper-modal.vue';

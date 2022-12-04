@@ -2,7 +2,7 @@
   <Popper>
   <div class="task-option-btn">
     <font-awesome-icon :style="{'height': 12+'px'}" icon="fa-solid fa-user" />       
-     <button>Members</button>
+     <p>Members</p>
   </div>
     <template #content>
     <div class="popper-content member-picker">

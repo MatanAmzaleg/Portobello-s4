@@ -33,6 +33,7 @@
             <div class="task-description-wrapper">
             <div class="task-description-title">
               <h3 class="task-mini-title">Description</h3>
+              <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
             </div>
               <p
             v-if="!isEdit"
@@ -70,8 +71,9 @@
         </section>
         <section class="actions">
           <div class="task-actions">
-            <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
+            <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
+            <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <datePicker />
             <coverPicker @setCover="saveTaskCover" />
           </div>

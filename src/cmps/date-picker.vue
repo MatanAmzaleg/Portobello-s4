@@ -2,7 +2,7 @@
     <Popper>
     <div class="task-option-btn">
         <font-awesome-icon :style="{'height': 12+'px'}" icon="fa-regular fa-clock" />
-      <button>Date</button>
+      <p>Date</p>
     </div>
       <template #content>
       <div class="date-picker">

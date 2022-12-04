@@ -2,7 +2,7 @@
   <Popper>
 <div class="task-option-btn">
   <font-awesome-icon  :style="{'height': 12+'px'}" icon="fa-regular fa-image" />
-  <button>Cover</button>
+  <p>Cover</p>
 </div>
   <template #content>
   <div class="popper-content cover-picker">
