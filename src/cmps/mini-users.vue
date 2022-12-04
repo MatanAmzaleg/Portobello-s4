@@ -1,6 +1,6 @@
 <template lang="">
   <div class="main-task-members-container">
-    <div v-if="!noHeader" class="main-task-members-header">Members</div>
+    <p v-if="!noHeader" class="main-task-members-header">Members</p>
     <div class="main-task-members">
       <ul v-for="user in usersToShow">
         <li>
@@ -45,12 +45,19 @@ export default {
   ul {
     list-style: none;
   }
+
+  .main-task-members-header{
+    font-size: 12px;
+      font-weight: 600;
+      margin-right: 8px;
+      margin-bottom: 4px;
+  }
   flex-direction: column;
   padding-top: 3px;
   .main-task-members-header {
-    margin-top: 0.8rem;
+    margin-top: 11px;
     font-size: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
   }
   .main-task-members {
     display: flex;

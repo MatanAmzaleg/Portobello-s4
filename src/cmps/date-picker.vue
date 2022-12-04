@@ -1,7 +1,7 @@
 <template lang="">
     <Popper>
     <div class="task-option-btn">
-        <font-awesome-icon :style="{'height': 12+'px'}" icon="fa-regular fa-clock" />
+      <font-awesome-icon class="icon" icon="fa-regular fa-clock" />
       <p>Date</p>
     </div>
       <template #content>

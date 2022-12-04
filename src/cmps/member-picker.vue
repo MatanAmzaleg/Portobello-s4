@@ -1,7 +1,7 @@
 <template lang="">
   <Popper>
   <div class="task-option-btn">
-    <font-awesome-icon :style="{'height': 12+'px'}" icon="fa-solid fa-user" />       
+    <font-awesome-icon class="icon" icon="fa-regular fa-user" />      
      <p>Members</p>
   </div>
     <template #content>
