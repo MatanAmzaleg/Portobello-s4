@@ -10,7 +10,7 @@
     <span class="task-router-link">{{ item.title }}</span>
     <div class="task-details">
     <span>{{item.task.description?.slice(0,50)}}</span>
-     <mini-users :memberIds="item.task.memberIds" /> 
+     <mini-users :noHeader="true" :memberIds="item.task.memberIds" /> 
     </div>
   </section>
 </template>
@@ -38,8 +38,8 @@ export default {
   },
   computed: {
       currBoard() {
-          this.$store.getters.currBoard
-      }
+          return this.$store.getters.currBoard
+      },
   },
   components:{
     miniUsers

@@ -54,9 +54,9 @@ export default {
   }
   .main-task-members {
     display: flex;
-    // margin-top: -0.8rem;
+    margin-top: -0.8rem;
     margin-left: -0.1rem;
-    // margin-bottom: 20px;
+    margin-bottom: 20px;
     .main-task-member-img {
       width: 32px;
       height: 32px;
