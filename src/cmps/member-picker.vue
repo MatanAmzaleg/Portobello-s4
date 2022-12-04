@@ -6,9 +6,9 @@
   </div>
     <template #content>
     <div class="popper-content member-picker">
-      <popper-modal title="Members" />
+      <popperModal title="Members" />
       <input v-model="input" class="members-input-search" type="search" placeholder="Search Members">
-      <div class="labels">
+      <div class="members">
       <h5 class="board-members-title">Board Members</h5>
       <div class="board-members">
         <div @click="addMember(member._id)" v-for="member in boardMembers" class="member">
@@ -55,6 +55,7 @@ export default {
 }
 </script>
 <style lang="scss">
+
 .members-input-search{
   border: none;
     border-radius: 3px;
@@ -75,8 +76,10 @@ export default {
 }
         .member-picker{
         padding: 20px;
-        width: 310px;
+        width: 307px;
         text-align: center;
+        background-color: white;
+
         .member{
           display: flex;
           margin-bottom: 5px;
