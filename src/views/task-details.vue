@@ -20,7 +20,7 @@
           <div class="task-section task-info">
             <span></span>
             <div class="task-info-wrapper">
-              <miniUsers v-if="task.memberIds" :memberIds="task.memberIds" />
+              <miniUsers v-if="task.memberIds" :memberIds="getTaskMembers" />
               <labelsPreview
                 v-if="task.labelIds"
                 :currBoard="currBoard"
@@ -33,18 +33,25 @@
             <div class="task-description-wrapper">
             <div class="task-description-title">
               <h3>Description</h3>
-              <el-button class="task-btn">Edit</el-button>
+              <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button>
             </div>
               <p
+            v-if="!isEdit"
             contenteditable="true"
             spellcheck="false"
+            @click="isEdit = true"
             class="description-info"
           >
             {{ task.description }}
           </p>
-            </div>
+          <div v-else class="details-edit">
+          <textarea @input="updateTask" v-model="task.description" class="description-input"></textarea>
+          <el-button @click="(isEdit = false)" type="primary">Save</el-button>
+          <el-button @click="(isEdit = false)">Cancel</el-button>
           </div>
-          <div class="task-section task-todo"></div>
+          </div>
+          </div>
+          <div v-if="false" class="task-section task-todo"></div>
           <div class="task-section task-activity">
             <span class="activity-icon"></span>
             <div class="task-activity-wrapper">
@@ -65,7 +72,7 @@
         <section class="actions">
           <div class="task-actions">
             <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
-            <memberPicker />
+            <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <datePicker />
             <coverPicker @setCover="saveTaskCover" />
           </div>
@@ -102,7 +109,9 @@ export default {
       groupId: "",
       task: {},
       showComments: false,
+      isEdit:false
     };
+
   },
   methods: {
     exitTask() {
@@ -147,10 +156,24 @@ export default {
       this.task.style = { bgColor: color };
       this.updateTask();
     },
+    saveTaskMembers(id) {
+      // if(!this.task.memberIds) this.task.memberIds = []
+      // let memberIdx = this.task.memberIds.findIndex(m => m._id === id);
+      // if(memberIdx === -1){
+        this.task.memberIds.push(id)
+      this.updateTask();
+      // return
+      // }
+      // this.task.memberIds.splice(memberIdx,1)
+      // this.updateTask();
+    },
   },
   computed: {
     getTaskLabels() {
       return this.task.labelIds;
+    },
+    getTaskMembers() {
+      return this.task.memberIds;
     },
   },
   components: {

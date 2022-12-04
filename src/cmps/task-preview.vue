@@ -12,9 +12,11 @@
       </div>
       <span class="task-router-link">{{ item.title }}</span>
     </div>
+    <span class="task-router-link">{{ item.title }}</span>
   </section>
 </template>
 <script>
+import miniUsers from './mini-users.vue';
 export default {
   props: {
     item: Object,
@@ -24,23 +26,23 @@ export default {
   },
   methods: {
     labelColor(id) {
-        console.log(id);
       const label =  this.$store.getters.currBoard.labels.find((l) => {
-        console.log(l.id);
           return l.id === id
       })
-      console.log(label);
       return label.color;
     },
     labelText(id) {
       const label =  this.$store.getters.currBoard.labels.find((l) => l.id === id);
       return label.title;
     },
-    computed: {
-        currBoard() {
-            this.$store.getters.currBoard
-        }
-    },
   },
+  computed: {
+      currBoard() {
+          this.$store.getters.currBoard
+      }
+  },
+  components:{
+    miniUsers
+  }
 };
 </script>

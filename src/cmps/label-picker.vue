@@ -1,10 +1,10 @@
 <template lang="">
   <Popper>
   <div class="task-option-btn">
-    <font-awesome-icon  :style="{'height': 12+'px'}" icon="fa-solid fa-tag" />
+    <font-awesome-icon @click="showPopper = true"  :style="{'height': 12+'px'}" icon="fa-solid fa-tag" />
     <button>Labels</button>
   </div>
-    <template #content v-if="labelIds">
+    <template :show="showPopper" #content v-if="labelIds">
     <div class="popper-content label-picker">
       <popper-modal title="Labels" />
       <input type="search">
@@ -48,6 +48,7 @@ export default {
     },
     data(){
         return{
+            showPopper:false,
             labels:[
   {
     title: "Manager task",

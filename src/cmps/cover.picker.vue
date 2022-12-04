@@ -10,7 +10,7 @@
     <div class="colors">
     <small>Colors</small>
     <div class="covers" v-for="cover in covers">
-      <div @click="setCover(cover.color)" class="cover-color" :style="{'background-color':cover.color}">XXXX </div>
+      <span @click="setCover(cover.color)" class="cover-color" :style="{'background-color':cover.color}"></span>
     </div>
     </div>
   </div>

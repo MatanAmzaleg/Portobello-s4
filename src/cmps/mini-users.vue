@@ -25,7 +25,6 @@ export default {
       if(!this.memberIds){
         this.usersToShow = this.$store.getters.currBoard.members
         this.noHeader = true
-        console.log(this.noHeader);
         return
       }
         this.users = this.$store.getters.currBoard.members
@@ -35,6 +34,7 @@ export default {
           usersToShow.push(user)
           return user
         })
+        console.log(this.usersToShow,this.memberIds)
         this.usersToShow = usersToShow
     }
 };
@@ -54,9 +54,9 @@ export default {
   }
   .main-task-members {
     display: flex;
-    margin-top: -0.8rem;
+    // margin-top: -0.8rem;
     margin-left: -0.1rem;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
     .main-task-member-img {
       width: 32px;
       height: 32px;
