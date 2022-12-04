@@ -1,7 +1,7 @@
 <template lang="">
   <Popper>
   <div class="task-option-btn">
-    <font-awesome-icon @click="showPopper = true"  :style="{'height': 12+'px'}" icon="fa-solid fa-tag" />
+    <font-awesome-icon class="icon" icon="fa-solid fa-tag" />
     <p>Labels</p>
   </div>
     <template :show="showPopper" #content v-if="labelIds">

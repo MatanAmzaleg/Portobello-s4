@@ -45,7 +45,7 @@
             {{ task.description }}
           </p>
           <div v-else class="details-edit">
-          <textarea @input="updateTask" v-model="task.description" class="description-input"></textarea>
+          <textarea @input="updateTask" v-model="task.description" class="description-input" placeholder="Add a more detailed description..."></textarea>
           <el-button @click="(isEdit = false)" type="primary">Save</el-button>
           <el-button @click="(isEdit = false)">Cancel</el-button>
           </div>
