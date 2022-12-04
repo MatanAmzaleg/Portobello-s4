@@ -15,43 +15,38 @@
         "labels": [
             {
                 "title": "Manager task",
-                "color": "#7bc86c",
+                "color": "#6FA765",
                 "id": "JsY1qR"
             },
             {
                 "title": "Low priority",
-                "color": "#faf3c0",
+                "color": "#F5DD29",
                 "id": "d6cjhb"
             },
             {
                 "title": "Medium priority",
-                "color": "#fce6c6",
+                "color": "#FFAF3F",
                 "id": "YIQPhe"
             },
             {
                 "title": "High priority",
-                "color": "#f5d3ce",
+                "color": "#EF7564",
                 "id": "DNfXVp"
             },
             {
                 "title": "Bug",
-                "color": "#eddbf4",
+                "color": "#CD8DE5",
                 "id": "oKpZV4"
             },
             {
                 "title": "Adjustment",
-                "color": "#0079bf",
+                "color": "#5BA4CF",
                 "id": "rZnFvJ"
             },
             {
                 "title": "Design",
-                "color": "#bcd9ea",
+                "color": "#29CCE5",
                 "id": "kT8v8m"
-            },
-            {
-                "title": "Styles",
-                "color": "#bdecf3",
-                "id": "AYKlTC"
             }
         ],
         "members": [

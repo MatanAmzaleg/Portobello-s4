@@ -7,13 +7,13 @@
     <template :show="showPopper" #content>
     <div class="popper-content label-picker">
       <popperModal title="Labels" />
-      <input type="search">
+      <input class="search-input" placeholder="Search labels..." type="search">
       <div class="labels">
-      <small>Labels</small>
+      <p>Labels</p>
       <li v-for="label in labels">
       <div class="label">
-        <input :checked="checkLabel(label.id)" @input="addLabel(label.id)" type="checkbox">
-        <label :style="{'background-color':label.color}"></label>
+        <input class="checkbox" :checked="checkLabel(label.id)" @input="addLabel(label.id)" type="checkbox">
+        <label class="label-color" :style="{'background-color':label.color}"></label>
         <font-awesome-icon class="pen-btn" icon="fa-solid fa-pencil" />
       </div>
       </li>

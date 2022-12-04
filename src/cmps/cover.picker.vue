@@ -26,43 +26,43 @@ export default {
         return{
             covers:[
                 {
-                    "color": "#D5EDD2",
+                    "color": "#7BC86C",
                     "id": "JsY1qR"
                 },
                 {
-                    "color": "#D5EDD2",
+                    "color": "#F5DD29",
                     "id": "JsY1qR"
                 },
                 {
-                    "color": "#D5EDD2",
+                    "color": "#FFAF3F",
                     "id": "JsY1qR"
                 },
                 {
-                    "color": "#D5EDD2",
+                    "color": "#EF7564",
                     "id": "JsY1qR"
                 },
                 {
-                    "color": "#FAF3C0",
+                    "color": "#CD8DE5",
                     "id": "d6cjhb"
                 },
                 {
-                    "color": "#FDE6C6",
+                    "color": "#5BA4CF",
                     "id": "YIQPhe"
                 },
                 {
-                    "color": "#F6D3CE",
+                    "color": "#29CCE5",
                     "id": "DNfXVp"
                 },
                 {
-                    "color": "#EDDBF4",
+                    "color": "#6DECA9",
                     "id": "oKpZV4"
                 },
                 {
-                    "color": "#BCD9EA",
+                    "color": "#FF8ED4",
                     "id": "rZnFvJ"
                 },
                 {
-                    "color": "#BDECF3",
+                    "color": "#172B4D",
                     "id": "kT8v8m"
                 },
             ]
