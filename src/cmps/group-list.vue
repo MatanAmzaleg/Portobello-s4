@@ -82,8 +82,10 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
+      console.log(this.scene);
       let board = utilService.createBoardFromScene(this.scene);
       board = { ...this.currBoard, groups: board.groups };
+      console.log(board);
       this.$store.dispatch({ type: "updateBoard", board });
     },
     addBoard(board) {
@@ -122,6 +124,7 @@ export default {
             id: `${this.currBoard.groups[i].tasks[j].id}`,
             loading: false,
             title: `${this.currBoard.groups[i].tasks[j].title}`,
+            // labelIds:`${this.currBoard.groups[i].tasks[j].labelIds}`,
             task: this.currBoard.groups[i].tasks[j],
           })),
         })),

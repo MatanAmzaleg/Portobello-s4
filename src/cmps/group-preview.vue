@@ -11,41 +11,6 @@
         :currBoard="currBoard"
         :column="column"
       ></task-list>
-      <!-- <Container
-        class="flex-grow overflow-y-auto overflow-x-hidden task-list"
-        orientation="vertical"
-        group-name="col-items"
-        :shouldAcceptDrop="
-          (e, payload) => e.groupName === 'col-items' && !payload.loading
-        "
-        :get-child-payload="getCardPayload(column.id)"
-        :drop-placeholder="{
-          className: `bg-primary bg-opacity-20  
-              border-dotted border-2 
-              border-primary mx-4 my-2`,
-          animationDuration: '200',
-          showOnTop: true,
-        }"
-        drag-class="bg-primary dark:bg-primary 
-            border-2 border-primary-hover text-white 
-            transition duration-100 ease-in z-50
-            transform rotate-6 scale-110"
-        drop-class="transition duration-100 
-            ease-in z-50 transform 
-            -rotate-2 scale-90"
-        @drop="(e) => onCardDrop(column.id, e)"
-      > -->
-      <!-- Items -->
-      <!-- <draggable
-          @click="goToTask(item.id)"
-          v-for="item in column.tasks"
-          :key="item.id"
-          :item="item"
-          class="task rotate-6"
-        >
-          <span class="task-router-link">{{ item.title }}</span>
-        </draggable>
-      </Container> -->
       <textarea
         v-if="column.id === currGroup"
         class="textarea"
