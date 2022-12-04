@@ -31,7 +31,7 @@ export default {
       this.title = ev.target.value
     },
     AddCheckList(){
-      
+      this.$emit('addchecklist', this.title)
     }
   },
   components: {

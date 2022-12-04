@@ -1,11 +1,7 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div class="task-edit-container" @click.stop>
-      <div
-        v-if="task.style?.bgColor"
-        class="task-cover"
-        :style="{ 'background-color': task.style.bgColor }"
-      >
+      <div v-if="task.style?.bgColor" class="task-cover" :style="{ 'background-color': task.style.bgColor }">
         <span></span>
       </div>
       <div class="task-section task-title">
@@ -21,71 +17,74 @@
             <span></span>
             <div class="task-info-wrapper" v-if="(task.memberIds?.length || task.labelIds?.length)">
               <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
-              <labelsPreview
-              v-if="task.labelIds?.length"
-                :currBoard="currBoard"
-                :labelIds="getTaskLabels"
-              />
+              <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
             </div>
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>
             <div class="task-description-wrapper">
-            <div class="task-description-title">
-              <h3 class="task-mini-title">Description</h3>
-              <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
+              <div class="task-description-title">
+                <h3 class="task-mini-title">Description</h3>
+                <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
+              </div>
+              <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
+                class="description-info">
+                {{ task.description }}
+              </p>
+              <div v-else class="details-edit">
+                <textarea @input="updateTask" v-model="task.description" class="description-input"
+                  placeholder="Add a more detailed description..."></textarea>
+                <el-button @click="(isEdit = false)" type="primary">Save</el-button>
+                <el-button @click="(isEdit = false)">Cancel</el-button>
+              </div>
             </div>
-              <p
-            v-if="!isEdit"
-            contenteditable="true"
-            spellcheck="false"
-            @click="isEdit = true"
-            class="description-info"
-          >
-            {{ task.description }}
-          </p>
-          <div v-else class="details-edit">
-          <textarea @input="updateTask" v-model="task.description" class="description-input" placeholder="Add a more detailed description..."></textarea>
-          <el-button @click="(isEdit = false)" type="primary">Save</el-button>
-          <el-button @click="(isEdit = false)">Cancel</el-button>
           </div>
+          <div v-if="task.checklists" class="task-section task-todo">
+            <span class="description-icon"></span>
+            <ul>
+              <li v-for="checklist in task.checklists" :key="checklist.id">
+                {{ checklist.title }}
+                <ul>
+                  <li v-for="todo in checklist.todos" :key="todo.id">
+                    {{ todo.title }}
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
-          </div>
-          <div v-if="false" class="task-section task-todo"></div>
           <div class="task-section task-activity">
             <span class="activity-icon"></span>
             <div class="task-activity-wrapper">
               <h3 class="task-mini-title">Activity</h3>
-              <el-button class="task-btn"  @click="(showComments = !showComments)">{{showComments ? 'Hide Details':'Show Details'}}</el-button>
+              <el-button class="task-btn" @click="(showComments = !showComments)">{{ showComments ? 'Hide Details' :
+                  'ShowDetails'
+              }}</el-button>
             </div>
-              <font-awesome-icon icon="fa-regular fa-user" />
+            <font-awesome-icon icon="fa-regular fa-user" />
             <div>
-              <input
-          placeholder="Write a comment..."
-          spellcheck="false"
-          class="activity-comment"
-        />
+              <input placeholder="Write a comment..." spellcheck="false" class="activity-comment" />
             </div>
           </div>
-            <div v-if="showComments" class="task-comments">HELLO</div>
+          <div v-if="showComments" class="task-comments">HELLO</div>
         </section>
         <section class="actions">
           <div class="task-actions">
             <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
-            <checkList />
+            <checkList @addchecklist="addTaskChecklist" />
             <datePicker />
             <coverPicker @setCover="saveTaskCover" />
           </div>
         </section>
       </section>
 
-      <span @click="exitTask" class="task-exit-btn"> <svg class="margin" width="18" height="18" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893C0.683418 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.41421 7L13.7071 12.2929C14.0976 12.6834 14.0976 13.3166 13.7071 13.7071C13.3166 14.0976 12.6834 14.0976 12.2929 13.7071L7 8.41421L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7Z"
-                        fill="grey"></path>
-                </svg></span>
+      <span @click="exitTask" class="task-exit-btn"> <svg class="margin" width="18" height="18" viewBox="0 0 20 13"
+          fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893C0.683418 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.41421 7L13.7071 12.2929C14.0976 12.6834 14.0976 13.3166 13.7071 13.7071C13.3166 14.0976 12.6834 14.0976 12.2929 13.7071L7 8.41421L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7Z"
+            fill="grey"></path>
+        </svg></span>
     </div>
   </div>
 </template>
@@ -98,6 +97,8 @@ import datePicker from "../cmps/date-picker.vue";
 import coverPicker from "../cmps/cover.picker.vue";
 import miniUsers from "../cmps/mini-users.vue";
 import labelsPreview from "../cmps/labels-preview.vue";
+import { utilService } from "../services/util.service";
+
 export default {
   props: {
     currBoard: Object,
@@ -116,7 +117,7 @@ export default {
       groupId: "",
       task: {},
       showComments: false,
-      isEdit:false
+      isEdit: false
     };
 
   },
@@ -167,6 +168,15 @@ export default {
       this.task.memberIds = members
       this.updateTask();
     },
+    addTaskChecklist(checklistsTitle) {
+      const checklist = {
+        id: utilService.makeId(),
+        title: checklistsTitle,
+        todos: []
+      }
+      this.task.checklists.push(checklist);
+      this.updateTask()
+    },
   },
   computed: {
     getTaskLabels() {
@@ -189,5 +199,5 @@ export default {
 </script>
 
 <style lang="scss">
-  
+
 </style>
