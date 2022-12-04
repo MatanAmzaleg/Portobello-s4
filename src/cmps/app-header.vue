@@ -57,12 +57,14 @@
             </svg>
           </button>
         </section>
-        <Popper class="popper-create" offsetSkid="118" @open:popper="toggleModal" @close:popper="toggleModal">
+        <Popper class="popper-create" :class="popperClass" offsetSkid="118" @open:popper="toggleModal" @close:popper="toggleModal">
           <button class="btn-create">
             <span>Create</span>
           </button>
-          <template #content>
-            <createBoardPopperTemplateVue :isModalOpen="isModalOpen"/>
+          <template #content="{close}">
+            <div>
+              <createBoardPopperTemplateVue :isModalOpen="isModalOpen" @closeModal="close"/>
+            </div>
           </template>
         </Popper>
       </section>
@@ -98,11 +100,14 @@ export default {
     loggedInUser() {
       return this.$store.getters.loggedinUser
     },
+    popperClass() {
+      return this.isModalOpen? 'popper-opened' : 'popper-closed'
+    }
   },
   methods: {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen
-    }
+    },
   },
   components: {
     notifications,

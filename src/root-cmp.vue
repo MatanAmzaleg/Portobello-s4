@@ -14,12 +14,14 @@ import appHeader from './cmps/app-header.vue'
 import homeHeader from './cmps/home-header.vue'
 import userMsg from './cmps/user-msg.vue'
 import { userService } from './services/user.service'
+import { utilService } from './services/util.service'
 
 export default {
   created() {
     console.log('Vue App created')
     const user = userService.getLoggedinUser()
     if (user)  store.commit({type: 'setLoggedinUser', user})
+    utilService.fetchListOfPhotos('random')
   },
   computed: {
     routeIsHome() {

@@ -1,3 +1,6 @@
+import { ACCES_KEY } from '../../secret.js';
+import { storageService } from "./async-storage.service.js";
+
 export const utilService = {
   makeId,
   makeLorem,
@@ -7,7 +10,12 @@ export const utilService = {
   saveToStorage,
   loadFromStorage,
   createBoardFromScene,
+  fetchListOfPhotos,
+  getImgs,
 };
+
+const STORAGE_KEY = "imgsDb";
+let imgs = []
 
 function makeId(length = 6) {
   var txt = "";
@@ -19,6 +27,27 @@ function makeId(length = 6) {
   }
 
   return txt;
+}
+
+async function fetchListOfPhotos (query = '') {
+  try {
+    let response = null
+    response = await fetch(`https://api.unsplash.com/search/photos?client_id=${ACCES_KEY}&query=${query}`)
+    let json = await response.json()
+    imgs = json.results.map((img) => {
+      return img.urls.regular
+    })
+    saveToStorage(STORAGE_KEY, imgs)
+    console.log('imgs', imgs)
+  } catch (err) {
+    console.log('Cannot load photos', err)
+    throw err
+  }
+}
+
+function getImgs() {
+  var imgs = loadFromStorage(STORAGE_KEY);
+  return imgs
 }
 
 function makeLorem(size = 100) {

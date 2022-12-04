@@ -10,7 +10,7 @@
                 </svg>
             </span>
         </button>
-        <button class="close">
+        <button class="close" @click="closeModal">
             <span>
                 <svg width="14" height="14" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -26,7 +26,12 @@
 export default {
     props: {
         title: String,
-        hasBackBtn: Boolean
+        hasBackBtn: Boolean,
+    },
+    methods: {
+        closeModal() {
+            this.$emit('closeModal')
+        }
     }
 }
 </script>

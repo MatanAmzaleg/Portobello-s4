@@ -1,4 +1,12 @@
 .popper-create {
+    &.poper-closed {
+        display: none;
+    }
+
+    &.poper-opened {
+        display: block;
+    }
+
     div:first-child {
         height: 100%;
     }
@@ -161,7 +169,8 @@
                         .li-img {
                             width: 64px;
                             height: 40px;
-
+                            background-position: center;
+                            
                             button {
                                 &:hover {
                                     background: #00000022;

@@ -40,12 +40,12 @@
           </li>
           <Popper class="popper-create" placement="right" @open:popper="toggleModal" @close:popper="toggleModal">
             <article class="create-board">
-                <div class="create-board-preview">
-                  <p class="create-board-preview-title">
-                    Create new board
-                  </p>
-                </div>
-              </article>
+              <div class="create-board-preview">
+                <p class="create-board-preview-title">
+                  Create new board
+                </p>
+              </div>
+            </article>
             <template #content>
               <createBoardPopperTemplateVue />
             </template>
@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       boardToAdd: boardService.getEmptyBoard(),
+      listOfImgs: []
     }
   },
   computed: {
@@ -77,7 +78,7 @@ export default {
       return this.$store.getters.boards
     },
     titleUpperCase() {
-      return "Your Workspaces".toUpperCase()
+      return "Your Boards".toUpperCase()
     }
   },
   async created() {
@@ -140,6 +141,7 @@ export default {
     //     showErrorMsg('Cannot add board msg')
     //   }
     // },
+
     printBoardToConsole(board) {
       console.log('Board msgs:', board.msgs)
     },
