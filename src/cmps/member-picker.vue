@@ -45,8 +45,15 @@ export default {
       const member = this.boardMembers.find((m) => m._id === id);
       return member.imgUrl;
     },
-    addMember(id){
-      this.$emit('addMember',id)
+    addMember(memberId){
+      let memberIdx = this.members.findIndex(id => id === memberId)
+          if(memberIdx === -1){
+            this.members.push(memberId)
+          }
+          else{
+            this.members.splice(memberIdx,1)  
+          }
+          this.$emit('add-member',this.members)
     }
     },
     components:{

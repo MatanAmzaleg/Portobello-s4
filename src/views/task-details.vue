@@ -24,7 +24,7 @@
               <labelsPreview
               v-if="task.labelIds?.length"
                 :currBoard="currBoard"
-                :labelIds="task.labelIds"
+                :labelIds="getTaskLabels"
               />
             </div>
           </div>
@@ -161,16 +161,9 @@ export default {
       this.task.style = { bgColor: color };
       this.updateTask();
     },
-    saveTaskMembers(id) {
-      // if(!this.task.memberIds) this.task.memberIds = []
-      // let memberIdx = this.task.memberIds.findIndex(m => m._id === id);
-      // if(memberIdx === -1){
-        this.task.memberIds.push(id)
+    saveTaskMembers(members) {
+      this.task.memberIds = members
       this.updateTask();
-      // return
-      // }
-      // this.task.memberIds.splice(memberIdx,1)
-      // this.updateTask();
     },
   },
   computed: {
