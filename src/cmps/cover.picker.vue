@@ -7,12 +7,14 @@
   <template #content>
   <div class="popper-content cover-picker">
   <popper-modal title="Cover"></popper-modal>
-    <div class="colors">
     <small>Colors</small>
-    <div class="covers" v-for="cover in covers">
-      <span @click="setCover(cover.color)" class="cover-color" :style="{'background-color':cover.color}"></span>
+    <div class="colors">
+      <span v-for="cover in covers" @click="setCover(cover.color)" class="cover-color" :style="{'background-color':cover.color}"></span>
     </div>
+    <small>Attachments</small>
+    <div>``
     </div>
+    <small>Photos from unsplash</small>
   </div>
   </template>
 </Popper>
@@ -23,6 +25,18 @@ export default {
     data(){
         return{
             covers:[
+                {
+                    "color": "#D5EDD2",
+                    "id": "JsY1qR"
+                },
+                {
+                    "color": "#D5EDD2",
+                    "id": "JsY1qR"
+                },
+                {
+                    "color": "#D5EDD2",
+                    "id": "JsY1qR"
+                },
                 {
                     "color": "#D5EDD2",
                     "id": "JsY1qR"
@@ -66,4 +80,5 @@ export default {
 }
 </script>
 <style lang="scss">
+
 </style>
