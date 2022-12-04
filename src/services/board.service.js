@@ -19,7 +19,8 @@ export const boardService = {
   getTask,
   getTaskById,
   getGroupById,
-  saveTask
+  saveTask,
+  getEmptyTask
 };
 window.boardService = boardService;
 
@@ -120,6 +121,20 @@ async function save(board) {
 async function addBoardMsg(boardId, txt) {
   const savedMsg = await httpService.post(`board/${boardId}/msg`, { txt });
   return savedMsg;
+}
+
+
+function getEmptyTask(){
+  return{
+      status: "",priority: "",description: "",
+      comments: [],
+      checklists: [],
+      memberIds: [],
+      labelIds: [],
+      dueDate: '',
+      byMember: {},
+      style: {}
+    }
 }
 
 function getEmptyBoard() {
