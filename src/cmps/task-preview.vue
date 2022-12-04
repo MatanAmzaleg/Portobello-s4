@@ -1,6 +1,6 @@
 <template>
   <section class="task-preview">
-    <div class="cover" v-if="item.style" :style="{backgroundColor:item.style.bgColor}"></div>
+    <div class="cover" v-if="item.style?.bgColor" :style="{backgroundColor:item.style.bgColor}"></div>
     <div class="padded-section">
 
       <div class="labels" v-if="item.labelIds">

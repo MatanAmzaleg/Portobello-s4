@@ -6,13 +6,14 @@
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
       </div>
       <!-- column -->
-      <task-list @addBoard="addBoard"
+      <task-list
+        @addBoard="addBoard"
         :scene="scene"
         :currBoard="currBoard"
         :column="column"
       ></task-list>
       <textarea
-      @keyup.enter="addTask"
+        @keyup.enter="addTask"
         v-if="column.id === currGroup"
         class="textarea"
         placeholder="Enter a title for this card"
@@ -83,13 +84,15 @@ export default {
     },
     addTask() {
       console.log(this.currGroup);
-      if(!this.newTaskTxt) return
-      const task = { title: this.newTaskTxt, id: utilService.makeId() };
+      if (!this.newTaskTxt) return;
       const board = JSON.parse(JSON.stringify(this.currBoard));
       console.log(board);
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup
       );
+      let task = this.$store.getters.emptyTask
+      task.id= utilService.makeId()
+      task.title= this.newTaskTxt
       console.log(groupIdx);
       board.groups[groupIdx].tasks.push(task);
       this.$emit("addTask", board);
@@ -106,10 +109,9 @@ export default {
       this.$emit("add-Task", board);
       this.newGroupTxt = "";
     },
-    addBoard(board){
+    addBoard(board) {
       this.$emit("addBoard", board);
-    }
+    },
   },
-
 };
 </script>

@@ -19,10 +19,10 @@
         <section class="content">
           <div class="task-section task-info">
             <span></span>
-            <div class="task-info-wrapper">
-              <miniUsers v-if="task.memberIds.length" :memberIds="getTaskMembers" />
+            <div class="task-info-wrapper" v-if="(task.memberIds?.length || task.labelIds?.length)">
+              <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
               <labelsPreview
-                v-if="task.labelIds.length"
+              v-if="task.labelIds?.length"
                 :currBoard="currBoard"
                 :labelIds="task.labelIds"
               />
