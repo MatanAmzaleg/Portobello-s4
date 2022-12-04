@@ -17,17 +17,17 @@
   width: 304px;
   text-align: center;
 
-  .search-input{
+  .search-input {
     width: 280px;
     height: 36px;
     padding: 8px 12px;
-    background-color: #FAFBFC;
+    background-color: #fafbfc;
     border-radius: 3px;
-    border: 2px solid #DFE1E6;
+    border: 2px solid #dfe1e6;
 
-    &:focus{
-        border:2px solid $clr9;
-        outline: none;
+    &:focus {
+      border: 2px solid $clr9;
+      outline: none;
     }
   }
   .labels {
@@ -55,13 +55,9 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       display: flex;
-      align-items: center;
-
-    .checkbox{
-        width: 16px;
-        height: 16px;
-        border: 2px solid #DFE1E6;
-    }
+      .checkbox {
+        margin-top: -3px;
+      }
 
       .label-color {
         border-radius: 3px;
