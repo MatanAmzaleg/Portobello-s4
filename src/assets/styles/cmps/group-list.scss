@@ -16,6 +16,13 @@
     overflow-x: hidden;
     width: 268px;
 
+    .cover{
+      width: 256px;
+      height: 32px;
+      background-color: #6b778c;
+      margin: auto;
+    }
+
     .task-preview {
       .labels {
         display: flex;
@@ -91,12 +98,16 @@
     margin-inline-end: 16px;
   }
 
+  .padded-section
+  {
+    padding: 6px 8px 2px;
+  }
+
   .task {
     background-color: #ffffff;
     word-wrap: break-word;
     clear: both;
     display: block;
-    padding: 8px 8px 2px;
     margin: 0 4px 8px 8px;
     font-size: 14px;
     cursor: pointer;

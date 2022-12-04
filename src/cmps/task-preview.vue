@@ -1,16 +1,19 @@
 <template>
   <section class="task-preview">
-    <div class="labels">
-      <span
+    <div class="cover" v-if="item.task?.style" ></div>
+    <div class="padded-section">
+
+      <div class="labels">
+        <span
         class="label"
         v-for="label in item.task?.labelIds"
         :style="{ 'background-color': labelColor(label) }"
-      ></span>
+        ></span>
+      </div>
+      <span class="task-router-link">{{ item.title }}</span>
     </div>
-    <span class="task-router-link">{{ item.title }}</span>
   </section>
 </template>
-
 <script>
 export default {
   props: {
