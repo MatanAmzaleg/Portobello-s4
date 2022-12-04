@@ -46,8 +46,8 @@
                 </p>
               </div>
             </article>
-            <template #content>
-              <createBoardPopperTemplateVue />
+            <template #content="{close}">
+              <createBoardPopperTemplateVue @closeModal="close"/>
             </template>
           </Popper>
         </ul>
