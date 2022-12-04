@@ -13,6 +13,9 @@ export const boardStore = {
     currBoard({ currBoard }) {
       return currBoard;
     },
+    emptyTask(){
+      return boardService.getEmptyTask()
+    }
   },
   mutations: {
     setBoards(state, { boards }) {
