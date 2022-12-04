@@ -1,8 +1,13 @@
 .activity-comment {
     border: none;
-    width: 100%;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    box-sizing: initial;
+    height: 20px;
+    width: calc(100% - 24px);
+    border-radius: 3px;
     outline: none;
-    padding: 7px 0;
+    padding: 8px 12px;
     box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
     word-wrap: break-word;
     resize: none;
@@ -16,7 +21,7 @@
   }
   .task-description-title{
     display: flex;
-    gap: 10px;
+    gap: 11px;
   }
   .description-input{
     width: 100%;
@@ -116,7 +121,7 @@
     }
 
     .task-title {
-      margin-top: 30px;
+      margin-top: 22px;
       width: 100%;
       input {
         outline: none;
@@ -132,7 +137,7 @@
           outline: 1px solid blue;
         }
       }
-    }
+  }
     .task-content {
       display: flex;
       flex-direction: row;
@@ -157,6 +162,13 @@
         padding: 0 16px 8px 8px;
         display: flex;
         flex-direction: column;
+
+        .mini-title{
+          font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+          font-size: 12px;
+          margin-top: -4px;
+        }
+      
       }
     }
     .task-exit-btn {
