@@ -60,6 +60,7 @@
     }
 
     .board-name-input{
+      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
       display: flex;
       align-items: center;
       border: none;
@@ -201,6 +202,6 @@
   .users{
     height: 32px;
     display: flex;
-    margin-top: 24px;
+    margin-bottom: 0.7rem;
   }
 }

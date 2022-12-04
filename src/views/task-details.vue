@@ -12,7 +12,7 @@
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
           <input v-model="task.title" @input="updateTask" type="text" />
-          <h5>in list {{ this.groupId }}</h5>
+          <p>in list {{ this.groupId }}</p>
         </div>
       </div>
       <section class="task-content">
@@ -32,8 +32,7 @@
             <span class="description-icon"></span>
             <div class="task-description-wrapper">
             <div class="task-description-title">
-              <h3>Description</h3>
-              <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button>
+              <h3 class="task-mini-title">Description</h3>
             </div>
               <p
             v-if="!isEdit"
@@ -55,7 +54,7 @@
           <div class="task-section task-activity">
             <span class="activity-icon"></span>
             <div class="task-activity-wrapper">
-              <h3>Activity</h3>
+              <h3 class="task-mini-title">Activity</h3>
               <el-button class="task-btn"  @click="(showComments = !showComments)">{{showComments ? 'Hide Details':'Show Details'}}</el-button>
             </div>
               <font-awesome-icon icon="fa-regular fa-user" />

@@ -1,20 +1,19 @@
 <template>
-  <section class="task-preview" :style="{'background-color': item.task.style?.bgColor}" >
-    <div class="labels">
-      <span
+  <section class="task-preview">
+    <div class="cover" v-if="item.style" :style="{backgroundColor:item.style.bgColor}"></div>
+    <div class="padded-section">
+
+      <div class="labels" v-if="item.labelIds">
+        <span
         class="label"
-        v-for="label in item.task?.labelIds"
+        v-for="label in item.labelIds"
         :style="{ 'background-color': labelColor(label) }"
-      ></span>
-    </div>
-    <span class="task-router-link">{{ item.title }}</span>
-    <div class="task-details">
-    <span>{{item.task.description?.slice(0,50)}}</span>
-     <mini-users :noHeader="true" :memberIds="item.task.memberIds" /> 
+        ></span>
+      </div>
+      <span class="task-router-link">{{ item.title }}</span>
     </div>
   </section>
 </template>
-
 <script>
 import miniUsers from './mini-users.vue';
 export default {
@@ -26,9 +25,11 @@ export default {
   },
   methods: {
     labelColor(id) {
+      console.log(id);
       const label =  this.$store.getters.currBoard.labels.find((l) => {
           return l.id === id
       })
+      console.log(label);
       return label.color;
     },
     labelText(id) {
