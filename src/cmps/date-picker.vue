@@ -6,7 +6,7 @@
     </div>
       <template #content>
       <div class="date-picker">
-      <div class="date-picker">
+      <popper-modal title="Date" />
         <el-date-picker
         v-model="value2"
         placeholder="Pick a day"
@@ -15,8 +15,6 @@
         :size="size"
       />
       </div>
-      </div>
-      <popper-modal title="Date" />
       </template>
     </Popper>
 </template>
@@ -46,7 +44,8 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   line-height: 20px;
-  font-weight: 400;
+  padding: 20px;
+        width: 310px;
   background-color: var(--ds-surface-overlay, #ffffff);
   border-radius: 3px;
   box-shadow: var(--ds-shadow-overlay, 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08));

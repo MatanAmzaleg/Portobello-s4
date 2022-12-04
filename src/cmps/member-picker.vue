@@ -11,9 +11,16 @@
       <input type="search" placeholder="Search Members">
       <div class="labels">
       <small>Members</small>
-      <div v-for="member in members" class="member">
-        <font-awesome-icon icon="fa-solid fa-user" />
-        <small>{{member}}</small>
+      <div v-for="id in members" class="member">
+        <img class="member-img" :src="getMemberImg(id)">
+        <span>{{getMemberName(id)}}</span>
+      </div>
+      <h1>Board Members</h1>
+      <div class="board-members">
+        <div @click="addMember(member._id)" v-for="member in boardMembers" class="member">
+        <img class="member-img" :src="member.imgUrl">
+        <span>{{member.fullname}}</span>
+      </div>
       </div>
       </div>
     </div>
@@ -27,13 +34,26 @@ export default {
         members: Array
     },
     created(){
-      console.log(this.members)
-        this.currMembers = this.members
+      this.boardMembers = this.$store.getters.currBoard.members
     },
     data(){
         return{
-            currMembers: []
+            boardMembers : []
         }
+    },
+    methods:{
+      getMemberName(id) {
+        console.log(id,this.boardMembers)
+      const member = this.boardMembers.find((m) => m._id === id);
+      return member.fullname;
+    },
+    getMemberImg(id) {
+      const member = this.boardMembers.find((m) => m._id === id);
+      return member.imgUrl;
+    },
+    addMember(id){
+      this.$emit('addMember',id)
+    }
     },
     components:{
       popperModal
@@ -45,6 +65,17 @@ export default {
         padding: 20px;
         width: 310px;
         text-align: center;
-        background-color: lightblue;
+        .member{
+          display: flex;
+          justify-content: flex-start;
+          margin-bottom: 5px;
+          gap: 15px;
+        }
+        .member-img{
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    
+        }
     }
 </style>

@@ -25,7 +25,6 @@ export default {
       if(!this.memberIds){
         this.usersToShow = this.$store.getters.currBoard.members
         this.noHeader = true
-        console.log(this.noHeader);
         return
       }
         this.users = this.$store.getters.currBoard.members
@@ -35,6 +34,7 @@ export default {
           usersToShow.push(user)
           return user
         })
+        console.log(this.usersToShow,this.memberIds)
         this.usersToShow = usersToShow
     }
 };
