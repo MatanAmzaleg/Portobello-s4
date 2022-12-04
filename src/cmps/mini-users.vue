@@ -2,7 +2,7 @@
   <div class="main-task-members-container">
     <p v-if="!noHeader" class="main-task-members-header">Members</p>
     <div class="main-task-members">
-      <ul v-for="user in usersToShow">
+      <ul v-for="user in users">
         <li>
           <img class="main-task-member-img" :src="user.imgUrl" alt="member" />
         </li>
@@ -18,6 +18,7 @@ export default {
     data(){
       return{
         usersToShow:[],
+        allUsers: [],
         noHeader:false,
       }
     },
@@ -27,16 +28,20 @@ export default {
         this.noHeader = true
         return
       }
-        this.users = this.$store.getters.currBoard.members
-        let usersToShow = []
-        this.memberIds.map(memberId => {
-          let user = this.users.find(user => user._id === memberId)
-          usersToShow.push(user)
-          return user
-        })
-        console.log(this.usersToShow,this.memberIds)
-        this.usersToShow = usersToShow
-    }
+        this.allUsers = this.$store.getters.currBoard.members
+    },
+    computed: {
+      users(){
+        this.usersToShow = []
+        if(this.memberIds) {
+          Object.values(this.memberIds).map(memberId => {
+            let user = this.allUsers.find(user => user._id === memberId)
+            this.usersToShow.push(user)
+          })
+        }
+        return this.memberIds ? this.usersToShow : []
+      }
+    },
 };
 </script>
 <style lang="scss">

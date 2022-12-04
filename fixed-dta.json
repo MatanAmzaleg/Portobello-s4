@@ -79,23 +79,86 @@
                 "tasks": [
                     {
                         "id": "c101",
-                        "title": "Replace logo"
+                        "title": "Replace logo",
+                        "status": "",
+                        "priority": "",
+                        "description": "",
+                        "comments": [],
+                        "checklists": [],
+                        "memberIds": [],
+                        "labelIds": [],
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {}
                     },
                     {
                         "id": "c102",
-                        "title": "Add Samples"
+                        "title": "Add Samples",
+                        "comments": [],
+                        "checklists": [],
+                        "memberIds": [],
+                        "labelIds": [],
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {}
                     },
                     {
                         "id": "c103",
-                        "title": "Desgin HomePage"
+                        "title": "Desgin HomePage",
+                        "comments": [],
+                        "checklists": [],
+                        "memberIds": [],
+                        "labelIds": [],
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {}
                     },
                     {
                         "id": "c104",
-                        "title": "Create AboutPage"
+                        "title": "Create AboutPage",
+                        "comments": [],
+                        "checklists": [],
+                        "memberIds": [],
+                        "labelIds": [],
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {}
                     },
                     {
                         "id": "c105",
-                        "title": "Create SCSS folders"
+                        "title": "Create SCSS folders",
+                        "comments": [],
+                        "checklists": [],
+                        "memberIds": [],
+                        "labelIds": [],
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {}
                     }
                 ],
                 "style": {}
@@ -107,7 +170,18 @@
                     {
                         "id": "c107",
                         "title": "Logo",
-                        "archivedAt": 1589983468418
+                        "comments": [],
+                        "checklists": [],
+                        "memberIds": [],
+                        "labelIds": [],
+                        "dueDate": 16156215211,
+                        "byMember": {
+                            "_id": "u101",
+                            "username": "Tal",
+                            "fullname": "Tal Tarablus",
+                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                        },
+                        "style": {}
                     },
                     {
                         "id": "c108",
