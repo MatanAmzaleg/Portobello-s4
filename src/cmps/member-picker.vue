@@ -6,16 +6,10 @@
   </div>
     <template #content>
     <div class="popper-content member-picker">
-      <popper-modal title="Members" />
-      <h1>Members</h1>
-      <input type="search" placeholder="Search Members">
-      <div class="labels">
-      <small>Members</small>
-      <div v-for="id in members" class="member">
-        <img class="member-img" :src="getMemberImg(id)">
-        <span>{{getMemberName(id)}}</span>
-      </div>
-      <h1>Board Members</h1>
+      <popperModal title="Members" />
+      <input v-model="input" class="members-input-search" type="search" placeholder="Search Members">
+      <div class="members">
+      <h5 class="board-members-title">Board Members</h5>
       <div class="board-members">
         <div @click="addMember(member._id)" v-for="member in boardMembers" class="member">
         <img class="member-img" :src="member.imgUrl">
@@ -38,12 +32,12 @@ export default {
     },
     data(){
         return{
-            boardMembers : []
+            boardMembers : [],
+            input:''
         }
     },
     methods:{
       getMemberName(id) {
-        console.log(id,this.boardMembers)
       const member = this.boardMembers.find((m) => m._id === id);
       return member.fullname;
     },
@@ -61,15 +55,35 @@ export default {
 }
 </script>
 <style lang="scss">
+
+.members-input-search{
+  border: none;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 2px var(--ds-border-input,#dfe1e6);
+    line-height: 20px;
+    margin-bottom: 12px;
+    outline: none;
+    padding: 8px 12px;
+    width: 100%;
+}
+.board-members-title{
+  text-align: left;
+}
+.board-members{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
         .member-picker{
         padding: 20px;
-        width: 310px;
+        width: 307px;
         text-align: center;
+        background-color: white;
+
         .member{
           display: flex;
-          justify-content: flex-start;
           margin-bottom: 5px;
-          gap: 15px;
+          gap: 5px;
         }
         .member-img{
       width: 32px;

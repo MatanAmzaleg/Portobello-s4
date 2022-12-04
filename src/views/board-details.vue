@@ -49,7 +49,7 @@ export default {
       console.log(filterBy);
       this.filterBy = filterBy;
       this.$store.dispatch({type:"setCurrBoard", boardId:this.$route.params.boardId, filterBy})
-    },
+    }, 
     updateBoard(board) {
       console.log("updating board ");
       this.currBoard = board;
@@ -57,7 +57,7 @@ export default {
         type: "updateBoard",
         board,
       });
-    },
+    },     
   },
   computed: {
     getBoards() {

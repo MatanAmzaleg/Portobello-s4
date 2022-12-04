@@ -6,7 +6,7 @@
   </div>
     <template :show="showPopper" #content v-if="labelIds">
     <div class="popper-content label-picker">
-      <popper-modal title="Labels" />
+      <popperModal title="Labels" />
       <input type="search">
       <div class="labels">
       <small>Labels</small>
