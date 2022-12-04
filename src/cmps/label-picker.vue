@@ -30,8 +30,11 @@ export default {
     },
     methods:{
         addLabel(labelId){
+          let labelIdx = this.labelIds.findIndex(labelId)
+          if(labelIdx === -1){
             this.labelIds.push(labelId)
             this.$emit('save-label',this.labelIds)
+          }
         },
         checkLabel(id){
           return this.labelIds?.includes(id)
