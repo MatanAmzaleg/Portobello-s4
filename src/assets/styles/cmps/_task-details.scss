@@ -8,17 +8,41 @@
   border-radius: 3px;
   outline: none;
   padding: 8px 12px;
-  box-shadow: 0 1px 2px -1px #091e4240, 0 0 0 1px #091e4214;
+  box-shadow: 0 1px 2px -1px $clr26, 0 0 0 1px $clr25;
   word-wrap: break-word;
   resize: none;
   font-size: 14px;
   background-color: white;
 }
 .task-btn {
-  background-color: #091e420a !important;
+  background-color: $clr23 !important;
   border: none !important;
   border-radius: 2px !important;
 }
+.popper{
+  width: 304px;
+  background-color: white;
+}
+.task-popper-input {
+  width: 100%;
+  background-color: $clr4;
+  border: none;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px $clr22;
+  box-sizing: border-box;
+  line-height: 20px;
+  margin-bottom: 12px;
+  outline: none;
+  padding: 8px 12px;
+  transition-duration: 85ms;
+  transition-property: background-color,border-color,box-shadow;
+
+  &:focus {
+    background-color: $clr4;
+    box-shadow: inset 0 0 0 2px $clr9;
+  }
+}
+
 .task-description-title {
   display: flex;
   gap: 11px;
@@ -35,7 +59,7 @@
   resize: none;
   &:focus {
     background-color: #fff;
-    outline: solid 2px #0079bf;
+    outline: solid 2px $clr9;
     border-radius: 3px;
   }
 }
@@ -44,20 +68,20 @@
   margin-top: 17px;
   padding: 7px 2px;
   padding-inline: 12px;
-  color: #172b4d;
+  color: $clr5;
   border-radius: 4px;
   font-size: 14px;
-  background-color: #091e420a;
+  background-color: $clr23;
   font-family: NunitoSans-regular;
   overflow-wrap: break-word;
   cursor: pointer;
   min-height: 50px;
   &:focus {
     background-color: #fff;
-    box-shadow: inset 0 0 0 2px #0079bf;
+    box-shadow: inset 0 0 0 2px $clr9;
   }
   &:hover {
-    background-color: #091e4214;
+    background-color: $clr25;
   }
   &:empty:before {
     content: "Add a more detailed description...";
@@ -141,7 +165,7 @@
         height: 30px;
         font-size: 20px;
         border-radius: 3px;
-        color: #172b4d;
+        color: $clr5;
         &:focus {
           background-color: #fff;
           outline: 1px solid blue;

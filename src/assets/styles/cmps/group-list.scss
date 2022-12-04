@@ -60,7 +60,7 @@
   }
   .group {
     width: 272px;
-    background-color: #ebecf0;
+    background-color: $clr19;
     border-radius: 3px;
 
     .group-title {
@@ -173,10 +173,10 @@
       margin: 5px 10px 5px 0px;
       border-radius: 3px;
       color: #ffffff;
-      background-color: #0079bf;
+      background-color: $clr9;
 
       &:hover {
-        background-color: #026aa7;
+        background-color: $clr20;
       }
     }
 
@@ -215,7 +215,7 @@
     .add-group-input {
       width: 240px;
       height: 32px;
-      outline: 1px solid #0079bf;
+      outline: 1px solid $clr9;
       margin: auto;
       margin-top: 5px;
       padding-inline: 7px;
@@ -227,10 +227,10 @@
       margin: 8px 10px 8px 0px;
       border-radius: 3px;
       color: #ffffff;
-      background-color: #0079bf;
+      background-color: $clr9;
 
       &:hover {
-        background-color: #026aa7;
+        background-color: $clr20;
       }
     }
   }

@@ -19,7 +19,7 @@
   }
   font-weight: 500;
   height: 20px;
-  background-color: var(--ds-background-neutral, #091e420a);
+  background-color: $clr23;
   padding: 6px 12px;
   width: 144px;
   margin-top: 8px;
@@ -31,7 +31,6 @@
 }
 .member-picker {
   padding: 20px;
-  width: 200px;
   text-align: center;
   background-color: white;
 }

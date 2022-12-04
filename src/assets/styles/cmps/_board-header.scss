@@ -75,7 +75,7 @@
         background-color: #3787b564;
       }
       &:focus{
-        outline: 2px solid #0079bf;
+        outline: 2px solid $clr9;
         background-color: #fff;
         height: 28px;
       }
@@ -166,7 +166,7 @@
         padding-inline: 11px;
 
         &:focus {
-          outline: 2px solid #0079bf;
+          outline: 2px solid $clr9;
           border: none;
           border-radius: 2px;
         }

@@ -12,7 +12,7 @@
     }
 
     .popper {
-        color: var(--ds-text, #172b4d);
+        color: $clr5;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
         font-size: 14px;
         line-height: 20px;
@@ -96,7 +96,7 @@
                     margin-top: 12px;
 
                     label {
-                        color: var(--ds-text-subtle, #5e6c84);
+                        color: $clr21;
                         display: block;
                         font-size: 12px;
                         font-weight: 700;
@@ -116,7 +116,7 @@
                         outline: none;
                         border: none;
                         box-sizing: border-box;
-                        color: var(--ds-text, #172b4d);
+                        color: $clr5;
                         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
                         font-size: 14px;
                         line-height: 20px;
@@ -129,7 +129,7 @@
                         background-color: $clr4;
                         width: 100%;
                         margin-bottom: 0;
-                        box-shadow: inset 0 0 0 2px var(--ds-border-focused, #0079bf);
+                        box-shadow: inset 0 0 0 2px $clr9;
 
                         &:hover {
                             box-shadow: inset 0 0 0 2px $clr18;
@@ -240,7 +240,7 @@
                     }
 
                     .create-not-allowed {
-                        background-color: #091e4217;
+                        background-color: $clr24;
                         color: #a5adba;
                         cursor: not-allowed;
                     }

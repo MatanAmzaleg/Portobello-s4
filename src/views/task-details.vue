@@ -74,6 +74,7 @@
             <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
+            <checkList />
             <datePicker />
             <coverPicker @setCover="saveTaskCover" />
           </div>
@@ -92,6 +93,7 @@
 <script>
 import labelPicker from "../cmps/label-picker.vue";
 import memberPicker from "../cmps/member-picker.vue";
+import checkList from "../cmps/check-list.vue";
 import datePicker from "../cmps/date-picker.vue";
 import coverPicker from "../cmps/cover.picker.vue";
 import miniUsers from "../cmps/mini-users.vue";
@@ -177,6 +179,7 @@ export default {
   components: {
     labelPicker,
     memberPicker,
+    checkList,
     datePicker,
     coverPicker,
     miniUsers,
