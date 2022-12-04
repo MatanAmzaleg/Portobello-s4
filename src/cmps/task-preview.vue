@@ -1,18 +1,17 @@
 <template>
   <section class="task-preview">
-    <div class="cover" v-if="item.task?.style" ></div>
+    <div class="cover" v-if="item.style" :style="{backgroundColor:item.style.bgColor}"></div>
     <div class="padded-section">
 
-      <div class="labels">
+      <div class="labels" v-if="item.labelIds">
         <span
         class="label"
-        v-for="label in item.task?.labelIds"
+        v-for="label in item.labelIds"
         :style="{ 'background-color': labelColor(label) }"
         ></span>
       </div>
       <span class="task-router-link">{{ item.title }}</span>
     </div>
-    <!-- <span class="task-router-link">{{ item.title }}</span> -->
   </section>
 </template>
 <script>
@@ -26,9 +25,11 @@ export default {
   },
   methods: {
     labelColor(id) {
+      console.log(id);
       const label =  this.$store.getters.currBoard.labels.find((l) => {
           return l.id === id
       })
+      console.log(label);
       return label.color;
     },
     labelText(id) {

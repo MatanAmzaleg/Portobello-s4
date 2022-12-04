@@ -12,6 +12,7 @@
         :column="column"
       ></task-list>
       <textarea
+      @keyup.enter="addTask"
         v-if="column.id === currGroup"
         class="textarea"
         placeholder="Enter a title for this card"

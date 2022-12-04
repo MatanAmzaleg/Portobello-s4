@@ -27,6 +27,7 @@
           Add another list
         </button>
         <input
+        @keyup.enter="addGroup"
           v-model="newGroupTxt"
           v-if="isAddNewGroup"
           class="add-group-input"
@@ -124,8 +125,16 @@ export default {
             id: `${this.currBoard.groups[i].tasks[j].id}`,
             loading: false,
             title: `${this.currBoard.groups[i].tasks[j].title}`,
-            // labelIds:`${this.currBoard.groups[i].tasks[j].labelIds}`,
-            task: this.currBoard.groups[i].tasks[j],
+            labelIds:this.currBoard.groups[i].tasks[j].labelIds,
+            memberIds:this.currBoard.groups[i].tasks[j].memberIds,
+            priority:this.currBoard.groups[i].tasks[j].priority,
+            comments:this.currBoard.groups[i].tasks[j].comments,
+            checklist:this.currBoard.groups[i].tasks[j].checklist,
+            dueDate:this.currBoard.groups[i].tasks[j].dueDate,
+            byMember:this.currBoard.groups[i].tasks[j].byMember,
+            style:this.currBoard.groups[i].tasks[j].style,
+            status:this.currBoard.groups[i].tasks[j].status,
+
           })),
         })),
       };
