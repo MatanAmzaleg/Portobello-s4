@@ -66,10 +66,6 @@ export default {
     },
     data() {
         return {
-            selectedBackground: {
-                imgUrl: "",
-                bgColor: "",
-            },
             colors: [
                 {
                     name: "blue",
@@ -110,7 +106,11 @@ export default {
                     src: "https://images.unsplash.com/photo-1669327857374-43aaa93dec95?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot"
                 }
             ],
-            boardTitle: ""
+            boardTitle: "",
+            selectedBackground: {
+                imgUrl: "",
+                bgColor: "#0079bf",
+            },
         }
     },
     components: {
