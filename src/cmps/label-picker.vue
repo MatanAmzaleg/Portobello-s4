@@ -4,7 +4,7 @@
     <font-awesome-icon class="icon" icon="fa-solid fa-tag" />
     <p>Labels</p>
   </div>
-    <template :show="showPopper" #content v-if="labelIds">
+    <template :show="showPopper" #content>
     <div class="popper-content label-picker">
       <popperModal title="Labels" />
       <input type="search">
@@ -12,7 +12,7 @@
       <small>Labels</small>
       <li v-for="label in labels">
       <div class="label">
-        <input @input="addLabel(label.id)" type="checkbox">
+        <input :checked="checkLabel(label.id)" @input="addLabel(label.id)" type="checkbox">
         <label :style="{'background-color':label.color}"></label>
         <font-awesome-icon class="pen-btn" icon="fa-solid fa-pencil" />
       </div>
@@ -24,23 +24,17 @@
 </template>
 <script>
 import popperModal from './popper-modal.vue';
-
 export default {
     props:{
        labelIds: Array
     },
-    created(){
-        this.taskLabelsIds = this.labelIds
-
-    },
     methods:{
         addLabel(labelId){
-          console.log(this.taskLabelsIds);
-            this.taskLabelsIds.push(labelId)
-            this.$emit('save-label',this.taskLabelsIds)
+            this.labelIds.push(labelId)
+            this.$emit('save-label',this.labelIds)
         },
         checkLabel(id){
-          return false
+          return this.labelIds?.includes(id)
         }
     },
     components:{
@@ -48,7 +42,6 @@ export default {
     },
     data(){
         return{
-            showPopper:false,
             labels:[
   {
     title: "Manager task",
@@ -91,8 +84,6 @@ export default {
     id: "AYKlTC"
   }
 ],
-            labelIds: [
-            ] 
         }
     }
 }
