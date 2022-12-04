@@ -20,7 +20,7 @@
           <div class="task-section task-info">
             <span></span>
             <div class="task-info-wrapper">
-              <miniUsers v-if="task.memberIds" :memberIds="task.memberIds" />
+              <miniUsers v-if="task.memberIds" :memberIds="getTaskMembers" />
               <labelsPreview
                 v-if="task.labelIds"
                 :currBoard="currBoard"
@@ -46,7 +46,7 @@
           </p>
           <div v-else class="details-edit">
           <textarea @input="updateTask" v-model="task.description" class="description-input"></textarea>
-          <el-button type="primary">Save</el-button>
+          <el-button @click="(isEdit = false)" type="primary">Save</el-button>
           <el-button @click="(isEdit = false)">Cancel</el-button>
           </div>
           </div>
@@ -157,15 +157,15 @@ export default {
       this.updateTask();
     },
     saveTaskMembers(id) {
-      if(!this.task.memberIds) this.task.memberIds = []
-      let memberIdx = this.task.memberIds.findIndex(m => m._id === id);
-      if(memberIdx === -1){
+      // if(!this.task.memberIds) this.task.memberIds = []
+      // let memberIdx = this.task.memberIds.findIndex(m => m._id === id);
+      // if(memberIdx === -1){
         this.task.memberIds.push(id)
       this.updateTask();
-      return
-      }
-      this.task.memberIds.splice(memberIdx,1)
-        this.updateTask();
+      // return
+      // }
+      // this.task.memberIds.splice(memberIdx,1)
+      // this.updateTask();
     },
   },
   computed: {
