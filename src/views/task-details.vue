@@ -83,7 +83,16 @@
               <input placeholder="Write a comment..." spellcheck="false" class="activity-comment" />
             </div>
           </div>
-          <div v-if="showComments" class="task-comments">HELLO</div>
+          <div v-for="comment in task.comments" v-if="showComments" class="task-section">
+          <img :src="comment.byMember.imgUrl" class="member-img">
+          <div class="task-comment">
+          <div class="member-info">
+          <p class="comment-sender">{{comment.byMember.fullname}}</p>
+          <p>{{comment.txt}}</p>
+          </div>
+          <a>{{getCommentTime(comment.createdAt)}}</a>
+          </div>
+          </div>
         </section>
         <section class="actions">
           <div class="task-actions">
@@ -110,6 +119,7 @@
 </template>
 
 <script>
+import dateFormat, { masks } from "dateformat";
 import labelPicker from "../cmps/label-picker.vue"
 import memberPicker from "../cmps/member-picker.vue"
 import checkList from "../cmps/check-list.vue"
@@ -284,6 +294,10 @@ export default {
     checklistFormat(percentage){
       return percentage? percentage === 100 ? 'Full' : `${percentage}%` : `0%`
     },
+    getCommentTime(ts){
+      if(ts - Date.now() < 86349893 && ts - Date.now() > 0)  return dateFormat(new Date(ts), "'Before' H 'hours'");
+      return dateFormat(new Date(ts), "mmm dd 'at' HH:MM");
+    }
   },
   computed: {
     getTaskLabels() {

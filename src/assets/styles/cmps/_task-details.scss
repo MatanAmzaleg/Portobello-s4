@@ -34,6 +34,30 @@
     padding-right: 5px;
   }
 }
+.task-comment{
+  * {
+    color: black !important;
+  }
+  a{
+    color: #5e6c84 !important;
+    font-size: 12px;
+    display: block;
+  }
+  .member-info{
+    display: flex;
+    gap: 5px;
+    .comment-sender{
+      font-weight: bolder;
+    }
+  }
+  
+}
+.member-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  justify-self: center;
+}
 
 .content-container {
   padding: 0 12px 12px;

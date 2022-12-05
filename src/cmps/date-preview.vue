@@ -1,5 +1,5 @@
 <template lang="">
-              <Popper placement="top" offsetDistance="-100">
+              <Popper class="date-preview-popper" placement="top" offsetDistance="-100">
               <div class="task-date">
               <input @click.stop @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
               <div class="task-option-btn large">
@@ -62,6 +62,9 @@ export default {
 <style lang="scss">
     .task-option-btn.large{
         width: max-content;
+    }
+    .date-preview-popper{
+        width: fit-content;
     }
 .task-status{
     font-size: 12px;
