@@ -18,9 +18,11 @@
             <div class="task-info-wrapper" v-if="(task.memberIds?.length || task.labelIds?.length ||task.dueDate?.length)">
               <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
               <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
-              <datePreview v-if="task.dueDate" :dueDate="task.dueDate" />
               </div>
-              
+          </div>
+          <div class="task-section">
+            <span></span>
+            <datePreview v-if="task.dueDate?.length" :dueDate="task.dueDate" :status="task.status" />
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>

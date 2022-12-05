@@ -1,6 +1,6 @@
 <template lang="">
               <div class="task-date">
-              <el-checkbox class="checkbox date-input" size="large" />
+              <input @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
               <div class="task-option-btn">
               <p>{{date}}</p>
               </div>
@@ -9,10 +9,23 @@
 <script>
 export default {
     props:{
-        dueDate:String
+        dueDate:String,
+        status: String,
     },
     created(){
-        console.log(this.dueDate);
+        this.status === 'completed' ? this.isDone = true : this.isDone = false
+    },
+    data(){
+        return{
+            isDone:'',
+        }
+    },
+    methods:{
+        changeStatus(){
+        //    if(this.isDone) this.status = 'completed'
+        //    if()
+        //     this.$emit('saveStatus',this.isDone)
+        }
     },
     computed:{
         date(){
