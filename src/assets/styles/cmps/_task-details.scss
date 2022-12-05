@@ -18,7 +18,13 @@
 .task-btn {
   background-color: $clr23 !important;
   border: none !important;
-  border-radius: 2px !important;
+  border-radius: 3px !important;
+
+  &.delete-btn {
+    width: -webkit-fill-available;
+    color: $clr4;
+    background-color: $clr14 !important;
+  }
 }
 
 .popper {
@@ -169,7 +175,7 @@
     justify-self: center;
   }
 
-  .task-checklist-title{
+  .task-checklist-title {
     display: flex;
     align-items: center;
     gap: 11px;
@@ -354,6 +360,11 @@
         }
 
         .task-option-btn {
+
+          &.btn-members {
+            margin-top: 5px !important;
+          }
+          
           p {
             color: $clr27;
           }
@@ -393,6 +404,7 @@
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 16px;
     font-weight: 600;
+    line-height: 32px;
   }
 
   p {

@@ -4,9 +4,9 @@
     <span class="card-cover-icon icon-actions"></span>
   <p>Cover</p>
 </div>
-  <template #content>
+  <template #content="{close}">
   <div class="popper-content cover-picker">
-  <popper-modal title="Cover"></popper-modal>
+  <popper-modal title="Cover" @closeModal="close"></popper-modal>
     <small>Colors</small>
     <div class="colors">
       <span v-for="cover in covers" @click="setCover(cover.color)" class="cover-color" :style="{'background-color':cover.color}"></span>

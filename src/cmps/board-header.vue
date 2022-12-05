@@ -25,7 +25,7 @@
       </button>
     </div>
     <div class="right-section">
-      <popper :show="isModalOpen">
+      <popper>
         <button @click="changeIsModalOpen" class="filter-btn">
           <img
             class="filter-icon"
@@ -34,9 +34,9 @@
           />
           Filter
         </button>
-        <template #content>
+        <template #content="{close}">
           <section class="filter-popper">
-            <div class="header">
+            <!-- <div class="header">
               <p>Filter</p>
               <button class="x-mark-btn" @click="isModalOpen = false">
                 <font-awesome-icon
@@ -44,7 +44,8 @@
                   icon="fa-solid fa-xmark"
                 />
               </button>
-            </div>
+            </div> -->
+            <popperModal :title="'Filter'" @closeModal="close" :hasBtnBack="false"/>
             <section class="keyword-filter">
               <p class="mini-title">Keyword</p>
               <input
@@ -128,6 +129,7 @@
 </template>
 <script>
 import miniUsers from "./mini-users.vue";
+import popperModal from "./popper-modal.vue";
 export default {
   props: {
     board: Object,
@@ -166,6 +168,7 @@ export default {
   },
   components: {
     miniUsers,
+    popperModal
   },
 };
 </script>

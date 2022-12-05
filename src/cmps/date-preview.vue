@@ -7,7 +7,7 @@
               <p class="task-status" v-if="status" :class="status">{{status}}</p>
               </div>
               </div>
-      <template #content>
+      <template #content="{close}">
         <popper-calendar @removeDate="removeDate" @saveDate="saveDate"/>
       </template>
     </Popper>

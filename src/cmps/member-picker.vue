@@ -1,12 +1,12 @@
 <template lang="">
     <Popper>
-      <div class="task-option-btn">
+      <div class="task-option-btn btn-members">
         <span class="icon-actions member-icon"></span>      
         <p>Members</p>
       </div>
-      <template #content>
+      <template #content="{close}">
         <div class="popper-content member-picker">
-          <popperModal title="Members" />
+          <popperModal title="Members" @closeModal="close"/>
           <div class="members-section">
             <input v-model="input" class="members-input-search" type="search" placeholder="Search Members">
             <div class="members">

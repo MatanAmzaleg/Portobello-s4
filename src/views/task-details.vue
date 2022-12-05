@@ -55,11 +55,13 @@
               <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
               <Popper class="popper">
                 <el-button class="task-btn">Delete</el-button>
-                <template #content>
-                  <div class="popper-content">
-                    <popperModal :title="'Delete Checklist?'"/>
-                    <p>Deleting a checklist is permanent and there is no way to get it back.</p>
-                    <el-button @click="deleteChecklist(checklist.id)" class="task-btn">Delete checklist</el-button>
+                <template #content="{close}">
+                  <div class="popper-content popper-template">
+                    <popperModal :title="'Delete Checklist?'" @closeModal="close"/>
+                    <div class="content">
+                      <p>Deleting a checklist is permanent and there is no way to get it back.</p>
+                      <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">Delete checklist</el-button>
+                    </div>
                   </div>
                 </template>
               </Popper>

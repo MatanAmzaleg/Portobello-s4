@@ -4,9 +4,9 @@
       <span class="checklist-icon icon-actions"></span>
       <p>Checklist</p>
     </div>
-      <template #content>
+      <template #content="{close}">
       <div class="popper-content label-picker">
-        <popperModal title="Add Checklist" />
+        <popperModal title="Add Checklist" @closeModal="close"/>
         <div class="content-container">
           <p>Title</p>
           <input class="task-popper-input" @input="onTitleChanged">

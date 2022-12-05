@@ -1,23 +1,20 @@
 <template lang="">
-  <div class="popper-content label-picker date-picker"> <popper-modal title="Dates" />
-  <v-date-picker mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
-  <el-button @click="saveDate" class=" save-btn" type="primary">Save</el-button>
-  <el-button @click="removeDate" class="remove-btn">Remove</el-button> </div>
+  <div class="popper-content label-picker date-picker"> 
+    <v-date-picker mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
+    <el-button @click="saveDate" class=" save-btn" type="primary">Save</el-button>
+    <el-button @click="removeDate" class="remove-btn">Remove</el-button> 
+  </div>
 </template>
 <script>
-import popperModal from "./popper-modal.vue";
 export default {
-  components: {
-    popperModal,
+  created() {
+    this.date = this.getTask
   },
-  created(){
-      this.date = this.getTask
-      },
-      data(){
-          return{
-              date:'',
-          }    
-      },
+  data() {
+    return {
+      date: '',
+    }
+  },
   methods: {
     saveDate() {
       this.$emit("save-date", this.date);
@@ -31,11 +28,11 @@ export default {
       return this.$store.getters.currTask;
     },
   },
-  watch:{
-        getTask(newTask,oldTask){
-          this.date = newTask.dueDate
-        }
-      },
+  watch: {
+    getTask(newTask, oldTask) {
+      this.date = newTask.dueDate
+    }
+  },
 };
 </script>
 <style lang=""></style>

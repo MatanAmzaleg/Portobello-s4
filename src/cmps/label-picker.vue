@@ -4,10 +4,10 @@
       <span class="label-icon icon-actions"></span>
       <p>Labels</p>
     </div>
-    <template :show="showPopper" #content>
+    <template #content="{close}">
       <div class="popper-content label-picker">
-        <popperModal title="Labels" v-if="!isEditMode" />
-        <popperModal v-if="isEditMode" title="Edit label"></popperModal>
+        <popperModal title="Labels" v-if="!isEditMode" @closeModal="close"/>
+        <popperModal v-if="isEditMode" title="Edit label" @closeModal="close"></popperModal>
         <input
         @input="filterLabels"
         v-model="filterBy.txt"
