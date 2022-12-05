@@ -44,16 +44,22 @@
 
 // input helpers 
 
-.checkbox {
+.checkbox-helper {
     border-radius: 2px;
     box-shadow: inset 0 0 0 2px $clr22;
-    background-color: $clr4;
     cursor: pointer;
     margin: 6px;
     transition: all 0.2s ease-in-out;
+    height: 16px;
+    width: 16px;
+    accent-color: $clr4;
 
     &:hover {
-        background-color: $clr19;
+        accent-color: $clr19;
         box-shadow: inset 0 0 0 2px $clr22;
+    }
+
+    &:checked {
+        accent-color: $clr20;
     }
 }

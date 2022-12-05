@@ -1,6 +1,6 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
-    <div class="task-edit-container" @click.stop>
+    <div v-if="task" class="task-edit-container" @click.stop>
       <div v-if="task.style?.bgColor" class="task-cover" :style="{ 'background-color': task.style.bgColor }">
         <span></span>
       </div>
@@ -15,10 +15,12 @@
         <section class="content">
           <div class="task-section task-info">
             <span></span>
-            <div class="task-info-wrapper" v-if="(task.memberIds?.length || task.labelIds?.length)">
+            <div class="task-info-wrapper" v-if="(task.memberIds?.length || task.labelIds?.length ||task.dueDate?.length)">
               <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
               <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
-            </div>
+              <datePreview v-if="task.dueDate" :dueDate="task.dueDate" />
+              </div>
+              
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>
@@ -52,7 +54,7 @@
             </div>
             <ul class="checklist">
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
-                <input class="checkbox" type="checkbox" :checked="todo.isDone" @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)"/>
+                <input class="checkbox-helper" type="checkbox" :checked="todo.isDone" @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)"/>
                 {{ todo.title }}
               </li>
               <button
@@ -87,7 +89,7 @@
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <checkList @addchecklist="addTaskChecklist" />
-            <datePicker />
+            <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
             <coverPicker @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
@@ -115,7 +117,8 @@ import miniUsers from "../cmps/mini-users.vue"
 import addAttachment from "../cmps/add-attachment.vue"
 import labelsPreview from "../cmps/labels-preview.vue"
 import archiveTask from "../cmps/archive-task.vue"
-import { utilService } from "../services/util.service"
+import datePreview from "../cmps/date-preview.vue";
+import { utilService } from "../services/util.service";
 
 export default {
   props: {
@@ -214,6 +217,14 @@ export default {
       this.task.memberIds = members
       this.updateTask()
     },
+    saveTaskDate(date) {
+      this.task.dueDate = date
+      this.updateTask();
+    },
+    removeTaskDate(date) {
+      this.task.dueDate = ''
+      this.updateTask();
+    },
     addTaskChecklist(checklistsTitle) {
       const checklist = {
         id: utilService.makeId(),
@@ -276,6 +287,11 @@ export default {
     getTaskMembers() {
       return this.task.memberIds
     },
+    getTaskDate() {
+      console.log('clg',this.task.dueDate);
+      console.log('clg2',this.task);
+      return this.task.dueDate;
+    },
   },
   components: {
     labelPicker,
@@ -286,7 +302,8 @@ export default {
     miniUsers,
     labelsPreview,
     addAttachment,
-    archiveTask
+    archiveTask,
+    datePreview
   },
 }
 </script>

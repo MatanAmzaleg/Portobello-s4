@@ -54,7 +54,7 @@
           <li v-if="!isEditMode" v-for="label in filteredLabels">
             <div class="label">
               <input
-                class="checkbox"
+                class="checkbox-helper"
                 :checked="checkLabel(label.id)"
                 @input="addLabel(label.id)"
                 type="checkbox"
@@ -110,6 +110,7 @@ export default {
   created() {
     console.log(this.labelIds);
     this.currBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
+    this.filteredLabels = this.currBoard.labels
     console.log(this.currBoard);
   },
   methods: {
