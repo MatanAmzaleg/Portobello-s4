@@ -18,18 +18,19 @@
             <div class="task-info-wrapper" v-if="(getTaskLabels?.length || getTaskMembers?.length)">
               <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
               <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
-              </div>
+            </div>
           </div>
           <div class="task-section">
-          <span></span>
-            <datePreview v-if="task.dueDate" :dueDate="task.dueDate" :status="task.status" @changeStatus="updateTaskStatus" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
+            <span></span>
+            <datePreview v-if="task.dueDate" :dueDate="task.dueDate" :status="task.status"
+              @changeStatus="updateTaskStatus" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>
             <div class="task-description-wrapper">
               <div class="task-description-title">
                 <h3 class="task-mini-title">Description</h3>
-                <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
+                <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button>
               </div>
               <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
                 class="description-info" :class="descriptionTxtAreaClass">
@@ -49,14 +50,27 @@
           </div>
           <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo">
             <span class="checklist-icon"></span>
-            <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
+            <div class="task-checklist-title">
+              <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
+              <Popper class="popper">
+                <el-button class="task-btn">Delete</el-button>
+                <template #content>
+                  <div class="popper-content">
+                    <popperModal :title="'Delete Checklist?'"/>
+                    <p>Deleting a checklist is permanent and there is no way to get it back.</p>
+                    <el-button @click="deleteChecklist(checklist.id)" class="task-btn">Delete checklist</el-button>
+                  </div>
+                </template>
+              </Popper>
+            </div>
             <div class="progress-container">
-              <el-progress :percentage="checklistPercentage(checklist.id)"
-              :format="checklistFormat" width="200px"></el-progress>
+              <el-progress :percentage="checklistPercentage(checklist.id)" :format="checklistFormat"
+                width="200px"></el-progress>
             </div>
             <ul class="checklist">
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
-                <input class="checkbox-helper" type="checkbox" :checked="todo.isDone" @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)"/>
+                <input class="checkbox-helper" type="checkbox" :checked="todo.isDone"
+                  @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)" />
                 {{ todo.title }}
               </li>
               <button
@@ -65,7 +79,7 @@
               <div v-if="currChecklist.id === checklist.id && currChecklist.isAddItem" class="todo-edit">
                 <textarea class="textarea-edit" v-model="currChecklist.task" ref="todoTxtarea"
                   @input="updateCurrTaskInfo" placeholder="Add an item"></textarea>
-                <el-button @click="addTaskChecklistTodo()" type="primary">Add</el-button>
+                <el-button @click="addChecklistTodo()" type="primary">Add</el-button>
                 <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
               </div>
             </ul>
@@ -84,14 +98,14 @@
             </div>
           </div>
           <div v-for="comment in task.comments" v-if="showComments" class="task-section">
-          <img :src="comment.byMember.imgUrl" class="member-img">
-          <div class="task-comment">
-          <div class="member-info">
-          <p class="comment-sender">{{comment.byMember.fullname}}</p>
-          <p>{{comment.txt}}</p>
-          </div>
-          <a>{{getCommentTime(comment.createdAt)}}</a>
-          </div>
+            <img :src="comment.byMember.imgUrl" class="member-img">
+            <div class="task-comment">
+              <div class="member-info">
+                <p class="comment-sender">{{ comment.byMember.fullname }}</p>
+                <p>{{ comment.txt }}</p>
+              </div>
+              <a>{{ getCommentTime(comment.createdAt) }}</a>
+            </div>
           </div>
         </section>
         <section class="actions">
@@ -99,7 +113,7 @@
             <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
-            <checkList @addchecklist="addTaskChecklist" />
+            <checkList @addchecklist="addChecklist" />
             <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
             <coverPicker @setCover="saveTaskCover" />
@@ -131,6 +145,7 @@ import labelsPreview from "../cmps/labels-preview.vue"
 import archiveTask from "../cmps/archive-task.vue"
 import datePreview from "../cmps/date-preview.vue";
 import { utilService } from "../services/util.service";
+import popperModal from "../cmps/popper-modal.vue";
 
 export default {
   props: {
@@ -224,7 +239,7 @@ export default {
       this.updateTask()
     },
     updateTaskStatus(status) {
-      console.log('status',status);
+      console.log('status', status);
       this.task.status = status
       this.updateTask()
     },
@@ -240,7 +255,7 @@ export default {
       this.task.dueDate = ''
       this.updateTask();
     },
-    addTaskChecklist(checklistsTitle) {
+    addChecklist(checklistsTitle) {
       const checklist = {
         id: utilService.makeId(),
         title: checklistsTitle,
@@ -249,7 +264,13 @@ export default {
       this.task.checklists.push(checklist)
       this.updateTask()
     },
-    addTaskChecklistTodo() {
+    deleteChecklist(checklistsId) {
+      const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistsId)
+      this.task.checklists.splice(idx, 1)
+      this.updateTask()
+    },
+    addChecklistTodo() {
+      if (this.currChecklist.task === "") return
       this.task.checklists.find(checklist => checklist.id === this.currChecklist.id).todos.push(
         {
           id: utilService.makeId(),
@@ -263,8 +284,8 @@ export default {
       this.currChecklist.task = ""
       this.updateTask()
     },
-    updateBoard(board){
-      this.$store.dispatch({type:"updateBoard", board})
+    updateBoard(board) {
+      this.$store.dispatch({ type: "updateBoard", board })
     },
     updateTxtAddTodo(checklistId, isAddItem) {
       if (isAddItem) {
@@ -281,21 +302,21 @@ export default {
     onTodoIsDoneChanged(checklistId, todoId, ev) {
       const isChecked = ev.target.checked
       this.task.checklists.find(checklist => checklist.id === checklistId).todos.find(
-      todo => todo.id === todoId
+        todo => todo.id === todoId
       ).isDone = isChecked
       this.updateTask()
     },
-    checklistPercentage(checklistId){
+    checklistPercentage(checklistId) {
       const allTasks = this.task.checklists.find(checklist => checklist.id === checklistId).todos.length
       const doneTasks = this.task.checklists.find(checklist => checklist.id === checklistId).todos.filter(
-      todo => todo.isDone).length
-      return Math.round((doneTasks/ allTasks)  * 100)
+        todo => todo.isDone).length
+      return Math.round((doneTasks / allTasks) * 100)
     },
-    checklistFormat(percentage){
-      return percentage? percentage === 100 ? 'Full' : `${percentage}%` : `0%`
+    checklistFormat(percentage) {
+      return percentage ? percentage === 100 ? 'Full' : `${percentage}%` : `0%`
     },
-    getCommentTime(ts){
-      if(ts - Date.now() < 86349893 && ts - Date.now() > 0)  return dateFormat(new Date(ts), "'Before' H 'hours'");
+    getCommentTime(ts) {
+      if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(new Date(ts), "'Before' H 'hours'");
       return dateFormat(new Date(ts), "mmm dd 'at' HH:MM");
     }
   },
@@ -309,8 +330,8 @@ export default {
     getTaskDate() {
       return this.task.dueDate;
     },
-    descriptionTxtAreaClass(){
-      return this.task.description? 'description-info-full' : ''
+    descriptionTxtAreaClass() {
+      return this.task.description ? 'description-info-full' : ''
     }
   },
   components: {
@@ -323,7 +344,8 @@ export default {
     labelsPreview,
     addAttachment,
     archiveTask,
-    datePreview
+    datePreview,
+    popperModal
   },
 }
 </script>

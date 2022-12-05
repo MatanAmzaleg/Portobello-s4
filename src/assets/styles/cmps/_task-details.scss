@@ -34,24 +34,29 @@
     padding-right: 5px;
   }
 }
-.task-comment{
+
+.task-comment {
   * {
     color: black !important;
   }
-  a{
-    color: #5e6c84 !important;
+
+  a {
+    color: $clr21 !important;
     font-size: 12px;
     display: block;
   }
-  .member-info{
+
+  .member-info {
     display: flex;
     gap: 5px;
-    .comment-sender{
+
+    .comment-sender {
       font-weight: bolder;
     }
   }
-  
+
 }
+
 .member-img {
   width: 32px;
   height: 32px;
@@ -64,7 +69,7 @@
   text-align: start;
 }
 
-.task-date{
+.task-date {
   width: max-content;
 }
 
@@ -89,6 +94,7 @@
 
 .task-description-title {
   display: flex;
+  align-items: center;
   gap: 11px;
 }
 
@@ -161,6 +167,12 @@
   svg {
     margin-block-start: 6px;
     justify-self: center;
+  }
+
+  .task-checklist-title{
+    display: flex;
+    align-items: center;
+    gap: 11px;
   }
 
   .progress-container {
@@ -266,6 +278,7 @@
     .task-activity-wrapper {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       width: 100%;
       margin-bottom: 14px;
     }
@@ -336,11 +349,13 @@
             Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
           font-size: 12px;
           margin-top: -4px;
+          color: $clr21;
+          font-weight: 600;
         }
 
         .task-option-btn {
           p {
-            color: #42526e;
+            color: $clr27;
           }
         }
       }
@@ -348,7 +363,7 @@
 
     .task-exit-btn {
       border-radius: 50%;
-      color: var(--ds-icon, #42526e);
+      color: $clr27;
       height: 32px;
       margin: 4px;
       overflow: hidden;
