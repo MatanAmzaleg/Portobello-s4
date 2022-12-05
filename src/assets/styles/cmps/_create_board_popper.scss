@@ -22,7 +22,7 @@
         box-shadow: var(--ds-shadow-overlay, 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08));
         box-sizing: border-box;
         outline: 0;
-        overflow: hidden;
+        // overflow: hidden;
         position: fixed;
         width: 304px;
         will-change: top, left;

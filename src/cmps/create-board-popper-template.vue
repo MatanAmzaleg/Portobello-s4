@@ -32,7 +32,7 @@
                             </button>
                         </li>
                         <li class="li-color more">
-                            <button>
+                            <!-- <button>
                                 <svg width="100%" height="13" role="presentation" focusable="false" viewBox="0 1 24 20"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -40,8 +40,8 @@
                                         fill="#42526E">
                                     </path>
                                 </svg>
-                            </button>
-                            <!-- <Popper class="popper-create" placement="right">
+                            </button> -->
+                            <Popper class="popper-create" placement="right">
                                 <button>
                                     <svg width="100%" height="13" role="presentation" focusable="false"
                                         viewBox="0 1 24 20" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
                                 <template #content="{ close }" style="position: absolute;">
                                     <h1>Hello</h1>
                                 </template>
-                            </Popper> -->
+                            </Popper>
                         </li>
                     </ul>
                 </div>

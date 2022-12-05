@@ -32,7 +32,7 @@
                 {{ task.description }}
               </p>
               <div v-else class="details-edit">
-                <textarea @input="updateTask" v-model="task.description" class="description-input"
+                <textarea @input="updateTask" v-model="task.description" class="textarea-edit"
                   placeholder="Add a more detailed description..."></textarea>
                 <el-button @click="(isEdit = false)" type="primary">Save</el-button>
                 <el-button @click="(isEdit = false)">Cancel</el-button>
@@ -51,6 +51,14 @@
                 <input type="checkbox" />
                 {{ todo.title }}
               </li>
+              <button
+                v-if="(this.currChecklist.id === checklist.id && !this.currChecklist.isAddItem || this.currChecklist.id !== checklist.id)"
+                class="btn-add" @click="updateTxtAddTodo(checklist.id, true)">Add an item</button>
+              <div v-if="this.currChecklist.id === checklist.id && this.currChecklist.isAddItem" class="todo-edit">
+                <textarea class="textarea-edit" ref="todoTxtarea" placeholder="Add an item"></textarea>
+                <el-button @click="updateTxtAddTodo(checklist.id, false)" type="primary">Save</el-button>
+                <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
+              </div>
             </ul>
           </div>
           <div class="task-section task-activity">
@@ -122,7 +130,11 @@ export default {
       groupId: "",
       task: {},
       showComments: false,
-      isEdit: false
+      isEdit: false,
+      currChecklist: {
+        id: "",
+        isAddItem: false
+      },
     };
 
   },
@@ -205,6 +217,15 @@ export default {
       this.task.checklists.push(checklist);
       this.updateTask()
     },
+    updateTxtAddTodo(checklistId, isAddItem) {
+      if (isAddItem) {
+        setTimeout(() => {
+          this.$refs.todoTxtarea[0].focus()
+        }, 50)
+      }
+      this.currChecklist.id = checklistId
+      this.currChecklist.isAddItem = isAddItem
+    }
   },
   computed: {
     getTaskLabels() {
