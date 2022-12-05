@@ -47,18 +47,22 @@
           </div>
           <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo">
             <span class="description-icon"></span>
-            {{ checklist.title }}
+            <h3 class="task-mini-title">{{ checklist.title }}</h3>
+            <div class="progress-container">
+              <el-progress :percentage="checklistPercentage(checklist.id)"
+              :format="checklistFormat" width="200px"></el-progress>
+            </div>
             <ul class="checklist">
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
-                <input type="checkbox" />
+                <input class="checkbox" type="checkbox" :checked="todo.isDone" @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)"/>
                 {{ todo.title }}
               </li>
               <button
                 v-if="currChecklist.id === checklist.id && !currChecklist.isAddItem || currChecklist.id !== checklist.id"
                 class="btn-add" @click="updateTxtAddTodo(checklist.id, true)">Add an item</button>
               <div v-if="currChecklist.id === checklist.id && currChecklist.isAddItem" class="todo-edit">
-                <textarea class="textarea-edit" v-model="currChecklist.task" ref="todoTxtarea" @input="updateCurrTaskInfo"
-                  placeholder="Add an item"></textarea>
+                <textarea class="textarea-edit" v-model="currChecklist.task" ref="todoTxtarea"
+                  @input="updateCurrTaskInfo" placeholder="Add an item"></textarea>
                 <el-button @click="addTaskChecklistTodo()" type="primary">Add</el-button>
                 <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
               </div>
@@ -83,7 +87,7 @@
           <div class="task-actions">
             <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
-            <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
+            <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <checkList @addchecklist="addTaskChecklist" />
             <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
@@ -104,30 +108,34 @@
 </template>
 
 <script>
-import labelPicker from "../cmps/label-picker.vue";
-import memberPicker from "../cmps/member-picker.vue";
-import checkList from "../cmps/check-list.vue";
-import datePicker from "../cmps/date-picker.vue";
-import coverPicker from "../cmps/cover.picker.vue";
-import miniUsers from "../cmps/mini-users.vue";
-import addAttachment from "../cmps/add-attachment.vue";
-import labelsPreview from "../cmps/labels-preview.vue";
+import labelPicker from "../cmps/label-picker.vue"
+import memberPicker from "../cmps/member-picker.vue"
+import checkList from "../cmps/check-list.vue"
+import datePicker from "../cmps/date-picker.vue"
+import coverPicker from "../cmps/cover.picker.vue"
+import miniUsers from "../cmps/mini-users.vue"
+import addAttachment from "../cmps/add-attachment.vue"
+import labelsPreview from "../cmps/labels-preview.vue"
 import archiveTask from "../cmps/archive-task.vue"
+<<<<<<< HEAD
 import datePreview from "../cmps/date-preview.vue";
 import { utilService } from "../services/util.service";
+=======
+import { utilService } from "../services/util.service"
+>>>>>>> b39f1a064e844a45c1bd511a23d0a4f8d8538a61
 
 export default {
   props: {
     currBoard: Object,
   },
   async created() {
-    let { taskId } = this.$route.params;
+    let { taskId } = this.$route.params
     let task = await this.$store.dispatch({
       type: "loadTask",
       board: this.currBoard,
       taskId,
-    });
-    this.task = JSON.parse(JSON.stringify(task));
+    })
+    this.task = JSON.parse(JSON.stringify(task))
   },
   data() {
     return {
@@ -140,38 +148,38 @@ export default {
         isAddItem: false,
         task: ""
       },
-    };
+    }
 
   },
   methods: {
     exitTask() {
-      this.$router.push(`/board/${this.currBoard._id}`);
+      this.$router.push(`/board/${this.currBoard._id}`)
     },
     toggleDetails() {
-      this.isDetailsShown = !this.isDetailsShown;
+      this.isDetailsShown = !this.isDetailsShown
     },
     async updateTask() {
       try {
-        let board = JSON.parse(JSON.stringify(this.currBoard));
-        let taskIdx;
+        let board = JSON.parse(JSON.stringify(this.currBoard))
+        let taskIdx
         let groupIdx = board.groups.findIndex((group) =>
           group.tasks.some((task, idx) => {
-            if (task.id === this.task.id) taskIdx = idx;
-            return task.id === this.task.id;
+            if (task.id === this.task.id) taskIdx = idx
+            return task.id === this.task.id
           })
-        );
-        board.groups[groupIdx].tasks[taskIdx] = this.task;
-        // console.log(board);
-        await this.$store.dispatch({ type: "updateBoard", board });
+        )
+        board.groups[groupIdx].tasks[taskIdx] = this.task
+        // console.log(board)
+        await this.$store.dispatch({ type: "updateBoard", board })
       } catch (err) {
-        console.log("cant Update task", err);
+        console.log("cant Update task", err)
       }
     },
     closeModal() {
-      this.$router.push("/board");
+      this.$router.push("/board")
     },
     addLabel(labels) {
-      this.task.labels = labels;
+      this.task.labels = labels
       this.updateTask()
     },
     archiveTask() {
@@ -198,20 +206,20 @@ export default {
       this.updateTask()
     },
     addMember(members) {
-      this.task.members = members;
+      this.task.members = members
       this.updateTask()
     },
     saveTaskLabels(labels) {
-      this.task.labelIds = labels;
-      this.updateTask();
+      this.task.labelIds = labels
+      this.updateTask()
     },
     saveTaskCover(color) {
-      this.task.style = { bgColor: color };
-      this.updateTask();
+      this.task.style = { bgColor: color }
+      this.updateTask()
     },
     saveTaskMembers(members) {
       this.task.memberIds = members
-      this.updateTask();
+      this.updateTask()
     },
     saveTaskDate(date) {
       this.task.dueDate = date
@@ -227,42 +235,28 @@ export default {
         title: checklistsTitle,
         todos: []
       }
-      this.task.checklists.push(checklist);
+      this.task.checklists.push(checklist)
       this.updateTask()
     },
-    addTaskChecklistTodo() {
-      this.task.checklists.find(checklist => checklist.id === this.currChecklist.id).todos.push(
-        {
-          id: utilService.makeId(),
-          title: this.currChecklist.task,
-          isDone: false
-        },
-      )
-      setTimeout(() => {
-          this.$refs.todoTxtarea[0].focus()
-        }, 50)
-      this.currChecklist.task = ""
-      this.updateTask();
+    updateBoard(board){
+      this.$store.dispatch({type:"updateBoard", board})
     },
-    updateTxtAddTodo(checklistId, isAddItem) {
-      if (isAddItem) {
-        setTimeout(() => {
-          this.$refs.todoTxtarea[0].focus()
-        }, 50)
-      }
-      this.currChecklist.id = checklistId
-      this.currChecklist.isAddItem = isAddItem
+    checklistPercentage(checklistId){
+      const allTasks = this.task.checklists.find(checklist => checklist.id === checklistId).todos.length
+      const doneTasks = this.task.checklists.find(checklist => checklist.id === checklistId).todos.filter(
+      todo => todo.isDone).length
+      return Math.round((doneTasks/ allTasks)  * 100)
     },
-    updateCurrTaskInfo(ev) {
-      this.currChecklist.task = ev.target.value
-    }
+    checklistFormat(percentage){
+      return percentage === 100 ? 'Full' : `${percentage}%`
+    },
   },
   computed: {
     getTaskLabels() {
-      return this.task.labelIds;
+      return this.task.labelIds
     },
     getTaskMembers() {
-      return this.task.memberIds;
+      return this.task.memberIds
     },
     getTaskDate() {
       console.log('clg',this.task.dueDate);
@@ -282,7 +276,7 @@ export default {
     archiveTask,
     datePreview
   },
-};
+}
 </script>
 
 <style lang="scss">

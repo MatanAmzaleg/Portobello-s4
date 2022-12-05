@@ -1,12 +1,43 @@
 .label-picker {
+  .create-label-btn {
+    width: 280px;
+    height: 36px;
+    background-color: #f5f6f8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #5c6a82;
+    margin-bottom: 8px;
+    margin-top: 10px;
+    border-radius: 3px;
 
-    .labels-title{
-        width: 100%;
-        margin: 12px 0 8px;
-        padding-inline-start: 2px;
-        font-size: 12px;
-        font-weight: 600;
-      }
+    &:hover {
+      background-color: #ecedf0;
+    }
+  }
+
+  .return-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 12px;
+    color: #808080;
+
+    .return-icon {
+      height: 13px;
+      width: 13px;
+    }
+  }
+
+  .labels-title {
+    width: 100%;
+    margin: 12px 0 8px;
+    padding-inline-start: 2px;
+    font-size: 12px;
+    font-weight: 600;
+  }
   color: var(--ds-text, #172b4d);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
     "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -24,8 +55,6 @@
   overflow: hidden;
   width: 304px;
   text-align: center;
-
-
 
   .search-input {
     width: 280px;
@@ -47,6 +76,104 @@
     justify-content: center;
     flex-direction: column;
     padding: 0px 12px 12px;
+
+    .remove-color-btn {
+      width: 280px;
+      height: 36px;
+      background-color: #f5f6f8;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 400;
+      color: #5c6a82;
+      margin-bottom: 8px;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: #ecedf0;
+      }
+    }
+
+    hr {
+      background-color: var(--ds-border, #091e4221);
+      border: 0;
+      height: 1px;
+      margin: 16px 0;
+      padding: 0;
+      width: 100%;
+    }
+    .buttons-section{
+      width: 100%;
+      display: flex;
+      justify-content:space-between;
+      .save-btn {
+        width: 53px;
+        height: 32px;
+        background-color: $clr9;
+        color: #ffffff;
+        border-radius: 3px;
+  
+        &:hover {
+          background-color: #026aa7;
+        }
+      }
+  
+      .delete-btn{
+        width: 53px;
+        height: 32px;
+        background-color: #B04632;
+        color: #ffffff;
+        border-radius: 3px;
+  
+        &:hover {
+          background-color: #933B27;
+        }
+      }
+
+    }
+
+    .labels {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      flex-wrap: wrap;
+
+      .label-color {
+        width: 48px;
+        border-radius: 3px;
+        height: 28px;
+        display: block;
+        border: 2px transparent solid;
+        
+      }
+    }
+
+    .chosen-label {
+      width: 100%;
+      height: 101px;
+      background-color: #f4f5f7;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .label-color {
+        display: flex;
+        align-items: center;
+        width: 240px;
+        height: 32px;
+        position: absolute;
+        border-radius: 3px;
+
+        .circle {
+          width: 16px;
+          height: 16px;
+          border-radius: 50%;
+          margin: 8px;
+        }
+      }
+    }
     ul {
       padding: 0;
       margin: 0;
@@ -56,7 +183,7 @@
     }
     .label {
       border-radius: 3px;
-      padding-block: 3px;
+      padding-block: 2px;
       max-width: 100%;
       min-width: 48px;
       height: 32px;
@@ -65,12 +192,27 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       display: flex;
+
       .checkbox {
         margin-top: -3px;
       }
 
+      .circle {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        margin: 8px;
+      }
+
       .label-color {
         border-radius: 3px;
+        display: flex;
+        align-items: center;
+        .title{
+          color: #172b4d;
+        }
+
+        
       }
       label {
         width: 212px;
@@ -90,8 +232,8 @@
         border-radius: 3px;
         cursor: pointer;
 
-        &:hover{
-            background-color: #ECEDF0;
+        &:hover {
+          background-color: #ecedf0;
         }
       }
     }
