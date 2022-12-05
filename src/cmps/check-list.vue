@@ -1,7 +1,6 @@
 <template lang="">
     <Popper>
     <div class="task-option-btn">
-      <!-- <font-awesome-icon class="icon" icon="fa-solid fa-tag" /> -->
       <span class="checklist-icon icon-actions"></span>
       <p>Checklist</p>
     </div>
