@@ -1,22 +1,32 @@
 <template>
   <section v-if="board" class="board-header">
     <div class="left-section">
-      <span 
-      class="board-name-input"
-  role="textbox" 
-  ref="span"
-  @input="changeBoardName"
-  contenteditable>
-    {{board.title}}
-</span>
+      <span
+        class="board-name-input"
+        role="textbox"
+        ref="span"
+        @input="changeBoardName"
+        contenteditable
+      >
+        {{ board.title }}
+      </span>
       <button @click="changeBoardIsStarred" class="is-starred">
-        <font-awesome-icon class="star-icon" v-if="!board.isStarred" icon="fa-regular fa-star" />
-        <img class="yellow-star" src="../assets/icons/star.png"  v-if="board.isStarred" alt="">
+        <font-awesome-icon
+          class="star-icon"
+          v-if="!board.isStarred"
+          icon="fa-regular fa-star"
+        />
+        <img
+          class="yellow-star"
+          src="../assets/icons/star.png"
+          v-if="board.isStarred"
+          alt=""
+        />
       </button>
     </div>
     <div class="right-section">
       <popper :show="isModalOpen">
-        <button @click="isModalOpen = true" class="filter-btn">
+        <button @click="changeIsModalOpen" class="filter-btn">
           <img
             class="filter-icon"
             src="../assets/icons/filter-results-button.png"
@@ -28,7 +38,7 @@
           <section class="filter-popper">
             <div class="header">
               <p>Filter</p>
-              <button class="x-mark-btn" @click="(isModalOpen = false)">
+              <button class="x-mark-btn" @click="isModalOpen = false">
                 <font-awesome-icon
                   class="x-mark-icon"
                   icon="fa-solid fa-xmark"
@@ -38,6 +48,7 @@
             <section class="keyword-filter">
               <p class="mini-title">Keyword</p>
               <input
+                ref="filterInput"
                 @input="setFilter"
                 v-model="filterBy.txt"
                 class="keyword-input"
@@ -116,7 +127,7 @@
   </section>
 </template>
 <script>
- import miniUsers from './mini-users.vue';
+import miniUsers from "./mini-users.vue";
 export default {
   props: {
     board: Object,
@@ -127,31 +138,34 @@ export default {
       filterBy: {
         txt: "",
       },
-      isModalOpen:false,
-      boardName:"",
-
+      isModalOpen: false,
+      boardName: "",
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     setFilter() {
-      console.log(this.filterBy)
-      this.$emit("setFilter", this.filterBy)
+      this.$emit("setFilter", this.filterBy);
     },
-    changeBoardName(){  
-      const boardToUpdate = JSON.parse(JSON.stringify(this.board))
-      boardToUpdate.title = this.$refs.span.innerText
-      this.$emit("updateBoard", boardToUpdate)    
+    changeBoardName() {
+      const boardToUpdate = JSON.parse(JSON.stringify(this.board));
+      boardToUpdate.title = this.$refs.span.innerText;
+      this.$emit("updateBoard", boardToUpdate);
     },
-    changeBoardIsStarred(){
-      const boardToUpdate = JSON.parse(JSON.stringify(this.board))
-      boardToUpdate.isStarred = !boardToUpdate.isStarred
-      this.$emit("updateBoard", boardToUpdate)
-    }
+    changeBoardIsStarred() {
+      const boardToUpdate = JSON.parse(JSON.stringify(this.board));
+      boardToUpdate.isStarred = !boardToUpdate.isStarred;
+      this.$emit("updateBoard", boardToUpdate);
+    },
+    changeIsModalOpen() {
+      this.isModalOpen = true;
+      setTimeout(() => {
+        this.$refs.filterInput.focus();
+      }, 50);
+    },
   },
   components: {
-    miniUsers
+    miniUsers,
   },
 };
 </script>

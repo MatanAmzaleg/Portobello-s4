@@ -28,7 +28,8 @@
 
 .task-date {
   display: flex;
-  .date-input{
+
+  .date-input {
     margin-top: 15px;
     padding-right: 5px;
   }
@@ -79,6 +80,11 @@
     outline: solid 2px $clr9;
     border-radius: 3px;
   }
+
+
+  &:focus-visible {
+    outline: none
+  }
 }
 
 .description-info {
@@ -106,6 +112,14 @@
 
   &:empty:before {
     content: "Add a more detailed description...";
+  }
+
+  &:focus-visible {
+    outline: none
+  }
+
+  &.description-info-full {
+    background-color: transparent !important;
   }
 }
 
@@ -233,12 +247,23 @@
     .description-icon,
     .activity-icon,
     .archive-icon,
-    .checklist-icon {
+    .checklist-icon,
+    .member-icon,
+    .label-icon,
+    .card-cover-icon {
       font-family: trellicons;
       place-self: center;
       align-self: flex-start;
       font-size: 24px;
       line-height: 1.3;
+    }
+
+    .member-icon:before {
+      content: "\e946";
+    }
+
+    .label-icon:before {
+      content: "\e93f";
     }
 
     .checklist-icon:before {
@@ -270,6 +295,10 @@
     .attachments-icon:before {
       content: "\e908";
       font-family: trellicons;
+    }
+
+    .card-cover-icon:before {
+      content: "\e914";
     }
 
     .task-cover {
@@ -328,11 +357,22 @@
         display: flex;
         flex-direction: column;
 
+        .icon-actions {
+          font-size: 16px;
+          color: $clr27;
+        }
+
         .mini-title {
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
           font-size: 12px;
           margin-top: -4px;
+        }
+
+        .task-option-btn {
+          p {
+            color: #42526e;
+          }
         }
       }
     }

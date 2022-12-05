@@ -136,7 +136,6 @@ export default {
             if (utilService.getImgs()) {
                 background = utilService.getImgs().slice(0, 4)
             }
-            console.log('background', background)
             return background
         }
     },
