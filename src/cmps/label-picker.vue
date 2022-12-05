@@ -164,6 +164,9 @@ export default {
       }else{
         const labelIdx = this.currBoard.labels.findIndex(l=> l.id === this.chosenLabel.id)
         this.currBoard.labels.splice(labelIdx, 1)
+        console.log(this.chosenLabel.id);
+        // this.currBoard.groups.forEach(g=> g.tasks.forEach(t=> t.labelIds.filter(label=> label !== this.chosenLabel.id)))
+        // console.log(this.currBoard);
         this.$emit("updateBoard",this.currBoard)
         this.isEditMode = false
       }

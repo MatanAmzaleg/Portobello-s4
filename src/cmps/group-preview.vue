@@ -13,6 +13,7 @@
         :column="column"
       ></task-list>
       <textarea
+        ref="taskArea"
         @keyup.enter="addTask"
         v-if="column.id === currGroup"
         class="textarea"
@@ -80,6 +81,9 @@ export default {
   components: { Container, Draggable, taskDetails, taskList },
   methods: {
     changeAddStatus(groupId) {
+      setTimeout(() => {
+        this.$refs.taskArea.focus();
+      }, 50);
       this.currGroup = groupId;
     },
     addTask() {
@@ -90,9 +94,9 @@ export default {
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup
       );
-      let task = this.$store.getters.emptyTask
-      task.id= utilService.makeId()
-      task.title= this.newTaskTxt
+      let task = this.$store.getters.emptyTask;
+      task.id = utilService.makeId();
+      task.title = this.newTaskTxt;
       console.log(groupIdx);
       board.groups[groupIdx].tasks.push(task);
       this.$emit("addTask", board);
