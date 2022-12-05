@@ -26,6 +26,7 @@ export const boardStore = {
       state.currBoard = board;
     },
     updateBoard(state, { board }) {
+      console.log(board)
       const idx = state.boards.findIndex((c) => c._id === board._id);
       state.boards.splice(idx, 1, board);
       state.currBoard = board;
@@ -146,7 +147,7 @@ export const boardStore = {
       console.log(taskId);
       try {
         const newBoard = await boardService.removeTask(board, taskId);
-        commit({ type: "updateBoard", newBoard });
+        commit({ type: "updateBoard", board: newBoard });
       } catch (err) {
         console.log(err);
       }
