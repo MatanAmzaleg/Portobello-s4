@@ -11,6 +11,13 @@
           ></span>
       </div>
       <span class="task-router-link">{{ item.title }}</span>
+      <div v-if="taskExtra(item)" class="task-preview-info">
+      <span v-if="item.isWatched" class="watch-icon"></span>
+      <span v-if="item.description?.length" class="description-icon"></span>
+      <span v-if="item.attachments?.length" class="attachment-icon"></span>
+      <span v-if="item.checklists?.length" class="checklist-icon"></span>
+      <mini-users :isHeader="true" v-if="item.memberIds" :memberIds="item.memberIds" />
+      </div>
     </div>
   </section>
 </template>
@@ -36,6 +43,9 @@ export default {
       const label =  this.$store.getters.currBoard.labels.find((l) => l.id === id);
       return label.title;
     },
+    taskExtra(item){
+     return (item.description?.length || item.attachments?.length || item.checklists?.length || item.memberIds?.length || item.isWatched)
+    }
   },
   computed: {
       currBoard() {
