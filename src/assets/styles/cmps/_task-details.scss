@@ -80,9 +80,9 @@
     outline: solid 2px $clr9;
     border-radius: 3px;
   }
-  
 
-  &:focus-visible{
+
+  &:focus-visible {
     outline: none
   }
 }
@@ -114,8 +114,12 @@
     content: "Add a more detailed description...";
   }
 
-  &:focus-visible{
+  &:focus-visible {
     outline: none
+  }
+
+  &.description-info-full {
+    background-color: transparent !important;
   }
 }
 
@@ -363,6 +367,12 @@
             Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
           font-size: 12px;
           margin-top: -4px;
+        }
+
+        .task-option-btn {
+          p {
+            color: #42526e;
+          }
         }
       }
     }

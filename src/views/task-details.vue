@@ -32,7 +32,7 @@
                 <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
               </div>
               <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
-                class="description-info">
+                class="description-info" :class="descriptionTxtAreaClass">
                 {{ task.description }}
               </p>
               <div v-else class="details-edit">
@@ -127,15 +127,12 @@ export default {
     currBoard: Object,
   },
   async created() {
-    console.log('this.currBoard', this.currBoard)
-    console.log('this.$store.getters.currBoard', this.$store.getters.currBoard)
     let { taskId } = this.$route.params
     let task = await this.$store.dispatch({
       type: "loadTask",
       board: this.currBoard,
       taskId,
     })
-    console.log('task created', task)
     this.task = JSON.parse(JSON.stringify(task))
   },
   data() {
@@ -170,7 +167,6 @@ export default {
           })
         )
         board.groups[groupIdx].tasks[taskIdx] = this.task
-        // console.log(board)
         await this.$store.dispatch({ type: "updateBoard", board })
       } catch (err) {
         console.log("cant Update task", err)
@@ -201,7 +197,6 @@ export default {
       }
     },
     addAttachment(attachment) {
-      console.log('here')
       if (!this.task.attachments) this.task.attachments = []
       this.task.attachments.push(attachment)
       this.updateTask()
@@ -236,7 +231,6 @@ export default {
         title: checklistsTitle,
         todos: []
       }
-      console.log('this.task', this.task)
       this.task.checklists.push(checklist)
       this.updateTask()
     },
@@ -294,10 +288,11 @@ export default {
       return this.task.memberIds
     },
     getTaskDate() {
-      console.log('clg',this.task.dueDate);
-      console.log('clg2',this.task);
       return this.task.dueDate;
     },
+    descriptionTxtAreaClass(){
+      return this.task.description? 'description-info-full' : ''
+    }
   },
   components: {
     labelPicker,

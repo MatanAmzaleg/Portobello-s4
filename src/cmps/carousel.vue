@@ -15,7 +15,6 @@ export default {
   methods: {
     onChange(idx){
       this.$emit('updateSelectedCarousel', idx)
-      console.log('idx', idx)
     }
   },
   watch: {
