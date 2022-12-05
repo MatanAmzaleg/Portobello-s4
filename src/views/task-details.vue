@@ -39,6 +39,10 @@
               </div>
             </div>
           </div>
+          <div v-if="task.attachments?.length" class="task-section">
+            <span class="attachments-icon"></span>
+            <h3 class="task-mini-title">Attachments</h3>
+          </div>
           <div v-if="task.checklists" class="task-section task-todo">
             <span class="description-icon"></span>
             <ul>
@@ -74,7 +78,9 @@
             <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <checkList @addchecklist="addTaskChecklist" />
             <datePicker />
+            <addAttachment @addAttachment="addAttachment" />
             <coverPicker @setCover="saveTaskCover" />
+            <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
           </div>
         </section>
       </section>
@@ -96,7 +102,9 @@ import checkList from "../cmps/check-list.vue";
 import datePicker from "../cmps/date-picker.vue";
 import coverPicker from "../cmps/cover.picker.vue";
 import miniUsers from "../cmps/mini-users.vue";
+import addAttachment from "../cmps/add-attachment.vue";
 import labelsPreview from "../cmps/labels-preview.vue";
+import archiveTask from "../cmps/archive-task.vue"
 import { utilService } from "../services/util.service";
 
 export default {
@@ -152,6 +160,29 @@ export default {
       this.task.labels = labels;
       this.updateTask()
     },
+    archiveTask(){
+      this.task.archivedAt = Date.now()
+      this.updateTask()
+    },
+    restoreTask(){
+      delete this.task.archivedAt 
+      this.updateTask()
+    },
+    async deleteTask(){
+      try{
+        await this.$store.dispatch({ type: "deleteTask", board:this.currBoard, taskId:this.task.id })
+        this.exitTask()
+      }
+      catch(err){
+        console.log(err)
+      }
+    },
+    addAttachment(attachment) {
+      console.log('here')
+      if(!this.task.attachments) this.task.attachments = []
+      this.task.attachments.push(attachment)
+      this.updateTask()
+    },
     addMember(members) {
       this.task.members = members;
       this.updateTask()
@@ -194,6 +225,8 @@ export default {
     coverPicker,
     miniUsers,
     labelsPreview,
+    addAttachment,
+    archiveTask
   },
 };
 </script>

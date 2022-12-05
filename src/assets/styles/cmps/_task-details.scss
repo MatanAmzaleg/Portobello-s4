@@ -126,8 +126,10 @@
       margin-bottom: 14px;
     }
     .header-icon,
+    .attachments-icon,
     .description-icon,
-    .activity-icon {
+    .activity-icon,
+    .archive-icon {
       font-family: trellicons;
       place-self: center;
       align-self: flex-start;
@@ -149,6 +151,13 @@
         content: "\e900";
       }
     }
+    .archive-icon:before {
+      content: "\e907";
+    }
+    .attachments-icon:before {
+      content: "\e908";
+      font-family: trellicons;
+  }
     .task-cover {
       height: 117px;
       border-radius: 3px 3px 0 0;

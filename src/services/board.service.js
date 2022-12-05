@@ -20,7 +20,8 @@ export const boardService = {
   getTaskById,
   getGroupById,
   saveTask,
-  getEmptyTask
+  getEmptyTask,
+  removeTask
 };
 window.boardService = boardService;
 
@@ -54,18 +55,29 @@ async function getGroupById(boardId, groupId) {
   }
 }
 
-function getTaskById(board,taskId){
+function getTaskById(board, taskId) {
   var task
   board.groups.forEach(group => {
-    group.tasks.forEach((t) =>{
-      if(t.id === taskId) {
-        
+    group.tasks.forEach((t) => {
+      if (t.id === taskId) {
+
         task = t
       }
     })
   });
-
   return task
+}
+function removeTask(board, taskId) {
+  let boardCopy = JSON.parse(JSON.stringify(board))
+  let taskIdx;
+  let groupIdx = boardCopy.groups.findIndex((group) =>
+    group.tasks.some((task, idx) => {
+      if (task.id === taskId) taskIdx = idx;
+      return task.id === taskId
+    }))
+    boardCopy.groups[groupIdx].tasks.splice(taskIdx,1)
+    return storageService.put(STORAGE_KEY, boardCopy)
+
 }
 
 function getTask(boardId, groupId, taskId) {
@@ -73,30 +85,30 @@ function getTask(boardId, groupId, taskId) {
     .then(board => board.groups.find(group => group.id === groupId))
     .then(group => group.tasks.find(task => task.id === taskId))
 }
-function removeTask(boardId, groupId, taskId) {
-  return storageService.remove(STORAGE_KEY, boardId)
-    .then(board => board.groups.find(group => group.id === groupId))
-    .then(group => group.tasks.find(task => task.id === taskId))
-}
+// function removeTask(boardId, groupId, taskId) {
+//   return storageService.remove(STORAGE_KEY, boardId)
+//     .then(board => board.groups.find(group => group.id === groupId))
+//     .then(group => group.tasks.find(task => task.id === taskId))
+// }
 function saveTask(boardId, groupId, taskToSave) {
-  if(taskToSave.id){
+  if (taskToSave.id) {
     return storageService.get(STORAGE_KEY, boardId)
-          .then(board =>{
-            let groupIdx  = board.groups.findIndex(group => group.id === groupId)
-            let taskIdx  = board.groups[groupIdx].tasks.findIndex(task => task.id === taskToSave.id)
-            board.groups[groupIdx].tasks[taskIdx] = taskToSave
-            return board
-          })
-          .then(newBoard => storageService.put(STORAGE_KEY,newBoard))
+      .then(board => {
+        let groupIdx = board.groups.findIndex(group => group.id === groupId)
+        let taskIdx = board.groups[groupIdx].tasks.findIndex(task => task.id === taskToSave.id)
+        board.groups[groupIdx].tasks[taskIdx] = taskToSave
+        return board
+      })
+      .then(newBoard => storageService.put(STORAGE_KEY, newBoard))
   }
-  else{
+  else {
     return storageService.get(STORAGE_KEY, boardId)
-    .then(board =>{
-      let groupIdx  = board.groups.findIndex(group => group.id === groupId)
-      board.groups[groupIdx].tasks.push(taskToSave)
-      return board
-    })
-    .then(newBoard => storageService.put(STORAGE_KEY,newBoard))
+      .then(board => {
+        let groupIdx = board.groups.findIndex(group => group.id === groupId)
+        board.groups[groupIdx].tasks.push(taskToSave)
+        return board
+      })
+      .then(newBoard => storageService.put(STORAGE_KEY, newBoard))
   }
 }
 
@@ -124,17 +136,17 @@ async function addBoardMsg(boardId, txt) {
 }
 
 
-function getEmptyTask(){
-  return{
-      status: "",priority: "",description: "",
-      comments: [],
-      checklists: [],
-      memberIds: [],
-      labelIds: [],
-      dueDate: '',
-      byMember: {},
-      style: {}
-    }
+function getEmptyTask() {
+  return {
+    status: "", priority: "", description: "",
+    comments: [],
+    checklists: [],
+    memberIds: [],
+    labelIds: [],
+    dueDate: '',
+    byMember: {},
+    style: {}
+  }
 }
 
 function getEmptyBoard() {
@@ -331,8 +343,8 @@ function getEmptyBoard() {
 }
 
 // test data
-    let boardie = data
-    storageService._save(STORAGE_KEY,boardie)
+    // let boardie = data
+    // storageService._save(STORAGE_KEY,boardie)
 // ; (async () => {
 //   setTimeout(async () => {
 //     // console.log(boardie[0]);

@@ -142,5 +142,14 @@ export const boardStore = {
         console.log(err);
       }
     },
+    async deleteTask({ commit }, { board, taskId }) {
+      console.log(taskId);
+      try {
+        const newBoard = await boardService.removeTask(board, taskId);
+        commit({ type: "updateBoard", newBoard });
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
 };
