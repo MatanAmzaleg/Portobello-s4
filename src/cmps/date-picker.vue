@@ -5,15 +5,10 @@
       <p>Date</p>
     </div>
       <template #content>
-      <div class="date-picker">
+      <div class="popper-content label-picker ">
       <popper-modal title="Date" />
-        <el-date-picker
-        v-model="value2"
-        placeholder="Pick a day"
-        :disabled-date="disabledDate"
-        :shortcuts="shortcuts"
-        :size="size"
-      />
+      <v-date-picker v-model="date" />
+
       </div>
       </template>
     </Popper>
@@ -30,7 +25,7 @@
       },
       data(){
           return{
-              currMembers: [],
+              date:'',
           }    
       },
       components:{
@@ -40,18 +35,18 @@
   </script>
   <style lang="scss">
     .date-picker{
-      color: var(--ds-text, #172b4d);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-  padding: 20px;
-        width: 310px;
-  background-color: var(--ds-surface-overlay, #ffffff);
-  border-radius: 3px;
-  box-shadow: var(--ds-shadow-overlay, 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08));
-  box-sizing: border-box;
-  outline: 0;
-  overflow: hidden;
-      text-align: center;
+  //     color: var(--ds-text, #172b4d);
+  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  // font-size: 14px;
+  // line-height: 20px;
+  // padding: 20px;
+  //       width: 310px;
+  // background-color: var(--ds-surface-overlay, #ffffff);
+  // border-radius: 3px;
+  // box-shadow: var(--ds-shadow-overlay, 0 8px 16px -4px rgba(9, 30, 66, 0.25), 0 0 0 1px rgba(9, 30, 66, 0.08));
+  // box-sizing: border-box;
+  // outline: 0;
+  // overflow: hidden;
+  //     text-align: center;
     }
   </style>
