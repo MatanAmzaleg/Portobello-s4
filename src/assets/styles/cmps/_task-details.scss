@@ -26,6 +26,14 @@
   background-color: white;
 }
 
+.task-date{
+  display: flex;
+  .date-input{
+    margin-top: 4px;
+    padding-right: 5px;
+  }
+}
+
 .task-popper-input {
   width: 90%;
   background-color: $clr4;

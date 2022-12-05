@@ -15,6 +15,9 @@ export const boardStore = {
     },
     emptyTask(){
       return boardService.getEmptyTask()
+    },
+    currTask({currTask}){
+      return currTask
     }
   },
   mutations: {
