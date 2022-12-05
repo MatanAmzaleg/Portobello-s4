@@ -117,12 +117,8 @@ import miniUsers from "../cmps/mini-users.vue"
 import addAttachment from "../cmps/add-attachment.vue"
 import labelsPreview from "../cmps/labels-preview.vue"
 import archiveTask from "../cmps/archive-task.vue"
-<<<<<<< HEAD
 import datePreview from "../cmps/date-preview.vue";
 import { utilService } from "../services/util.service";
-=======
-import { utilService } from "../services/util.service"
->>>>>>> b39f1a064e844a45c1bd511a23d0a4f8d8538a61
 
 export default {
   props: {
