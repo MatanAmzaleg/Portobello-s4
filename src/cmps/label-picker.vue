@@ -9,7 +9,7 @@
       <popperModal title="Labels" />
       <input class="search-input" placeholder="Search labels..." type="search">
       <div class="labels">
-      <p>Labels</p>
+      <p class="labels-title">Labels</p>
       <li v-for="label in labels">
       <div class="label">
         <input class="checkbox" :checked="checkLabel(label.id)" @input="addLabel(label.id)" type="checkbox">
