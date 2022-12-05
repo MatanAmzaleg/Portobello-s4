@@ -1,12 +1,20 @@
 <template lang="">
+              <Popper class="date-preview-popper" placement="top" offsetDistance="-100">
               <div class="task-date">
-              <input @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
-              <div class="task-option-btn">
+              <input @click.stop @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
+              <div class="task-option-btn large">
               <p>{{date}}</p>
+              <p class="task-status" v-if="status" :class="status">{{status}}</p>
               </div>
               </div>
+      <template #content>
+        <popper-calendar @removeDate="removeDate" @saveDate="saveDate"/>
+      </template>
+    </Popper>
 </template>
 <script>
+import dateFormat, { masks } from "dateformat";
+import popperCalendar from './popper-calendar.vue'
 export default {
     props:{
         dueDate:String,
@@ -17,23 +25,63 @@ export default {
     },
     data(){
         return{
-            isDone:'',
+            isDone:false,
         }
     },
     methods:{
         changeStatus(){
-        //    if(this.isDone) this.status = 'completed'
-        //    if()
-        //     this.$emit('saveStatus',this.isDone)
+        let newStatus
+           if(!this.isDone) newStatus = 'completed'
+           else(newStatus === '')
+           this.$emit('change-status',newStatus) 
+        },
+        saveDate(date){
+          this.$emit('save-date',date)
+        },
+        removeDate(){
+          this.$emit('remove-date')
         }
     },
     computed:{
+        status(){
+            const isoDate = new Date(this.dueDate);
+            if(this.isDone) return 'completed'
+            if(isoDate.getTime() - Date.now() >= 86349893) return null 
+            if(isoDate.getTime() - Date.now() < 86349893 && isoDate.getTime() - Date.now() > 0) return 'due-soon' 
+            return 'overdue'
+        },
         date(){
-            return new Date(this.dueDate).toLocaleDateString()
+            return dateFormat(new Date(this.dueDate), "mmm dd 'at' HH:MM");
         }
+    },
+    components:{
+        popperCalendar
     }
 }
 </script>
-<style lang="">
-    
+<style lang="scss">
+    .task-option-btn.large{
+        width: max-content;
+    }
+    .date-preview-popper{
+        width: fit-content;
+    }
+.task-status{
+    font-size: 12px;
+    color: white !important;
+    line-height: 16px;
+    padding: 0 4px;
+    border-radius: 2px;
+    margin: auto 0 auto 8px;
+}
+    .task-status.completed{
+        background-color: #61BD4F;
+    }
+    .task-status.due-soon{
+        background-color: #F2D600;
+        color: #172b4d !important;
+    }
+    .task-status.overdue{
+        background-color: #EB5A46;
+    }
 </style>

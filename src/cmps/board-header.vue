@@ -145,7 +145,6 @@ export default {
   mounted() {},
   methods: {
     setFilter() {
-      console.log(this.filterBy);
       this.$emit("setFilter", this.filterBy);
     },
     changeBoardName() {

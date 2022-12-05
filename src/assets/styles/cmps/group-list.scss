@@ -3,6 +3,7 @@
     overflow-x: auto;
     height: calc(100vh - 92px);
   }
+
   .group-container {
     display: flex;
     gap: 8px;
@@ -24,20 +25,44 @@
     }
 
     .task-preview {
+      .task-preview-info{
+        font-family: trellicons;
+       *{
+       font-size: 16px;
+       }
+        .watch-icon:before{
+            content: "\e969";
+        }
+        .description-icon:before {
+          content: "\e922";
+      }
+      .attachment-icon:before {
+        content: "\e908";
+    }
+    .checklist-icon:before {
+      content: "\e91a";
+  }
+      }
       .labels {
         display: flex;
         flex-wrap: wrap;
         gap: 4px;
-        margin-bottom: 4px;
+        // margin-bottom: 4px;
+
+        padding-top: 1px;
+
         .label {
           min-width: 40px;
           min-height: 8px;
           background-color: #67748a;
-          margin-top: 4px;
-          margin-bottom: 4px;
+          // margin-top: 4px;
+          // margin-bottom: 4px;
           padding-right: 0;
           padding-left: 0;
           border-radius: 4px;
+
+          margin-top: 4px;
+          margin-bottom: 7px;
         }
       }
     }
@@ -58,6 +83,7 @@
       margin-inline-end: 2px;
     }
   }
+
   .group {
     width: 272px;
     background-color: $clr19;
@@ -102,7 +128,8 @@
   }
 
   .padded-section {
-    padding: 5px 8px 5px;
+    // padding: 5px 8px 5px;
+    padding: 5px 8px 4px;
   }
 
   .task {
@@ -125,13 +152,14 @@
       text-align: left;
       height: 28px;
       font-size: 14px;
-      margin: 2px 0 8px 8px;
+      margin: 1px 0 8px 10px;
       padding: 4px 8px;
       border-radius: 3px;
       color: #7e8a9d;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 
       .add-task-icon {
-        margin-inline-end: 3px;
+        // margin-inline-end: 3px;
         width: 16px;
         height: 16px;
       }
@@ -195,6 +223,7 @@
     height: fit-content;
     background-color: #7e8a9d5d;
     border-radius: 4px;
+
     .add-group-btn {
       display: flex;
       align-items: center;
@@ -207,11 +236,13 @@
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       font-weight: 500;
     }
+
     .add-task-icon2 {
       padding-inline-end: 3px;
       height: 16px;
       width: 16px;
     }
+
     .add-group-input {
       width: 240px;
       height: 32px;

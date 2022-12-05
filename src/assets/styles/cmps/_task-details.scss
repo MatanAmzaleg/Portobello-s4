@@ -35,9 +35,42 @@
   }
 }
 
+.task-comment {
+  * {
+    color: black !important;
+  }
+
+  a {
+    color: $clr21 !important;
+    font-size: 12px;
+    display: block;
+  }
+
+  .member-info {
+    display: flex;
+    gap: 5px;
+
+    .comment-sender {
+      font-weight: bolder;
+    }
+  }
+
+}
+
+.member-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  justify-self: center;
+}
+
 .content-container {
   padding: 0 12px 12px;
   text-align: start;
+}
+
+.task-date {
+  width: max-content;
 }
 
 .task-popper-input {
@@ -61,6 +94,7 @@
 
 .task-description-title {
   display: flex;
+  align-items: center;
   gap: 11px;
 }
 
@@ -80,9 +114,9 @@
     outline: solid 2px $clr9;
     border-radius: 3px;
   }
-  
 
-  &:focus-visible{
+
+  &:focus-visible {
     outline: none
   }
 }
@@ -114,8 +148,12 @@
     content: "Add a more detailed description...";
   }
 
-  &:focus-visible{
+  &:focus-visible {
     outline: none
+  }
+
+  &.description-info-full {
+    background-color: transparent !important;
   }
 }
 
@@ -129,6 +167,12 @@
   svg {
     margin-block-start: 6px;
     justify-self: center;
+  }
+
+  .task-checklist-title{
+    display: flex;
+    align-items: center;
+    gap: 11px;
   }
 
   .progress-container {
@@ -234,10 +278,12 @@
     .task-activity-wrapper {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       width: 100%;
       margin-bottom: 14px;
     }
 
+<<<<<<< HEAD
     .header-icon,
     .attachments-icon,
     .description-icon,
@@ -303,6 +349,8 @@
       content: "\e914";
     }
 
+=======
+>>>>>>> ad2a23b6381229505bf313b6603536650c676818
     .task-cover {
       height: 117px;
       border-radius: 3px 3px 0 0;
@@ -369,13 +417,21 @@
             Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
           font-size: 12px;
           margin-top: -4px;
+          color: $clr21;
+          font-weight: 600;
+        }
+
+        .task-option-btn {
+          p {
+            color: $clr27;
+          }
         }
       }
     }
 
     .task-exit-btn {
       border-radius: 50%;
-      color: var(--ds-icon, #42526e);
+      color: $clr27;
       height: 32px;
       margin: 4px;
       overflow: hidden;
