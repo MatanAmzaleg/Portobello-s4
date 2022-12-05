@@ -15,14 +15,14 @@
         <section class="content">
           <div class="task-section task-info">
             <span></span>
-            <div class="task-info-wrapper" v-if="(task.memberIds?.length || task.labelIds?.length ||task.dueDate?.length)">
+            <div class="task-info-wrapper" v-if="(getTaskLabels?.length || getTaskMembers?.length)">
               <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
               <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
               </div>
           </div>
           <div class="task-section">
-            <span></span>
-            <datePreview v-if="task.dueDate?.length" :dueDate="task.dueDate" :status="task.status" />
+          <span></span>
+            <datePreview v-if="task.dueDate" :dueDate="task.dueDate" :status="task.status" @changeStatus="updateTaskStatus" />
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>
@@ -216,6 +216,11 @@ export default {
     },
     saveTaskCover(color) {
       this.task.style = { bgColor: color }
+      this.updateTask()
+    },
+    updateTaskStatus(status) {
+      console.log('status',status);
+      this.task.status = status
       this.updateTask()
     },
     saveTaskMembers(members) {
