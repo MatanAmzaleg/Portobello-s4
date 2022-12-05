@@ -1,0 +1,72 @@
+.members-input-search {
+  border: none;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px var(--ds-border-input, #dfe1e6);
+  line-height: 20px;
+  outline: none;
+  padding: 8px 12px;
+  width: 100%;
+  margin-top: 4px;
+  background-color: #FAFBFC;
+
+  &:hover{
+    background-color: #EBECF0;
+  }
+}
+.board-members-title {
+  color: var(--ds-text-subtle,#5e6c84);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  margin: 16px 0 8px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+  text-align: left;
+}
+.board-members {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.member-picker {
+  width: 304px;
+  border-radius: 3px;
+  text-align: center;
+  background-color: white;
+
+.members-section{
+    padding: 0 12px 12px;
+}
+  .member {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    position: relative;
+    gap: 5px;
+    height: 40px;
+
+    &:hover{
+      background-color: #F5F6F8;
+      border-radius: 3px;
+    }
+
+    .member-name{
+      font-weight: 400;
+      font-size:14px ;
+      
+    }
+
+    .checkedIcon{
+      color: #54627C;
+      padding:11px ;
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      right:0 ;
+    }
+  }
+  .member-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}

@@ -246,6 +246,8 @@
     .checklist-icon,
     .member-icon,
     .label-icon,
+    .vi-icon
+    
     .card-cover-icon {
       font-family: trellicons;
       place-self: center;
@@ -264,6 +266,10 @@
 
     .checklist-icon:before {
       content: "\e91a";
+    }
+
+    .vi-icon:before {
+      content: "\e916";
     }
 
     .header-icon {
