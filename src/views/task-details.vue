@@ -46,8 +46,8 @@
             <h3 class="task-mini-title">Attachments</h3>
           </div>
           <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo">
-            <span class="description-icon"></span>
-            <h3 class="task-mini-title">{{ checklist.title }}</h3>
+            <span class="checklist-icon"></span>
+            <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
             <div class="progress-container">
               <el-progress :percentage="checklistPercentage(checklist.id)"
               :format="checklistFormat" width="200px"></el-progress>
@@ -125,12 +125,15 @@ export default {
     currBoard: Object,
   },
   async created() {
+    console.log('this.currBoard', this.currBoard)
+    console.log('this.$store.getters.currBoard', this.$store.getters.currBoard)
     let { taskId } = this.$route.params
     let task = await this.$store.dispatch({
       type: "loadTask",
       board: this.currBoard,
       taskId,
     })
+    console.log('task created', task)
     this.task = JSON.parse(JSON.stringify(task))
   },
   data() {
@@ -231,6 +234,7 @@ export default {
         title: checklistsTitle,
         todos: []
       }
+      console.log('this.task', this.task)
       this.task.checklists.push(checklist)
       this.updateTask()
     },

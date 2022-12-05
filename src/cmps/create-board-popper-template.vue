@@ -161,6 +161,7 @@ export default {
                 await this.$store.dispatch({ type: 'createNewBoard', board })
                 showSuccessMsg('Board added')
                 this.boardToAdd = boardService.getEmptyBoard()
+                this.closeModal()
             } catch (err) {
                 console.log(err)
                 showErrorMsg('Cannot add board')
