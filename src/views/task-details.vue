@@ -52,11 +52,12 @@
                 {{ todo.title }}
               </li>
               <button
-                v-if="(this.currChecklist.id === checklist.id && !this.currChecklist.isAddItem || this.currChecklist.id !== checklist.id)"
+                v-if="currChecklist.id === checklist.id && !currChecklist.isAddItem || currChecklist.id !== checklist.id"
                 class="btn-add" @click="updateTxtAddTodo(checklist.id, true)">Add an item</button>
-              <div v-if="this.currChecklist.id === checklist.id && this.currChecklist.isAddItem" class="todo-edit">
-                <textarea class="textarea-edit" ref="todoTxtarea" placeholder="Add an item"></textarea>
-                <el-button @click="updateTxtAddTodo(checklist.id, false)" type="primary">Save</el-button>
+              <div v-if="currChecklist.id === checklist.id && currChecklist.isAddItem" class="todo-edit">
+                <textarea class="textarea-edit" v-model="currChecklist.task" ref="todoTxtarea" @input="updateCurrTaskInfo"
+                  placeholder="Add an item"></textarea>
+                <el-button @click="addTaskChecklistTodo()" type="primary">Add</el-button>
                 <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
               </div>
             </ul>
@@ -133,7 +134,8 @@ export default {
       isEdit: false,
       currChecklist: {
         id: "",
-        isAddItem: false
+        isAddItem: false,
+        task: ""
       },
     };
 
@@ -217,6 +219,20 @@ export default {
       this.task.checklists.push(checklist);
       this.updateTask()
     },
+    addTaskChecklistTodo() {
+      this.task.checklists.find(checklist => checklist.id === this.currChecklist.id).todos.push(
+        {
+          id: utilService.makeId(),
+          title: this.currChecklist.task,
+          isDone: false
+        },
+      )
+      setTimeout(() => {
+          this.$refs.todoTxtarea[0].focus()
+        }, 50)
+      this.currChecklist.task = ""
+      this.updateTask();
+    },
     updateTxtAddTodo(checklistId, isAddItem) {
       if (isAddItem) {
         setTimeout(() => {
@@ -225,6 +241,9 @@ export default {
       }
       this.currChecklist.id = checklistId
       this.currChecklist.isAddItem = isAddItem
+    },
+    updateCurrTaskInfo(ev) {
+      this.currChecklist.task = ev.target.value
     }
   },
   computed: {
