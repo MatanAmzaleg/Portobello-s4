@@ -13,7 +13,8 @@
 <script>
 export default {
     props:{
-        memberIds:Array
+        memberIds:Array,
+        isHeader: Boolean
     },
     data(){
       return{
@@ -23,6 +24,7 @@ export default {
       }
     },
     created(){
+      if(this.isHeader)this.noHeader = this.isHeader
       if(!this.memberIds){
         this.usersToShow = this.$store.getters.currBoard.members
         this.noHeader = true

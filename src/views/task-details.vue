@@ -30,7 +30,8 @@
             <div class="task-description-wrapper">
               <div class="task-description-title">
                 <h3 class="task-mini-title">Description</h3>
-                <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button>
+                <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
+                <el-button v-if="task.description?.length" @click="isEdit = true" class="task-btn">Edit</el-button>
               </div>
               <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
                 class="description-info" :class="descriptionTxtAreaClass">

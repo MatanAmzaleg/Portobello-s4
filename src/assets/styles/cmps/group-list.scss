@@ -25,6 +25,24 @@
     }
 
     .task-preview {
+      .task-preview-info{
+        font-family: trellicons;
+       *{
+       font-size: 16px;
+       }
+        .watch-icon:before{
+            content: "\e969";
+        }
+        .description-icon:before {
+          content: "\e922";
+      }
+      .attachment-icon:before {
+        content: "\e908";
+    }
+    .checklist-icon:before {
+      content: "\e91a";
+  }
+      }
       .labels {
         display: flex;
         flex-wrap: wrap;
