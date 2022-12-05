@@ -43,16 +43,13 @@
             <span class="attachments-icon"></span>
             <h3 class="task-mini-title">Attachments</h3>
           </div>
-          <div v-if="task.checklists" class="task-section task-todo">
+          <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo">
             <span class="description-icon"></span>
-            <ul>
-              <li v-for="checklist in task.checklists" :key="checklist.id">
-                {{ checklist.title }}
-                <ul>
-                  <li v-for="todo in checklist.todos" :key="todo.id">
-                    {{ todo.title }}
-                  </li>
-                </ul>
+            {{ checklist.title }}
+            <ul class="checklist">
+              <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
+                <input type="checkbox" />
+                {{ todo.title }}
               </li>
             </ul>
           </div>
@@ -160,26 +157,26 @@ export default {
       this.task.labels = labels;
       this.updateTask()
     },
-    archiveTask(){
+    archiveTask() {
       this.task.archivedAt = Date.now()
       this.updateTask()
     },
-    restoreTask(){
-      delete this.task.archivedAt 
+    restoreTask() {
+      delete this.task.archivedAt
       this.updateTask()
     },
-    async deleteTask(){
-      try{
-        await this.$store.dispatch({ type: "deleteTask", board:this.currBoard, taskId:this.task.id })
+    async deleteTask() {
+      try {
+        await this.$store.dispatch({ type: "deleteTask", board: this.currBoard, taskId: this.task.id })
         this.exitTask()
       }
-      catch(err){
+      catch (err) {
         console.log(err)
       }
     },
     addAttachment(attachment) {
       console.log('here')
-      if(!this.task.attachments) this.task.attachments = []
+      if (!this.task.attachments) this.task.attachments = []
       this.task.attachments.push(attachment)
       this.updateTask()
     },
