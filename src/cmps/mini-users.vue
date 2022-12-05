@@ -7,7 +7,7 @@
           <img class="main-task-member-img" :src="user.imgUrl" alt="member" />
         </li>
       </ul>
-      <button class="plus-btn">
+      <button v-if="users" class="plus-btn">
         <font-awesome-icon class="plus-icon" icon="fa-solid fa-plus" />
       </button>
     </div>
