@@ -14,8 +14,8 @@
       <div v-if="taskExtra(item)" class="task-preview-info">
       <span v-if="item.isWatched" class="watch-icon"></span>
       <span v-if="item.description?.length" class="description-icon"></span>
-      <span v-if="item.attachments?.length" class="attachment-icon"></span>
-      <span v-if="item.checklists?.length" class="checklist-icon"></span>
+      <span v-if="item.attachments?.length" class="attachment-icon">{{item.attachments.length}}</span>
+      <span v-if="item.checklists.length" class="checklist-icon">{{getTodoStatus(item.checklists)}}</span>
       <mini-users :isHeader="true" v-if="item.memberIds" :memberIds="item.memberIds" />
       </div>
     </div>
@@ -45,6 +45,17 @@ export default {
     },
     taskExtra(item){
      return (item.description?.length || item.attachments?.length || item.checklists?.length || item.memberIds?.length || item.isWatched)
+    },
+    getTodoStatus(checklists){
+      console.log(checklists);
+      if(!checklists.length) return
+      let doneTasks = 0
+      checklists.forEach(checklist =>{
+          doneTasks += checklist.todos.filter(todo => todo.isDone).length
+      })
+      let allTasks = 0
+      checklists.forEach(checklist => allTasks += checklist.todos.length)
+      return `${doneTasks}/${allTasks}` 
     }
   },
   computed: {
