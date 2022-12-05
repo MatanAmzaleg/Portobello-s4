@@ -1,13 +1,20 @@
 <template lang="">
+              <Popper placement="top" offsetDistance="-100">
               <div class="task-date">
-              <input @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
-              <div class="task-option-btn">
+              <input @click.stop @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
+              <div class="task-option-btn large">
               <p>{{date}}</p>
-              <p class="task-status" :class="status">{{status}}</p>
+              <p class="task-status" v-if="status" :class="status">{{status}}</p>
               </div>
               </div>
+      <template #content>
+        <popper-calendar @removeDate="removeDate" @saveDate="saveDate"/>
+      </template>
+    </Popper>
 </template>
 <script>
+import dateFormat, { masks } from "dateformat";
+import popperCalendar from './popper-calendar.vue'
 export default {
     props:{
         dueDate:String,
@@ -27,6 +34,12 @@ export default {
            if(!this.isDone) newStatus = 'completed'
            else(newStatus === '')
            this.$emit('change-status',newStatus) 
+        },
+        saveDate(date){
+          this.$emit('save-date',date)
+        },
+        removeDate(){
+          this.$emit('remove-date')
         }
     },
     computed:{
@@ -38,12 +51,18 @@ export default {
             return 'overdue'
         },
         date(){
-            return new Date(this.dueDate).toLocaleTimeString()
+            return dateFormat(new Date(this.dueDate), "mmm dd 'at' HH:MM");
         }
+    },
+    components:{
+        popperCalendar
     }
 }
 </script>
 <style lang="scss">
+    .task-option-btn.large{
+        width: max-content;
+    }
 .task-status{
     font-size: 12px;
     color: white !important;

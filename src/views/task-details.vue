@@ -22,7 +22,7 @@
           </div>
           <div class="task-section">
           <span></span>
-            <datePreview v-if="task.dueDate" :dueDate="task.dueDate" :status="task.status" @changeStatus="updateTaskStatus" />
+            <datePreview v-if="task.dueDate" :dueDate="task.dueDate" :status="task.status" @changeStatus="updateTaskStatus" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>
