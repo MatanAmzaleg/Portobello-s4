@@ -347,6 +347,8 @@
     .task-cover {
       height: 117px;
       border-radius: 3px 3px 0 0;
+      object-fit:contain;
+      background-position: center;
     }
 
     .task-title {
