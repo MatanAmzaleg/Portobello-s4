@@ -14,28 +14,31 @@
   font-size: 14px;
   background-color: white;
 }
+
 .task-btn {
   background-color: $clr23 !important;
   border: none !important;
   border-radius: 2px !important;
 }
-.popper{
+
+.popper {
   width: 304px;
   background-color: white;
 }
+
 .task-popper-input {
-  width: 100%;
+  width: 90%;
   background-color: $clr4;
   border: none;
   border-radius: 3px;
   box-shadow: inset 0 0 0 2px $clr22;
   box-sizing: border-box;
   line-height: 20px;
-  margin-bottom: 12px;
+  margin: 10px 12px;
   outline: none;
   padding: 8px 12px;
   transition-duration: 85ms;
-  transition-property: background-color,border-color,box-shadow;
+  transition-property: background-color, border-color, box-shadow;
 
   &:focus {
     background-color: $clr4;
@@ -47,6 +50,7 @@
   display: flex;
   gap: 11px;
 }
+
 .description-input {
   width: calc(100% - 18px);
   height: 50px;
@@ -57,12 +61,14 @@
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   border: none;
   resize: none;
+
   &:focus {
     background-color: #fff;
     outline: solid 2px $clr9;
     border-radius: 3px;
   }
 }
+
 .description-info {
   margin-bottom: 10px;
   margin-top: 17px;
@@ -76,13 +82,16 @@
   overflow-wrap: break-word;
   cursor: pointer;
   min-height: 50px;
+
   &:focus {
     background-color: #fff;
     box-shadow: inset 0 0 0 2px $clr9;
   }
+
   &:hover {
     background-color: $clr25;
   }
+
   &:empty:before {
     content: "Add a more detailed description...";
   }
@@ -94,11 +103,28 @@
   display: grid;
   grid-template-columns: 50px 1fr;
   padding-inline-start: 6px;
+
   svg {
     margin-block-start: 6px;
     justify-self: center;
   }
+
+  .checklist {
+    grid-column: 1 / span 2;
+
+    .todo {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+
+      input {
+        height: 16px;
+        width: 16px;
+        margin: auto;
+      }
+    }
+  }
 }
+
 .task-edit-screen {
   height: 100%;
   width: 100%;
@@ -109,6 +135,7 @@
   justify-content: center;
   top: 0;
   left: 0;
+
   .task-edit-container {
     position: relative;
     display: flex;
@@ -119,12 +146,14 @@
     background-color: #f4f5f7;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
+
     .task-activity-wrapper {
       display: flex;
       justify-content: space-between;
       width: 100%;
       margin-bottom: 14px;
     }
+
     .header-icon,
     .attachments-icon,
     .description-icon,
@@ -136,28 +165,34 @@
       font-size: 24px;
       line-height: 1.3;
     }
+
     .header-icon {
       &::before {
         content: "\e912";
       }
     }
+
     .description-icon {
       &::before {
         content: "\e922";
       }
     }
+
     .activity-icon {
       &::before {
         content: "\e900";
       }
     }
+
     .archive-icon:before {
       content: "\e907";
     }
+
     .attachments-icon:before {
       content: "\e908";
       font-family: trellicons;
-  }
+    }
+
     .task-cover {
       height: 117px;
       border-radius: 3px 3px 0 0;
@@ -166,6 +201,7 @@
     .task-title {
       margin-top: 22px;
       width: 100%;
+
       input {
         outline: none;
         border: none;
@@ -175,25 +211,30 @@
         font-size: 20px;
         border-radius: 3px;
         color: $clr5;
+
         &:focus {
           background-color: #fff;
           outline: 1px solid blue;
         }
       }
     }
+
     .task-content {
       display: flex;
       flex-direction: row;
       width: 100%;
       gap: 16px;
+
       .content {
         width: 75%;
+
         .task-section {
           .task-info-wrapper {
             display: flex;
             align-items: center;
             height: 72px;
           }
+
           &.task-info {
             grid-column: 2;
           }
@@ -216,6 +257,7 @@
         }
       }
     }
+
     .task-exit-btn {
       border-radius: 50%;
       color: var(--ds-icon, #42526e);
@@ -232,11 +274,12 @@
       display: grid;
       place-content: center;
       cursor: pointer;
+
       &:hover {
         background-color: rgba(172, 171, 171, 0.2);
       }
 
-      .margin{
+      .margin {
         margin-inline-start: 5px;
       }
     }
