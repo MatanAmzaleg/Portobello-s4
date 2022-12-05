@@ -3,12 +3,12 @@
     <div class="cover" v-if="item.style?.bgColor" :style="{backgroundColor:item.style.bgColor}"></div>
     <div class="padded-section">
 
-      <div class="labels" v-if="item.labelIds">
+      <div class="labels" v-if="(item.labelIds?.length > 0)">
         <span
-        class="label"
-        v-for="label in item.labelIds"
-        :style="{ 'background-color': labelColor(label) }"
-        ></span>
+          class="label"
+          v-for="label in item.labelIds"
+          :style="{ 'background-color': labelColor(label) }"
+          ></span>
       </div>
       <span class="task-router-link">{{ item.title }}</span>
     </div>
