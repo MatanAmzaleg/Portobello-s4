@@ -1,6 +1,6 @@
 <template lang="">
   <Popper>
-  <div class="task-option-btn">
+  <div class="task-option-btn btn-members">
     <span class="icon-actions member-icon"></span>      
      <p>Members</p>
   </div>
