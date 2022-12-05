@@ -15,7 +15,7 @@
       <span v-if="item.isWatched" class="watch-icon"></span>
       <span v-if="item.description?.length" class="description-icon"></span>
       <span v-if="item.attachments?.length" class="attachment-icon">{{item.attachments.length}}</span>
-      <span v-if="item.checklists.length" class="checklist-icon">{{getTodoStatus(item.checklists)}}</span>
+      <span v-if="item.checklists?.length" class="checklist-icon">{{getTodoStatus(item.checklists)}}</span>
       <mini-users :isHeader="true" v-if="item.memberIds" :memberIds="item.memberIds" />
       </div>
     </div>

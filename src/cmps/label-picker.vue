@@ -20,7 +20,7 @@
           <div v-if="isEditMode" class="chosen-label">
             <label
               class="label-color"
-              :style="{ 'background-color': chosenLabel.color + '80' }"
+              :style="{ 'background-color': chosenLabel.color + '60' }"
               ><div
                 class="circle"
                 :style="{ 'background-color': chosenLabel.color }"
@@ -61,7 +61,7 @@
               />
               <label
                 class="label-color"
-                :style="{ 'background-color': label.color + '80' }"
+                :style="{ 'background-color': label.color + '60' }"
                 ><div
                   class="circle"
                   :style="{ 'background-color': label.color }"

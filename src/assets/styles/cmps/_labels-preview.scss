@@ -1,24 +1,54 @@
 .label-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  max-width: 100%;
+  margin-bottom: 10px;
+  .label-preview-header {
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 8px;
+    margin-bottom: 4px;
+  }
+  .labels-preview-list {
     display: flex;
-    flex-direction: column;
-    align-self: center;
-    max-width: 100%;
-    margin-bottom: 10px;
-    .label-preview-header {
-      font-size: 12px;
-      font-weight: 600;
-      margin-right: 8px;
-      margin-bottom: 4px;
-    }
-    .labels-preview-list {
-      display: flex;
-    }
-  
-    .label-preview {
-      width: 16px;
-      height: 32px;
-      border-radius: 0.1875em;
-      margin: 0 0.25em 0 0;
-      padding: 0px 0.75em;
+
+    .plus-btn {
+      padding: 8px;
+      background-color: #eaecf0;
+      border-radius: 3px;
+
+      &:hover {
+        background-color: #e2e4e9;
+      }
+
+      .plus-icon {
+        color: #52617b;
+        height: 16px;
+        width: 16px;
+        margin: 0;
+      }
     }
   }
+
+  .label-preview {
+    width: 48px;
+    height: 32px;
+    border-radius: 0.1875em;
+    margin: 0 0.25em 0 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      filter: contrast(60%);
+    }
+
+    .circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      margin-inline-start: 8px;
+    }
+  }
+}

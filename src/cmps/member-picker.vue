@@ -15,7 +15,7 @@
                 <div @click="addMember(member._id)" v-for="member in boardMembers" class="member">
                   <img class="member-img" :src="member.imgUrl">
                   <p class="member-name">{{member.fullname}}</p>
-                  <font-awesome-icon v-if="members.includes(member._id)" class="checkedIcon" icon="fa-solid fa-check" />
+                  <font-awesome-icon v-if="members?.includes(member._id)" class="checkedIcon" icon="fa-solid fa-check" />
                 </div>
               </div>
             </div>

@@ -1,0 +1,57 @@
+.main-task-members-container {
+    margin-right: 20px;
+    ul {
+      list-style: none;
+    }
+  
+    .main-task-members-header {
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 8px;
+      margin-bottom: 4px;
+    }
+    flex-direction: column;
+    padding-top: 3px;
+    .main-task-members-header {
+      margin-top: 11px;
+      font-size: 12px;
+      margin-bottom: 15px;
+    }
+    .main-task-members {
+      display: flex;
+      align-items: center;
+      margin-top: -0.8rem;
+      margin-left: -0.1rem;
+      margin-bottom: 20px;
+
+      >*{
+        margin-inline: 3px;
+      }
+      .main-task-member-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        position: relative;
+        top: 3px;
+        cursor: pointer;
+      }
+
+      .plus-btn{
+        padding: 8px;
+        background-color: #EAECF0;
+        border-radius: 50%;
+        height: 32px;
+
+        &:hover{
+          background-color: #E2E4E9;
+        }
+
+        .plus-icon{
+          color: #52617b;
+          height: 16px;
+          width: 16px;
+          margin: 0;
+        }
+      }
+    }
+  }
