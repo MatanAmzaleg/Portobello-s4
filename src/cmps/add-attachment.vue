@@ -1,7 +1,7 @@
 <template lang="">
     <Popper class="popper">
     <div class="task-option-btn">
-      <font-awesome-icon class="icon" icon="fa-solid fa-tag" />
+      <span class="attachments-icon icon-actions"></span>
       <p>Attachment</p>
     </div>
       <template #content>
@@ -96,7 +96,6 @@ export default {
     padding: 8px 14px;
   }
   .attach-link-input{
-    -webkit-appearance: none;
     background-color: var(--ds-background-input,#fafbfc);
     border: none;
     border-radius: 3px;

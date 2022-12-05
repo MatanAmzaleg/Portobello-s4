@@ -1,7 +1,7 @@
 <template lang="">
   <Popper>
     <div class="task-option-btn">
-      <font-awesome-icon class="icon" icon="fa-solid fa-tag" />
+      <span class="label-icon icon-actions"></span>
       <p>Labels</p>
     </div>
     <template :show="showPopper" #content>
