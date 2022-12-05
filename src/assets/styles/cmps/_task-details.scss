@@ -80,6 +80,11 @@
     outline: solid 2px $clr9;
     border-radius: 3px;
   }
+  
+
+  &:focus-visible{
+    outline: none
+  }
 }
 
 .description-info {
@@ -107,6 +112,10 @@
 
   &:empty:before {
     content: "Add a more detailed description...";
+  }
+
+  &:focus-visible{
+    outline: none
   }
 }
 
