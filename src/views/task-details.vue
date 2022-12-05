@@ -30,7 +30,6 @@
             <div class="task-description-wrapper">
               <div class="task-description-title">
                 <h3 class="task-mini-title">Description</h3>
-                <!-- <el-button v-if="!isEdit" @click="isEdit = true" class="task-btn">Edit</el-button> -->
                 <el-button v-if="task.description?.length" @click="isEdit = true" class="task-btn">Edit</el-button>
               </div>
               <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
@@ -53,14 +52,15 @@
             <span class="checklist-icon"></span>
             <div class="task-checklist-title">
               <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
-              <Popper class="popper">
+              <Popper class="popper-btn delete-popper" offsetSkid="116">
                 <el-button class="task-btn">Delete</el-button>
-                <template #content="{close}">
+                <template #content="{ close }">
                   <div class="popper-content popper-template">
-                    <popperModal :title="'Delete Checklist?'" @closeModal="close"/>
+                    <popperModal :title="'Delete Checklist?'" @closeModal="close" />
                     <div class="content">
                       <p>Deleting a checklist is permanent and there is no way to get it back.</p>
-                      <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">Delete checklist</el-button>
+                      <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">Delete
+                        checklist</el-button>
                     </div>
                   </div>
                 </template>
@@ -74,7 +74,22 @@
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
                 <input class="checkbox-helper" type="checkbox" :checked="todo.isDone"
                   @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)" />
-                {{ todo.title }}
+                <div class="todo-content">
+                  {{ todo.title }}
+                  <Popper class="popper-btn" offsetSkid="116">
+                    <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
+                    <template #content="{ close }">
+                      <div class="popper-content popper-template">
+                        <popperModal :title="'Delete Checklist?'" @closeModal="close" />
+                        <div class="content">
+                          <p>Deleting a checklist is permanent and there is no way to get it back.</p>
+                          <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">Delete
+                            checklist</el-button>
+                        </div>
+                      </div>
+                    </template>
+                  </Popper>
+                </div>
               </li>
               <button
                 v-if="currChecklist.id === checklist.id && !currChecklist.isAddItem || currChecklist.id !== checklist.id"

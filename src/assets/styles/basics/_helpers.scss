@@ -163,8 +163,9 @@
 
 // popper helper 
 
-.popper {
-  z-index: 50;
+.popper-btn {
+  z-index: 0;
+  width: auto;
 }
 
 .popper-template {

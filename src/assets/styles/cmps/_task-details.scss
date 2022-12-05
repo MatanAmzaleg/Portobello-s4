@@ -24,6 +24,7 @@
   background-color: $clr23 !important;
   border: none !important;
   border-radius: 3px !important;
+  color: inherit !important;
 
   span {
     display: inline-flex;
@@ -33,10 +34,28 @@
     font-weight: 400;
   }
 
+  &:hover {
+    color: inherit !important;
+    background-color: $clr25 !important;
+  }
+
   &.delete-btn {
     width: -webkit-fill-available;
-    color: $clr4;
+    color: $clr4 !important;
     background-color: $clr14 !important;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 16px 0px 12px 0;
+
+    &:hover {
+      background-color: $clr28 !important;
+    }
+
+    .close {
+      right: 14px;
+      top: 6px;
+    }
   }
 }
 
@@ -182,15 +201,22 @@
   grid-template-columns: 50px 1fr;
   padding-inline-start: 6px;
 
-  svg {
-    margin-block-start: 6px;
-    justify-self: center;
+  &.task-activity {
+    svg {
+      margin-block-start: 6px;
+      justify-self: center;
+    }
   }
 
   .task-checklist-title {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 11px;
+
+    .delete-popper{
+      z-index: 50;
+    }
   }
 
   .progress-container {
@@ -241,7 +267,24 @@
 
       &:hover {
         background-color: $clr23;
-        // background-color: lightblue;
+      }
+
+      .todo-content{
+        display: flex;
+        justify-content: space-between;
+
+        .ellipsis-icon {
+          color: #707c90;
+          padding: 8px;
+          width: 15px;
+          height: 13px;
+          border-radius: 3px;
+          margin-right: 5px;
+
+          &:hover {
+            background-color: #dadbe2;
+          }
+        }
       }
     }
 
@@ -431,8 +474,6 @@
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
-    // color: #6f7c91;
     font-weight: 400;
-    padding: 0 2px;
   }
 }
