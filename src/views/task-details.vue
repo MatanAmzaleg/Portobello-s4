@@ -72,7 +72,7 @@
           <div class="task-actions">
             <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
-            <labelPicker @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
+            <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <checkList @addchecklist="addTaskChecklist" />
             <datePicker />
             <addAttachment @addAttachment="addAttachment" />
@@ -205,6 +205,9 @@ export default {
       this.task.checklists.push(checklist);
       this.updateTask()
     },
+    updateBoard(board){
+      this.$store.dispatch({type:"updateBoard", board})
+    }
   },
   computed: {
     getTaskLabels() {
