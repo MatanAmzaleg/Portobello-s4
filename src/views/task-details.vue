@@ -223,8 +223,41 @@ export default {
       this.task.checklists.push(checklist)
       this.updateTask()
     },
+    addTaskChecklistTodo() {
+      this.task.checklists.find(checklist => checklist.id === this.currChecklist.id).todos.push(
+        {
+          id: utilService.makeId(),
+          title: this.currChecklist.task,
+          isDone: false
+        },
+      )
+      setTimeout(() => {
+        this.$refs.todoTxtarea[0].focus()
+      }, 50)
+      this.currChecklist.task = ""
+      this.updateTask()
+    },
     updateBoard(board){
       this.$store.dispatch({type:"updateBoard", board})
+    },
+    updateTxtAddTodo(checklistId, isAddItem) {
+      if (isAddItem) {
+        setTimeout(() => {
+          this.$refs.todoTxtarea[0].focus()
+        }, 50)
+      }
+      this.currChecklist.id = checklistId
+      this.currChecklist.isAddItem = isAddItem
+    },
+    updateCurrTaskInfo(ev) {
+      this.currChecklist.task = ev.target.value
+    },
+    onTodoIsDoneChanged(checklistId, todoId, ev) {
+      const isChecked = ev.target.checked
+      this.task.checklists.find(checklist => checklist.id === checklistId).todos.find(
+      todo => todo.id === todoId
+      ).isDone = isChecked
+      this.updateTask()
     },
     checklistPercentage(checklistId){
       const allTasks = this.task.checklists.find(checklist => checklist.id === checklistId).todos.length
@@ -233,7 +266,7 @@ export default {
       return Math.round((doneTasks/ allTasks)  * 100)
     },
     checklistFormat(percentage){
-      return percentage === 100 ? 'Full' : `${percentage}%`
+      return percentage? percentage === 100 ? 'Full' : `${percentage}%` : `0%`
     },
   },
   computed: {

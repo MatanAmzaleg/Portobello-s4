@@ -26,25 +26,30 @@
   background-color: white;
 }
 
-.task-popper-input {
-  width: 90%;
-  background-color: $clr4;
-  border: none;
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 2px $clr22;
-  box-sizing: border-box;
-  line-height: 20px;
-  margin: 10px 12px;
-  outline: none;
-  padding: 8px 12px;
-  transition-duration: 85ms;
-  transition-property: background-color, border-color, box-shadow;
+.content-container{
+  padding: 0 12px 12px;
+  text-align: start;
 
-  &:focus {
+  .task-popper-input {
+    width: 100%;
     background-color: $clr4;
-    box-shadow: inset 0 0 0 2px $clr9;
+    border: none;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 2px $clr22;
+    box-sizing: border-box;
+    line-height: 20px;
+    outline: none;
+    padding: 8px 12px;
+    transition-duration: 85ms;
+    transition-property: background-color, border-color, box-shadow;
+    
+    &:focus {
+      background-color: $clr4;
+      box-shadow: inset 0 0 0 2px $clr9;
+    }
   }
 }
+
 
 .task-description-title {
   display: flex;

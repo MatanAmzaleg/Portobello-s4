@@ -7,11 +7,11 @@
       <template #content>
       <div class="popper-content label-picker">
         <popperModal title="Add Checklist" />
-        <p>Title</p>
-        <input class="task-popper-input" @input="onTitleChanged">
-        <!-- <p>Copy items from...</p>
-        <input class="task-popper-input" type="search"> -->
-        <button @click="AddCheckList">Add</button>
+        <div class="content-container">
+          <p>Title</p>
+          <input class="task-popper-input" @input="onTitleChanged">
+          <button @click="AddCheckList">Add</button>
+        </div>
       </div>
       </template>
     </Popper>
