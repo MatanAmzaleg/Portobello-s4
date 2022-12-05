@@ -92,7 +92,7 @@
             <div class="task-activity-wrapper">
               <h3 class="task-mini-title">Activity</h3>
               <el-button class="task-btn" @click="(showComments = !showComments)">{{ showComments ? 'Hide Details' :
-                  'Show Details'
+                  'Show details'
               }}</el-button>
             </div>
             <font-awesome-icon icon="fa-regular fa-user" />

@@ -1,3 +1,7 @@
+.header-icon {
+  margin-top: 1px;
+}
+
 .activity-comment {
   border: none;
   overflow: hidden;
@@ -12,6 +16,7 @@
   word-wrap: break-word;
   resize: none;
   font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   background-color: white;
 }
 
@@ -19,6 +24,14 @@
   background-color: $clr23 !important;
   border: none !important;
   border-radius: 3px !important;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
 
   &.delete-btn {
     width: -webkit-fill-available;
@@ -128,10 +141,9 @@
 }
 
 .description-info {
-  margin-bottom: 10px;
-  margin-top: 17px;
-  padding: 7px 2px;
-  padding-inline: 12px;
+  margin-bottom: 19px;
+  margin-top: 12px;
+  padding: 7px 13px !important;
   color: $clr5;
   border-radius: 4px;
   font-size: 14px;
@@ -139,7 +151,7 @@
   font-family: NunitoSans-regular;
   overflow-wrap: break-word;
   cursor: pointer;
-  min-height: 50px;
+  min-height: 42px;
 
   &:focus {
     background-color: #fff;
@@ -164,7 +176,7 @@
 }
 
 .task-section {
-  margin-bottom: 15px;
+  margin-bottom: 13px;
   width: 100%;
   display: grid;
   grid-template-columns: 50px 1fr;
@@ -286,7 +298,7 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .task-cover {
@@ -299,6 +311,7 @@
     .task-title {
       margin-top: 22px;
       width: 100%;
+      margin-bottom: 0px;
 
       input {
         outline: none;
@@ -306,9 +319,16 @@
         background-color: transparent;
         width: 92%;
         height: 30px;
-        font-size: 20px;
         border-radius: 3px;
-        color: $clr5;
+        font-size: 20px;
+        font-weight: 600;
+        height: 32px;
+        margin: -4px -8px;
+        padding: 4px 8px;
+        resize: none;
+        font-size: 20px;
+        color: #172b4d;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 
         &:focus {
           background-color: #fff;
@@ -366,7 +386,7 @@
           &.btn-members {
             margin-top: 5px !important;
           }
-          
+
           p {
             color: $clr27;
           }
@@ -413,7 +433,8 @@
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
-    color: #6f7c91;
+    // color: #6f7c91;
     font-weight: 400;
+    padding: 0 2px;
   }
 }
