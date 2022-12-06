@@ -43,7 +43,7 @@
     width: -webkit-fill-available;
     color: $clr4 !important;
     background-color: $clr14 !important;
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
     font-weight: 400;
     margin: 16px 0px 12px 0;
@@ -68,8 +68,8 @@
   display: flex;
 
   .date-input {
-    margin-top: 15px;
-    padding-right: 5px;
+    margin-top: 16px;
+    margin-left: 0px;
   }
 }
 
@@ -213,10 +213,6 @@
     align-items: center;
     justify-content: space-between;
     gap: 11px;
-
-    .delete-popper{
-      z-index: 50;
-    }
   }
 
   .progress-container {
@@ -269,8 +265,9 @@
         background-color: $clr23;
       }
 
-      .todo-content{
+      .todo-content {
         display: flex;
+        align-items: center;
         justify-content: space-between;
 
         .ellipsis-icon {
@@ -347,7 +344,7 @@
     .task-cover {
       height: 117px;
       border-radius: 3px 3px 0 0;
-      object-fit:contain;
+      object-fit: contain;
       background-position: center;
     }
 

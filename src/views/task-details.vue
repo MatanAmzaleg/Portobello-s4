@@ -79,12 +79,10 @@
                   <Popper class="popper-btn" offsetSkid="116">
                     <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
                     <template #content="{ close }">
-                      <div class="popper-content popper-template">
+                      <div class="popper-content popper-template delete-popper">
                         <popperModal :title="'Delete Checklist?'" @closeModal="close" />
                         <div class="content">
-                          <p>Deleting a checklist is permanent and there is no way to get it back.</p>
-                          <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">Delete
-                            checklist</el-button>
+                          <el-button @click="deleteChecklistTodo(checklist.id, todo.id)" class="task-btn delete-btn">Delete</el-button>
                         </div>
                       </div>
                     </template>
@@ -290,6 +288,11 @@ export default {
     deleteChecklist(checklistsId) {
       const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistsId)
       this.task.checklists.splice(idx, 1)
+      this.updateTask()
+    },
+    deleteChecklistTodo(checklistsId, todoId) {
+      const idx = this.task.checklists.find(checklist => checklist.id === checklistsId).todos.findIndex(todo => todo.id === todoId)
+      this.task.checklists.find(checklist => checklist.id === checklistsId).todos.splice(idx, 1)
       this.updateTask()
     },
     addChecklistTodo() {
