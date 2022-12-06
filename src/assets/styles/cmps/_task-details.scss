@@ -555,7 +555,19 @@
         }
 
         .task-option-btn {
-
+          position: relative;
+          .check-icon:before {
+            background-color: #61bd4f;
+            width: 20px;
+            justify-self: center;
+            font-family: trellicons;
+            content: "\e916";
+            padding-left:  2px;
+            padding-right: 2px;
+            color: white;
+            position: absolute;
+            left: 85%;
+          }
           &.btn-members {
             margin-top: 5px !important;
           }

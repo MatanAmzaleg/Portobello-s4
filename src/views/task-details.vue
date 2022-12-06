@@ -211,6 +211,10 @@
             <addAttachment @addAttachment="addAttachment" />
             <coverPicker @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
+            <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched? 'watched' : ''">
+              <span class="archive-icon icon-actions"></span>
+             <p>Watch <span class="check-icon-container" v-if="task.isWatched"><span class="check-icon"></span></span></p>
+            </div>
           </div>
         </section>
       </section>
@@ -475,6 +479,10 @@ export default {
       console.log(attachment);
       const attachIdx =  this.task.attachments.findIndex(attach => attach.id === attachment.id)
       this.task.attachments.splice(attachIdx,1,attachment)
+      this.updateTask()
+    },
+    toggleWatch(){
+      this.task.isWatched = !this.task.isWatched
       this.updateTask()
     }
   },
