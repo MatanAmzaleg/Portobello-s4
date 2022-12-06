@@ -14,7 +14,7 @@
           :scene="scene"
           :currBoard="currBoard"
           :column="column"
-          >helo</group-preview
+          ></group-preview
         >
       </Draggable>
       <article class="add-group">
