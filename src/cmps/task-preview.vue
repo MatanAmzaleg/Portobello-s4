@@ -2,8 +2,8 @@
   <section class="task-preview">
     <div
       class="cover"
-      v-if="item.style?.bgColor"
-      :style="{ backgroundColor: item.style.bgColor }"
+      v-if="Object.keys(item.style).length !== 0"
+      :style="item.style?.bgColor ? { 'background-color': item.style.bgColor } : { 'background-image': 'url( ' + item.style.imgUrl + ')', 'height': '100px' , 'background-position':'center', 'background-size':'cover'}"
     ></div>
     <div class="padded-section">
       <div class="labels" v-if="item.labelIds?.length > 0">
