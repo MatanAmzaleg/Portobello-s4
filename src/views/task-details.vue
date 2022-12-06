@@ -331,6 +331,7 @@ export default {
       this.updateTask()
     },
     saveTaskLabels(labels) {
+      console.log(labels)
       this.task.labelIds = labels
       this.updateTask()
     },
