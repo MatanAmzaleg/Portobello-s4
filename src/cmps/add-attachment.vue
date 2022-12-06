@@ -5,7 +5,7 @@
       <p>Attachment</p>
     </div>
       <template #content="{close}">
-      <div class="popper-content add-attachment label-picker">
+      <div class="popper-content add-attachment">
         <popperModal title="Attach from..." @closeModal="close"/>
         <label>
       Computer
