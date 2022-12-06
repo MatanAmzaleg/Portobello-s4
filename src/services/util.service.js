@@ -38,9 +38,7 @@ async function fetchListOfPhotos (query = '', page= '1') {
       return img.urls.regular
     })
     res.forEach(img => imgs.push(img))
-    
     saveToStorage(STORAGE_KEY, imgs)
-    console.log('imgs', imgs)
   } catch (err) {
     console.log('Cannot load photos', err)
     throw err
