@@ -39,6 +39,31 @@
     background-color: $clr25 !important;
   }
 
+  &.delete-btn-task {
+    width: -webkit-fill-available;
+    text-align: start !important;
+    color: #172b4d !important;
+    background-color: transparent !important;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 0px !important;
+    margin-bottom: 8px;
+
+    span {
+      width: 100%;
+    }
+
+    &:hover {
+      background-color: #091e4214 !important;
+    }
+
+    .close {
+      right: 14px;
+      top: 6px;
+    }
+  }
+
   &.delete-btn {
     width: -webkit-fill-available;
     color: $clr4 !important;
@@ -514,7 +539,7 @@
     font-size: 16px;
     font-weight: 600;
     color: $clr5;
-    
+
     .edit-checklist {
       display: flex;
       gap: 10px;
