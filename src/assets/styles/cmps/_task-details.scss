@@ -513,7 +513,8 @@
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 16px;
     font-weight: 600;
-
+    color: $clr5;
+    
     .edit-checklist {
       display: flex;
       gap: 10px;
@@ -525,5 +526,6 @@
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
     font-weight: 400;
+    color: $clr21;
   }
 }

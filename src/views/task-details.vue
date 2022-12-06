@@ -40,7 +40,7 @@
               <div v-else class="details-edit">
                 <textarea @input="updateTask" v-model="task.description" class="textarea-edit"
                   placeholder="Add a more detailed description..."></textarea>
-                <el-button @click="(isEdit = false)" type="primary">Save</el-button>
+                <el-button class="add-save-btn" @click="(isEdit = false)" type="primary">Save</el-button>
                 <el-button @click="(isEdit = false)">Cancel</el-button>
               </div>
             </div>
@@ -64,7 +64,10 @@
                     @keyup.enter="updateCurrChecklisTitle(checklist.id)">
                   </textarea>
                   <div class="edit-checklist">
-                    <el-button @click="updateCurrChecklisTitle(checklist.id)" type="primary">
+                    <el-button 
+                      @click="updateCurrChecklisTitle(checklist.id)" 
+                      class="add-save-btn"
+                      type="primary">
                       Save
                     </el-button>
                     <button>
@@ -115,7 +118,7 @@
                 />
                 <div 
                   class="todo-content" 
-                  :class="currChecklist.todo.isEditTodo ? 'edit-todo-content' : ''"
+                  :class="(currChecklist.todo.isEditTodo && currChecklist.todo.id === todo.id) ? 'edit-todo-content' : ''"
                 >
                   <div 
                     v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)" 
@@ -132,6 +135,7 @@
                     v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)">
                     <el-button 
                       @click="updateCurrTodoTitle(checklist.id, todo.id)" 
+                      class="add-save-btn"
                       type="primary">
                       Save
                     </el-button>
@@ -144,7 +148,7 @@
                     v-if="(!currChecklist.todo.id || currChecklist.todo.id !== todo.id || (currChecklist.todo.id === todo.id && !currChecklist.todo.isEditTodo))"
                     @click="onEditChecklistTodo(checklist.id, todo.id, true)" 
                     class="todo-edit">
-                      {{ todo.title }}
+                      <p :style="todo.isDone ? {textDecoration: 'line-through'} : ''">{{ todo.title }}</p>
                   </div>
                   <Popper class="popper-btn" offsetSkid="116">
                     <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
@@ -177,7 +181,7 @@
                     @input="updateCurrTaskInfo" 
                     placeholder="Add an item">
                   </textarea>
-                  <el-button @click="addChecklistTodo()" type="primary">Add</el-button>
+                  <el-button class="add-save-btn" @click="addChecklistTodo()" type="primary">Add</el-button>
                   <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
               </div>
             </ul>
