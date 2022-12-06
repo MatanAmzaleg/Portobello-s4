@@ -3,7 +3,10 @@
     <div class="group">
       <div class="group-title">
         <h2 class="text-lg">{{ column.title }}</h2>
-        <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
+        <popperEditOptions requestedTitle="Group actions" @delete="deleteGroup(column.id)"/>
+
+
+        <!-- <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /> -->
       </div>
       <!-- column -->
       <task-list
@@ -56,6 +59,7 @@ import { utilService } from "../services/util.service";
 import taskDetails from "../views/task-details.vue";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import taskList from "./task-list.vue";
+import popperEditOptions from "./popper-edit-options.vue";
 // import { applyDrag, generateItems, generateWords } from "../utils/helpers";
 export default {
   name: "group-preview",
@@ -78,7 +82,7 @@ export default {
       this.$store.dispatch({ type: "loadBoards" });
     } catch {}
   },
-  components: { Container, Draggable, taskDetails, taskList },
+  components: { Container, Draggable, taskDetails, taskList, popperEditOptions },
   methods: {
     changeAddStatus(groupId) {
       setTimeout(() => {
@@ -113,6 +117,12 @@ export default {
     addBoard(board) {
       this.$emit("addBoard", board);
     },
+    deleteGroup(groupId){
+      const board = JSON.parse(JSON.stringify(this.currBoard));
+      let groupIdx = board.groups.findIndex(group => group.id === groupId)
+      board.groups.splice(groupIdx,1)
+      this.$store.dispatch({type: 'updateBoard',board})
+    }
   },
 };
 </script>

@@ -70,12 +70,14 @@ export default {
       const label = this.$store.getters.currBoard.labels.find((l) => {
         return l.id === id;
       });
+      if (!label) return
       return label.color;
     },
     labelText(id) {
       const label = this.$store.getters.currBoard.labels.find(
         (l) => l.id === id
       );
+      if (!label) return
       return label.title;
     },
     taskExtra(item) {

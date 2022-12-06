@@ -8,9 +8,9 @@
       <div class="popper-content label-picker">
         <popperModal title="Add Checklist" @closeModal="close"/>
         <div class="content-container">
-          <p>Title</p>
+          <label>Title</label>
           <input class="task-popper-input" @input="onTitleChanged">
-          <button @click="AddCheckList">Add</button>
+          <el-button class="add-save-btn add-save-btn2" @click="AddCheckList" type="primary">Add</el-button>
         </div>
       </div>
       </template>

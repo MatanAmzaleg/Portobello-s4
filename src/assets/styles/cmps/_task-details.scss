@@ -19,40 +19,47 @@
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   background-color: white;
 }
-.task-attachments{
+
+.task-attachments {
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
-  .task-attachment-preview{
+
+  .task-attachment-preview {
     max-width: 100%;
     height: 80px;
     display: flex;
     gap: 15px;
     font-family: trellicons;
     color: $clr21;
-    .attachment-info p{
+
+    .attachment-info p {
       display: flex;
       gap: 5px;
     }
-    .img-preview{
+
+    .img-preview {
       width: 110px;
       height: 80px;
-      .attachment-img{
+
+      .attachment-img {
         height: 100%;
         max-width: 100%;
       }
     }
-    .attachment-preview{
+
+    .attachment-preview {
       width: 110px;
       display: grid;
       place-content: center;
       background-color: $clr23;
     }
+
     .attachment-icon:before {
       font-size: 25px;
       content: "\e908";
-  }
+    }
   }
 }
 
@@ -166,6 +173,17 @@
 .content-container {
   padding: 0 12px 12px;
   text-align: start;
+
+  label {
+    color: $clr21;
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 16px;
+    margin-bottom: 4px;
+    margin-top: 11px;
+    margin-left: 1px;
+  }
 }
 
 .task-date {
@@ -185,6 +203,10 @@
   transition-duration: 85ms;
   transition-property: background-color, border-color, box-shadow;
 
+  &:hover {
+    background-color: $clr19;
+  }
+
   &:focus {
     background-color: $clr4;
     box-shadow: inset 0 0 0 2px $clr9;
@@ -198,7 +220,7 @@
 }
 
 .textarea-edit {
-  width: calc(100% - 18px);
+  width: calc(100% - 45px);
   height: 50px;
   padding: 8px 12px;
   margin-top: 17px;
@@ -233,6 +255,7 @@
   font-weight: 600;
   line-height: 28px;
   color: $clr2;
+  overflow: hidden;
 
   &:focus {
     background-color: #fff;
@@ -248,7 +271,8 @@
     font-size: 14px;
     font-weight: 400;
     line-height: 28px;
-    color: $clr2;  
+    color: $clr2;
+    overflow: hidden;
   }
 }
 
@@ -381,7 +405,7 @@
           gap: 10px;
         }
 
-        &.edit-todo-content{
+        &.edit-todo-content {
           flex-wrap: wrap;
         }
       }
@@ -410,7 +434,7 @@
     .todo-edit {
       width: 100%;
 
-      &.add-todo{
+      &.add-todo {
         margin-left: 20px;
       }
     }
@@ -441,6 +465,7 @@
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
     margin-bottom: 100px;
+
     .task-activity-wrapper {
       display: flex;
       justify-content: space-between;

@@ -31,6 +31,9 @@ export default {
     methods: {
         closeModal() {
             this.$emit('closeModal')
+            setTimeout(() => {
+                this.$emit('closeMoreModal')
+            }, 100)
         }
     }
 }

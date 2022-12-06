@@ -93,6 +93,7 @@
 <script>
 import popperModal from "./popper-modal.vue";
 import {utilService} from "../services/util.service"
+import { toHandlers } from "vue";
 export default {
   props: {
     labelIds: Array,
@@ -108,10 +109,8 @@ export default {
     };
   },
   created() {
-    console.log(this.labelIds);
-    this.currBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
+    this.currBoard = JSON.parse(JSON.stringify(this.getCurrBoard))
     this.filteredLabels = this.currBoard.labels
-    console.log(this.currBoard);
   },
   methods: {
     addLabel(labelId) {
@@ -162,12 +161,14 @@ export default {
         this.isEditMode = false
         return
       }else{
-        const labelIdx = this.currBoard.labels.findIndex(l=> l.id === this.chosenLabel.id)
-        this.currBoard.labels.splice(labelIdx, 1)
-        console.log(this.chosenLabel.id);
-        // this.currBoard.groups.forEach(g=> g.tasks.forEach(t=> t.labelIds.filter(label=> label !== this.chosenLabel.id)))
-        // console.log(this.currBoard);
-        this.$emit("updateBoard",this.currBoard)
+        //REMOVE LABEL FROM TASK
+        // let labelIdx = this.labelIds.findIndex(l => l.id === this.chosenLabel.id)
+        // let idx = this.currBoard.labels.findIndex(l => l.id === this.chosenLabel.id)
+        // this.currBoard.labels.splice(idx,1)
+        // this.$store.dispatch({type:'updateBoard',board: this.currBoard})
+        // const labelIdx = this.labelIds.findIndex(l=> l.id === this.chosenLabel.id)
+        // this.labelIds.splice(labelIdx,1)
+        // this.$emit('saveLabels',this.labelIds)
         this.isEditMode = false
       }
     },
@@ -182,6 +183,11 @@ export default {
   components: {
     popperModal,
   },
+  computed:{
+    getCurrBoard(){
+      return this.$store.getters.currBoard
+    }
+  }
 };
 </script>
 <style lang="scss"></style>

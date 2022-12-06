@@ -1,6 +1,6 @@
 <template>
     <div class="popper-content">
-        <popperModalHeaderVue title="Create board" :hasBackBtn="false" @closeModal="closeModal" />
+        <popperModalHeaderVue title="Create board" :hasBackBtn="false" @closeModal="closeModal" @closeMoreModal="closeMoreModal"/>
         <div class="content">
             <div class="content-board-img">
                 <div class="board-img"
