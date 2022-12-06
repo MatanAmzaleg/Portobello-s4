@@ -348,6 +348,10 @@
 
     .todo-edit {
       width: 100%;
+
+      &.add-todo{
+        margin-left: 20px;
+      }
     }
   }
 }
