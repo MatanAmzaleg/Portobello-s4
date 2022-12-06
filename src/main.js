@@ -16,10 +16,18 @@ import 'v-calendar/dist/style.css';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
+import Datepicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
+
+
+
+
 library.add(fas, far, fab)
 const app = createApp(rootCmp)
     .component('font-awesome-icon', FontAwesomeIcon)
 app.use(router)
+app.component('Datepicker', Datepicker);
 app.use(VCalendar, {})
 app.use(store)
 app.use(ElementPlus)

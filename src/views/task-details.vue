@@ -17,8 +17,8 @@
           <div class="task-section task-info">
             <span></span>
             <div class="task-info-wrapper" v-if="(getTaskLabels?.length || getTaskMembers?.length)">
-              <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
-              <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
+              <miniUsers @addMember="saveTaskMembers" v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
+              <labelsPreview @updateBoard="updateBoard" @saveLabel="saveTaskLabels" v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
             </div>
           </div>
           <div class="task-section">
@@ -80,9 +80,9 @@
                     <div class="popper-content popper-template">
                       <popperModal :title="'Edit Attachment'" @closeModal="close" />
                       <div class="content add-attachment">
-                        <input class="attach-link-input" :placeholder="attachment.link">
+                        <input class="attach-link-input" v-model="attachment.link">
                         <p>Link name (optional)</p>
-                        <input class="attach-link-input" :placeholder="attachment.name">
+                        <input class="attach-link-input" v-model="attachment.name">
                         <el-button class="attach-link-button" @click="updateAttachment(attachment)">Update</el-button>
                       </div>
                     </div>
@@ -211,6 +211,10 @@
             <addAttachment @addAttachment="addAttachment" />
             <coverPicker @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
+            <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched? 'watched' : ''">
+              <span class="archive-icon icon-actions"></span>
+             <p>Watch <span class="check-icon-container" v-if="task.isWatched"><span class="check-icon"></span></span></p>
+            </div>
           </div>
         </section>
       </section>
@@ -475,6 +479,10 @@ export default {
       console.log(attachment);
       const attachIdx =  this.task.attachments.findIndex(attach => attach.id === attachment.id)
       this.task.attachments.splice(attachIdx,1,attachment)
+      this.updateTask()
+    },
+    toggleWatch(){
+      this.task.isWatched = !this.task.isWatched
       this.updateTask()
     }
   },
