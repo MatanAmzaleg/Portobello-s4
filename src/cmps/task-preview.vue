@@ -3,7 +3,16 @@
     <div
       class="cover"
       v-if="Object.keys(item.style).length !== 0"
-      :style="item.style?.bgColor ? { 'background-color': item.style.bgColor } : { 'background-image': 'url( ' + item.style.imgUrl + ')', 'height': '100px' , 'background-position':'center', 'background-size':'cover'}"
+      :style="
+        item.style?.bgColor
+          ? { 'background-color': item.style.bgColor }
+          : {
+              'background-image': 'url( ' + item.style.imgUrl + ')',
+              height: '130px',
+              'background-position': 'center',
+              'background-size': 'cover',
+            }
+      "
     ></div>
     <div class="padded-section">
       <div class="labels" v-if="item.labelIds?.length > 0">
@@ -15,26 +24,31 @@
       </div>
       <span class="task-router-link">{{ item.title }}</span>
       <div v-if="taskExtra(item)" class="task-preview-info">
-      <div class="task-preview-content">
-        <span v-if="item.isWatched" class="watch-icon"></span>
-      <TaskDatePreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" :taskId="item.id"/>
-        <span v-if="item.description?.length" class="description-icon"></span>
-        <span v-if="item.attachments" class="attachment-icon">{{
-          item.attachments.length
-        }}</span>
-        <div class="task-preview-checklist" :class="isDone ? 'done' : ''">
-        <span v-if="item.checklists?.length" class="checklist-icon">
-          <span>{{getTodoStatus(item.checklists) }}</span>
-        </span>
+        <div class="task-preview-content">
+          <span v-if="item.isWatched" class="watch-icon"></span>
+          <TaskDatePreview
+            v-if="item.dueDate"
+            :status="item.status"
+            :date="item.dueDate"
+            :taskId="item.id"
+          />
+          <span v-if="item.description?.length" class="description-icon"></span>
+          <span v-if="item.attachments" class="attachment-icon">{{
+            item.attachments.length
+          }}</span>
+          <div class="task-preview-checklist" :class="isDone ? 'done' : ''">
+            <span v-if="item.checklists?.length" class="checklist-icon">
+              <span>{{ getTodoStatus(item.checklists) }}</span>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="task-preview-users">
-        <mini-users
-          :isHeader="true"
-          v-if="item.memberIds"
-          :memberIds="item.memberIds"
-        />
-      </div>
+        <div class="task-preview-users">
+          <mini-users
+            :isHeader="true"
+            v-if="item.memberIds"
+            :memberIds="item.memberIds"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -46,10 +60,10 @@ export default {
   props: {
     item: Object,
   },
-  data(){
-    return{
-      isDone:null
-    }
+  data() {
+    return {
+      isDone: null,
+    };
   },
   methods: {
     labelColor(id) {
@@ -81,7 +95,7 @@ export default {
       });
       let allTasks = 0;
       checklists.forEach((checklist) => (allTasks += checklist.todos.length));
-      this.isDone = allTasks === doneTasks ? true : false
+      this.isDone = allTasks === doneTasks ? true : false;
       return `${doneTasks}/${allTasks}`;
     },
   },
@@ -90,9 +104,9 @@ export default {
       return this.$store.getters.currBoard;
     },
   },
-  components:{
+  components: {
     miniUsers,
-    TaskDatePreview
-}
+    TaskDatePreview,
+  },
 };
 </script>

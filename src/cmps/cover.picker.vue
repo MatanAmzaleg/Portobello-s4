@@ -45,7 +45,7 @@
           <div class="cover-section">
             <input
               v-model="searchWord"
-              @input="sendApiReq(searchWord)"
+              @input="debounce(searchWord)"
               type="text"
               class="search-input"
               placeholder="Search Unsplash for photos"
@@ -131,6 +131,7 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard));
     this.covers = this.currBoard.covers;
+    this.debounce = utilService.debounce(this.sendApiReq)
   },
   methods: {
     setCover(color) {
@@ -139,9 +140,10 @@ export default {
     setImgAsCover(img) {
       this.$emit("setCover", img);
     },
-    sendApiReq(sug = "") {
+   async sendApiReq(sug = "") {
+      console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug)
       if (sug) this.searchWord = sug;
-      utilService.fetchListOfPhotos(this.searchWord) ;
+     await utilService.fetchListOfPhotos(this.searchWord) ;
       this.searchedImgs = utilService.getImgs(this.searchWord).slice(0,10)
     },
     restartParam(close){

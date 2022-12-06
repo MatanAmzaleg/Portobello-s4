@@ -1,37 +1,57 @@
 <template>
   <section v-if="board" class="board-header">
     <div class="left-section">
-      <span class="board-name-input" role="textbox" ref="span" @input="changeBoardName" contenteditable>
+      <span
+        class="board-name-input"
+        role="textbox"
+        ref="span"
+        @input="changeBoardName"
+        contenteditable
+      >
         {{ board.title }}
       </span>
       <button @click="changeBoardIsStarred" class="is-starred">
-        <font-awesome-icon class="star-icon" v-if="!board.isStarred" icon="fa-regular fa-star" />
-        <img class="yellow-star" src="../assets/icons/star.png" v-if="board.isStarred" alt="" />
+        <font-awesome-icon
+          class="star-icon"
+          v-if="!board.isStarred"
+          icon="fa-regular fa-star"
+        />
+        <img
+          class="yellow-star"
+          src="../assets/icons/star.png"
+          v-if="board.isStarred"
+          alt=""
+        />
       </button>
     </div>
     <div class="right-section">
       <popper>
         <button @click="changeIsModalOpen" class="filter-btn">
-          <img class="filter-icon" src="../assets/icons/filter-results-button.png" alt="" />
+          <img
+            class="filter-icon"
+            src="../assets/icons/filter-results-button.png"
+            alt=""
+          />
           Filter
         </button>
         <template #content="{ close }">
-          <!-- <div class="header">
-            <p>Filter</p>
-            <button class="x-mark-btn" @click="isModalOpen = false">
-              <font-awesome-icon
-              class="x-mark-icon"
-              icon="fa-solid fa-xmark"
-              />
-            </button>
-          </div> -->
           <div class="popper-content">
             <section class="filter-popper">
-              <popperModal :title="'Filter'" @closeModal="close" :hasBtnBack="false" />
+              <popperModal
+                :title="'Filter'"
+                @closeModal="close"
+                :hasBtnBack="false"
+              />
               <section class="keyword-filter">
                 <p class="mini-title">Keyword</p>
-                <input ref="filterInput" @input="setFilter" v-model="filterBy.txt" class="keyword-input" type="search"
-                  placeholder="Enter a keyword..." />
+                <input
+                  ref="filterInput"
+                  @input="setFilter"
+                  v-model="filterBy.txt"
+                  class="keyword-input"
+                  type="search"
+                  placeholder="Enter a keyword..."
+                />
                 <p class="smaller">Search cards, members, labels, and more.</p>
               </section>
               <section class="members-filter">
@@ -99,7 +119,7 @@
         <mini-users></mini-users>
       </div>
       |
-      <button class="ellipsis-btn">
+      <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
       </button>
     </div>
@@ -122,7 +142,7 @@ export default {
       boardName: "",
     };
   },
-  mounted() { },
+  mounted() {},
   methods: {
     setFilter() {
       this.$emit("setFilter", this.filterBy);
@@ -146,7 +166,7 @@ export default {
   },
   components: {
     miniUsers,
-    popperModal
+    popperModal,
   },
 };
 </script>

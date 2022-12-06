@@ -1,0 +1,84 @@
+.board-menu {
+    position: fixed;
+  right: 0;
+  width: 0;
+overflow-x: hidden;
+  background-color: #f4f5f7;
+  height: calc(100vh - 44px);
+  overflow: hidden;
+  z-index: 10;
+  
+
+  transition: 0.5s;
+  
+  h4 {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    padding-inline: 12px;
+
+    h3 {
+      font-weight: 600;
+      font-size: 16px;
+      color: #40506d;
+    }
+  }
+  hr {
+    width: 321px;
+    border: 0;
+    height: 1px;
+    background-color: #d5d9e0;
+    margin: auto;
+  }
+
+  .main-content {
+    padding: 12px 6px 8px 12px;
+    display: flex;
+    flex-direction: column;
+
+    .menu-opt{
+        padding: 6px;
+        height: 20px;
+        border-radius: 3px;
+        display: flex; 
+        cursor:pointer;
+        align-items: center;
+
+        &:hover{
+            background-color: #E2E4E9;
+        }
+    }
+
+    .menu-options {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+
+.is-menu-open{
+    .board-header{
+        margin-inline-end:  339px;
+        transition: 0.6s;
+    }
+
+    .group-list{
+       margin-inline-end:  339px;
+        transition: 0.6s;
+    }
+
+    .board-menu{
+        width: 339px;
+    }
+}
