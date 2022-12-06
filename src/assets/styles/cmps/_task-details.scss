@@ -19,6 +19,42 @@
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   background-color: white;
 }
+.task-attachments{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  .task-attachment-preview{
+    max-width: 100%;
+    height: 80px;
+    display: flex;
+    gap: 15px;
+    font-family: trellicons;
+    color: $clr21;
+    .attachment-info p{
+      display: flex;
+      gap: 5px;
+    }
+    .img-preview{
+      width: 110px;
+      height: 80px;
+      .attachment-img{
+        height: 100%;
+        max-width: 100%;
+      }
+    }
+    .attachment-preview{
+      width: 110px;
+      display: grid;
+      place-content: center;
+      background-color: $clr23;
+    }
+    .attachment-icon:before {
+      font-size: 25px;
+      content: "\e908";
+  }
+  }
+}
 
 .task-btn {
   background-color: $clr23 !important;
