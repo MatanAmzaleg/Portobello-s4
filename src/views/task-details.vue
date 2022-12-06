@@ -17,8 +17,8 @@
           <div class="task-section task-info">
             <span></span>
             <div class="task-info-wrapper" v-if="(getTaskLabels?.length || getTaskMembers?.length)">
-              <miniUsers v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
-              <labelsPreview v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
+              <miniUsers @addMember="saveTaskMembers" v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
+              <labelsPreview @updateBoard="updateBoard" @saveLabel="saveTaskLabels" v-if="task.labelIds?.length" :currBoard="currBoard" :labelIds="getTaskLabels" />
             </div>
           </div>
           <div class="task-section">
@@ -80,9 +80,9 @@
                     <div class="popper-content popper-template">
                       <popperModal :title="'Edit Attachment'" @closeModal="close" />
                       <div class="content add-attachment">
-                        <input class="attach-link-input" :placeholder="attachment.link">
+                        <input class="attach-link-input" v-model="attachment.link">
                         <p>Link name (optional)</p>
-                        <input class="attach-link-input" :placeholder="attachment.name">
+                        <input class="attach-link-input" v-model="attachment.name">
                         <el-button class="attach-link-button" @click="updateAttachment(attachment)">Update</el-button>
                       </div>
                     </div>

@@ -12,11 +12,18 @@
           :style="{ 'background-color': labelColor(id) }"
         ></div
       ></span>
+      <popper>
       <button class="plus-btn"><font-awesome-icon class="plus-icon" icon="fa-solid fa-plus" /></button>
+      <template #content>
+        <popperLabel @updateBoard="onSaveLabel" @saveLabel="addLabel" :labelIds="this.labelIds" />      
+      </template>
+      </popper>
+
     </div>
   </div>
 </template>
 <script>
+import popperLabel from './popper-label.vue';
 export default {
   props: {
     labelIds: Array,
@@ -34,7 +41,16 @@ export default {
       if (!label) return
       return label.title;
     },
+    addLabel(labels) {
+      this.$emit("save-label", labels);
+    },
+    onSaveLabel(board){
+      this.$emit("updateBoard",board)
+    },
   },
+  components:{
+    popperLabel
+  }
 };
 </script>
 <style lang="scss"></style>

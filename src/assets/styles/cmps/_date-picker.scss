@@ -31,3 +31,30 @@
     background-color: #e2e4e9;
   }
 }
+
+.save-btn{
+  box-shadow: none;
+  border: none;
+  background-color: $clr1;
+  padding: 9px 12px;
+  font-size: 14px !important;
+  color: var(--ds-text-inverse, #ffffff);
+  margin-bottom: 3px;
+  border-radius: 3px;
+  &:hover{
+    filter: contrast(85%);
+  }
+}
+
+.remove-btn{
+  margin-bottom: 5px;
+  box-shadow: none;
+  border: none;
+  background-color: $clr23;
+  padding: 6px 12px;
+  font-size: 14px !important;
+  color: $clr2;
+  &:hover{
+    background-color: $clr24;
+  }
+}

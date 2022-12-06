@@ -8,12 +8,18 @@
         </li>
       </ul>
       <button v-if="users" class="plus-btn">
+      <popper>
         <font-awesome-icon class="plus-icon" icon="fa-solid fa-plus" />
+        <template #content="{close}">
+        <popperMember @addMember="addMember" :members="this.memberIds" />
+      </template>
+      </popper>
       </button>
     </div>
   </div>
 </template>
 <script>
+import popperMember from './popper-member.vue';
 export default {
   props: {
     memberIds: Array,
@@ -35,6 +41,11 @@ export default {
     }
     this.allUsers = this.$store.getters.currBoard.members;
   },
+  methods:{
+    addMember(members){
+        this.$emit('addMember',members)
+      }
+  },
   computed: {
     users() {
       this.usersToShow = [];
@@ -47,6 +58,9 @@ export default {
       return this.memberIds ? this.usersToShow : [];
     },
   },
+  components:{
+    popperMember
+  }
 };
 </script>
 
