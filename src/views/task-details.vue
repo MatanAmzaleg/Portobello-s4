@@ -212,7 +212,7 @@
             <coverPicker @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
             <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched? 'watched' : ''">
-              <span class="archive-icon icon-actions"></span>
+              <span class="watch-icon icon-actions"></span>
              <p>Watch <span class="check-icon-container" v-if="task.isWatched"><span class="check-icon"></span></span></p>
             </div>
           </div>
