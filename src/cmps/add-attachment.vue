@@ -13,6 +13,8 @@
     </label>
         <p>Attach a link</p>
         <input class="attach-link-input" v-model="link">
+        <p v-if="link">Link name (optional)</p>
+        <input v-if="link" class="attach-link-input" v-model="name">
         <button class="attach-link-button" @click="addAttachment">Attach</button>
       </div>
       </template>
@@ -20,22 +22,36 @@
   </template>
 <script>
 import { uploadService } from '../services/upload.service.js'
+import { utilService } from '../services/util.service';
 import popperModal from './popper-modal.vue';
 export default {
   data() {
     return {
-      link: ''
+      link: '',
+      name:'',
+      isImg: null
     }
   },
   methods: {
     addAttachment() {
       if (!this.link) return
-      this.$emit('addAttachment',this.link)
+      let attachment = {}
+      attachment.id = utilService.makeId()
+      attachment.createdAt = Date.now()
+      attachment.link = this.link
+      if(this.isImg) attachment.type = 'img'
+      if(this.name) attachment.name = this.name
+      this.$emit('addAttachment',attachment)
     },
     async uploadAttachment(ev) {
+      try{
       const { secure_url} = await uploadService.uploadImg(ev)
-      const Attachment = secure_url
-      this.$emit('addAttachment', Attachment)
+      this.link = secure_url
+      this.isImg = true
+      }
+      catch(err){
+        console.log(err)
+      }
     }
   },
   components: {

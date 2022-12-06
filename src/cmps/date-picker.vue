@@ -36,10 +36,6 @@ export default {
 }
 </script>
 <style lang="scss">
-.vc-highlights{
-    background-color: #95A3B3 !important;
-}
-
 .date-picker {
   background-color: white;
   .el-button+.el-button {

@@ -1,6 +1,6 @@
 <template lang="">
   <div class="popper-content date-picker"> 
-    <v-date-picker color="gray" mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
+    <v-date-picker mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
     <el-button @click="saveDate" class=" save-btn" type="primary">Save</el-button>
     <el-button @click="removeDate" class="remove-btn">Remove</el-button> 
   </div>
