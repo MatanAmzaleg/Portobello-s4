@@ -1,7 +1,7 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div v-if="task" class="task-edit-container" @click.stop>
-      <div v-if="task.style?.length && Object.keys(task.style).length !== 0" class="task-cover"
+      <div v-if="task.style && Object.keys(task.style).length !== 0" class="task-cover"
         :style="task.style?.bgColor ? { 'background-color': task.style.bgColor } : { 'background-image': 'url( ' + task.style.imgUrl + ')' }">
         <span></span>
       </div>
@@ -336,6 +336,7 @@ export default {
       this.updateTask()
     },
     saveTaskCover(color) {
+      console.log('color', color)
       if (color.charAt(0) === '#') this.task.style = { bgColor: color }
       else this.task.style = { imgUrl: color }
       // console.log(color);

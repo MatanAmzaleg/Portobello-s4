@@ -9,6 +9,40 @@
         <div class="popper-content cover-picker">
           <popper-modal :title="titleMode" @closeModal="close"></popper-modal>
           <div class="cover-section">
+            <div class="half-cover-container">
+              <div class="cover-option">
+                <div class="cover-color" :style="currCover.charAt(0) !== '#' ? {
+                    'background-image': 'url(' + currCover + ')',
+                    'background-size': 'cover',
+                    'background-position': 'center'
+                  } : {
+                    'background-color': currCover,
+                  }"></div>
+                <div class="cover-content-example">
+                  <div class="line"></div>
+                  <div class="line line-2"></div>
+                  <div class="line-3">
+                    <div class="part"></div>
+                    <div class="part"></div>
+                  </div>
+                  <div class="circle"></div>
+                </div>
+              </div>
+              <div class="cover-option">
+                <div class="cover-color all" :style="currCover.charAt(0) !== '#' ? {
+                    'background-image': 'url(' + currCover + ')',
+                    'background-size': 'cover',
+                    'background-position': 'center'
+                  } : {
+                    'background-color': currCover,
+                  }">
+                  <div class="cover-content-example all">
+                    <div class="line"></div>
+                    <div class="line line-2"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <p class="mini-title1">Colors</p>
             <div class="colors">
               <span
@@ -29,6 +63,7 @@
                 :style="{
                   'background-image': 'url(' + img + ')',
                   'background-size': 'cover',
+                  'background-position': 'center'
                 }"
               >
               </span>
@@ -67,7 +102,7 @@
                   class="unsplash-img2"
                   :style="{
                     'background-image': 'url(' + img + ')',
-                    'background-size': 'cover',
+                    'background-size': 'contain',
                   }"
                 >
                 </span>
@@ -114,7 +149,8 @@ export default {
       covers: null,
       isSearchMode: false,
       searchWord: "",
-      searchedImgs:null,
+      searchedImgs: null,
+      currCover: "#fff",
       suggested: [
         "Productivity",
         "Perspective",
@@ -135,18 +171,20 @@ export default {
   },
   methods: {
     setCover(color) {
+      this.currCover = color
       this.$emit("setCover", color);
     },
     setImgAsCover(img) {
+      this.currCover = img
       this.$emit("setCover", img);
     },
-   async sendApiReq(sug = "") {
+    async sendApiReq(sug = "") {
       console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug)
       if (sug) this.searchWord = sug;
-     await utilService.fetchListOfPhotos(this.searchWord) ;
-      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0,10)
+      await utilService.fetchListOfPhotos(this.searchWord);
+      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 10)
     },
-    restartParam(close){
+    restartParam(close) {
       close
       this.searchedImgs = []
       this.searchWord = ""
@@ -168,15 +206,17 @@ export default {
       }
       return background;
     },
-    titleMode(){
-      if(!this.isSearchMode) return "cover"
+    titleMode() {
+      if (!this.isSearchMode) return "cover"
       else if (this.searchWord) return "Photo search"
       else return ""
-    }
+    },
   },
   components: {
     popperModal,
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+
+</style>
