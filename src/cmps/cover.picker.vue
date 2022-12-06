@@ -10,14 +10,24 @@
           <popper-modal :title="titleMode" @closeModal="close"></popper-modal>
           <div class="cover-section">
             <div class="half-cover-container">
-              <div class="cover-option">
-                <div class="cover-color" :style="currCover.charAt(0) !== '#' ? {
-                    'background-image': 'url(' + currCover + ')',
-                    'background-size': 'cover',
-                    'background-position': 'center'
-                  } : {
-                    'background-color': currCover,
-                  }"></div>
+              <div
+                @click="updateCoverMode('half', currCover)"
+                class="cover-option"
+              >
+                <div
+                  class="cover-color"
+                  :style="
+                    currCover.charAt(0) !== '#'
+                      ? {
+                          'background-image': 'url(' + currCover + ')',
+                          'background-size': 'cover',
+                          'background-position': 'center',
+                        }
+                      : {
+                          'background-color': currCover,
+                        }
+                  "
+                ></div>
                 <div class="cover-content-example">
                   <div class="line"></div>
                   <div class="line line-2"></div>
@@ -28,14 +38,24 @@
                   <div class="circle"></div>
                 </div>
               </div>
-              <div class="cover-option">
-                <div class="cover-color all" :style="currCover.charAt(0) !== '#' ? {
-                    'background-image': 'url(' + currCover + ')',
-                    'background-size': 'cover',
-                    'background-position': 'center'
-                  } : {
-                    'background-color': currCover,
-                  }">
+              <div
+                @click="updateCoverMode('full', currCover)"
+                class="cover-option"
+              >
+                <div
+                  class="cover-color all"
+                  :style="
+                    currCover.charAt(0) !== '#'
+                      ? {
+                          'background-image': 'url(' + currCover + ')',
+                          'background-size': 'cover',
+                          'background-position': 'center',
+                        }
+                      : {
+                          'background-color': currCover,
+                        }
+                  "
+                >
                   <div class="cover-content-example all">
                     <div class="line"></div>
                     <div class="line line-2"></div>
@@ -63,7 +83,7 @@
                 :style="{
                   'background-image': 'url(' + img + ')',
                   'background-size': 'cover',
-                  'background-position': 'center'
+                  'background-position': 'center',
                 }"
               >
               </span>
@@ -76,7 +96,10 @@
       </div>
       <div v-if="isSearchMode" class="cover-search-mode">
         <div class="popper-content cover-picker">
-          <popper-modal title="Photo search" @closeModal="restartParam(close)"></popper-modal>
+          <popper-modal
+            title="Photo search"
+            @closeModal="restartParam(close)"
+          ></popper-modal>
           <div class="cover-section">
             <input
               v-model="searchWord"
@@ -167,29 +190,32 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard));
     this.covers = this.currBoard.covers;
-    this.debounce = utilService.debounce(this.sendApiReq)
+    this.debounce = utilService.debounce(this.sendApiReq);
   },
   methods: {
     setCover(color) {
-      this.currCover = color
+      this.currCover = color;
       this.$emit("setCover", color);
     },
     setImgAsCover(img) {
-      this.currCover = img
+      this.currCover = img;
       this.$emit("setCover", img);
     },
     async sendApiReq(sug = "") {
-      console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug)
+      console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug);
       if (sug) this.searchWord = sug;
       await utilService.fetchListOfPhotos(this.searchWord);
-      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 10)
+      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 10);
     },
     restartParam(close) {
-      close
-      this.searchedImgs = []
-      this.searchWord = ""
-      this.isSearchMode = false
-    }
+      close;
+      this.searchedImgs = [];
+      this.searchWord = "";
+      this.isSearchMode = false;
+    },
+    updateCoverMode(coverMode, currCover) {
+      this.$emit("setCover", currCover, coverMode);
+    },
   },
   computed: {
     imgs() {
@@ -207,9 +233,9 @@ export default {
       return background;
     },
     titleMode() {
-      if (!this.isSearchMode) return "cover"
-      else if (this.searchWord) return "Photo search"
-      else return ""
+      if (!this.isSearchMode) return "cover";
+      else if (this.searchWord) return "Photo search";
+      else return "";
     },
   },
   components: {
@@ -217,6 +243,4 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

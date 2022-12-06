@@ -2,19 +2,36 @@
   <section class="task-preview">
     <div
       class="cover"
-      v-if="Object.keys(item.style).length !== 0"
+      v-if="(Object.keys(item.style).length !== 0 && item.style?.mode !== 'full')"
       :style="
         item.style?.bgColor
           ? { 'background-color': item.style.bgColor }
           : {
               'background-image': 'url( ' + item.style.imgUrl + ')',
-              height: '130px',
+              height: '80px',
               'background-position': 'center',
               'background-size': 'cover',
             }
       "
-    ></div>
-    <div class="padded-section">
+    >
+    </div>
+    <div
+      class="cover"
+      v-if="item.style?.mode === 'full'"
+      :style="
+        item.style?.bgColor
+          ? { 'background-color': item.style.bgColor , height: '56px',}
+          : {
+              'background-image': 'url( ' + item.style.imgUrl + ')',
+              height: '256px',
+              'background-position': 'center',
+              'background-size': 'cover',
+            }
+      "
+    >
+      <p class="item-title-full">{{ item.title }}</p>
+    </div>
+    <div v-if="item.style?.mode !== 'full'" class="padded-section">
       <div class="labels" v-if="item.labelIds?.length > 0">
         <span
           class="label"
@@ -70,14 +87,14 @@ export default {
       const label = this.$store.getters.currBoard.labels.find((l) => {
         return l.id === id;
       });
-      if (!label) return
+      if (!label) return;
       return label.color;
     },
     labelText(id) {
       const label = this.$store.getters.currBoard.labels.find(
         (l) => l.id === id
       );
-      if (!label) return
+      if (!label) return;
       return label.title;
     },
     taskExtra(item) {
