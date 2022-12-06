@@ -16,7 +16,7 @@
       <span class="task-router-link">{{ item.title }}</span>
       <div v-if="taskExtra(item)" class="task-preview-info">
         <span v-if="item.isWatched" class="watch-icon"></span>
-      <checklistPreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" />
+      <TaskDatePreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" />
         <span v-if="item.description?.length" class="description-icon"></span>
         <span v-if="item.attachments?.length" class="attachment-icon">{{
           item.attachments.length
@@ -35,21 +35,16 @@
 </template>
 <script>
 import miniUsers from "./mini-users.vue";
-import checklistPreview from './checklist-preview.vue';
+import TaskDatePreview from "./task-date-preview.vue";
 export default {
   props: {
     item: Object,
   },
-  created() {
-    console.log(this.item);
-  },
   methods: {
     labelColor(id) {
-      console.log(id);
       const label = this.$store.getters.currBoard.labels.find((l) => {
         return l.id === id;
       });
-      console.log(label);
       return label.color;
     },
     labelText(id) {
@@ -68,7 +63,6 @@ export default {
       );
     },
     getTodoStatus(checklists) {
-      console.log(checklists);
       if (!checklists.length) return;
       let doneTasks = 0;
       checklists.forEach((checklist) => {
@@ -85,7 +79,8 @@ export default {
     },
   },
   components:{
-    miniUsers
-  }
+    miniUsers,
+    TaskDatePreview
+}
 };
 </script>
