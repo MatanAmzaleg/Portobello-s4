@@ -133,8 +133,8 @@ export default {
     computed: {
         imgs() {
             let background = []
-            if (utilService.getImgs()) {
-                background = utilService.getImgs().slice(0, 4)
+            if (utilService.getImgs("random")) {
+                background = utilService.getImgs("random").slice(0, 4)
             }
             return background
         }

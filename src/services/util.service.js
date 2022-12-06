@@ -15,7 +15,7 @@ export const utilService = {
 };
 
 const STORAGE_KEY = "imgsDb";
-let imgs = []
+let imgs = {}
 
 function makeId(length = 6) {
   var txt = "";
@@ -37,7 +37,10 @@ async function fetchListOfPhotos (query = '', page= '1') {
     const res = json.results.map((img) => {
       return img.urls.regular
     })
-    res.forEach(img => imgs.push(img))
+    res.forEach(img => {
+      if(!imgs[query.toLowerCase()]) imgs[query.toLowerCase()] = []
+      imgs[query.toLowerCase()].push(img)
+    })
     saveToStorage(STORAGE_KEY, imgs)
   } catch (err) {
     console.log('Cannot load photos', err)
@@ -45,8 +48,9 @@ async function fetchListOfPhotos (query = '', page= '1') {
   }
 }
 
-function getImgs() {
-  var imgs = loadFromStorage(STORAGE_KEY);
+function getImgs(query) {
+  var imgs = loadFromStorage(STORAGE_KEY)[query.toLowerCase()];
+  console.log(imgs);
   return imgs
 }
 
