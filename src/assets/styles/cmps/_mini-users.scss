@@ -1,9 +1,7 @@
 .main-task-members-container {
-    margin-right: 13px;
     ul {
       list-style: none;
     }
-  
     .main-task-members-header {
       font-size: 12px;
       font-weight: 600;
@@ -13,17 +11,13 @@
     flex-direction: column;
     padding-top: 3px;
     .main-task-members-header {
-      margin-top: 9px;
       font-size: 12px;
-      margin-bottom: 13px;
     }
     .main-task-members {
       display: flex;
       align-items: center;
       margin-top: -0.8rem;
       margin-left: -0.1rem;
-      margin-bottom: 20px;
-
       >*{
         margin-inline: 2px;
       }

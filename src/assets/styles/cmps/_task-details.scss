@@ -162,25 +162,32 @@
 .textarea-edit-checklist {
   width: calc(100% - 18px);
   height: 50px;
-  padding: 2px 12px;
+  padding: 0 0 2px 12px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   border: none;
-  background-color: var(--ds-background-neutral,#091e420a);
+  background-color: var(--ds-background-neutral, #091e420a);
   border-radius: 3px;
   resize: none;
   font-size: 16px;
   font-weight: 600;
-  line-height: 32px;
-  
+  line-height: 28px;
+  color: $clr2;
+
   &:focus {
     background-color: #fff;
     outline: solid 2px $clr9;
     border-radius: 3px;
   }
 
-
   &:focus-visible {
     outline: none
+  }
+
+  &.edit-todo {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 28px;
+    color: $clr2;  
   }
 }
 
@@ -307,6 +314,15 @@
             background-color: #dadbe2;
           }
         }
+
+        .edit-checklist {
+          display: flex;
+          gap: 10px;
+        }
+
+        &.edit-todo-content{
+          flex-wrap: wrap;
+        }
       }
     }
 
@@ -331,7 +347,11 @@
     }
 
     .todo-edit {
-      margin-left: 50px;
+      width: 100%;
+
+      &.add-todo{
+        margin-left: 20px;
+      }
     }
   }
 }
@@ -339,10 +359,11 @@
 .task-edit-screen {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   align-items: flex-start;
   background-color: #0009;
   display: flex;
+  overflow-y: auto;
   justify-content: center;
   top: 0;
   left: 0;
@@ -353,11 +374,12 @@
     flex-direction: column;
     top: 44px;
     min-height: 700px;
-    width: 768px;
+    max-width: 768px;
+    width: 100%;
     background-color: #f4f5f7;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
-
+    margin-bottom: 100px;
     .task-activity-wrapper {
       display: flex;
       justify-content: space-between;
@@ -409,7 +431,7 @@
       gap: 16px;
 
       .content {
-        width: 75%;
+        flex: 1;
 
         .task-section {
           .task-info-wrapper {
@@ -425,7 +447,7 @@
       }
 
       .actions {
-        width: calc(100% - 600px);
+        width: 165px;
         float: right;
         overflow: hidden;
         padding: 0 16px 8px 8px;
@@ -491,7 +513,11 @@
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 16px;
     font-weight: 600;
-    line-height: 32px;
+
+    .edit-checklist {
+      display: flex;
+      gap: 10px;
+    }
   }
 
   p {
