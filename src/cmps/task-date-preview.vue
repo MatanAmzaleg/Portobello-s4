@@ -1,5 +1,5 @@
 <template lang="">
-    <div @click.stop="toggleTask()" class="checklist-preview task-status" :class="status">
+    <div @click.stop="toggleTask()" class="task-preview-date task-status" :class="status">
         <span class="clock-icon"></span>
         <a>{{date}}</a>
     </div>
@@ -34,7 +34,8 @@ export default {
 }
 </script>
 <style lang="scss">
-    .checklist-preview{
+    .task-preview-date{
+        margin: 0;
         max-width: 64px;
     min-height: 20px;
     overflow: hidden;

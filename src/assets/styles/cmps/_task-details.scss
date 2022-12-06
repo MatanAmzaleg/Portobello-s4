@@ -355,10 +355,11 @@
 .task-edit-screen {
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   align-items: flex-start;
   background-color: #0009;
   display: flex;
+  overflow-y: auto;
   justify-content: center;
   top: 0;
   left: 0;
@@ -369,11 +370,12 @@
     flex-direction: column;
     top: 44px;
     min-height: 700px;
-    width: 768px;
+    max-width: 768px;
+    width: 100%;
     background-color: #f4f5f7;
     border-radius: 5px;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.315);
-
+    margin-bottom: 100px;
     .task-activity-wrapper {
       display: flex;
       justify-content: space-between;
@@ -425,7 +427,7 @@
       gap: 16px;
 
       .content {
-        width: 75%;
+        flex: 1;
 
         .task-section {
           .task-info-wrapper {
@@ -441,7 +443,7 @@
       }
 
       .actions {
-        width: calc(100% - 600px);
+        width: 165px;
         float: right;
         overflow: hidden;
         padding: 0 16px 8px 8px;

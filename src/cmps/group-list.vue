@@ -137,6 +137,7 @@ export default {
             status: this.currBoard.groups[i].tasks[j].status,
             description: this.currBoard.groups[i].tasks[j].description,
             isWatched:this.currBoard.groups[i].tasks[j].isWatched,
+            attachments:this.currBoard.groups[i].tasks[j].attachments
           })),
         })),
       };
