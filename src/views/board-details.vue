@@ -1,6 +1,10 @@
 <template>
   <section class="full-board flex" :class="{ 'is-menu-open': isMenuOpen }">
-    <board-menu></board-menu>
+    <board-menu
+    @updateBoard="updateBoard"
+      :currBoard="getCurrBoard"
+      @closeBoardMenu="closeBoardMenu"
+    ></board-menu>
     <section
       class="board-details"
       v-if="getCurrBoard"
@@ -37,7 +41,6 @@
 import boardMenu from "../cmps/board-menu.vue";
 import boardHeader from "../cmps/board-header.vue";
 import groupList from "../cmps/group-list.vue";
-import { boardService } from "../services/board.service";
 import { eventBus } from "../services/event-bus.service";
 export default {
   name: "board-details",
@@ -92,6 +95,10 @@ export default {
     openBoardMenu() {
       this.isMenuOpen = !this.isMenuOpen;
       console.log("yeahhhhhhh");
+    },
+    closeBoardMenu() {
+      console.log("ok");
+      this.isMenuOpen = false;
     },
   },
   computed: {
