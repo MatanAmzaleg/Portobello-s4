@@ -84,4 +84,7 @@ export default {
     .task-status.overdue{
         background-color: #EB5A46;
     }
+    .task-status.regular{
+        color: #172b4d !important;
+    }
 </style>
