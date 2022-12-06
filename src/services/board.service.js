@@ -150,12 +150,14 @@ function getEmptyTask() {
 }
 
 function getEmptyBoard() {
-  return data[0]
+  const board = data[0]
+  delete board._id
+  return board
 }
 
 // test data
-    let boardie = data
-    storageService._save(STORAGE_KEY,boardie)
+    // let boardie = data
+    // storageService._save(STORAGE_KEY,boardie)
 // ; (async () => {
 //   setTimeout(async () => {
 //     // console.log(boardie[0]);

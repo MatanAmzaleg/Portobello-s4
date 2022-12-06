@@ -44,6 +44,10 @@
             grid-row: 1;
             position: fixed;
             left: 7px;
+
+            &:hover {
+                background-color: transparent !important;
+            }
         }
     
         .close {
@@ -51,6 +55,19 @@
             grid-row: 1;
             position: fixed;
             right: 4px;
+            width: auto !important;
+
+            &:hover {
+                background-color: transparent !important;
+
+                span {
+                    svg {
+                        path{
+                            fill: $clr5;
+                        }
+                    }
+                }
+            }
         }
     
     }
