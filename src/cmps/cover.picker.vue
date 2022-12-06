@@ -131,7 +131,6 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard));
     this.covers = this.currBoard.covers;
-    console.log(this.covers);
   },
   methods: {
     setCover(color) {
@@ -139,13 +138,11 @@ export default {
     },
     setImgAsCover(img) {
       this.$emit("setCover", img);
-      console.log(img);
     },
     sendApiReq(sug = "") {
       if (sug) this.searchWord = sug;
       utilService.fetchListOfPhotos(this.searchWord) ;
       this.searchedImgs = utilService.getImgs(this.searchWord).slice(0,10)
-      console.log(this.searchWord);
     },
     restartParam(close){
       close

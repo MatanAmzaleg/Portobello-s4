@@ -50,7 +50,6 @@ async function fetchListOfPhotos (query = '', page= '1') {
 
 function getImgs(query) {
   var imgs = loadFromStorage(STORAGE_KEY)[query.toLowerCase()];
-  console.log(imgs);
   return imgs
 }
 

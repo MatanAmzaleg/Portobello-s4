@@ -87,17 +87,14 @@ export default {
       this.currGroup = groupId;
     },
     addTask() {
-      console.log(this.currGroup);
       if (!this.newTaskTxt) return;
       const board = JSON.parse(JSON.stringify(this.currBoard));
-      console.log(board);
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup
       );
       let task = this.$store.getters.emptyTask;
       task.id = utilService.makeId();
       task.title = this.newTaskTxt;
-      console.log(groupIdx);
       board.groups[groupIdx].tasks.push(task);
       this.$emit("addTask", board);
       this.newTaskTxt = "";

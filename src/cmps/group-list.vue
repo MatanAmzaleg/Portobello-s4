@@ -84,10 +84,8 @@ export default {
       const scene = Object.assign({}, this.scene);
       scene.groups = applyDrag(scene.groups, dropResult);
       this.scene = scene;
-      console.log(this.scene);
       let board = utilService.createBoardFromScene(this.scene);
       board = { ...this.currBoard, groups: board.groups };
-      console.log(board);
       this.$store.dispatch({ type: "updateBoard", board });
     },
     addBoard(board) {
@@ -104,7 +102,6 @@ export default {
       };
       const board = JSON.parse(JSON.stringify(this.currBoard));
       board.groups.push(group);
-      console.log(this.$store.getters.currBoard);
       this.$emit("addTask", board);
       this.newGroupTxt = "";
     },

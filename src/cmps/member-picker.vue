@@ -57,8 +57,6 @@ export default {
             this.members.splice(memberIdx,1)  
           }
           this.$emit('add-member',this.members)
-          console.log(this.userOnTask);
-          console.log(this.members);
     },
     userOnTask(userId){
       console.log(userId);
