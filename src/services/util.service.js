@@ -29,14 +29,16 @@ function makeId(length = 6) {
   return txt;
 }
 
-async function fetchListOfPhotos (query = '') {
+async function fetchListOfPhotos (query = '', page= '1') {
   try {
     let response = null
-    response = await fetch(`https://api.unsplash.com/search/photos?client_id=${ACCES_KEY}&query=${query}`)
+    response = await fetch(`https://api.unsplash.com/search/photos?client_id=${ACCES_KEY}&query=${query}&page=${page}`)
     let json = await response.json()
-    imgs = json.results.map((img) => {
+    const res = json.results.map((img) => {
       return img.urls.regular
     })
+    res.forEach(img => imgs.push(img))
+    
     saveToStorage(STORAGE_KEY, imgs)
     console.log('imgs', imgs)
   } catch (err) {

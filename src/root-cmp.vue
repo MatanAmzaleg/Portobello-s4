@@ -22,6 +22,7 @@ export default {
     const user = userService.getLoggedinUser()
     if (user)  store.commit({type: 'setLoggedinUser', user})
     utilService.fetchListOfPhotos('random')
+    utilService.fetchListOfPhotos('random', '2')
   },
   computed: {
     routeIsHome() {

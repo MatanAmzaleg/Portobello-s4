@@ -48,11 +48,21 @@
             <span class="attachments-icon"></span>
             <h3 class="task-mini-title">Attachments</h3>
           </div>
-          <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo">
+          <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo checklist">
             <span class="checklist-icon"></span>
             <div class="task-checklist-title">
-              <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
-              <Popper class="popper-btn delete-popper" offsetSkid="116">
+              <div class="task-mini-title checklist-title">
+                <div v-if="(currChecklist.id === checklist.id && currChecklist.isEditTitle)" class="todo-edit">
+                <textarea class="textarea-edit-checklist" v-model="currChecklist.title" ref="todoTxtarea"
+                  @input="updateCurrTaskInfo"></textarea>
+                <el-button @click="addChecklistTodo()" type="primary">Add</el-button>
+                <el-button @click="openEditChecklist(checklist.id ,false)">Cancel</el-button>
+              </div>                
+              <div v-if="(!currChecklist.id || (currChecklist.id === checklist.id && !currChecklist.isEditTitle))"  @click="openEditChecklist(checklist.id ,true)">
+                <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
+              </div>
+              </div>
+              <Popper v-if="(currChecklist.id === checklist.id && !currChecklist.isEditTitle)" class="popper-btn delete-popper" offsetSkid="116">
                 <el-button class="task-btn">Delete</el-button>
                 <template #content="{ close }">
                   <div class="popper-content popper-template">
@@ -183,9 +193,10 @@ export default {
       showComments: false,
       isEdit: false,
       currChecklist: {
-        id: "",
+        id: null,
         isAddItem: false,
-        task: ""
+        task: "",
+        isEditTitle: false
       },
     }
 
@@ -324,6 +335,11 @@ export default {
     },
     updateCurrTaskInfo(ev) {
       this.currChecklist.task = ev.target.value
+    },
+    openEditChecklist(checklistId, isEditTitle) {
+      this.currChecklist.id = checklistId
+      this.currChecklist.title = this.task.checklists.find(checklist => checklist.id === checklistId).title
+      this.currChecklist.isEditTitle = isEditTitle
     },
     onTodoIsDoneChanged(checklistId, todoId, ev) {
       const isChecked = ev.target.checked
