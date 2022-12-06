@@ -194,6 +194,10 @@
   .content {
     width: -webkit-fill-available !important;
     padding: 0 12px;
+
+    &.content-delete{
+      padding: 0;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div v-if="task" class="task-edit-container" @click.stop>
-      <div v-if="task.style" class="task-cover"
+      <div v-if="task.style?.length" class="task-cover"
         :style="task.style?.bgColor ? { 'background-color': task.style.bgColor } : { 'background-image': 'url( ' + task.style.imgUrl + ')' }">
         <span></span>
       </div>
@@ -105,8 +105,12 @@
               </Popper>
             </div>
             <div class="progress-container">
-              <el-progress :percentage="checklistPercentage(checklist.id)" :format="checklistFormat"
-                width="200px"></el-progress>
+              <el-progress 
+                :percentage="checklistPercentage(checklist.id)" 
+                :format="checklistFormat"
+                :color="checklistPercentage(checklist.id) === 100? '#61bd4f' : ''"
+                width="200px">
+              </el-progress>
             </div>
             <ul class="checklist">
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
@@ -154,10 +158,10 @@
                     <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
                     <template #content="{ close }">
                       <div class="popper-content popper-template delete-popper">
-                        <popperModal :title="'Delete Checklist?'" @closeModal="close" />
-                        <div class="content">
+                        <popperModal :title="'Item actions'" @closeModal="close" />
+                        <div class="content content-delete">
                           <el-button @click="deleteChecklistTodo(checklist.id, todo.id)"
-                            class="task-btn delete-btn">Delete</el-button>
+                            class="task-btn delete-btn-task">Delete</el-button>
                         </div>
                       </div>
                     </template>
