@@ -162,7 +162,7 @@
 .textarea-edit-checklist {
   width: calc(100% - 18px);
   height: 50px;
-  padding: 2px 12px;
+  padding: 0 0 2px 12px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   border: none;
   background-color: var(--ds-background-neutral, #091e420a);
@@ -313,6 +313,15 @@
           &:hover {
             background-color: #dadbe2;
           }
+        }
+
+        .edit-checklist {
+          display: flex;
+          gap: 10px;
+        }
+
+        &.edit-todo-content{
+          flex-wrap: wrap;
         }
       }
     }

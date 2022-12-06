@@ -92,17 +92,18 @@
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
                 <input class="checkbox-helper" type="checkbox" :checked="todo.isDone"
                   @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)" />
-                <div class="todo-content">
+                <div class="todo-content" :class="currChecklist.todo.isEditTodo ? 'edit-todo-content' : ''">
                   <div v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)" class="todo-edit">
                     <textarea class="textarea-edit-checklist edit-todo" v-model="currChecklist.todo.title"
                       ref="todoTxtarea" @input="updateCurrTodoTitleInput"></textarea>
-                    <div class="edit-checklist">
-                      <el-button @click="updateCurrTodoTitle(checklist.id, todo.id)" type="primary">Save</el-button>
-                      <button>
-                        <font-awesome-icon @click="openEditChecklistTodo(checklist.id, todo.id, false)"
-                          class="close-add-task-btn" icon="fa-solid fa-xmark" />
-                      </button>
-                    </div>
+                  </div>
+                  <div class="edit-checklist"
+                    v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)">
+                    <el-button @click="updateCurrTodoTitle(checklist.id, todo.id)" type="primary">Save</el-button>
+                    <button>
+                      <font-awesome-icon @click="openEditChecklistTodo(checklist.id, todo.id, false)"
+                        class="close-add-task-btn" icon="fa-solid fa-xmark" />
+                    </button>
                   </div>
                   <div
                     v-if="(!currChecklist.todo.id || currChecklist.todo.id !== todo.id || (currChecklist.todo.id === todo.id && !currChecklist.todo.isEditTodo))"
