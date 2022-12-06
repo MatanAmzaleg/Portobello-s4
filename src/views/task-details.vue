@@ -292,6 +292,7 @@ export default {
           })
         )
         board.groups[groupIdx].tasks[taskIdx] = this.task
+        console.log(board.groups[groupIdx].tasks[taskIdx]);
         await this.$store.dispatch({ type: "updateBoard", board })
       } catch (err) {
         console.log("cant Update task", err)
@@ -335,10 +336,9 @@ export default {
       this.task.labelIds = labels
       this.updateTask()
     },
-    saveTaskCover(color) {
-      console.log('color', color)
-      if (color.charAt(0) === '#') this.task.style = { bgColor: color }
-      else this.task.style = { imgUrl: color }
+    saveTaskCover(color, mode = "") {
+      if (color.charAt(0) === '#') this.task.style = { bgColor: color , mode}
+      else this.task.style = { imgUrl: color , mode}
       // console.log(color);
       // this.task.style = { bgColor: color }
       this.updateTask()
