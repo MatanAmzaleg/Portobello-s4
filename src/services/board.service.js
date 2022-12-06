@@ -150,7 +150,9 @@ function getEmptyTask() {
 }
 
 function getEmptyBoard() {
-  return data[0]
+  const board = data[0]
+  delete board._id
+  return board
 }
 
 // test data

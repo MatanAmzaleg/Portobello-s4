@@ -1,4 +1,8 @@
 .popper-create {
+    &.more{
+        width: 100%;
+    }
+
     &.poper-closed {
         display: none;
     }
@@ -45,7 +49,6 @@
                 padding: 0 10px;
 
                 &::-webkit-scrollbar-track {
-                    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.13);
                     background-color: #F5F5F5;
                     border-radius: 10px;
                 }
@@ -141,11 +144,21 @@
                         }
                     }
 
+                    .background-more-title {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .more-btn{
+                            text-decoration: underline;
+                        }
+                    }
+
                     ul {
                         padding-bottom: 8px;
                         display: flex;
                         justify-content: space-between;
                         list-style: none;
+                        flex-wrap: wrap;
 
                         li {
                             border-radius: 3px;
@@ -154,7 +167,7 @@
                                 padding: 0;
                                 border-radius: 3px;
                                 
-                                span {
+                                .background-span {
                                     display: flex;
                                     justify-content: center;
                                     align-items: center;
@@ -171,7 +184,7 @@
                             height: 40px;
                             background-position: center;
                             
-                            button {
+                            .color-button {
                                 &:hover {
                                     background: #00000022;
                                 }
@@ -182,7 +195,7 @@
                             width: 40px;
                             height: 32px;
 
-                            button {
+                            .color-button {
                                 &:hover {
                                     background: #00000022;
                                 }
@@ -193,24 +206,11 @@
                             }
                         }
 
-                        .clr-blue {
-                            background-color: $clr9;
-                        }
-
-                        .clr-orange {
-                            background-color: $clr13;
-                        }
-
-                        .clr-green {
-                            background-color: $clr11;
-                        }
-
-                        .clr-red {
-                            background-color: $clr14;
-                        }
-
-                        .clr-purple {
-                            background-color: $clr15;
+                        .li-imgs-wrap {
+                            width: 85px;
+                            height: 56px;
+                            margin: 2px;
+                            background-position: center;
                         }
                     }
                 }
