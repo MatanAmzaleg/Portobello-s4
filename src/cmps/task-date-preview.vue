@@ -6,17 +6,19 @@
 </template>
 <script>
 import dateFormat, { masks } from "dateformat";
+import { eventBus } from "../services/event-bus.service";
 export default {
     props:{
-        date:Object,
-        status:String
+        date: Object,
+        status: String,
+        taskId: String
     },
     created(){
         console.log(this.date);
     },
     methods:{
         toggleTask(){
-            console.log('hey');
+            eventBus.emit('toggleTask',{taskId:this.taskId, status:this.status})
         }
     },
     computed:{
@@ -34,6 +36,18 @@ export default {
 }
 </script>
 <style lang="scss">
+    .task-status.completed:hover{
+        .clock-icon:before {
+           content: "\e918";
+       }
+    }
+    .vc-container{
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+
     .task-preview-date{
         margin: 0;
         max-width: 64px;

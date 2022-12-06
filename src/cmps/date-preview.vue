@@ -8,13 +8,17 @@
               </div>
               </div>
       <template #content="{close}">
+        <div class="popper-content label-picker date-picker"> 
+        <popper-modal title="Dates" @closeModal="close"/>
         <popper-calendar @removeDate="removeDate" @saveDate="saveDate"/>
+        </div>
       </template>
     </Popper>
 </template>
 <script>
 import dateFormat, { masks } from "dateformat";
 import popperCalendar from './popper-calendar.vue'
+import popperModal from "./popper-modal.vue";
 export default {
     props:{
         dueDate:String,
@@ -55,7 +59,8 @@ export default {
         }
     },
     components:{
-        popperCalendar
+        popperCalendar,
+        popperModal
     }
 }
 </script>

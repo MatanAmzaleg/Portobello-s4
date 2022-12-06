@@ -24,7 +24,7 @@
 import boardHeader from "../cmps/board-header.vue";
 import groupList from "../cmps/group-list.vue";
 import { boardService } from "../services/board.service";
-
+import { eventBus } from "../services/event-bus.service";
 export default {
   name: "board-details",
   data() {
@@ -37,6 +37,7 @@ export default {
   },
   async created() {
     try {
+      eventBus.on('toggleTask',this.updateTaskStatus)
       const { boardId } = this.$route.params;
       this.$store.dispatch({type:"setCurrBoard", boardId})
       this.currBoard = this.getCurrBoard
@@ -57,14 +58,26 @@ export default {
         type: "updateBoard",
         board,
       });
-    },     
+    },
+    updateTaskStatus({taskId,status}){
+      const taskStatus = status === 'completed' ? '' : 'completed'
+      const newBoard = JSON.parse(JSON.stringify(this.getCurrBoard))
+        let taskIdx
+        let groupIdx = newBoard.groups.findIndex((group) =>
+          group.tasks.some((task, idx) => {
+            if (task.id === taskId) taskIdx = idx
+            return task.id === taskId
+          })
+        )
+      newBoard.groups[groupIdx].tasks[taskIdx].status = taskStatus
+      this.updateBoard(newBoard)
+    }     
   },
   computed: {
     getBoards() {
       return this.$store.getters.boards;
     },
     getCurrBoard() {
-
       return this.$store.getters.currBoard;
     },
   },

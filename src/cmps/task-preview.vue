@@ -17,7 +17,7 @@
       <div v-if="taskExtra(item)" class="task-preview-info">
       <div class="task-preview-content">
         <span v-if="item.isWatched" class="watch-icon"></span>
-      <TaskDatePreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" />
+      <TaskDatePreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" :taskId="item.id"/>
         <span v-if="item.description?.length" class="description-icon"></span>
         <span v-if="item.attachments" class="attachment-icon">{{
           item.attachments.length
