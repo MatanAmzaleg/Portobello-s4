@@ -1,7 +1,7 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div v-if="task" class="task-edit-container" @click.stop>
-      <div v-if="task.style" class="task-cover"
+      <div v-if="Object.keys(task.style).length !== 0" class="task-cover"
         :style="task.style?.bgColor ? { 'background-color': task.style.bgColor } : { 'background-image': 'url( ' + task.style.imgUrl + ')' }">
         <span></span>
       </div>
