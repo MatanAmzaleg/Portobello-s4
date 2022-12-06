@@ -7,7 +7,7 @@
     <template class="cover-container" #content="{ close }">
       <div v-if="!isSearchMode" class="cover-reg-mode">
         <div class="popper-content cover-picker">
-          <popper-modal title="Cover" @closeModal="close"></popper-modal>
+          <popper-modal :title="titleMode" @closeModal="close"></popper-modal>
           <div class="cover-section">
             <p class="mini-title1">Colors</p>
             <div class="colors">
@@ -41,7 +41,7 @@
       </div>
       <div v-if="isSearchMode" class="cover-search-mode">
         <div class="popper-content cover-picker">
-          <popper-modal title="Photo search" @closeModal="close"></popper-modal>
+          <popper-modal title="Photo search" @closeModal="restartParam(close)"></popper-modal>
           <div class="cover-section">
             <input
               v-model="searchWord"
@@ -62,7 +62,7 @@
               <p class="mini-title1">Top photos</p>
               <div class="background-imgs2">
                 <span
-                  v-for="img in imgs2"  
+                  v-for="img in imgs2"
                   @click="setImgAsCover(img)"
                   class="unsplash-img2"
                   :style="{
@@ -75,8 +75,19 @@
             </div>
             <div v-if="searchWord" class="results">
               <p class="mini-title1">Results</p>
+              <div v-if="searchedImgs" class="background-imgs3">
+                <span
+                  v-for="img in searchedImgs"
+                  @click="setImgAsCover(img)"
+                  class="unsplash-img3"
+                  :style="{
+                    'background-image': 'url(' + img + ')',
+                    'background-size': 'cover',
+                  }"
+                >
+                </span>
+              </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -103,6 +114,7 @@ export default {
       covers: null,
       isSearchMode: false,
       searchWord: "",
+      searchedImgs:null,
       suggested: [
         "Productivity",
         "Perspective",
@@ -129,30 +141,39 @@ export default {
       this.$emit("setCover", img);
       console.log(img);
     },
-    sendApiReq(sug= "") {
-      if(sug)this.searchWord = sug
-      else{
-      }
+    sendApiReq(sug = "") {
+      if (sug) this.searchWord = sug;
+      utilService.fetchListOfPhotos(this.searchWord) ;
+      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0,10)
       console.log(this.searchWord);
-      
-      // console.log(sug);
     },
+    restartParam(close){
+      close
+      this.searchedImgs = []
+      this.searchWord = ""
+      this.isSearchMode = false
+    }
   },
   computed: {
     imgs() {
       let background = [];
-      if (utilService.getImgs()) {
-        background = utilService.getImgs().slice(0, 6);
+      if (utilService.getImgs("random")) {
+        background = utilService.getImgs("random").slice(0, 6);
       }
       return background;
     },
     imgs2() {
       let background = [];
-      if (utilService.getImgs()) {
-        background = utilService.getImgs().slice(6, 18);
+      if (utilService.getImgs("random")) {
+        background = utilService.getImgs("random").slice(6, 18);
       }
       return background;
     },
+    titleMode(){
+      if(!this.isSearchMode) return "cover"
+      else if (this.searchWord) return "Photo search"
+      else return ""
+    }
   },
   components: {
     popperModal,
