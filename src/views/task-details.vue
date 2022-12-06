@@ -51,96 +51,60 @@
           </div>
           <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo checklist">
             <span class="checklist-icon"></span>
-            <div class="task-checklist-title">
               <div class="task-mini-title checklist-title">
-                <div 
-                  v-if="(currChecklist.id === checklist.id && currChecklist.isEditTitle)" 
-                  class="todo-edit">
-                  <textarea 
-                    class="textarea-edit-checklist" 
-                    v-model="currChecklist.title" 
-                    ref="checklistTitle"
-                    @input="updateCurrChecklisInput" 
-                    @keyup.enter="updateCurrChecklisTitle(checklist.id)">
+                <div v-if="(currChecklist.id === checklist.id && currChecklist.isEditTitle)" class="todo-edit">
+                  <textarea class="textarea-edit-checklist" v-model="currChecklist.title" ref="checklistTitle"
+                    @input="updateCurrChecklisInput" @keyup.enter="updateCurrChecklisTitle(checklist.id)">
                   </textarea>
                   <div class="edit-checklist">
-                    <el-button 
-                      @click="updateCurrChecklisTitle(checklist.id)" 
-                      class="add-save-btn"
-                      type="primary">
+                    <el-button @click="updateCurrChecklisTitle(checklist.id)" class="add-save-btn" type="primary">
                       Save
                     </el-button>
                     <button>
-                      <font-awesome-icon
-                        @click="openEditChecklist(checklist.id, false)" 
-                        class="close-add-task-btn"
-                        icon="fa-solid fa-xmark" 
-                      />
+                      <font-awesome-icon @click="openEditChecklist(checklist.id, false)" class="close-add-task-btn"
+                        icon="fa-solid fa-xmark" />
                     </button>
                   </div>
                 </div>
-                <div 
-                  v-if="(!currChecklist.id || (currChecklist.id === checklist.id && !currChecklist.isEditTitle))"
-                  @click="openEditChecklist(checklist.id, true)">
-                    <h3 class="task-mini-title checklist-title">{{ checklist.title }}</h3>
+                <div v-else class="task-checklist-title">
+                  <h3 @click="openEditChecklist(checklist.id, true)" class="task-mini-title checklist-title">{{ checklist.title }}</h3>
+                  <Popper
+                    class="popper-btn delete-popper" offsetSkid="116">
+                    <el-button class="task-btn">Delete</el-button>
+                    <template #content="{ close }">
+                      <div class="popper-content popper-template">
+                        <popperModal :title="'Delete Checklist?'" @closeModal="close" />
+                        <div class="content">
+                          <p>Deleting a checklist is permanent and there is no way to get it back.</p>
+                          <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">
+                            Delete checklist
+                          </el-button>
+                        </div>
+                      </div>
+                    </template>
+                  </Popper>
                 </div>
               </div>
-              <Popper 
-                v-if="(currChecklist.id === checklist.id && !currChecklist.isEditTitle)"
-                class="popper-btn delete-popper" offsetSkid="116">
-                  <el-button class="task-btn">Delete</el-button>
-                  <template #content="{ close }">
-                    <div class="popper-content popper-template">
-                      <popperModal :title="'Delete Checklist?'" @closeModal="close" />
-                      <div class="content">
-                        <p>Deleting a checklist is permanent and there is no way to get it back.</p>
-                        <el-button
-                          @click="deleteChecklist(checklist.id)" 
-                          class="task-btn delete-btn">
-                          Delete checklist
-                        </el-button>
-                      </div>
-                    </div>
-                  </template>
-              </Popper>
-            </div>
             <div class="progress-container">
-              <el-progress 
-                :percentage="checklistPercentage(checklist.id)" 
-                :format="checklistFormat"
-                :color="checklistPercentage(checklist.id) === 100? '#61bd4f' : ''"
-                width="200px">
+              <el-progress :percentage="checklistPercentage(checklist.id)" :format="checklistFormat"
+                :color="checklistPercentage(checklist.id) === 100 ? '#61bd4f' : ''" width="200px">
               </el-progress>
             </div>
             <ul class="checklist">
               <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
-                <input 
-                  class="checkbox-helper" 
-                  type="checkbox" 
-                  :checked="todo.isDone"
-                  @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)" 
-                />
-                <div 
-                  class="todo-content" 
-                  :class="(currChecklist.todo.isEditTodo && currChecklist.todo.id === todo.id) ? 'edit-todo-content' : ''"
-                >
-                  <div 
-                    v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)" 
-                    class="todo-edit">
-                    <textarea 
-                      class="textarea-edit-checklist edit-todo" 
-                      v-model="currChecklist.todo.title"
-                      ref="checklistTodoTitle"
-                      @input="updateCurrTodoTitleInput"
+                <input class="checkbox-helper" type="checkbox" :checked="todo.isDone"
+                  @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)" />
+                <div class="todo-content"
+                  :class="(currChecklist.todo.isEditTodo && currChecklist.todo.id === todo.id) ? 'edit-todo-content' : ''">
+                  <div v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)" class="todo-edit">
+                    <textarea class="textarea-edit-checklist edit-todo" v-model="currChecklist.todo.title"
+                      ref="checklistTodoTitle" @input="updateCurrTodoTitleInput"
                       @keyup.enter="updateCurrTodoTitle(checklist.id, todo.id)">
                     </textarea>
                   </div>
                   <div class="edit-checklist"
                     v-if="(currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo)">
-                    <el-button 
-                      @click="updateCurrTodoTitle(checklist.id, todo.id)" 
-                      class="add-save-btn"
-                      type="primary">
+                    <el-button @click="updateCurrTodoTitle(checklist.id, todo.id)" class="add-save-btn" type="primary">
                       Save
                     </el-button>
                     <button>
@@ -150,43 +114,23 @@
                   </div>
                   <div
                     v-if="(!currChecklist.todo.id || currChecklist.todo.id !== todo.id || (currChecklist.todo.id === todo.id && !currChecklist.todo.isEditTodo))"
-                    @click="onEditChecklistTodo(checklist.id, todo.id, true)" 
-                    class="todo-edit">
-                      <p :style="todo.isDone ? {textDecoration: 'line-through'} : ''">{{ todo.title }}</p>
+                    @click="onEditChecklistTodo(checklist.id, todo.id, true)" class="todo-edit">
+                    <p :style="todo.isDone ? { textDecoration: 'line-through' } : ''">{{ todo.title }}</p>
                   </div>
-                  <Popper class="popper-btn" offsetSkid="116">
-                    <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
-                    <template #content="{ close }">
-                      <div class="popper-content popper-template delete-popper">
-                        <popperModal :title="'Item actions'" @closeModal="close" />
-                        <div class="content content-delete">
-                          <el-button @click="deleteChecklistTodo(checklist.id, todo.id)"
-                            class="task-btn delete-btn-task">Delete</el-button>
-                        </div>
-                      </div>
-                    </template>
-                  </Popper>
+                  <popperEditOptions requestedTitle="Item actions" @delete="deleteChecklistTodo(checklist.id, todo.id)"/>
                 </div>
               </li>
               <button
                 v-if="currChecklist.id === checklist.id && !currChecklist.isAddItem || currChecklist.id !== checklist.id"
-                class="btn-add" 
-                @click="updateTxtAddTodo(checklist.id, true)">
-                  Add an item
+                class="btn-add" @click="updateTxtAddTodo(checklist.id, true)">
+                Add an item
               </button>
-              <div 
-                v-if="currChecklist.id === checklist.id && currChecklist.isAddItem" 
-                class="todo-edit add-todo">
-                  <textarea 
-                    @keyup.enter="addChecklistTodo()" 
-                    class="textarea-edit" 
-                    v-model="currChecklist.task"
-                    ref="todoTxtarea"
-                    @input="updateCurrTaskInfo" 
-                    placeholder="Add an item">
+              <div v-if="currChecklist.id === checklist.id && currChecklist.isAddItem" class="todo-edit add-todo">
+                <textarea @keyup.enter="addChecklistTodo()" class="textarea-edit" v-model="currChecklist.task"
+                  ref="todoTxtarea" @input="updateCurrTaskInfo" placeholder="Add an item">
                   </textarea>
-                  <el-button class="add-save-btn" @click="addChecklistTodo()" type="primary">Add</el-button>
-                  <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
+                <el-button class="add-save-btn" @click="addChecklistTodo()" type="primary">Add</el-button>
+                <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
               </div>
             </ul>
           </div>
@@ -252,6 +196,7 @@ import archiveTask from "../cmps/archive-task.vue"
 import datePreview from "../cmps/date-preview.vue";
 import { utilService } from "../services/util.service";
 import popperModal from "../cmps/popper-modal.vue";
+import popperEditOptions from "../cmps/popper-edit-options.vue";
 
 export default {
   props: {
@@ -498,7 +443,8 @@ export default {
     addAttachment,
     archiveTask,
     datePreview,
-    popperModal
+    popperModal,
+    popperEditOptions
   },
 }
 </script>
