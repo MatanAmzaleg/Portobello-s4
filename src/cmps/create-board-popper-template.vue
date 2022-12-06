@@ -1,6 +1,7 @@
 <template>
     <div class="popper-content">
-        <popperModalHeaderVue title="Create board" :hasBackBtn="false" @closeModal="closeModal" @closeMoreModal="closeMoreModal"/>
+        <popperModalHeaderVue title="Create board" :hasBackBtn="false" @closeModal="closeModal"
+            @closeMoreModal="closeMoreModal" />
         <div class="content">
             <div class="content-board-img">
                 <div class="board-img"
@@ -32,15 +33,18 @@
                         </li>
                     </ul>
                     <ul>
-                        <li class="li-color" :style="{ backgroundColor: selectedBackground.bgColor? colors.slice(0, 5).find(clr=> clr.color === selectedBackground.bgColor) ? colors[0].color : selectedBackground.bgColor : colors[0].color}">
-                            <button class="color-button" :title="colors[0].name.charAt(0).toUpperCase() + colors[0].name.slice(1)"
+                        <li class="li-color"
+                            :style="{ backgroundColor: selectedBackground.bgColor ? colors.slice(0, 5).find(clr => clr.color === selectedBackground.bgColor) ? colors[0].color : selectedBackground.bgColor : colors[0].color }">
+                            <button class="color-button"
+                                :title="colors[0].name.charAt(0).toUpperCase() + colors[0].name.slice(1)"
                                 @click="updateBgColor(colors[0])">
-                                <span class="background-span" v-if="((!colors.slice(1, 5).find(clr=> clr.color === selectedBackground.bgColor)) && (selectedBackground.bgColor))">
+                                <span class="background-span"
+                                    v-if="((!colors.slice(1, 5).find(clr => clr.color === selectedBackground.bgColor)) && (selectedBackground.bgColor))">
                                     <selectedSvg />
                                 </span>
                             </button>
                         </li>
-                        <li v-for="clr in colors.slice(1, colors.length - 1)" class="li-color"
+                        <li v-for="clr in colors.slice(1, colors.length - 4)" class="li-color"
                             :style="{ backgroundColor: clr.color }">
                             <button class="color-button" :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
                                 @click="updateBgColor(clr.color)">
@@ -61,12 +65,14 @@
                                     </svg>
                                 </button>
                                 <template #content="{ close }" style="position: absolute;">
-                                    <popperModalHeaderVue title="Board Background" :hasBackBtn="false"
-                                        @closeModal="close" />
-                                    <div class="board-background">
+                                    <popperModalHeaderVue 
+                                        :title="moreMode === 'none' ? 'Board background' : moreMode === 'photos' ? 'Photos' : 'Colors'" 
+                                        :hasBackBtn="moreMode === 'none' ? false : true"
+                                        @closeModal="close" @back="updatemoreMode('none')" />
+                                    <div v-if="moreMode === 'none'" class="board-background board-background-more">
                                         <div class="background-more-title">
                                             <label>Photos</label>
-                                            <label class="more-btn">See more</label>
+                                            <label class="more-btn" @click="updatemoreMode('photos')">See more</label>
                                         </div>
                                         <ul class="background-imgs">
                                             <li v-for="img in imgs.slice(0, 6)" class="li-imgs-wrap"
@@ -81,11 +87,11 @@
                                             </li>
                                         </ul>
                                         <div class="background-more-title">
-                                            <label>Photos</label>
-                                            <label class="more-btn">See more</label>
+                                            <label>Colors</label>
+                                            <label class="more-btn" @click="updatemoreMode('colors')">See more</label>
                                         </div>
                                         <ul class="background-colors">
-                                            <li v-for="clr in colors" class="li-imgs-wrap"
+                                            <li v-for="clr in colors.slice(0, 6)" class="li-imgs-wrap"
                                                 :style="{ backgroundColor: clr.color }">
                                                 <button class="color-button"
                                                     :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
@@ -97,6 +103,50 @@
                                                 </button>
                                             </li>
                                         </ul>
+                                    </div>
+                                    <div v-if="moreMode === 'photos'" class="cover-search-mode">
+                                        <div class="popper-content">
+                                            <div class="cover-section">
+                                                <input v-model="searchWord" @input="debounce(searchWord)" type="text"
+                                                    class="search-input" placeholder="Search Unsplash for photos" />
+                                                <div v-if="!searchWord" class="under-input">
+                                                    <div class="background-imgs-grid">
+                                                        <span v-for="img in imgs2" @click="updateUrlImg(img)"
+                                                            class="unsplash-img2" :style="{
+                                                                'background-image': 'url(' + img + ')',
+                                                            }">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div v-if="searchWord" class="results">
+                                                    <p class="mini-title1">Results</p>
+                                                    <div v-if="searchedImgs" class="background-imgs3">
+                                                        <span v-for="img in searchedImgs" @click="updateUrlImg(img)"
+                                                            class="unsplash-img3" :style="{
+                                                                'background-image': 'url(' + img + ')',
+                                                                'background-size': 'cover',
+                                                            }">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-if="moreMode === 'colors'" class="cover-search-mode">
+                                        <div class="popper-content">
+                                            <div class="cover-section">
+                                                <div class="under-input">
+                                                    <div class="background-color-grid">
+                                                        <span v-for="color in colors"
+                                                            @click="updateBgColor(color.color)" class="unsplash-img2"
+                                                            :style="{
+                                                                'background-color': color.color,
+                                                            }">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </template>
                             </Popper>
@@ -153,6 +203,18 @@ export default {
                     name: "pink",
                     color: "#cd5a91"
                 },
+                {
+                    name: "light green",
+                    color: "#4bbf6b"
+                },
+                {
+                    name: "azure",
+                    color: "#00aecc"
+                },
+                {
+                    name: "grey",
+                    color: "#838c91"
+                },
             ],
             // imgs: [
             //     {
@@ -177,7 +239,13 @@ export default {
                 imgUrl: null,
                 bgColor: "#0079bf",
             },
+            searchWord: "",
+            searchedImgs: null,
+            moreMode: 'none',
         }
+    },
+    created() {
+        this.debounce = utilService.debounce(this.sendApiReq)
     },
     computed: {
         imgs() {
@@ -186,7 +254,14 @@ export default {
                 background = utilService.getImgs("random")
             }
             return background
-        }
+        },
+        imgs2() {
+            let background = [];
+            if (utilService.getImgs("random")) {
+                background = utilService.getImgs("random").slice(6, 18);
+            }
+            return background;
+        },
     },
     methods: {
         updateUrlImg(url) {
@@ -200,14 +275,19 @@ export default {
         updateBoardName(ev) {
             this.boardTitle = ev.target.value
         },
+        updatemoreMode(currModal) {
+            console.log('currModal', currModal)
+            this.moreMode = currModal
+        },
         async addBoard() {
             try {
                 const board = {
                     title: this.boardTitle,
                     style: this.selectedBackground
                 }
-                await this.$store.dispatch({ type: 'createNewBoard', board })
+                const newBoard = await this.$store.dispatch({ type: 'createNewBoard', board })
                 showSuccessMsg('Board added')
+                this.$router.push(`/board/${newBoard._id}`)
                 this.boardToAdd = boardService.getEmptyBoard()
                 this.closeModal()
             } catch (err) {
@@ -221,7 +301,13 @@ export default {
         closeMoreModal() {
             this.selectedBackground.bgColor = "#0079bf"
             this.selectedBackground.imgUrl = null
-        }
+        },
+        async sendApiReq(sug = "") {
+            // console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug)
+            if (sug) this.searchWord = sug;
+            await utilService.fetchListOfPhotos(this.searchWord);
+            this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 10)
+        },
     },
     watch: {
         isModalOpen(newValue, old) {

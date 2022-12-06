@@ -44,6 +44,7 @@
             grid-row: 1;
             position: fixed;
             left: 7px;
+            height: auto !important;
 
             &:hover {
                 background-color: transparent !important;
@@ -56,6 +57,7 @@
             position: fixed;
             right: 4px;
             width: auto !important;
+            height: auto !important;
 
             &:hover {
                 background-color: transparent !important;
@@ -69,6 +71,5 @@
                 }
             }
         }
-    
     }
 }

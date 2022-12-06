@@ -1,7 +1,7 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
-        <button class="back" v-if="hasBackBtn">
+        <button class="back" v-if="hasBackBtn" @click="back">
             <span>
                 <svg width="10" height="18" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -34,6 +34,9 @@ export default {
             setTimeout(() => {
                 this.$emit('closeMoreModal')
             }, 100)
+        },
+        back() {
+            this.$emit('back')
         }
     }
 }
