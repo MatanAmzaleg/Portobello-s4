@@ -1,7 +1,7 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div v-if="task" class="task-edit-container" @click.stop>
-      <div v-if="Object.keys(task.style).length !== 0" class="task-cover"
+      <div v-if="task.style?.length && Object.keys(task.style).length !== 0" class="task-cover"
         :style="task.style?.bgColor ? { 'background-color': task.style.bgColor } : { 'background-image': 'url( ' + task.style.imgUrl + ')' }">
         <span></span>
       </div>
@@ -47,7 +47,50 @@
           </div>
           <div v-if="task.attachments?.length" class="task-section">
             <span class="attachments-icon"></span>
+            <div class="task-attachments">
             <h3 class="task-mini-title">Attachments</h3>
+            <div v-for="attachment in task.attachments" class="task-attachment-preview">
+            <div v-if="attachment.type" class="img-preview">
+            <img class="attachment-img" :src="attachment.link">
+            </div>
+            <div v-else class="attachment-preview">
+            <span class="attachment-icon"></span>
+            </div>
+            <div class="attachment-info">
+              <p>{{ attachment.name ||attachment.link}}</p>
+              <p>Created at {{getCreatedTime(attachment.createdAy)}}               <Popper 
+                class="popper-btn delete-popper" offsetSkid="116">
+                  <button >Remove</button>
+                  <template #content="{ close }">
+                    <div class="popper-content popper-template">
+                      <popperModal :title="'Delete Checklist?'" @closeModal="close" />
+                      <div class="content">
+                        <p>Deleting a attachment is permanent and there is no way to get it back.</p>
+                        <el-button
+                          @click="removeAttachment(attachment.id)" 
+                          class="task-btn delete-btn">
+                          Delete attachment
+                        </el-button>
+                      </div>
+                    </div>
+                  </template>
+              </Popper><Popper> 
+                  <button>Edit</button>
+                  <template #content="{ close }">
+                    <div class="popper-content popper-template">
+                      <popperModal :title="'Edit Attachment'" @closeModal="close" />
+                      <div class="content add-attachment">
+                        <input class="attach-link-input" :placeholder="attachment.link">
+                        <p>Link name (optional)</p>
+                        <input class="attach-link-input" :placeholder="attachment.name">
+                        <el-button class="attach-link-button" @click="updateAttachment(attachment)">Update</el-button>
+                      </div>
+                    </div>
+                  </template>
+              </Popper>  </p>
+            </div>
+            </div>
+            </div>
           </div>
           <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo checklist">
             <span class="checklist-icon"></span>
@@ -471,6 +514,21 @@ export default {
     getCommentTime(ts) {
       if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(new Date(ts), "'Before' H 'hours'");
       return dateFormat(new Date(ts), "mmm dd 'at' HH:MM");
+    },
+    getCreatedTime(ts) {
+      if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(ts, "'Before' H 'hours'");
+      return dateFormat(ts, "mmm dd 'at' HH:MM");
+    },
+    removeAttachment(attachId){
+      const attachIdx =  this.task.attachments.findIndex(attach => attach.id === attachId)
+      this.task.attachments.splice(attachIdx,1)
+      this.updateTask()
+    },
+    updateAttachment(attachment){
+      console.log(attachment);
+      const attachIdx =  this.task.attachments.findIndex(attach => attach.id === attachment.id)
+      this.task.attachments.splice(attachIdx,1,attachment)
+      this.updateTask()
     }
   },
   computed: {
