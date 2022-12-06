@@ -10,7 +10,19 @@
     <section v-if="titleMode === 'menu'" class="main-content">
       <div class="menu-options">
         <div @click="titleMode = 'changeBg'" class="menu-opt">
-          <div class="bg-trailer"></div>
+          <div
+            class="bg-trailer"
+            :style="
+              currBoard.style?.bgColor
+                ? { 'background-color': currBoard.style?.bgColor }
+                : currBoard.style?.imgUrl
+                ? {
+                    'background-image': 'url( ' + currBoard.style?.imgUrl + ')',
+                    'background-size': 'cover',
+                  }
+                : ''
+            "
+          ></div>
           <h4>Change background</h4>
         </div>
         <div class="menu-opt">
@@ -83,7 +95,6 @@
           >
           </span>
         </div>
-
       </div>
       <div v-if="titleMode === 'colors'" class="unsplash-section">
         <div class="background-imgs">
@@ -98,11 +109,10 @@
           >
           </span>
         </div>
-
       </div>
       <button
         v-if="titleMode !== 'menu'"
-        @click="(titleMode = 'menu', searchedImgs=null)"
+        @click="(titleMode = 'menu'), (searchedImgs = null)"
         class="return-btn2"
       >
         <font-awesome-icon
@@ -126,13 +136,13 @@ export default {
     currBoard: Object,
   },
   created() {
-    this.debounce = utilService.debounce(this.sendApiReq)
+    this.debounce = utilService.debounce(this.sendApiReq);
   },
   data() {
     return {
       titleMode: "menu",
       searchedImgs: [],
-      searchWord:""
+      searchWord: "",
     };
   },
   methods: {
@@ -149,13 +159,13 @@ export default {
       this.$emit("updateBoard", newBoard);
     },
     async sendApiReq() {
-        if(!this.searchWord){
-            this.searchedImgs = null
-            return
-        }
-     await utilService.fetchListOfPhotos(this.searchWord) ;
-      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0,14)
-      console.log( this.searchedImgs);
+      if (!this.searchWord) {
+        this.searchedImgs = null;
+        return;
+      }
+      await utilService.fetchListOfPhotos(this.searchWord);
+      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 14);
+      console.log(this.searchedImgs);
     },
   },
   computed: {
