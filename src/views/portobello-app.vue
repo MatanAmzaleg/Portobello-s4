@@ -112,8 +112,6 @@
           <Popper
             class="popper-create"
             placement="right"
-            @open:popper="toggleModal"
-            @close:popper="toggleModal"
           >
             <article class="create-board">
               <div class="create-board-preview">
