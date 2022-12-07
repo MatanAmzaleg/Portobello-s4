@@ -116,8 +116,14 @@
         </template>
       </popper>
         <mini-users-designed  v-if="board.members" :memberIds="getBoardMembers"></mini-users-designed>
- 
+        <Popper>
+          <el-button>Share</el-button>
+      <template #content="{ close }">
+        <popperAddMember @closeModal="close" />
+      </template>
+    </Popper>
       |
+
       <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
       </button>
@@ -128,7 +134,8 @@
 <script>
 import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
-import popperModal from "./popper-modal.vue";
+import popperAddMember from "./popper-add-member.vue";
+import memberPicker from "./member-picker.vue";
 export default {
   props: {
     board: Object,
@@ -143,7 +150,9 @@ export default {
       boardName: "",
     };
   },
-  mounted() {},
+  mounted() {
+    console.log(this.members)
+  },
   methods: {
     setFilter() {
       this.$emit("setFilter", this.filterBy);
@@ -173,8 +182,9 @@ export default {
   },
   components: {
     miniUsers,
-    popperModal,
-    miniUsersDesigned
+    memberPicker,
+    miniUsersDesigned,
+    popperAddMember,
   },
 };
 </script>

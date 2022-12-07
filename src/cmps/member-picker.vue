@@ -1,27 +1,31 @@
 <template>
-    <Popper>
-      <div class="task-option-btn btn-members">
-        <span class="icon-actions member-icon"></span>      
-        <p>Members</p>
-      </div>
-      <template #content="{ close }">
-        <popperMember @closeModal="close" @addMember="addMember" :members="this.members" />
-      </template>
-    </Popper>
-  </template>
+  <Popper @open:popper="addFocus">
+    <div class="task-option-btn btn-members">
+      <span class="icon-actions member-icon"></span>
+      <p>Members</p>
+    </div>
+    <template #content="{ close }">
+      <popperMember @closeModal="close" @addMember="addMember" :members="this.members" />
+    </template>
+  </Popper>
+</template>
 <script>
 import popperMember from './popper-member.vue';
+import { eventBus } from '../services/event-bus.service';
 export default {
-    props:{
-        members: Array
+  props: {
+    members: Array
+  },
+  methods: {
+    addMember(members) {
+      this.$emit('addMember', members)
     },
-    methods:{
-      addMember(members){
-        this.$emit('addMember',members)
-      }
-    },  
-    components:{
-      popperMember
-    }
+    addFocus() {
+      eventBus.emit('update-focus')
+    },
+  },
+  components: {
+    popperMember
+  }
 }
 </script>

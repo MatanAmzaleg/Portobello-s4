@@ -1,5 +1,5 @@
 <template>
-    <Popper>
+    <Popper @open:popper="updateInputFocus">
     <div class="task-option-btn">
       <span class="checklist-icon icon-actions"></span>
       <p>Checklist</p>
@@ -9,7 +9,7 @@
         <popperModal title="Add Checklist" @closeModal="close"/>
         <div class="content-container">
           <label>Title</label>
-          <input class="task-popper-input" @input="onTitleChanged">
+          <input ref="focusInput" class="task-popper-input" @input="onTitleChanged">
           <el-button class="add-save-btn add-save-btn2" @click="AddCheckList" type="primary">Add</el-button>
         </div>
       </div>
@@ -32,6 +32,11 @@ export default {
     },
     AddCheckList(){
       this.$emit('addchecklist', this.title)
+    },
+    updateInputFocus() {
+      setTimeout(() => {
+        this.$refs.focusInput.focus();
+      }, 50);
     }
   },
   components: {

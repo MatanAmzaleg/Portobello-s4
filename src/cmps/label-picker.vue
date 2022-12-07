@@ -1,5 +1,5 @@
 <template>
-  <Popper>
+  <Popper @open:popper="addFocus">
     <div class="task-option-btn">
       <span class="label-icon icon-actions"></span>
       <p>Labels</p>
@@ -11,6 +11,7 @@
 </template>
 <script>
 import popperLabel from "./popper-label.vue";
+import { eventBus } from "../services/event-bus.service";
 export default {
   props: {
     labelIds: Array,
@@ -22,9 +23,9 @@ export default {
     onSaveLabel(board){
       this.$emit("updateBoard",board)
     },
-    onDeleteLabel(){
-
-    }
+    addFocus() {
+      eventBus.emit('update-focus')
+    },
   },
   components: {
     popperLabel,

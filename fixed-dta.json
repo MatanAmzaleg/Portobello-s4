@@ -49,7 +49,7 @@
                 "id": "kT8v8m"
             }
         ],
-        "covers":[
+        "covers": [
             {
                 "color": "#7BC86C",
                 "id": "JsY1qR"
@@ -93,19 +93,11 @@
         ],
         "members": [
             {
-                "_id": "u102",
-                "fullname": "Shakira",
-                "imgUrl": "https://imagez.tmz.com/image/86/4by3/2022/07/29/86ef71e21a30452980f337bad314dadf_md.jpg"
-            },
-            {
-                "_id": "u103242",
-                "fullname": "Dave",
-                "imgUrl": "https://yt3.ggpht.com/ytc/AMLnZu91y_wc558BmAoKGoPJ-HulcExG1u3YQpW_NhbyRA=s900-c-k-c0x00ffffff-no-rj"
-            },
-            {
-                "_id": "u103",
-                "fullname": "Drake",
-                "imgUrl": "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTQ3NTI2OTA4NzY5MjE2MTI4/drake_photo_by_prince_williams_wireimage_getty_479503454.jpg"
+                "_id":  "6390f5c1ba306ac05af209e5",
+                "username": "Matan",
+                "password": "$2b$10$CNZGuhtBp/BLSsVzOzrHo.mnYmy18aTsfCIDhouI4XyBQCJr/db9i",
+                "fullname": "Matan Amzaleg",
+                "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
             }
         ],
         "groups": [
@@ -146,7 +138,6 @@
                                         "title": "Let me know when it is done",
                                         "isDone": false
                                     }
-
                                 ]
                             },
                             {
@@ -276,9 +267,9 @@
                                 "txt": "also @yaronb please CR this",
                                 "createdAt": 1590999817436,
                                 "byMember": {
-                                        "_id": "u103242",
-                                        "fullname": "Dave",
-                                        "imgUrl": "https://yt3.ggpht.com/ytc/AMLnZu91y_wc558BmAoKGoPJ-HulcExG1u3YQpW_NhbyRA=s900-c-k-c0x00ffffff-no-rj"
+                                    "_id": "u103242",
+                                    "fullname": "Dave",
+                                    "imgUrl": "https://yt3.ggpht.com/ytc/AMLnZu91y_wc558BmAoKGoPJ-HulcExG1u3YQpW_NhbyRA=s900-c-k-c0x00ffffff-no-rj"
                                 }
                             }
                         ],

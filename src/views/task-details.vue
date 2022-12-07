@@ -33,12 +33,12 @@
                 <h3 class="task-mini-title">Description</h3>
                 <el-button v-if="task.description?.length" @click="isEdit = true" class="task-btn">Edit</el-button>
               </div>
-              <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
+              <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="descriptionEditMode"
                 class="description-info" :class="descriptionTxtAreaClass">
                 {{ task.description }}
               </p>
               <div v-else class="details-edit">
-                <textarea @input="updateTask" v-model="task.description" class="textarea-edit"
+                <textarea ref="focusInput" @input="updateTask" v-model="task.description" class="textarea-edit"
                   placeholder="Add a more detailed description..."></textarea>
                 <el-button class="add-save-btn" @click="(isEdit = false)" type="primary">Save</el-button>
                 <el-button @click="(isEdit = false)">Cancel</el-button>
@@ -160,7 +160,7 @@
                     @click="onEditChecklistTodo(checklist.id, todo.id, true)" class="todo-edit">
                     <p :style="todo.isDone ? { textDecoration: 'line-through' } : ''">{{ todo.title }}</p>
                   </div>
-                  <popperEditOptions requestedTitle="Item actions" @delete="deleteChecklistTodo(checklist.id, todo.id)"/>
+                  <popperEditOptions deleteTitle="Delete" requestedTitle="Item actions" @delete="deleteChecklistTodo(checklist.id, todo.id)"/>
                 </div>
               </li>
               <button
@@ -202,14 +202,14 @@
           </div>
         </section>
         <section class="actions">
+          <h3 class="mini-title">Add to card</h3>
           <div class="task-actions">
-            <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <checkList @addchecklist="addChecklist" />
             <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
-            <coverPicker @setCover="saveTaskCover" />
+            <coverPicker :style="task.style" @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
             <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched? 'watched' : ''">
               <span class="watch-icon icon-actions"></span>
@@ -231,8 +231,8 @@
 
 <script>
 import dateFormat, { masks } from "dateformat";
-import labelPicker from "../cmps/label-picker.vue"
 import memberPicker from "../cmps/member-picker.vue"
+import labelPicker from "../cmps/label-picker.vue"
 import checkList from "../cmps/check-list.vue"
 import datePicker from "../cmps/date-picker.vue"
 import coverPicker from "../cmps/cover.picker.vue"
@@ -413,7 +413,8 @@ export default {
       this.currChecklist.task = ev.target.value
     },
     openEditChecklist(checklistId, isEditTitle) {
-      setTimeout(() => {
+      this.currChecklist.todo.isEditTodo = false
+            setTimeout(() => {
         this.$refs.checklistTitle[0].focus()
       }, 50)
       this.currChecklist.id = checklistId
@@ -429,6 +430,7 @@ export default {
       this.updateTask()
     },
     onEditChecklistTodo(checklistId, todoId, isEditTodo) {
+      this.currChecklist.isEditTitle = false
       setTimeout(() => {
         this.$refs.checklistTodoTitle[0].focus()
       }, 50)
@@ -481,6 +483,17 @@ export default {
     toggleWatch(){
       this.task.isWatched = !this.task.isWatched
       this.updateTask()
+    },
+    descriptionEditMode() {
+      this.isEdit = true
+      console.log('entered refs')
+      this.updateInputFocus
+    },
+    updateInputFocus() {
+      console.log('entered refs 2')
+      setTimeout(() => {
+        this.$refs.focusInput.focus();
+      }, 50);
     }
   },
   computed: {
@@ -495,7 +508,7 @@ export default {
     },
     descriptionTxtAreaClass() {
       return this.task.description ? 'description-info-full' : ''
-    }
+    },
   },
   components: {
     labelPicker,
