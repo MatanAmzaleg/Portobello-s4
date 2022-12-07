@@ -2,7 +2,7 @@
   <div class="popper-content label-picker">
     <popperModal title="Labels" v-if="!isEditMode" @closeModal="closeModal" />
     <popperModal v-if="isEditMode" title="Edit label" @closeModal="closeModal"></popperModal>
-    <input @input="filterLabels" v-model="filterBy.txt" class="search-input" v-if="!isEditMode"
+    <input ref="focusInput" @input="filterLabels" v-model="filterBy.txt" class="search-input" v-if="!isEditMode"
       placeholder="Search labels..." type="search" />
     <div class="labels">
       <div v-if="isEditMode" class="chosen-label">
@@ -45,6 +45,7 @@
 <script>
 import popperModal from "./popper-modal.vue";
 import { utilService } from "../services/util.service"
+import { eventBus } from "../services/event-bus.service";
 export default {
   props: {
     labelIds: Array,
@@ -62,6 +63,7 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.getCurrBoard))
     this.filteredLabels = this.currBoard.labels
+    eventBus.on('update-focus', this.updateInputFocus)
   },
   methods: {
     addLabel(labelId) {
@@ -137,6 +139,11 @@ export default {
     closeModal() {
       this.$emit("closeModal");
     },
+    updateInputFocus() {
+      setTimeout(() => {
+        this.$refs.focusInput.focus();
+      }, 50);
+    }
   },
   components: {
     popperModal,

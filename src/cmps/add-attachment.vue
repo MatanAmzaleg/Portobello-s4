@@ -1,5 +1,5 @@
 <template>
-  <Popper class="popper">
+  <Popper class="popper" @open:popper="updateInputFocus">
     <div class="task-option-btn">
       <span class="attachments-icon icon-actions"></span>
       <p>Attachment</p>
@@ -12,7 +12,7 @@
         <input type="file" @change="uploadAttachment" hidden />
         </label>
         <p>Attach a link</p>
-        <input class="attach-link-input" v-model="link">
+        <input ref="focusInput" class="attach-link-input" v-model="link">
         <p v-if="link">Link name (optional)</p>
         <input v-if="link" class="attach-link-input" v-model="name">
         <button class="attach-link-button" @click="addAttachment">Attach</button>
@@ -52,6 +52,11 @@ export default {
       catch (err) {
         console.log(err)
       }
+    },
+    updateInputFocus() {
+      setTimeout(() => {
+        this.$refs.focusInput.focus();
+      }, 50);
     }
   },
   components: {

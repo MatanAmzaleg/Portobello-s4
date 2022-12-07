@@ -33,12 +33,12 @@
                 <h3 class="task-mini-title">Description</h3>
                 <el-button v-if="task.description?.length" @click="isEdit = true" class="task-btn">Edit</el-button>
               </div>
-              <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="isEdit = true"
+              <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="descriptionEditMode"
                 class="description-info" :class="descriptionTxtAreaClass">
                 {{ task.description }}
               </p>
               <div v-else class="details-edit">
-                <textarea @input="updateTask" v-model="task.description" class="textarea-edit"
+                <textarea ref="focusInput" @input="updateTask" v-model="task.description" class="textarea-edit"
                   placeholder="Add a more detailed description..."></textarea>
                 <el-button class="add-save-btn" @click="(isEdit = false)" type="primary">Save</el-button>
                 <el-button @click="(isEdit = false)">Cancel</el-button>
@@ -231,8 +231,8 @@
 
 <script>
 import dateFormat, { masks } from "dateformat";
-import labelPicker from "../cmps/label-picker.vue"
 import memberPicker from "../cmps/member-picker.vue"
+import labelPicker from "../cmps/label-picker.vue"
 import checkList from "../cmps/check-list.vue"
 import datePicker from "../cmps/date-picker.vue"
 import coverPicker from "../cmps/cover.picker.vue"
@@ -483,6 +483,17 @@ export default {
     toggleWatch(){
       this.task.isWatched = !this.task.isWatched
       this.updateTask()
+    },
+    descriptionEditMode() {
+      this.isEdit = true
+      console.log('entered refs')
+      this.updateInputFocus
+    },
+    updateInputFocus() {
+      console.log('entered refs 2')
+      setTimeout(() => {
+        this.$refs.focusInput.focus();
+      }, 50);
     }
   },
   computed: {
@@ -497,7 +508,7 @@ export default {
     },
     descriptionTxtAreaClass() {
       return this.task.description ? 'description-info-full' : ''
-    }
+    },
   },
   components: {
     labelPicker,

@@ -1,8 +1,8 @@
 <template>
   <div class="popper-content member-picker">
-    <popperModal title="Members" @closeModal="close"/>
+    <popperModal title="Members" @closeModal="closeModal"/>
     <div class="members-section">
-      <input v-focus @input="filterMembers" v-model="input" class="members-input-search" type="search" placeholder="Search Members">
+      <input ref="focusInput" v-focus @input="filterMembers" v-model="input" class="members-input-search" type="search" placeholder="Search Members"/>
       <div class="members">
         <h5 class="board-members-title">Board members</h5>
         <div class="board-members">
@@ -18,12 +18,14 @@
 </template>
 <script>
 import popperModal from './popper-modal.vue';
+import { eventBus } from '../services/event-bus.service';
 export default {
   props: {
     members: Array
   },
   created() {
     this.boardMembers = this.$store.getters.currBoard.members
+    eventBus.on('update-focus', this.updateInputFocus)
   },
   data() {
     return {
@@ -50,6 +52,14 @@ export default {
       }
       this.$emit('add-member', this.members)
     },
+    closeModal() {
+      this.$emit('closeModal')
+    },
+    updateInputFocus() {
+      setTimeout(() => {
+        this.$refs.focusInput.focus();
+      }, 50);
+    }
   },
   components: {
     popperModal
