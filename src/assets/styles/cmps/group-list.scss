@@ -129,10 +129,8 @@
           padding-right: 0;
           padding-left: 0;
           border-radius: 4px;
-
           margin-top: 4px;
-
-          transition: 0.6s;
+          transition: min-width 0.6s;
         }
 
         .label-extended {
