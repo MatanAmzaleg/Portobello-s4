@@ -2,7 +2,7 @@
   <section class="task-preview">
     <div
       class="cover"
-      v-if="(Object.keys(item.style).length !== 0 && item.style?.mode !== 'full')"
+      v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'"
       :style="
         item.style?.bgColor
           ? { 'background-color': item.style.bgColor }
@@ -13,14 +13,13 @@
               'background-size': 'cover',
             }
       "
-    >
-    </div>
+    ></div>
     <div
       class="cover"
       v-if="item.style?.mode === 'full'"
       :style="
         item.style?.bgColor
-          ? { 'background-color': item.style.bgColor , height: '56px',}
+          ? { 'background-color': item.style.bgColor, height: '56px' }
           : {
               'background-image': 'url( ' + item.style.imgUrl + ')',
               height: '256px',
@@ -34,10 +33,19 @@
     <div v-if="item.style?.mode !== 'full'" class="padded-section">
       <div class="labels" v-if="item.labelIds?.length > 0">
         <span
+          @click.stop="openLabelExtended"
           class="label"
+          :class="labelExtendedClass"
           v-for="label in item.labelIds"
           :style="{ 'background-color': labelColor(label) }"
-        ></span>
+          ><div
+            class="circle"
+            :style="{ 'background-color': labelColor(label) }"
+          ></div>
+          <span class="label-title" v-if="isLabelsExtended">{{
+            getLabelTitle(label)
+          }}</span></span
+        >
       </div>
       <span class="task-router-link">{{ item.title }}</span>
       <div v-if="taskExtra(item)" class="task-preview-info">
@@ -60,7 +68,7 @@
           </div>
         </div>
         <mini-users-designed :memberIds="item.memberIds"></mini-users-designed>
-          <!-- <mini-users
+        <!-- <mini-users
             :isHeader="true"
             v-if="item.memberIds"
             :memberIds="item.memberIds"
@@ -80,6 +88,7 @@ export default {
   data() {
     return {
       isDone: null,
+      isLabelsExtended: false,
     };
   },
   methods: {
@@ -117,10 +126,24 @@ export default {
       this.isDone = allTasks === doneTasks ? true : false;
       return `${doneTasks}/${allTasks}`;
     },
+    openLabelExtended() {
+      this.isLabelsExtended = !this.isLabelsExtended;
+      this.labelExtendedClass;
+    },
+    getLabelTitle(labelId) {
+      const boardLabels = this.currBoard.labels;
+      const label = boardLabels.find((l) => l.id === labelId);
+      console.log(label);
+      return label.title;
+    },
   },
   computed: {
     currBoard() {
       return this.$store.getters.currBoard;
+    },
+    labelExtendedClass() {
+      if (this.isLabelsExtended) return "label-extended";
+      return "label";
     },
   },
   components: {
