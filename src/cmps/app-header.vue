@@ -132,10 +132,7 @@ export default {
   data() {
     return {
       isModalOpen: false,
-<<<<<<< HEAD
       calculatedColor:null
-=======
->>>>>>> c239158151fd5aa572697924d99d64f54d0c52e8
     }
   },
   created(){
@@ -159,10 +156,9 @@ export default {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen
     },
-<<<<<<< HEAD
     updateHeaderColor(calcColor){
       this.calculatedColor = calcColor
-=======
+    },
     removerStarred(board) {
       const boardToUpdate = JSON.parse(JSON.stringify(board));
       boardToUpdate.isStarred = false;
@@ -172,7 +168,6 @@ export default {
       console.log('move board')
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`)
->>>>>>> c239158151fd5aa572697924d99d64f54d0c52e8
     }
   },
   components: {
@@ -181,7 +176,7 @@ export default {
   },
   watch:{
     calculatedColor(newColor, oldColor){
-      
+
     }
   }
 }
