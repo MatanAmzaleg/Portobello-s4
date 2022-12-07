@@ -1,7 +1,7 @@
 <template>
   <section class="full-board flex" :class="{ 'is-menu-open': isMenuOpen }">
     <board-menu
-    @updateBoard="updateBoard"
+      @updateBoard="updateBoard"
       :currBoard="getCurrBoard"
       @closeBoardMenu="closeBoardMenu"
     ></board-menu>
@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { utilService } from "../services/util.service";
 import boardMenu from "../cmps/board-menu.vue";
 import boardHeader from "../cmps/board-header.vue";
 import groupList from "../cmps/group-list.vue";
@@ -49,8 +50,8 @@ export default {
   data() {
     return {
       filterBy: { txt: "", labels: null },
-      currBoard: null,
       isMenuOpen: false,
+      calculateColor: {},
     };
   },
   async created() {
@@ -58,9 +59,14 @@ export default {
       eventBus.on("toggleTask", this.updateTaskStatus);
       const { boardId } = this.$route.params;
       this.$store.dispatch({ type: "setCurrBoard", boardId });
-      this.currBoard = this.getCurrBoard;
     } catch (err) {
       console.log(err);
+    }
+  },
+  mounted() {
+    if (this.getCurrBoard.style.imgUrl) {
+      utilService.getCalculatedColor(this.getCurrBoard.style.imgUrl);
+    } else {
     }
   },
   methods: {

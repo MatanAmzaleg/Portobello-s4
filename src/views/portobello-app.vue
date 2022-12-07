@@ -32,12 +32,7 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <img
-                  class="yellow-star"
-                  src="../assets/icons/star.png"
-                  alt=""
-                  v-if="board.isStarred"
-                />
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" @click.stop="removerStarred(board)"/>
               </div>
             </article>
           </li>
@@ -76,12 +71,8 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <img
-                  class="yellow-star"
-                  src="../assets/icons/star.png"
-                  alt=""
-                  v-if="board.isStarred"
-                />
+                <font-awesome-icon  v-if="!board.isStarred" class="white-star" icon="fa-regular fa-star" @click.stop="addStarred(board)"/>
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" @click.stop="removerStarred(board)"/>
               </div>
             </article>
           </li>
@@ -113,12 +104,8 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <img
-                  class="yellow-star"
-                  src="../assets/icons/star.png"
-                  alt=""
-                  v-if="board.isStarred"
-                />
+                <font-awesome-icon  v-if="!board.isStarred" class="white-star" icon="fa-regular fa-star" @click.stop="addStarred(board)"/>
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" @click.stop="removerStarred(board)"/>
               </div>
             </article>
           </li>
@@ -239,6 +226,16 @@ export default {
     moveToBoard(board) {
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`);
+    },
+    addStarred(board) {
+      const boardToUpdate = JSON.parse(JSON.stringify(board));
+      boardToUpdate.isStarred = true;
+      this.$store.dispatch({ type: "updateBoard", board: boardToUpdate });
+    },
+    removerStarred(board) {
+      const boardToUpdate = JSON.parse(JSON.stringify(board));
+      boardToUpdate.isStarred = false;
+      this.$store.dispatch({ type: "updateBoard", board: boardToUpdate });
     },
   },
 

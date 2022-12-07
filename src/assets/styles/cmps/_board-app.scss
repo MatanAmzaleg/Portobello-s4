@@ -80,15 +80,27 @@
                 border-radius: 3px;
                 background-color: #00000051;
                 position: relative;
-                .yellow-star{
+
+                .white-star {
+                    right: -26px;
+                }
+
+                &:hover {
+                    .white-star {
+                        right: 0px;
+                    }
+                }
+
+                .yellow-star {
                     width: 14px;
                     height: 14px;
                     position: absolute;
                     bottom: 0;
                     right: 0;
                     margin: 12px;
+                    color: #F2D600;
 
-                    &:hover{
+                    &:hover {
                         scale: 1.1;
                         transition: 0.3s;
                     }
@@ -101,7 +113,7 @@
                 }
 
                 &:hover {
-                    background-color: #00000089;
+                    background-color: #00000071;
                 }
             }
 

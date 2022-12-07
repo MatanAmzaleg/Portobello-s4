@@ -1,4 +1,5 @@
 <template>
+    <hamburger v-if="isHamburgerMode"></hamburger>
     <header class="home-header">
         <div>
             <nav>
@@ -22,7 +23,7 @@
                     </router-link>
                 </section>
                 <section class="actions">
-                    <button class="humburger">
+                    <button @click="(isHamburgerMode = !isHamburgerMode)" class="humburger">
                         <font-awesome-icon icon="fa-solid fa-bars" class="icon" />
                     </button>
                     <router-link to="/login">
@@ -44,14 +45,21 @@
 </template>
 <script>
 import notifications from './notifications.vue';
+import hamburger from './hamburger.vue';
 export default {
+    data(){
+        return{
+            isHamburgerMode:false
+        }
+    },
     computed: {
         loggedInUser() {
             return this.$store.getters.loggedinUser
         },
     },
     components: {
-        notifications
+        notifications,
+        hamburger
     }
 }
 </script>

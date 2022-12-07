@@ -83,6 +83,7 @@
           >
           </span>
         </div>
+        <img class="loader" v-else src="../assets/icons/loader.svg" alt="" />
         <div v-if="searchedImgs" class="background-imgs">
           <span
             v-for="img in searchedImgs"
@@ -151,6 +152,7 @@ export default {
       console.log(newBoard);
       newBoard.style = { imgUrl: url };
       this.$emit("updateBoard", newBoard);
+      utilService.getCalculatedColor(newBoard.style.imgUrl);
     },
     setBoardCover(cover) {
       const newBoard = JSON.parse(JSON.stringify(this.currBoard));

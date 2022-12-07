@@ -115,17 +115,18 @@
           </div>
         </template>
       </popper>
-      <div v-if="board.members" class="users">
-        <mini-users></mini-users>
-      </div>
+        <mini-users-designed  v-if="board.members" :memberIds="getBoardMembers"></mini-users-designed>
+ 
       |
       <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
       </button>
     </div>
   </section>
+  <img class="loader" v-else src="../assets/icons/loader.svg" alt=""/>
 </template>
 <script>
+import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import popperModal from "./popper-modal.vue";
 export default {
@@ -164,9 +165,16 @@ export default {
       }, 50);
     },
   },
+  computed: {
+    getBoardMembers(){
+      console.log(this.board);
+      return this.board.members.map(member => member._id)
+    }
+  },
   components: {
     miniUsers,
     popperModal,
+    miniUsersDesigned
   },
 };
 </script>

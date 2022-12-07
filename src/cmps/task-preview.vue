@@ -59,18 +59,18 @@
             </span>
           </div>
         </div>
-        <div class="task-preview-users">
-          <mini-users
+        <mini-users-designed :memberIds="item.memberIds"></mini-users-designed>
+          <!-- <mini-users
             :isHeader="true"
             v-if="item.memberIds"
             :memberIds="item.memberIds"
-          />
-        </div>
+          /> -->
       </div>
     </div>
   </section>
 </template>
 <script>
+import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import TaskDatePreview from "./task-date-preview.vue";
 export default {
@@ -126,6 +126,7 @@ export default {
   components: {
     miniUsers,
     TaskDatePreview,
+    miniUsersDesigned,
   },
 };
 </script>

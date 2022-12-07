@@ -1,0 +1,44 @@
+.hamburger-section{
+    margin-top: 70px;
+    width: 250px;
+    position: fixed;
+    background-color: aqua;
+    right: 17px;
+
+    .btn-start {
+        height: 70px;
+        width: 100%;
+        font-size: 18px;
+        background-color: $clr6;
+        color: $clr4;
+
+        &:hover {
+            background-color: $clr7
+        }
+    }
+
+    .btn-login{
+            height: 50px;
+            width: 100%;
+            font-family: sans-serif;
+            font-size: 1.2rem;
+            padding: 0.5rem 1.5rem;
+            color: $clr5;
+            background-color: $clr4;
+
+            &:hover{
+                filter: brightness(90%);
+            }
+
+    }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}

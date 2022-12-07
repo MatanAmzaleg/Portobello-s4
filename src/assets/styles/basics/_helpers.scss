@@ -115,6 +115,7 @@
   margin-left: 3px;
   color: $clr27;
 }
+
 .watch-icon:before {
   content: "\e969";
 }
@@ -173,7 +174,37 @@
   width: 20px;
 }
 
+.star {
+  height: 18px;
+  width: 18px;
+  color: #F2D600 !important;
+  cursor: pointer;
+}
+
+.white-star {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  margin: 12px;
+  color: white !important;
+  cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    scale: 1.1;
+    transition: 0.3s;
+  }
+}
+
 // popper helper 
+
+.popper-main {
+  div:first-child {
+    height: 100%;
+  }
+}
 
 .popper-btn {
   width: auto;
@@ -199,7 +230,7 @@
     width: -webkit-fill-available !important;
     padding: 0 12px;
 
-    &.content-delete{
+    &.content-delete {
       padding: 0;
     }
   }
@@ -212,7 +243,7 @@
     background-color: $clr9 !important;
     border: none !important;
     padding: 10px !important;
-    
+
     &:hover {
       background-color: $clr20 !important;
     }

@@ -1,0 +1,23 @@
+.mini-users-designed{
+    display: flex;
+    float: right;
+    height: 32px;
+    width: fit-content;
+    margin-bottom: 3px;
+ul{
+    display: flex;
+    align-items: center;
+    li{
+        display: flex;
+        align-items: center;
+        .main-task-member-img{
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            margin-inline-end: 4px;
+            object-fit: cover;
+        }
+    }
+}
+
+}

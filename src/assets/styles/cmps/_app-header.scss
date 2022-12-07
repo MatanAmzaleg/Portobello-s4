@@ -10,6 +10,93 @@ header.app-header {
         display: flex;
         justify-content: space-between;
 
+        .nav-item {
+            height: 100%;
+        }
+
+        .nav-item-content {
+            display: flex;
+            gap: 8px 0;
+            flex-direction: column;
+            list-style: none;
+            padding: 12px;
+
+            li {
+
+                &:hover {
+                    background-color: #EBECF0;
+
+                    .starred-board-container {
+                        .style-container {
+                            opacity: 0.6;
+                        }
+                    }
+                }
+
+                .starred-board-container {
+                    display: flex;
+                    align-items: center;
+                    height: 32px;
+
+                    .board-name-container {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        padding: 0 0 0 8px;
+
+                        .title-1 {
+                            font-size: 14px;
+                            color: #172B4D;
+                            line-height: 18px;
+                            font-weight: 500;
+                        }
+
+                        .title-2 {
+                            font-size: 12px;
+                            color: #5E6C84;
+                            font-weight: 400;
+                            line-height: 16px;
+                        }
+                    }
+
+                    .style-container {
+                        height: 32px;
+                        min-width: 40px;
+                        border-radius: 3px;
+                    }
+
+                    .yellow-star {
+                        display: none;
+                    }
+
+                    .yellow-star-full {
+                        display: flex;
+                    }
+
+                    .yellow-star-container {
+                        height: 18px;
+                        width: 22px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
+                        &:hover {
+                            transition: 0.3s;
+
+                            .yellow-star {
+                                display: flex;
+                                
+                            }
+
+                            .yellow-star-full {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         section {
             display: flex;
         }
@@ -68,8 +155,10 @@ header.app-header {
             }
 
             .trello-actions-more {
-                @include for-mobile-layout {
-                    display: none;
+                display: none;
+
+                @include for-max-wide-layout {
+                    display: flex;
                 }
             }
         }
@@ -83,6 +172,9 @@ header.app-header {
         }
 
         .user {
+            width: -webkit-fill-available;
+            justify-content: end;
+
             button {
                 padding: 4px 10px;
                 font-size: 15px;
@@ -91,9 +183,10 @@ header.app-header {
             }
 
             .search {
+                width: 100%;
                 position: relative;
-                max-width: 100%;
-                width: 200px;
+                display: flex;
+                justify-content: end;
 
                 @include for-mobile-layout {
                     width: 30px;
@@ -111,7 +204,7 @@ header.app-header {
 
                 input {
                     height: 32px;
-                    width: 100%;
+                    width: 200px;
                     padding: 0px 12px 0px 40px;
                     box-sizing: border-box;
                     margin-bottom: revert;
@@ -131,11 +224,17 @@ header.app-header {
                     }
 
                     &:focus {
-                        width: 99vw;
-                        position: fixed;
-                        left: 0.5vw;
+                        width: 100%;
                         background-color: whitesmoke;
                         color: black;
+
+                        @include for-extra-normal-layout {
+                            width: 640px;
+                        }
+
+                        @include for-min-wide-layout {
+                            width: 780px;
+                        }
 
                         &::placeholder {
                             color: black;
@@ -148,9 +247,9 @@ header.app-header {
                 }
 
                 input:focus+.icon>.icon-svg {
-                    position: fixed;
-                    z-index: 10;
-                    left: 2vw;
+                    // position: fixed;
+                    // z-index: 10;
+                    // left: 2vw;
                     color: black;
                 }
             }
