@@ -1,10 +1,10 @@
-<template lang="">
+<template>
   <Popper placement="auto">
     <div class="task-option-btn">
       <span class="card-cover-icon icon-actions"></span>
       <p>Cover</p>
     </div>
-    <template class="cover-container" #content="{ close }">
+    <template #content="{ close }" class="cover-container">
       <div v-if="!isSearchMode" class="cover-reg-mode">
         <div class="popper-content cover-picker">
           <popper-modal :title="titleMode" @closeModal="close"></popper-modal>

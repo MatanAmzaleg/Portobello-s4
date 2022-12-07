@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="popper-content date-picker"> 
     <v-date-picker class="date-picker"  mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
     <!-- <Datepicker v-model="date" :is-24="true" inline auto-apply/> -->

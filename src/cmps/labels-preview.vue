@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <div class="label-preview-container">
     <p class="label-preview-header">Labels</p>
     <div class="labels-preview-list">
@@ -14,8 +14,8 @@
       ></span>
       <popper>
       <button class="plus-btn"><font-awesome-icon class="plus-icon" icon="fa-solid fa-plus" /></button>
-      <template #content>
-        <popperLabel @updateBoard="onSaveLabel" @saveLabel="addLabel" :labelIds="this.labelIds" />      
+      <template #content="{close}">
+        <popperLabel @updateBoard="onSaveLabel" @saveLabel="addLabel" :labelIds="this.labelIds" @closeModal="close"/>      
       </template>
       </popper>
 

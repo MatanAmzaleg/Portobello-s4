@@ -10,26 +10,12 @@
     <section v-if="titleMode === 'menu'" class="main-content">
       <div class="menu-options">
         <div @click="titleMode = 'changeBg'" class="menu-opt">
-          <div
-            class="bg-trailer"
-            :style="
-              currBoard.style?.bgColor
-                ? { 'background-color': currBoard.style?.bgColor }
-                : currBoard.style?.imgUrl
-                ? {
-                    'background-image': 'url( ' + currBoard.style?.imgUrl + ')',
-                    'background-size': 'cover',
-                  }
-                : ''
-            "
-          ></div>
+          <div class="bg-trailer" :style="currBoard?.style?.bgColor? { 'background-color': currBoard?.style?.bgColor } : currBoard?.style?.imgUrl? {'background-image': 'url( ' + currBoard?.style?.imgUrl + ')','background-size': 'cover'} : ''">
+          </div>
           <h4>Change background</h4>
         </div>
         <div class="menu-opt">
-          <font-awesome-icon
-            class="ellipsis-icon"
-            icon="fa-solid fa-ellipsis"
-          />
+          <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
           <h4>More</h4>
         </div>
       </div>
@@ -45,81 +31,47 @@
       <div v-if="titleMode === 'changeBg'" class="change-bg-section">
         <div class="main-container">
           <div @click="titleMode = 'unsplash'" class="unsplash-container">
-            <img
-              class="preview-img"
-              src="https://a.trellocdn.com/prgb/dist/images/photos-thumbnail@3x.8f9c1323c9c16601a9a4.jpg"
-              alt=""
-            />
+            <img class="preview-img"
+              src="https://a.trellocdn.com/prgb/dist/images/photos-thumbnail@3x.8f9c1323c9c16601a9a4.jpg" alt="" />
             <p>Photos</p>
           </div>
           <div @click="titleMode = 'colors'" class="unsplash-container">
-            <img
-              class="preview-img"
-              src="https://a.trellocdn.com/prgb/dist/images/colors@2x.ec32a2ed8dd8198b8ef0.jpg"
-              alt=""
-            />
+            <img class="preview-img" src="https://a.trellocdn.com/prgb/dist/images/colors@2x.ec32a2ed8dd8198b8ef0.jpg"
+              alt="" />
             <p>Photos</p>
           </div>
         </div>
       </div>
 
       <div v-if="titleMode === 'unsplash'" class="unsplash-section">
-        <input
-          v-model="searchWord"
-          @input="debounce()"
-          class="search-input"
-          placeholder="Photos"
-          type="text"
-        />
+        <input v-model="searchWord" @input="debounce()" class="search-input" placeholder="Photos" type="text" />
         <div v-if="!searchedImgs" class="background-imgs">
-          <span
-            v-for="img in imgs"
-            @click="setBoardBg(img)"
-            class="unsplash-img"
-            :style="{
-              'background-image': 'url(' + img + ')',
-              'background-size': 'cover',
-            }"
-          >
+          <span v-for="img in imgs" @click="setBoardBg(img)" class="unsplash-img" :style="{
+            'background-image': 'url(' + img + ')',
+            'background-size': 'cover',
+          }">
           </span>
         </div>
         <img class="loader" v-else src="../assets/icons/loader.svg" alt="" />
         <div v-if="searchedImgs" class="background-imgs">
-          <span
-            v-for="img in searchedImgs"
-            @click="setBoardBg(img)"
-            class="unsplash-img"
-            :style="{
-              'background-image': 'url(' + img + ')',
-              'background-size': 'cover',
-            }"
-          >
+          <span v-for="img in searchedImgs" @click="setBoardBg(img)" class="unsplash-img" :style="{
+            'background-image': 'url(' + img + ')',
+            'background-size': 'cover',
+          }">
           </span>
         </div>
       </div>
       <div v-if="titleMode === 'colors'" class="unsplash-section">
         <div class="background-imgs">
-          <span
-            v-for="cover in currBoard.covers"
-            @click="setBoardCover(cover)"
-            class="unsplash-img"
-            :style="{
-              'background-color': `${cover.color}`,
-              'background-size': 'cover',
-            }"
-          >
+          <span v-for="cover in currBoard.covers" @click="setBoardCover(cover)" class="unsplash-img" :style="{
+            'background-color': `${cover.color}`,
+            'background-size': 'cover',
+          }">
           </span>
         </div>
       </div>
-      <button
-        v-if="titleMode !== 'menu'"
-        @click="(titleMode = 'menu'), (searchedImgs = null)"
-        class="return-btn2"
-      >
-        <font-awesome-icon
-          class="return-icon"
-          icon="fa-solid fa-chevron-left"
-        />
+      <button v-if="titleMode !== 'menu'" @click="(titleMode = 'menu'), (searchedImgs = null)" class="return-btn2">
+        <font-awesome-icon class="return-icon" icon="fa-solid fa-chevron-left" />
       </button>
     </section>
 

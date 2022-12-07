@@ -64,7 +64,7 @@ export default {
     }
   },
   mounted() {
-    if (this.getCurrBoard.style.imgUrl) {
+    if (this.getCurrBoard?.style.imgUrl) {
       utilService.getCalculatedColor(this.getCurrBoard.style.imgUrl);
     } else {
     }

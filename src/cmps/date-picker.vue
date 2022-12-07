@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <Popper placement="top" offsetDistance="-100">
       <div class="task-option-btn">
         <font-awesome-icon class="icon" icon="fa-regular fa-clock" />

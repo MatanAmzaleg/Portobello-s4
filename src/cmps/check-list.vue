@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <Popper>
     <div class="task-option-btn">
       <span class="checklist-icon icon-actions"></span>

@@ -1,11 +1,11 @@
-<template lang="">
+<template>
     <Popper>
       <div class="task-option-btn btn-members">
         <span class="icon-actions member-icon"></span>      
         <p>Members</p>
       </div>
-      <template #content="{close}">
-        <popperMember @addMember="addMember" :members="this.members" />
+      <template #content="{ close }">
+        <popperMember @closeModal="close" @addMember="addMember" :members="this.members" />
       </template>
     </Popper>
   </template>
