@@ -24,6 +24,10 @@
     display: flex;
     gap: 8px;
     padding: 0px 16px 8px 16px;
+
+    @include for-mobile-layout {
+      padding: 0px;
+    }
   }
 
   .task-list {
@@ -183,6 +187,18 @@
       background-color: #c7ccd5;
       margin-inline-end: 2px;
     }
+
+    @include for-mobile-layout {
+      width: -webkit-fill-available;
+    }
+  }
+
+  .group-preview {
+    @include for-mobile-layout {
+      width: 98vw;
+      justify-content: center;
+      display: flex;
+    }
   }
 
   .group {
@@ -221,6 +237,10 @@
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       }
+    }
+
+    @include for-mobile-layout {
+      width: -webkit-fill-available;
     }
   }
 

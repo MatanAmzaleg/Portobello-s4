@@ -176,7 +176,7 @@ export default {
       isSearchMode: false,
       searchWord: "",
       searchedImgs: null,
-      currCover: this.style.bgColor || '#fff',
+      currCover: this.style?.bgColor || '#fff',
       suggested: [
         "Productivity",
         "Perspective",
