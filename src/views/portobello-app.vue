@@ -32,7 +32,7 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" />
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" @click.stop="removerStarred(board)"/>
               </div>
             </article>
           </li>

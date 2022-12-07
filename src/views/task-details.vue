@@ -129,8 +129,8 @@
                 </div>
               </div>
             <div class="progress-container">
-              <el-progress :percentage="checklistPercentage(checklist.id)" :format="checklistFormat"
-                :color="checklistPercentage(checklist.id) === 100 ? '#61bd4f' : ''" width="200px">
+              <el-progress :percentage="checklistPercentage(checklist.id)"
+                :color="checklistPercentage(checklist.id) === 100 ? '#61bd4f' : '#5ba4cf'" width="200px">
               </el-progress>
             </div>
             <ul class="checklist">
@@ -458,9 +458,6 @@ export default {
       const doneTasks = this.task.checklists.find(checklist => checklist.id === checklistId).todos.filter(
         todo => todo.isDone).length
       return Math.round((doneTasks / allTasks) * 100)
-    },
-    checklistFormat(percentage) {
-      return percentage ? percentage === 100 ? 'Full' : `${percentage}%` : `0%`
     },
     getCommentTime(ts) {
       if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(new Date(ts), "'Before' H 'hours'");
