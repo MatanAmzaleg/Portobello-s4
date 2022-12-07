@@ -1,5 +1,7 @@
-import { ACCES_KEY } from '../../secret.js';
+import { ACCES_KEY } from "../../secret.js";
 import { storageService } from "./async-storage.service.js";
+import { eventBus } from "./event-bus.service";
+import { FastAverageColor } from "fast-average-color";
 
 export const utilService = {
   makeId,
@@ -12,10 +14,11 @@ export const utilService = {
   createBoardFromScene,
   fetchListOfPhotos,
   getImgs,
+  getCalculatedColor,
 };
 
 const STORAGE_KEY = "imgsDb";
-let imgs = {}
+let imgs = {};
 
 function makeId(length = 6) {
   var txt = "";
@@ -29,28 +32,46 @@ function makeId(length = 6) {
   return txt;
 }
 
-async function fetchListOfPhotos (query = '', page= '1') {
+async function fetchListOfPhotos(query = "", page = "1") {
   try {
-    let response = null
-    response = await fetch(`https://api.unsplash.com/search/photos?client_id=${ACCES_KEY}&query=${query}&page=${page}`)
-    let json = await response.json()
+    let response = null;
+    response = await fetch(
+      `https://api.unsplash.com/search/photos?client_id=${ACCES_KEY}&query=${query}&page=${page}`
+    );
+    let json = await response.json();
     const res = json.results.map((img) => {
-      return img.urls.regular
-    })
-    res.forEach(img => {
-      if(!imgs[query.toLowerCase()]) imgs[query.toLowerCase()] = []
-      imgs[query.toLowerCase()].push(img)
-    })
-    saveToStorage(STORAGE_KEY, imgs)
+      return img.urls.regular;
+    });
+    res.forEach((img) => {
+      if (!imgs[query.toLowerCase()]) imgs[query.toLowerCase()] = [];
+      imgs[query.toLowerCase()].push(img);
+    });
+    saveToStorage(STORAGE_KEY, imgs);
   } catch (err) {
-    console.log('Cannot load photos', err)
-    throw err
+    console.log("Cannot load photos", err);
+    throw err;
   }
 }
 
 function getImgs(query) {
   var imgs = loadFromStorage(STORAGE_KEY)[query.toLowerCase()];
-  return imgs
+  return imgs;
+}
+
+async function getCalculatedColor(url) {
+  let calculateColor = {};
+  try {
+    const fac = new FastAverageColor();
+    fac.getColorAsync(url).then((color) => {
+      calculateColor.calcColor = color.rgba;
+      calculateColor.isDark = color.isDark;
+      console.log(calculateColor);
+      eventBus.emit("headerColor", calculateColor);
+      // return calculateColor
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 function makeLorem(size = 100) {

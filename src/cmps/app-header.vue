@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header">
+  <header :style="{'background-color':calculatedColor?.calcColor}" class="app-header">
     <nav>
       <section class="trello">
         <router-link to="/">
@@ -89,12 +89,17 @@
 </template>
 <script>
 import notifications from './notifications.vue';
+import { eventBus } from "../services/event-bus.service";
 import createBoardPopperTemplateVue from './create-board-popper-template.vue';
 export default {
   data() {
     return {
-      isModalOpen: false
+      isModalOpen: false,
+      calculatedColor:null
     }
+  },
+  created(){
+    eventBus.on("headerColor", this.updateHeaderColor);
   },
   computed: {
     loggedInUser() {
@@ -108,10 +113,18 @@ export default {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen
     },
+    updateHeaderColor(calcColor){
+      this.calculatedColor = calcColor
+    }
   },
   components: {
     notifications,
     createBoardPopperTemplateVue
+  },
+  watch:{
+    calculatedColor(newColor, oldColor){
+      
+    }
   }
 }
 </script>

@@ -8,6 +8,7 @@
     .btn-start {
         height: 70px;
         width: 100%;
+        font-size: 18px;
         background-color: $clr6;
         color: $clr4;
 
@@ -30,4 +31,14 @@
             }
 
     }
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
