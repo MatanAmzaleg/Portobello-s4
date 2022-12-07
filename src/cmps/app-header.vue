@@ -9,15 +9,39 @@
           </button>
         </router-link>
         <section class="trello-actions">
-          <button class="nav-item">
-            <span>Workspaces</span>
-            <svg width="18" height="18" role="presentation" focusable="false" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
-                fill="currentColor"></path>
-            </svg>
-          </button>
+          <Popper offsetSkid="110" class="popper-main">
+            <button class="nav-item">
+              <span>Boards</span>
+              <svg width="18" height="18" role="presentation" focusable="false" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <template #content="{ close }">
+              <div class="popper-template">
+                <ul class="nav-item-content">
+                  <li v-for="board in getBoards">
+                    <div class="starred-board-container" @click="moveToBoard(board)">
+                      <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="">
+                      <div v-if="board.style?.bgColor" class="style-container"
+                        :style="{ 'background-color': board.style?.bgColor }" alt="">
+                      </div>
+                      <div class="board-name-container">
+                        <label class="title-1">{{ board.title }}</label>
+                        <label class="title-2">{{ board.title }} Board</label>
+                      </div>
+                      <div v-if="board.isStarred" class="yellow-star-container" @click.stop="removerStarred(board)">
+                        <font-awesome-icon icon="fa-solid fa-star" class="star yellow-star-full" />
+                        <font-awesome-icon icon="fa-regular fa-star" class="star yellow-star" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </Popper>
           <button class="nav-item">
             <span>Recent</span>
             <svg width="18" height="18" role="presentation" focusable="false" viewBox="0 0 24 24"
@@ -27,24 +51,39 @@
                 fill="currentColor"></path>
             </svg>
           </button>
-          <button class="nav-item">
-            <span>Starred</span>
-            <svg width="18" height="18" role="presentation" focusable="false" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
-                fill="currentColor"></path>
-            </svg>
-          </button>
-          <button class="nav-item">
-            <span>Templates</span>
-            <svg width="18" height="18" role="presentation" focusable="false" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
-                fill="currentColor"></path>
-            </svg>
-          </button>
+          <Popper offsetSkid="110" class="popper-main">
+            <button class="nav-item">
+              <span>Starred</span>
+              <svg width="18" height="18" role="presentation" focusable="false" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M11.2929 16.7071L4.22185 9.63606C3.83132 9.24554 3.83132 8.61237 4.22185 8.22185C4.61237 7.83133 5.24554 7.83133 5.63606 8.22185L12 14.5858L18.364 8.22185C18.7545 7.83132 19.3877 7.83132 19.7782 8.22185C20.1687 8.61237 20.1687 9.24554 19.7782 9.63606L12.7071 16.7071C12.3166 17.0977 11.6834 17.0977 11.2929 16.7071Z"
+                  fill="currentColor"></path>
+              </svg>
+            </button>
+            <template #content="{ close }">
+              <div class="popper-template">
+                <ul class="nav-item-content">
+                  <li v-for="board in getBoards?.filter(board => board.isStarred)">
+                    <div v-if="board.isStarred" class="starred-board-container" @click="moveToBoard(board)">
+                      <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="">
+                      <div v-if="board.style?.bgColor" class="style-container"
+                        :style="{ 'background-color': board.style?.bgColor }" alt="">
+                      </div>
+                      <div class="board-name-container">
+                        <label class="title-1">{{ board.title }}</label>
+                        <label class="title-2">{{ board.title }} Board</label>
+                      </div>
+                      <div class="yellow-star-container" @click.stop="removerStarred(board)">
+                        <font-awesome-icon icon="fa-solid fa-star" class="star yellow-star-full" />
+                        <font-awesome-icon icon="fa-regular fa-star" class="star yellow-star" />
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </Popper>
         </section>
         <section class="trello-actions-more">
           <button class="nav-item">
@@ -57,13 +96,14 @@
             </svg>
           </button>
         </section>
-        <Popper class="popper-create" :class="popperClass" offsetSkid="118" @open:popper="toggleModal" @close:popper="toggleModal">
+        <Popper class="popper-create" :class="popperClass" offsetSkid="118" @open:popper="toggleModal"
+          @close:popper="toggleModal">
           <button class="btn-create">
             <span>Create</span>
           </button>
-          <template #content="{close}">
+          <template #content="{ close }">
             <div>
-              <createBoardPopperTemplateVue :isModalOpen="isModalOpen" @closeModal="close"/>
+              <createBoardPopperTemplateVue :isModalOpen="isModalOpen" @closeModal="close" />
             </div>
           </template>
         </Popper>
@@ -93,7 +133,7 @@ import createBoardPopperTemplateVue from './create-board-popper-template.vue';
 export default {
   data() {
     return {
-      isModalOpen: false
+      isModalOpen: false,
     }
   },
   computed: {
@@ -101,13 +141,28 @@ export default {
       return this.$store.getters.loggedinUser
     },
     popperClass() {
-      return this.isModalOpen? 'popper-opened' : 'popper-closed'
-    }
+      return this.isModalOpen ? 'popper-opened' : 'popper-closed'
+    },
+    getBoards() {
+      return this.$store.getters.boards;
+    },
+    getCurrBoard() {
+      return this.$store.getters.currBoard;
+    },
   },
   methods: {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen
     },
+    removerStarred(board) {
+      const boardToUpdate = JSON.parse(JSON.stringify(board));
+      boardToUpdate.isStarred = false;
+      this.$store.dispatch({ type: "updateBoard", board: boardToUpdate });
+    },
+    moveToBoard(board) {
+      this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
+      this.$router.push(`/board/${board._id}`)
+    }
   },
   components: {
     notifications,
