@@ -152,16 +152,19 @@ export default {
         this.isEditMode = false
         return
       }else{
-        //REMOVE LABEL FROM TASK
-        // let idx = this.labelIds.findIndex(l => l.id === this.chosenLabel.id)
-        // this.labelIds.splice(idx,1)
-        // this.$emit('saveLabels',this.labelIds)
+        let idx = this.labelIds.findIndex(l => l.id === this.chosenLabel.id)
+        this.labelIds.splice(idx,1)
+        this.$emit('saveLabels',this.labelIds)
 
-        // let idx = this.currBoard.labels.findIndex(l => l.id === this.chosenLabel.id)
-        // this.currBoard.labels.splice(idx,1)
-        // this.$store.dispatch({type:'updateBoard',board: this.currBoard})
-        // const labelIdx = this.labelIds.findIndex(l=> l.id === this.chosenLabel.id)
-        // this.labelIds.splice(labelIdx,1)
+        let idx1 = this.currBoard.labels.findIndex(l => l.id === this.chosenLabel.id)
+        this.currBoard.labels.splice(idx1,1)
+        const newBoard = this.currBoard.groups.map(group =>{
+         return group.tasks.map(task=>{
+            task.labelIds = task.labelIds.filter(labledId =>labledId !==  this.chosenLabel.id)
+            return task
+          })
+        })
+        this.$store.dispatch({type:'updateBoard',board: this.currBoard})
         this.isEditMode = false
       }
     },
