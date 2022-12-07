@@ -254,14 +254,9 @@
   font-size: 16px;
   font-weight: 600;
   line-height: 28px;
-  color: $clr2;
+  color: $clr5;
   overflow: hidden;
-
-  &:focus {
-    background-color: #fff;
-    outline: solid 2px $clr9;
-    border-radius: 3px;
-  }
+  box-shadow: inset 0 0 0 1px var(--ds-border-input, #091e4221);
 
   &:focus-visible {
     outline: none
@@ -346,7 +341,7 @@
       flex-direction: row-reverse;
 
       .el-progress-bar__outer {
-        height: 8px;
+        height: 8px !important;
       }
 
       .el-progress__text {
@@ -364,13 +359,15 @@
 
     .todo {
       display: grid;
-      grid-template-columns: 50px 1fr;
+      grid-template-columns: 30px 1fr;
       border-radius: 4px;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       font-size: 14px;
       line-height: 20px;
       padding: 4px 0;
       align-items: center;
+      width: 98%;
+      margin-left: 2%;
 
       input {
         height: 16px;
@@ -380,6 +377,12 @@
 
       &:hover {
         background-color: $clr23;
+
+        .todo-content {
+          .ellipsis-icon {
+            display: flex;
+          }
+        }
       }
 
       .todo-content {
@@ -388,12 +391,14 @@
         justify-content: space-between;
 
         .ellipsis-icon {
-          color: #707c90;
-          padding: 8px;
+          color: $clr27;
+          padding: 5px;
           width: 15px;
           height: 13px;
           border-radius: 3px;
           margin-right: 5px;
+          margin-top: 2px;
+          display: none;
 
           &:hover {
             background-color: #dadbe2;
@@ -433,6 +438,7 @@
 
     .todo-edit {
       width: 100%;
+      margin-left: 10px;
 
       &.add-todo {
         margin-left: 20px;
@@ -532,6 +538,10 @@
             grid-column: 2;
           }
         }
+
+        @include for-mobile-layout {
+          width: 90%;
+        }
       }
 
       .actions {
@@ -558,24 +568,48 @@
 
         .task-option-btn {
           position: relative;
+
           .check-icon:before {
             background-color: #61bd4f;
             font-family: trellicons;
             width: 20px;
             justify-self: center;
             content: "\e916";
-            padding-left:  2px;
+            padding-left: 2px;
             padding-right: 2px;
             color: white;
             position: absolute;
             left: 85%;
           }
+
           &.btn-members {
             margin-top: 5px !important;
           }
 
           p {
             color: $clr27;
+          }
+        }
+      }
+
+      @include for-mobile-layout {
+        flex-direction: column;
+
+        .actions {
+          width: 100%;
+
+          .task-actions {
+            width: 97%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            place-items: center;
+
+            .inline-block {
+              width: 176px;
+            }
           }
         }
       }
@@ -606,6 +640,10 @@
         margin-inline-start: 5px;
       }
     }
+
+    @include for-mobile-layout {
+      overflow-x: hidden;
+    }
   }
 
   .task-mini-title {
@@ -622,10 +660,10 @@
   }
 
   p {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    color: $clr5;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: $clr21;
+    line-height: 20px;
   }
 }

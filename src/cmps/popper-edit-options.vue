@@ -6,7 +6,8 @@
                 <popperModal :title="requestedTitle" @closeModal="close" />
                 <div class="content content-delete">
                     <el-button @click="deleteRequested"
-                        class="task-btn delete-btn-task">Archive this list</el-button>
+                        class="task-btn delete-btn-task">{{deleteTitle}}
+                    </el-button>
                 </div>
             </div>
         </template>
@@ -18,7 +19,8 @@ import popperModal from './popper-modal.vue';
 
 export default {
     props: {
-        requestedTitle: String
+        requestedTitle: String,
+        deleteTitle: String
     },
     methods: {
         deleteRequested() {

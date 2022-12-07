@@ -160,7 +160,7 @@
                     @click="onEditChecklistTodo(checklist.id, todo.id, true)" class="todo-edit">
                     <p :style="todo.isDone ? { textDecoration: 'line-through' } : ''">{{ todo.title }}</p>
                   </div>
-                  <popperEditOptions requestedTitle="Item actions" @delete="deleteChecklistTodo(checklist.id, todo.id)"/>
+                  <popperEditOptions deleteTitle="Delete" requestedTitle="Item actions" @delete="deleteChecklistTodo(checklist.id, todo.id)"/>
                 </div>
               </li>
               <button
@@ -202,8 +202,8 @@
           </div>
         </section>
         <section class="actions">
+          <h3 class="mini-title">Add to card</h3>
           <div class="task-actions">
-            <h3 class="mini-title">Add to card</h3>
             <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
             <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
             <checkList @addchecklist="addChecklist" />
@@ -413,7 +413,8 @@ export default {
       this.currChecklist.task = ev.target.value
     },
     openEditChecklist(checklistId, isEditTitle) {
-      setTimeout(() => {
+      this.currChecklist.todo.isEditTodo = false
+            setTimeout(() => {
         this.$refs.checklistTitle[0].focus()
       }, 50)
       this.currChecklist.id = checklistId
@@ -429,6 +430,7 @@ export default {
       this.updateTask()
     },
     onEditChecklistTodo(checklistId, todoId, isEditTodo) {
+      this.currChecklist.isEditTitle = false
       setTimeout(() => {
         this.$refs.checklistTodoTitle[0].focus()
       }, 50)
