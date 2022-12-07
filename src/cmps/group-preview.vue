@@ -4,8 +4,6 @@
       <div class="group-title">
         <h2 class="text-lg">{{ column.title }}</h2>
         <popperEditOptions deleteTitle="Delete this list" requestedTitle="List actions" @delete="deleteGroup(column.id)"/>
-
-
         <!-- <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /> -->
       </div>
       <!-- column -->
@@ -72,9 +70,9 @@ export default {
     return {
       newScene: null,
       currGroup: null,
-      newTaskTxt: "",
+      newTaskTxt: " ",
       isAddNewGroup: false,
-      newGroupTxt: "",
+      newGroupTxt: " ",
     };
   },
   async created() {
@@ -91,7 +89,8 @@ export default {
       this.currGroup = groupId;
     },
     addTask() {
-      if (!this.newTaskTxt) return;
+      if (this.newTaskTxt.trim(' ').length < 1) return
+      console.log(this.newTaskTxt.length);
       const board = JSON.parse(JSON.stringify(this.currBoard));
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup

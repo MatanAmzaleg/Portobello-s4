@@ -26,7 +26,7 @@
                     <button @click="(isHamburgerMode = !isHamburgerMode)" class="humburger">
                         <font-awesome-icon icon="fa-solid fa-bars" class="icon" />
                     </button>
-                    <router-link to="/login">
+                    <router-link class="login-btn" to="/login">
                         <button>
                             Log in
                         </button>

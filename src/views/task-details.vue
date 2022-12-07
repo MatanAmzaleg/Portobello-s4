@@ -209,7 +209,7 @@
             <checkList @addchecklist="addChecklist" />
             <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
-            <coverPicker @setCover="saveTaskCover" />
+            <coverPicker :style="task.style" @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
             <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched? 'watched' : ''">
               <span class="watch-icon icon-actions"></span>

@@ -24,12 +24,12 @@
   cursor: default;
   button {
     height: 32px;
-    background-color: #2e709764;
+    background-color: rgba(181, 191, 207, 0.2);
     padding: 6px;
     border-radius: 3px;
 
     &:hover {
-      background-color: #3787b564;
+      background-color: rgba(202, 209, 220, 0.2);
     }
   }
   .left-section {
