@@ -115,10 +115,8 @@
           </div>
         </template>
       </popper>
-      <div v-if="board.members" class="users">
-        <!-- <mini-users-designed :memberIds="board.members"></mini-users-designed> -->
-        <!-- <mini-users></mini-users> -->
-      </div>
+        <mini-users-designed  v-if="board.members" :memberIds="getBoardMembers"></mini-users-designed>
+ 
       |
       <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
         <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
@@ -165,6 +163,12 @@ export default {
         this.$refs.filterInput.focus();
       }, 50);
     },
+  },
+  computed: {
+    getBoardMembers(){
+      console.log(this.board);
+      return this.board.members.map(member => member._id)
+    }
   },
   components: {
     miniUsers,
