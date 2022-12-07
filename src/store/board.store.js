@@ -33,6 +33,10 @@ export const boardStore = {
       state.boards.splice(idx, 1, board);
       state.currBoard = board;
     },
+    updateRemoveStarredBoard(state, { board }) {
+      const idx = state.boards.findIndex((c) => c._id === board._id);
+      state.boards.splice(idx, 1, board);
+    },
     removeBoard(state, { boardId }) {
       state.boards = state.boards.filter((board) => board._id !== boardId);
     },
@@ -82,6 +86,17 @@ export const boardStore = {
       try {
         board = await boardService.save(board);
         context.commit({ type: "updateBoard", board });
+        // context.commit("setCurrBoard", board)
+        return board;
+      } catch (err) {
+        console.log("boardStore: Error in updateBoard", err);
+        throw err;
+      }
+    },
+    async updateRemoveStarredBoard(context, { board }) {
+      try {
+        board = await boardService.save(board);
+        context.commit({ type: "updateRemoveStarredBoard", board });
         // context.commit("setCurrBoard", board)
         return board;
       } catch (err) {

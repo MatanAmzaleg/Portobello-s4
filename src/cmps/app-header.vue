@@ -32,10 +32,6 @@
                         <label class="title-1">{{ board.title }}</label>
                         <label class="title-2">{{ board.title }} Board</label>
                       </div>
-                      <div v-if="board.isStarred" class="yellow-star-container" @click.stop="removerStarred(board)">
-                        <font-awesome-icon icon="fa-solid fa-star" class="star yellow-star-full" />
-                        <font-awesome-icon icon="fa-regular fa-star" class="star yellow-star" />
-                      </div>
                     </div>
                   </li>
                 </ul>
@@ -64,7 +60,7 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-for="board in getBoards?.filter(board => board.isStarred)">
+                  <li v-if="(getBoards?.filter(board => board.isStarred).length > 0)" v-for="board in getBoards?.filter(board => board.isStarred)">
                     <div v-if="board.isStarred" class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="">
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -80,6 +76,7 @@
                       </div>
                     </div>
                   </li>
+                  <label v-else>Star important boards to access them quickly and easily.</label>
                 </ul>
               </div>
             </template>
@@ -157,9 +154,10 @@ export default {
     removerStarred(board) {
       const boardToUpdate = JSON.parse(JSON.stringify(board));
       boardToUpdate.isStarred = false;
-      this.$store.dispatch({ type: "updateBoard", board: boardToUpdate });
+      this.$store.dispatch({ type: "updateRemoveStarredBoard", board: boardToUpdate });
     },
     moveToBoard(board) {
+      console.log('move board')
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`)
     }

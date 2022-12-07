@@ -181,6 +181,22 @@
   cursor: pointer;
 }
 
+.white-star {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  margin: 12px;
+  color: white !important;
+  cursor: pointer;
+
+  &:hover {
+    scale: 1.1;
+    transition: 0.3s;
+  }
+}
+
 // popper helper 
 
 .popper-main {
