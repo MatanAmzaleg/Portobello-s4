@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div  v-if="!this.task.archivedAt" @click="archiveTask" class="task-option-btn">
         <span class="archive-icon icon-actions"></span>
         <p>Archive</p>

@@ -1,4 +1,4 @@
-<template lang="">
+<template>
     <div @click.stop="toggleTask()" class="task-preview-date task-status" :class="status">
         <span class="clock-icon"></span>
         <a>{{date}}</a>
