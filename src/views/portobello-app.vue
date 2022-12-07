@@ -32,12 +32,7 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <img
-                  class="yellow-star"
-                  src="../assets/icons/star.png"
-                  alt=""
-                  v-if="board.isStarred"
-                />
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" />
               </div>
             </article>
           </li>
@@ -76,12 +71,7 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <img
-                  class="yellow-star"
-                  src="../assets/icons/star.png"
-                  alt=""
-                  v-if="board.isStarred"
-                />
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" />
               </div>
             </article>
           </li>
@@ -113,12 +103,7 @@
                 <p class="board-preview-title">
                   {{ board.title }}
                 </p>
-                <img
-                  class="yellow-star"
-                  src="../assets/icons/star.png"
-                  alt=""
-                  v-if="board.isStarred"
-                />
+                <font-awesome-icon  v-if="board.isStarred" class="yellow-star" icon="fa-solid fa-star" />
               </div>
             </article>
           </li>
