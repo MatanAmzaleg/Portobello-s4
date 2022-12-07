@@ -115,7 +115,6 @@
         flex-wrap: wrap;
         gap: 4px;
         margin-bottom: 7px;
-        // margin-bottom: 4px;
 
         padding-top: 1px;
 
@@ -123,8 +122,6 @@
           min-width: 40px;
           min-height: 8px;
           background-color: #67748a;
-          // margin-top: 4px;
-          // margin-bottom: 4px;
           padding-right: 0;
           padding-left: 0;
           border-radius: 4px;
@@ -134,15 +131,15 @@
           transition: 0.6s;
         }
 
-        .label-extended{
+        .label-extended {
           height: 16px;
           opacity: 0.6;
           min-width: 56px;
           display: flex;
           align-items: center;
-          transition:  0.6s;
+          transition: 0.6s;
 
-          .label-title{
+          .label-title {
             font-size: 11px;
             font-weight: 400;
             text-align: left;
@@ -150,14 +147,13 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
-            transition:  0.6s;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
             margin-inline-end: 2px;
             color: #000000;
           }
-          
-          
-          .circle{
+
+          .circle {
             width: 10px;
             height: 10px;
             border-radius: 50%;
@@ -184,7 +180,6 @@
       margin-inline-end: 2px;
     }
   }
-
   .group {
     width: 272px;
     background-color: $clr19;

@@ -445,7 +445,8 @@ export default {
         this.$router.push(`/board/${newBoard._id}`);
         this.boardToAdd = boardService.getEmptyBoard();
         this.closeModal();
-        if (this.selectedBackground.imgUrl !== "") utilService.getCalculatedColor(this.boardToAdd.style.imgUrl);
+        if (this.selectedBackground.imgUrl !== "")
+          utilService.getCalculatedColor(this.boardToAdd.style.imgUrl);
       } catch (err) {
         console.log(err);
         showErrorMsg("Cannot add board");
