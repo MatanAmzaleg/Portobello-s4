@@ -42,6 +42,8 @@ import boardMenu from "../cmps/board-menu.vue";
 import boardHeader from "../cmps/board-header.vue";
 import groupList from "../cmps/group-list.vue";
 import { eventBus } from "../services/event-bus.service";
+import { socketService, SOCKET_EMIT_SEND_MSG } from '../services/socket.service'
+
 export default {
   name: "board-details",
   data() {

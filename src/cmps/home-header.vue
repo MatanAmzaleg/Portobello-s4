@@ -25,10 +25,12 @@
                     <button class="humburger">
                         <font-awesome-icon icon="fa-solid fa-bars" class="icon" />
                     </button>
-                    <section class="user">
+                    <router-link to="/login">
                         <button>
                             Log in
                         </button>
+                    </router-link>
+                    <section class="user">
                         <router-link to="/board" class="btn-start">
                             <button class="btn-start">
                                 Get Portobello for free
