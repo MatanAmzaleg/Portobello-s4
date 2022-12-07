@@ -6,7 +6,7 @@
                 <popperModal :title="requestedTitle" @closeModal="close" />
                 <div class="content content-delete">
                     <el-button @click="deleteRequested"
-                        class="task-btn delete-btn-task">Delete</el-button>
+                        class="task-btn delete-btn-task">Archive this list</el-button>
                 </div>
             </div>
         </template>

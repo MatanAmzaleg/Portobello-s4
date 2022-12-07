@@ -3,7 +3,7 @@
     <div class="group">
       <div class="group-title">
         <h2 class="text-lg">{{ column.title }}</h2>
-        <popperEditOptions requestedTitle="Group actions" @delete="deleteGroup(column.id)"/>
+        <popperEditOptions requestedTitle="List actions" @delete="deleteGroup(column.id)"/>
 
 
         <!-- <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /> -->

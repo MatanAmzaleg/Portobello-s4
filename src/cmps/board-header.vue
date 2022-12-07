@@ -116,7 +116,8 @@
         </template>
       </popper>
       <div v-if="board.members" class="users">
-        <mini-users></mini-users>
+        <!-- <mini-users-designed :memberIds="board.members"></mini-users-designed> -->
+        <!-- <mini-users></mini-users> -->
       </div>
       |
       <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
@@ -126,6 +127,7 @@
   </section>
 </template>
 <script>
+import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import popperModal from "./popper-modal.vue";
 export default {
@@ -167,6 +169,7 @@ export default {
   components: {
     miniUsers,
     popperModal,
+    miniUsersDesigned
   },
 };
 </script>
