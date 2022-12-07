@@ -55,11 +55,6 @@ export default {
     closeModal() {
       this.$emit('closeModal')
     },
-    updateInputFocus() {
-      setTimeout(() => {
-        this.$refs.focusInput.focus();
-      }, 50);
-    }
   },
   components: {
     popperModal

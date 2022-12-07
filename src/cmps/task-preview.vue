@@ -42,10 +42,10 @@
             class="circle"
             :style="{ 'background-color': labelColor(label) }"
           ></div>
-          <span class="label-title" v-if="isLabelsExtended">{{
-            getLabelTitle(label)
-          }}</span></span
-        >
+            <span class="label-title" v-if="isLabelsExtended">{{
+              getLabelTitle(label)
+            }}</span>
+        </span>
       </div>
       <span class="task-router-link">{{ item.title }}</span>
       <div v-if="taskExtra(item)" class="task-preview-info">
