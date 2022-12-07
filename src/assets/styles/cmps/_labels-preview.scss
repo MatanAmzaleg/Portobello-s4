@@ -1,9 +1,11 @@
 .label-preview-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-self: center;
   max-width: 100%;
-  margin-bottom: 10px;
+  height: 100%;
+
   .label-preview-header {
     font-size: 12px;
     font-weight: 600;

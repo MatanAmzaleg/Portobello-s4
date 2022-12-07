@@ -2,8 +2,8 @@
   <div class="main-task-members-container">
     <p v-if="!noHeader" class="main-task-members-header">Members</p>
     <div class="main-task-members">
-      <ul v-for="user in users">
-        <li>
+      <ul>
+        <li v-for="user in users">
           <img class="main-task-member-img" :src="user.imgUrl" alt="member" />
         </li>
       </ul>
