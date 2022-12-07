@@ -127,15 +127,11 @@
           min-width: 40px;
           min-height: 8px;
           background-color: #67748a;
-          // margin-top: 4px;
-          // margin-bottom: 4px;
           padding-right: 0;
           padding-left: 0;
           border-radius: 4px;
-
           margin-top: 4px;
-
-          transition: 0.6s;
+          transition: min-width 0.6s;
         }
 
         .label-extended{
