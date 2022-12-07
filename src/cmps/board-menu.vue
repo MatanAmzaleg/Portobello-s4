@@ -83,6 +83,7 @@
           >
           </span>
         </div>
+        <img class="loader" v-else src="../assets/icons/loader.svg" alt=""/>
         <div v-if="searchedImgs" class="background-imgs">
           <span
             v-for="img in searchedImgs"

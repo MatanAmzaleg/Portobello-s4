@@ -135,6 +135,7 @@ overflow-x: hidden;
        display: flex;
        flex-direction: column;
        justify-content: center;
+       position: relative;
 
         .search-input {
             width: 277px;

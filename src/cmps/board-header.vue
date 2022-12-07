@@ -123,6 +123,7 @@
       </button>
     </div>
   </section>
+  <img class="loader" v-else src="../assets/icons/loader.svg" alt=""/>
 </template>
 <script>
 import miniUsersDesigned from "./mini-users-designed.vue";
