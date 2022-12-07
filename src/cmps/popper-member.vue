@@ -2,7 +2,7 @@
         <div class="popper-content member-picker">
           <popperModal title="Members" @closeModal="close"/>
           <div class="members-section">
-            <input v-focus v-model="input" class="members-input-search" type="search" placeholder="Search Members">
+            <input v-focus @input="filterMembers" v-model="input" class="members-input-search" type="search" placeholder="Search Members">
             <div class="members">
               <h5 class="board-members-title">Board members</h5>
               <div class="board-members">
@@ -28,7 +28,7 @@ export default {
     data(){
         return{
             boardMembers : [],
-            input:''
+            input:'',
         }
     },
     methods:{
@@ -50,6 +50,11 @@ export default {
           }
           this.$emit('add-member',this.members)
     },
+    filterMembers(){
+      const regex = new RegExp(this.input, "i")
+      this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members))
+      this.boardMembers = this.boardMembers.filter(m => regex.test(m.fullname))
+    }
     },
     components:{
         popperModal

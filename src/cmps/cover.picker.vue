@@ -166,6 +166,9 @@
 import popperModal from "./popper-modal.vue";
 import { utilService } from "../services/util.service";
 export default {
+  props:{
+    style: Object
+  },
   data() {
     return {
       currBoard: null,
@@ -173,7 +176,7 @@ export default {
       isSearchMode: false,
       searchWord: "",
       searchedImgs: null,
-      currCover: "#fff",
+      currCover: this.style.bgColor || '#fff',
       suggested: [
         "Productivity",
         "Perspective",
