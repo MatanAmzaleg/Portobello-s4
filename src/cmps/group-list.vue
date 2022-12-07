@@ -95,6 +95,7 @@ export default {
       this.$emit("addTask", board);
     },
     addGroup() {
+      if(!this.newGroupTxt) return
       const group = {
         title: this.newGroupTxt,
         id: utilService.makeId(),

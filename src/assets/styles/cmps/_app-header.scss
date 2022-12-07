@@ -185,6 +185,7 @@ header.app-header {
                 width: 100%;
                 position: relative;
                 display: flex;
+                flex-direction: row-reverse;
                 justify-content: end;
 
                 @include for-mobile-layout {
@@ -196,7 +197,8 @@ header.app-header {
                     height: 100%;
                     display: flex;
                     top: 0;
-                    position: absolute;
+                    left: 38px;
+                    position: relative;
                     color: var(--ds-text-subtlest, #FFFFFF);
                     align-items: center;
                 }
@@ -237,6 +239,12 @@ header.app-header {
 
                         &::placeholder {
                             color: black;
+                        }
+
+                        .icon {
+                            svg{
+                                color: black;
+                            }
                         }
                     }
 

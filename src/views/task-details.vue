@@ -130,7 +130,7 @@
               </div>
             <div class="progress-container">
               <el-progress :percentage="checklistPercentage(checklist.id)"
-                :color="checklistPercentage(checklist.id) === 100 ? '#61bd4f' : '#5ba4cf'" width="200px">
+                :color="checklistPercentage(checklist.id) === 100 ? '#61bd4f' : '#5ba4cf'" :width=200>
               </el-progress>
             </div>
             <ul class="checklist">

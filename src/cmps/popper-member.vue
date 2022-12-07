@@ -15,6 +15,9 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
 import popperModal from './popper-modal.vue';
@@ -28,7 +31,7 @@ export default {
     data(){
         return{
             boardMembers : [],
-            input:'',
+            input:''
         }
     },
     methods:{
@@ -40,26 +43,22 @@ export default {
       const member = this.boardMembers.find((m) => m._id === id);
       return member.imgUrl;
     },
-    addMember(memberId){
+    addMember(memberId) {
       let memberIdx = this.members.findIndex(id => id === memberId)
-          if(memberIdx === -1){
-            this.members.push(memberId)
-          }
-          else{
-            this.members.splice(memberIdx,1)  
-          }
-          this.$emit('add-member',this.members)
+      if (memberIdx === -1) {
+        this.members.push(memberId)
+      }
+      else {
+        this.members.splice(memberIdx, 1)
+      }
+      this.$emit('add-member', this.members)
     },
-    filterMembers(){
-      const regex = new RegExp(this.input, "i")
-      this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members))
-      this.boardMembers = this.boardMembers.filter(m => regex.test(m.fullname))
-    }
     },
-    components:{
-        popperModal
-    }
-    
+  },
+  components: {
+    popperModal
+  }
+
 }
 </script>
 <style lang="">
