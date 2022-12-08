@@ -1,0 +1,91 @@
+.container-auth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+
+    .app-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+            Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+
+        h1 {
+            font-size: 50px;
+        }
+    }
+
+    .login {
+        width: 25vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+        padding: 25px 40px;
+        border-radius: 3px;
+        gap: 20px;
+
+        p {
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+                Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+        }
+
+        .login-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            input {
+                height: 40px;
+                width: 80%;
+                margin: auto;
+                align-items: center;
+                padding: 0.5em;
+                font-size: 14px;
+                background-color: #fafbfc;
+                border: 2px solid #dfe1e6;
+                box-sizing: border-box;
+                border-radius: 3px;
+                transition: background-color .2s ease-in-out 0s, border-color .2s ease-in-out 0s;
+
+                &:focus {
+                    outline: 2px solid $clr1;
+                    border: none;
+                }
+
+                @include for-mobile-layout {
+                    width: 100%;
+                }
+            }
+
+            .select-user {
+                width: 100%;
+            }
+
+            .submit {
+                height: 40px;
+                width: 80%;
+                margin: auto;
+                border-radius: 3px;
+                color: $clr4;
+                background-color: $clr30;
+
+                &:hover {
+                    opacity: 0.9;
+                }
+
+                @include for-mobile-layout {
+                    width: 100%;
+                }
+            }
+        }
+
+        @include for-mobile-layout {
+            width: 55vw;
+        }
+    }
+    
+}
