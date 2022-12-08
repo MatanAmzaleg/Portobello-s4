@@ -14,6 +14,8 @@
   }
   .labels-preview-list {
     display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
 
     .plus-btn {
       padding: 8px;
@@ -37,7 +39,6 @@
     width: 48px;
     height: 32px;
     border-radius: 0.1875em;
-    margin: 0 0.25em 0 0;
     display: flex;
     align-items: center;
     cursor: pointer;

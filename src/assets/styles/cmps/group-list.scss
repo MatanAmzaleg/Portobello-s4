@@ -26,7 +26,7 @@
     padding: 0px 16px 8px 16px;
 
     @include for-mobile-layout {
-      padding: 0px;
+      padding: 0px 3.5px;
     }
   }
 
@@ -335,6 +335,10 @@
       background-color: rgba(202, 209, 220, 0.2);
     }
 
+    @include for-mobile-layout {
+      width: 96vw;
+    }
+
     .add-group-btn {
       display: flex;
       align-items: center;
@@ -347,6 +351,10 @@
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       font-weight: 400;
       color: white;
+
+      @include for-mobile-layout {
+        width: 98vw;
+      }
     }
 
     .add-task-icon2 {
