@@ -182,11 +182,17 @@ export default {
           type: "addBoard",
           board: this.boardToAdd,
         });
-        showSuccessMsg("Board added");
+        this.$notify({
+          type: 'success',
+          title: "Board added!",
+        });
         this.boardToAdd = boardService.getEmptyBoard();
       } catch (err) {
         console.log(err);
-        showErrorMsg("Cannot add board");
+        this.$notify({
+          type: 'error',
+          title: "Could not add board!",
+        });
       }
     },
     async removeBoard(boardId) {
@@ -202,10 +208,15 @@ export default {
       try {
         board = { ...board };
         await this.$store.dispatch({ type: "updateBoard", board });
-        showSuccessMsg("Board updated");
+        this.$notify({
+          type: 'success',
+          title: "Board updated!",
+        });
       } catch (err) {
-        console.log(err);
-        showErrorMsg("Cannot update board");
+        this.$notify({
+          type: 'error',
+          title: "Could not update board!",
+        });
       }
     },
     // async addBoardMsg(boardId) {

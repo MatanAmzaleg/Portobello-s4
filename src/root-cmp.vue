@@ -1,6 +1,6 @@
 <template>
   <section>
-    <user-msg/>
+    <notifications />
     <home-header v-if="routeIsHome"/>
     <app-header v-else/>
     <router-view/>

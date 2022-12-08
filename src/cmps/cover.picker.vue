@@ -24,7 +24,7 @@
                           'background-position': 'center',
                         }
                       : {
-                          'background-color': currCover,
+                          'background-color':  this.style?.bgColor || currCover,
                         }
                   "
                 ></div>
@@ -52,7 +52,7 @@
                           'background-position': 'center',
                         }
                       : {
-                          'background-color': currCover,
+                          'background-color': this.style?.bgColor || currCover,
                         }
                   "
                 >
@@ -176,7 +176,7 @@ export default {
       isSearchMode: false,
       searchWord: "",
       searchedImgs: null,
-      currCover: this.style?.bgColor || '#fff',
+      currCover:'#fff',
       suggested: [
         "Productivity",
         "Perspective",

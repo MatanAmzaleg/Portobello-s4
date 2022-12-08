@@ -18,7 +18,7 @@ import 'element-plus/dist/index.css'
 
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
-
+import Notifications from '@kyvg/vue3-notification'
 import {
     focusDirective,
     rainbowDirective,
@@ -34,7 +34,7 @@ app.directive('focus', focusDirective)
 app.directive('rainbow', rainbowDirective)
 app.directive('custom-on', customOnDirective)
 app.directive('click-outside', clickOutsideDirective)
-
+app.use(Notifications)
 app.use(router)
 app.component('Datepicker', Datepicker);
 app.use(VCalendar, {})

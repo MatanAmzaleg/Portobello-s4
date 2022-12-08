@@ -9,7 +9,7 @@
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
           <input v-model="task.title" @input="updateTask" type="text" />
-          <p>in list {{ this.groupId }}</p>
+          <p>in list {{ getTaskGroup }}</p>
         </div>
       </div>
       <section class="task-content">
@@ -77,7 +77,7 @@
               </Popper><Popper> 
                   <button>Edit</button>
                   <template #content="{ close }">
-                    <div class="popper-content popper-template">
+                    <div class="popper-content popper-template label-picker">
                       <popperModal :title="'Edit Attachment'" @closeModal="close" />
                       <div class="content add-attachment">
                         <input class="attach-link-input" v-model="attachment.link">
@@ -187,7 +187,8 @@
             </div>
             <font-awesome-icon icon="fa-regular fa-user" />
             <div>
-              <input placeholder="Write a comment..." spellcheck="false" class="activity-comment" />
+              <input @click="toggleComment" v-model="userInput" placeholder="Write a comment..." spellcheck="false" class="activity-comment" :class="isComment ? 'open' : ''"/>
+              <el-button @click="addComment" v-if="isComment">Send</el-button>
             </div>
           </div>
           <div v-for="comment in task.comments" v-if="showComments" class="task-section">
@@ -209,7 +210,7 @@
             <checkList @addchecklist="addChecklist" />
             <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
-            <coverPicker :style="task.style" @setCover="saveTaskCover" />
+            <coverPicker :style="getTaskStyle" @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
             <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched? 'watched' : ''">
               <span class="watch-icon icon-actions"></span>
@@ -244,6 +245,7 @@ import datePreview from "../cmps/date-preview.vue";
 import { utilService } from "../services/util.service";
 import popperModal from "../cmps/popper-modal.vue";
 import popperEditOptions from "../cmps/popper-edit-options.vue";
+import { now } from "lodash";
 
 export default {
   props: {
@@ -264,6 +266,8 @@ export default {
       task: {},
       showComments: false,
       isEdit: false,
+      userInput:null,
+      isComment: false,
       currChecklist: {
         id: null,
         isAddItem: false,
@@ -494,6 +498,19 @@ export default {
       setTimeout(() => {
         this.$refs.focusInput.focus();
       }, 50);
+    },
+    toggleComment(){
+      this.isComment = !this.isComment
+    },
+    addComment(){
+      let msg = {
+        id: utilService.makeId(),
+        txt: this.userInput,
+        createdAt: Date.now(),
+        byMember : this.$store.getters.loggedinUser
+      }
+      this.task.comments.push(msg)
+      this.updateTask()
     }
   },
   computed: {
@@ -508,6 +525,15 @@ export default {
     },
     descriptionTxtAreaClass() {
       return this.task.description ? 'description-info-full' : ''
+    },
+    getTaskStyle() {
+      return this.task.style
+    },
+    getTaskGroup() {
+      let group = this.currBoard?.groups?.find(group => {
+        if (group.tasks.find(t => t.id === this.task.id)) return group
+      })
+      return group?.title
     },
   },
   components: {

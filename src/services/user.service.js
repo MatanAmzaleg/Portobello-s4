@@ -28,7 +28,10 @@ function getUsers() {
 }
 
 function onUserUpdate(user) {
-    showSuccessMsg(`This user ${user.fullname} just got updated from socket, new score: ${user.score}`)
+    this.$notify({
+        type: 'success',
+        title: "User Updated!",
+      });
     store.dispatch({ type: 'setWatchedUser', user })
 }
 
