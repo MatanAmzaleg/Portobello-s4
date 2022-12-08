@@ -21,6 +21,7 @@
 }
 
 .task-attachments {
+  word-break:break-all;
   display: flex;
   flex-direction: column;
   gap: 10px;

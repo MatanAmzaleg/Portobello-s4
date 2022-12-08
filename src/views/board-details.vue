@@ -72,7 +72,6 @@ export default {
   },
   methods: {
     setFilter(filterBy) {
-      console.log(filterBy);
       this.filterBy = filterBy;
       this.$store.dispatch({
         type: "setCurrBoard",
@@ -81,8 +80,8 @@ export default {
       });
     },
     updateBoard(board) {
-      console.log("updating board ");
       this.currBoard = board;
+      console.log('board test', board)
       this.$store.dispatch({
         type: "updateBoard",
         board,
@@ -103,10 +102,8 @@ export default {
     },
     openBoardMenu() {
       this.isMenuOpen = !this.isMenuOpen;
-      console.log("yeahhhhhhh");
     },
     closeBoardMenu() {
-      console.log("ok");
       this.isMenuOpen = false;
     },
   },

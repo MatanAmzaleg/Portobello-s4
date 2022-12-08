@@ -68,11 +68,6 @@
           </div>
         </div>
         <mini-users-designed :memberIds="item.memberIds"></mini-users-designed>
-        <!-- <mini-users
-            :isHeader="true"
-            v-if="item.memberIds"
-            :memberIds="item.memberIds"
-          /> -->
       </div>
     </div>
   </section>
@@ -112,6 +107,7 @@ export default {
         item.attachments?.length ||
         item.checklists?.length ||
         item.memberIds?.length ||
+        item.dueDate ||
         item.isWatched
       );
     },

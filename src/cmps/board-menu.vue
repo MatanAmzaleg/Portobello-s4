@@ -98,12 +98,18 @@ export default {
     };
   },
   methods: {
-    setBoardBg(url) {
-      const newBoard = JSON.parse(JSON.stringify(this.currBoard));
-      console.log(newBoard);
-      newBoard.style = { imgUrl: url };
-      this.$emit("updateBoard", newBoard);
-      utilService.getCalculatedColor(newBoard.style.imgUrl);
+    async setBoardBg(url) {
+      try {
+        const newBoard = JSON.parse(JSON.stringify(this.currBoard));
+        console.log('menu',url);
+        newBoard.style = { imgUrl: url };
+        const calcColor = await utilService.getCalculatedColor(newBoard.style.imgUrl);
+        newBoard.style.calcColor = calcColor
+        console.log('newBoard style', newBoard.style)
+        this.$emit("updateBoard", newBoard);
+      }catch(err){
+        console.log(err)
+      }
     },
     setBoardCover(cover) {
       const newBoard = JSON.parse(JSON.stringify(this.currBoard));

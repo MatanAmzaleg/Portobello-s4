@@ -139,6 +139,7 @@ async function save(board) {
     // savedBoard = await storageService.put(STORAGE_KEY, board);
     socketService.emit('update-board',board)
     savedBoard = await httpService.put(BASE_URL+`${board._id}`, board)
+    console.log('board in service', savedBoard)
   } else {
     // Later, owner is set by the backend
     board.owner = userService.getLoggedinUser()._id;

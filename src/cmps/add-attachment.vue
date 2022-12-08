@@ -38,9 +38,10 @@ export default {
       let attachment = {}
       attachment.id = utilService.makeId()
       attachment.createdAt = Date.now()
-      attachment.link = this.link
+      attachment.link = this.link 
       if (this.isImg) attachment.type = 'img'
       if (this.name) attachment.name = this.name
+      if(!this.name && this.isImg) attachment.name = this.link.slice(8,26)
       this.$emit('addAttachment', attachment)
     },
     async uploadAttachment(ev) {

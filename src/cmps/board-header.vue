@@ -147,7 +147,6 @@ import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import popperAddMember from "./popper-add-member.vue";
 import memberPicker from "./member-picker.vue";
-import popperModal from "./popper-modal.vue";
 export default {
   props: {
     board: Object,
@@ -163,12 +162,9 @@ export default {
       calculatedColor: null,
     };
   },
-  created(){
-      eventBus.on("headerColor", this.updateHeaderColor);
-  },
-  mounted() {
-    console.log(this.members)
-  },
+  // created(){
+  //     eventBus.on("headerColor", this.updateHeaderColor);
+  // },
   methods: {
     setFilter() {
       this.$emit("setFilter", this.filterBy);
@@ -199,6 +195,7 @@ export default {
   },
   computed: {
     getBoardMembers(){
+      console.log(this.board);
       return this.board.members.map(member => member._id)
     },
     getCalcColor(){
@@ -213,7 +210,6 @@ export default {
     memberPicker,
     miniUsersDesigned,
     popperAddMember,
-    popperModal
   },
 };
 </script>
