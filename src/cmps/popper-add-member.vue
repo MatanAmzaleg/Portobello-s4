@@ -76,6 +76,8 @@ export default {
       let newBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
       newBoard.members = this.boardMembers
       this.$store.dispatch({type:"updateBoard", board:newBoard});
+    },closeModal() {
+      this.$emit("closeModal");
     },
   },
   components: {

@@ -368,24 +368,6 @@ export default {
           color: "#838c91",
         },
       ],
-      // imgs: [
-      //     {
-      //         id: "1",
-      //         src: "https://images.unsplash.com/photo-1669250740534-1e26fb77051d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot"
-      //     },
-      //     {
-      //         id: "2",
-      //         src: "https://images.unsplash.com/photo-1669123549422-22f62dee014d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot"
-      //     },
-      //     {
-      //         id: "3",
-      //         src: "https://images.unsplash.com/photo-1669327195331-cd47e0d5eef0?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot"
-      //     },
-      //     {
-      //         id: "4",
-      //         src: "https://images.unsplash.com/photo-1669327857374-43aaa93dec95?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjcwMDA1OTQ1&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400&quot"
-      //     }
-      // ],
       boardTitle: "",
       selectedBackground: {
         imgUrl: null,
@@ -460,7 +442,6 @@ export default {
       this.selectedBackground.imgUrl = null;
     },
     async sendApiReq(sug = "") {
-      // console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug)
       if (sug) this.searchWord = sug;
       await utilService.fetchListOfPhotos(this.searchWord);
       this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 10);

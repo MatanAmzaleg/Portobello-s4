@@ -1,7 +1,7 @@
 <template>
-    <div @click.stop="toggleTask()" class="task-preview-date task-status" :class="status">
+    <div @click.stop="toggleTask()" class="task-preview-date task-status" :class="statusComputed">
         <span class="clock-icon"></span>
-        <a>{{date}}</a>
+        <a>{{dateComputed}}</a>
     </div>
 </template>
 <script>
@@ -9,12 +9,9 @@ import dateFormat, { masks } from "dateformat";
 import { eventBus } from "../services/event-bus.service";
 export default {
     props:{
-        date: Object,
+        date: Number,
         status: String,
         taskId: String
-    },
-    created(){
-        console.log(this.date);
     },
     methods:{
         toggleTask(){
@@ -22,14 +19,14 @@ export default {
         }
     },
     computed:{
-        status(){
+        statusComputed(){
             const isoDate = new Date(this.date);
             if(this.status === 'completed') return 'completed'
             if(isoDate.getTime() - Date.now() >= 86349893) return 'regular' 
             if(isoDate.getTime() - Date.now() < 86349893 && isoDate.getTime() - Date.now() > 0) return 'due-soon' 
             return 'overdue'
         },
-        date(){
+        dateComputed(){
             return dateFormat(new Date(this.date), "d mmm");
         }
     }
