@@ -43,6 +43,13 @@ export default {
       return member.imgUrl;
     },
     addMember(memberId) {
+      if(!this.members){
+        this.members = []
+        this.$emit('add-member', this.members)
+
+        // this.members.push(memberId)
+        // return
+      } 
       let memberIdx = this.members.findIndex(id => id === memberId)
       if (memberIdx === -1) {
         this.members.push(memberId)
@@ -55,6 +62,11 @@ export default {
     closeModal() {
       this.$emit('closeModal')
     },
+    updateInputFocus() {
+      setTimeout(() => {
+        this.$refs?.focusInput?.focus();
+      }, 50);
+    }
   },
   components: {
     popperModal

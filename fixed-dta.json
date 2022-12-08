@@ -93,11 +93,24 @@
         ],
         "members": [
             {
-                "_id":  "6390f5c1ba306ac05af209e5",
+                "_id": "6390f5c1ba306ac05af209e5",
                 "username": "Matan",
-                "password": "$2b$10$CNZGuhtBp/BLSsVzOzrHo.mnYmy18aTsfCIDhouI4XyBQCJr/db9i",
                 "fullname": "Matan Amzaleg",
                 "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+            },
+            {
+                "_id": "6390f857ba306ac05af209e6",
+                "username": "Lior Queen",
+                "fullname": "Lior Atar",
+                "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+
+            },
+            {
+                "_id":  "6390f873ba306ac05af209e7",
+                "username": "Bar",
+                "fullname": "Bar Zaken",
+                "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
+
             }
         ],
         "groups": [
@@ -161,10 +174,10 @@
                         "labelIds": [],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            "_id": "",
+                            "username": "",
+                            "fullname": "",
+                            "imgUrl": ""
                         },
                         "style": {}
                     },
@@ -177,10 +190,7 @@
                         "labelIds": [],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+
                         },
                         "style": {}
                     },
@@ -193,10 +203,7 @@
                         "labelIds": [],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+
                         },
                         "style": {}
                     },
@@ -209,10 +216,7 @@
                         "labelIds": [],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+
                         },
                         "style": {}
                     },
@@ -225,10 +229,7 @@
                         "labelIds": [],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+
                         },
                         "style": {}
                     }
@@ -248,10 +249,7 @@
                         "labelIds": [],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+
                         },
                         "style": {}
                     },
@@ -267,9 +265,9 @@
                                 "txt": "also @yaronb please CR this",
                                 "createdAt": 1590999817436,
                                 "byMember": {
-                                    "_id": "u103242",
-                                    "fullname": "Dave",
-                                    "imgUrl": "https://yt3.ggpht.com/ytc/AMLnZu91y_wc558BmAoKGoPJ-HulcExG1u3YQpW_NhbyRA=s900-c-k-c0x00ffffff-no-rj"
+                                    "_id": "",
+                                    "fullname": "",
+                                    "imgUrl": ""
                                 }
                             }
                         ],
@@ -291,19 +289,16 @@
                                 ]
                             }
                         ],
-                        "memberIds": [
-                            "u102",
-                            "u103"
-                        ],
+                        "memberIds": [],
                         "labelIds": [
                             "d6cjhb"
                         ],
                         "dueDate": 16156215211,
                         "byMember": {
-                            "_id": "u101",
-                            "username": "Tal",
-                            "fullname": "Tal Tarablus",
-                            "imgUrl": "http://res.cloudinary.com/shaishar9/image/upload/v1590850482/j1glw3c9jsoz2py0miol.jpg"
+                            "_id": "",
+                            "username": "",
+                            "fullname": "",
+                            "imgUrl": ""
                         },
                         "style": {
                             "bgColor": "#26de81"
@@ -319,9 +314,9 @@
                 "txt": "Changed Color",
                 "createdAt": 154514,
                 "byMember": {
-                    "_id": "u101",
-                    "fullname": "Abi Abambi",
-                    "imgUrl": "http://some-img"
+                    "_id": "",
+                    "fullname": "",
+                    "imgUrl": ""
                 },
                 "task": {
                     "id": "c101",
