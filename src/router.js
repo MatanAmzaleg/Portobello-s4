@@ -8,6 +8,7 @@ import reviewApp from './views/review-app.vue'
 import loginSignup from './views/login-signup.vue'
 import userDetails from './views/user-details.vue'
 import taskDetails from './views/task-details.vue'
+import dashboardRoute from './views/dashboard-route.vue'
 
 const routes = [
   {
@@ -28,7 +29,11 @@ const routes = [
       {
         path:'task/:taskId',
         component:taskDetails
-      }
+      },
+      {
+        path:'dashboard-route',
+        component:dashboardRoute
+      },
     ]
   },
   {
