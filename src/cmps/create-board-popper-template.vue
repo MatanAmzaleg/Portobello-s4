@@ -1,80 +1,52 @@
 <template>
   <div class="popper-content popper-template">
-    <popperModalHeaderVue
-      title="Create board"
-      :hasBackBtn="false"
-      @closeModal="closeModal"
-      @closeMoreModal="closeMoreModal"
-    />
+    <popperModalHeaderVue title="Create board" :hasBackBtn="false" @closeModal="closeModal"
+      @closeMoreModal="closeMoreModal" />
     <div class="content">
       <div class="content-board-img">
-        <div
-          class="board-img"
-          :style="
-            selectedBackground?.bgColor
-              ? { 'background-color': selectedBackground?.bgColor }
-              : selectedBackground?.imgUrl
+        <div class="board-img" :style="
+          selectedBackground?.bgColor
+            ? { 'background-color': selectedBackground?.bgColor }
+            : selectedBackground?.imgUrl
               ? {
-                  'background-image': 'url( ' + selectedBackground?.imgUrl + ')',
-                  'background-size': 'cover',
-                }
+                'background-image': 'url( ' + selectedBackground?.imgUrl + ')',
+                'background-size': 'cover',
+              }
               : ''
-          "
-        >
-          <img
-            src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg"
-            alt=""
-            role="presentation"
-          />
+        ">
+          <img src="https://a.trellocdn.com/prgb/dist/images/board-preview-skeleton.14cda5dc635d1f13bc48.svg" alt=""
+            role="presentation" />
         </div>
       </div>
       <div class="board-background">
         <label>Background</label>
         <div>
           <ul class="background-imgs">
-            <li
-              class="li-img"
-              :style="{
-                'background-image':
-                  'url(' +
-                  (selectedBackground.imgUrl
-                    ? imgs.slice(1, 4).includes(selectedBackground.imgUrl)
-                      ? imgs[0]
-                      : selectedBackground.imgUrl
-                    : imgs[0]) +
-                  ')',
-                'background-size': 'cover',
-              }"
-            >
-              <button
-                class="color-button"
-                title="Custom image"
-                @click="updateUrlImg(imgs[0])"
-              >
-                <span
-                  class="background-span"
-                  v-if="
-                    !imgs.slice(1, 4).includes(selectedBackground.imgUrl) &&
-                    selectedBackground.imgUrl
-                  "
-                >
+            <li class="li-img" :style="{
+              'background-image':
+                'url(' +
+                (selectedBackground.imgUrl
+                  ? imgs.slice(1, 4).includes(selectedBackground.imgUrl)
+                    ? imgs[0]
+                    : selectedBackground.imgUrl
+                  : imgs[0]) +
+                ')',
+              'background-size': 'cover',
+            }">
+              <button class="color-button" title="Custom image" @click="updateUrlImg(imgs[0])">
+                <span class="background-span" v-if="
+                  !imgs.slice(1, 4).includes(selectedBackground.imgUrl) &&
+                  selectedBackground.imgUrl
+                ">
                   <selectedSvg />
                 </span>
               </button>
             </li>
-            <li
-              v-for="img in imgs.slice(1, 4)"
-              class="li-img"
-              :style="{
-                'background-image': 'url(' + img + ')',
-                'background-size': 'cover',
-              }"
-            >
-              <button
-                class="color-button"
-                title="Custom image"
-                @click="updateUrlImg(img)"
-              >
+            <li v-for="img in imgs.slice(1, 4)" class="li-img" :style="{
+              'background-image': 'url(' + img + ')',
+              'background-size': 'cover',
+            }">
+              <button class="color-button" title="Custom image" @click="updateUrlImg(img)">
                 <span class="background-span" v-if="selectedBackground.imgUrl === img">
                   <selectedSvg />
                 </span>
@@ -82,50 +54,32 @@
             </li>
           </ul>
           <ul>
-            <li
-              class="li-color"
-              :style="{
-                backgroundColor: selectedBackground.bgColor
-                  ? colors
-                      .slice(0, 5)
-                      .find((clr) => clr.color === selectedBackground.bgColor)
-                    ? colors[0].color
-                    : selectedBackground.bgColor
-                  : colors[0].color,
-              }"
-            >
-              <button
-                class="color-button"
-                :title="colors[0].name.charAt(0).toUpperCase() + colors[0].name.slice(1)"
-                @click="updateBgColor(colors[0])"
-              >
-                <span
-                  class="background-span"
-                  v-if="
-                    !colors
-                      .slice(1, 5)
-                      .find((clr) => clr.color === selectedBackground.bgColor) &&
-                    selectedBackground.bgColor
-                  "
-                >
+            <li class="li-color" :style="{
+              backgroundColor: selectedBackground.bgColor
+                ? colors
+                  .slice(0, 5)
+                  .find((clr) => clr.color === selectedBackground.bgColor)
+                  ? colors[0].color
+                  : selectedBackground.bgColor
+                : colors[0].color,
+            }">
+              <button class="color-button" :title="colors[0].name.charAt(0).toUpperCase() + colors[0].name.slice(1)"
+                @click="updateBgColor(colors[0])">
+                <span class="background-span" v-if="
+                  !colors
+                    .slice(1, 5)
+                    .find((clr) => clr.color === selectedBackground.bgColor) &&
+                  selectedBackground.bgColor
+                ">
                   <selectedSvg />
                 </span>
               </button>
             </li>
-            <li
-              v-for="clr in colors.slice(1, colors.length - 4)"
-              class="li-color"
-              :style="{ backgroundColor: clr.color }"
-            >
-              <button
-                class="color-button"
-                :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
-                @click="updateBgColor(clr.color)"
-              >
-                <span
-                  class="background-span"
-                  v-if="selectedBackground.bgColor === clr.color"
-                >
+            <li v-for="clr in colors.slice(1, colors.length - 4)" class="li-color"
+              :style="{ backgroundColor: clr.color }">
+              <button class="color-button" :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
+                @click="updateBgColor(clr.color)">
+                <span class="background-span" v-if="selectedBackground.bgColor === clr.color">
                   <selectedSvg />
                 </span>
               </button>
@@ -133,150 +87,93 @@
             <li class="li-color more">
               <Popper class="popper-create more" placement="right">
                 <button>
-                  <svg
-                    width="100%"
-                    height="13"
-                    role="presentation"
-                    focusable="false"
-                    viewBox="0 1 24 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                  <svg width="100%" height="13" role="presentation" focusable="false" viewBox="0 1 24 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M5 14C6.10457 14 7 13.1046 7 12C7 10.8954 6.10457 10 5 10C3.89543 10 3 10.8954 3 12C3 13.1046 3.89543 14 5 14ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14ZM21 12C21 13.1046 20.1046 14 19 14C17.8954 14 17 13.1046 17 12C17 10.8954 17.8954 10 19 10C20.1046 10 21 10.8954 21 12Z"
-                      fill="#42526E"
-                    ></path>
+                      fill="#42526E"></path>
                   </svg>
                 </button>
                 <template #content="{ close }" style="position: absolute">
-                  <popperModalHeaderVue
-                    :title="
+                  <div class="popper-content popper-template">
+                    <popperModalHeaderVue :title="
                       moreMode === 'none'
                         ? 'Board background'
                         : moreMode === 'photos'
-                        ? 'Photos'
-                        : 'Colors'
-                    "
-                    :hasBackBtn="moreMode === 'none' ? false : true"
-                    @closeModal="close"
-                    @back="updatemoreMode('none')"
-                  />
-                  <div
-                    v-if="moreMode === 'none'"
-                    class="board-background board-background-more"
-                  >
-                    <div class="background-more-title">
-                      <label>Photos</label>
-                      <label class="more-btn" @click="updatemoreMode('photos')"
-                        >See more</label
-                      >
-                    </div>
-                    <ul class="background-imgs">
-                      <li
-                        v-for="img in imgs.slice(0, 6)"
-                        class="li-imgs-wrap"
-                        :style="{
+                          ? 'Photos'
+                          : 'Colors'
+                    " :hasBackBtn="moreMode === 'none' ? false : true" @closeModal="close"
+                      @back="updatemoreMode('none')" />
+                    <div v-if="moreMode === 'none'" class="board-background board-background-more">
+                      <div class="background-more-title">
+                        <label>Photos</label>
+                        <label class="more-btn" @click="updatemoreMode('photos')">See more</label>
+                      </div>
+                      <ul class="background-imgs">
+                        <li v-for="img in imgs.slice(0, 6)" class="li-imgs-wrap" :style="{
                           'background-image': 'url(' + img + ')',
                           'background-size': 'cover',
-                        }"
-                      >
-                        <button
-                          class="color-button"
-                          title="Custom image"
-                          @click="updateUrlImg(img)"
-                        >
-                          <span
-                            class="background-span"
-                            v-if="selectedBackground.imgUrl === img"
-                          >
-                            <selectedSvg />
-                          </span>
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="background-more-title">
-                      <label>Colors</label>
-                      <label class="more-btn" @click="updatemoreMode('colors')"
-                        >See more</label
-                      >
-                    </div>
-                    <ul class="background-colors">
-                      <li
-                        v-for="clr in colors.slice(0, 6)"
-                        class="li-imgs-wrap"
-                        :style="{ backgroundColor: clr.color }"
-                      >
-                        <button
-                          class="color-button"
-                          :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
-                          @click="updateBgColor(clr.color)"
-                        >
-                          <span
-                            class="background-span"
-                            v-if="selectedBackground.bgColor === clr.color"
-                          >
-                            <selectedSvg />
-                          </span>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                  <div v-if="moreMode === 'photos'" class="cover-search-mode">
-                    <div class="popper-content">
-                      <div class="cover-section">
-                        <input
-                          v-model="searchWord"
-                          @input="debounce(searchWord)"
-                          type="text"
-                          class="search-input"
-                          placeholder="Search Unsplash for photos"
-                        />
-                        <div v-if="!searchWord" class="under-input">
-                          <div class="background-imgs-grid">
-                            <span
-                              v-for="img in imgs2"
-                              @click="updateUrlImg(img)"
-                              class="unsplash-img2"
-                              :style="{
-                                'background-image': 'url(' + img + ')',
-                              }"
-                            >
+                        }">
+                          <button class="color-button" title="Custom image" @click="updateUrlImg(img)">
+                            <span class="background-span" v-if="selectedBackground.imgUrl === img">
+                              <selectedSvg />
                             </span>
+                          </button>
+                        </li>
+                      </ul>
+                      <div class="background-more-title">
+                        <label>Colors</label>
+                        <label class="more-btn" @click="updatemoreMode('colors')">See more</label>
+                      </div>
+                      <ul class="background-colors">
+                        <li v-for="clr in colors.slice(0, 6)" class="li-imgs-wrap"
+                          :style="{ backgroundColor: clr.color }">
+                          <button class="color-button" :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
+                            @click="updateBgColor(clr.color)">
+                            <span class="background-span" v-if="selectedBackground.bgColor === clr.color">
+                              <selectedSvg />
+                            </span>
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                    <div v-if="moreMode === 'photos'" class="cover-search-mode">
+                      <div class="popper-content">
+                        <div class="cover-section">
+                          <input v-model="searchWord" @input="debounce(searchWord)" type="text" class="search-input"
+                            placeholder="Search Unsplash for photos" />
+                          <div v-if="!searchWord" class="under-input">
+                            <div class="background-imgs-grid">
+                              <span v-for="img in imgs2" @click="updateUrlImg(img)" class="unsplash-img2" :style="{
+                                'background-image': 'url(' + img + ')',
+                              }">
+                              </span>
+                            </div>
                           </div>
-                        </div>
-                        <div v-if="searchWord" class="results">
-                          <p class="mini-title1">Results</p>
-                          <div v-if="searchedImgs" class="background-imgs3">
-                            <span
-                              v-for="img in searchedImgs"
-                              @click="updateUrlImg(img)"
-                              class="unsplash-img3"
-                              :style="{
+                          <div v-if="searchWord" class="results">
+                            <p class="mini-title1">Results</p>
+                            <div v-if="searchedImgs" class="background-imgs3">
+                              <span v-for="img in searchedImgs" @click="updateUrlImg(img)" class="unsplash-img3" :style="{
                                 'background-image': 'url(' + img + ')',
                                 'background-size': 'cover',
-                              }"
-                            >
-                            </span>
+                              }">
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div v-if="moreMode === 'colors'" class="cover-search-mode">
-                    <div class="popper-content">
-                      <div class="cover-section">
-                        <div class="under-input">
-                          <div class="background-color-grid">
-                            <span
-                              v-for="color in colors"
-                              @click="updateBgColor(color.color)"
-                              class="unsplash-img2"
-                              :style="{
-                                'background-color': color.color,
-                              }"
-                            >
-                            </span>
+                    <div v-if="moreMode === 'colors'" class="cover-search-mode">
+                      <div class="popper-content">
+                        <div class="cover-section">
+                          <div class="under-input">
+                            <div class="background-color-grid">
+                              <span v-for="color in colors" @click="updateBgColor(color.color)" class="unsplash-img2"
+                                :style="{
+                                  'background-color': color.color,
+                                }">
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -293,10 +190,7 @@
         <input @keyup.enter="addBoard" ref="boardName" @input="updateBoardName" />
       </div>
       <div class="board-create">
-        <button
-          :class="boardTitle !== '' ? 'create-allowed' : 'create-not-allowed'"
-          @click="addBoard"
-        >
+        <button :class="boardTitle !== '' ? 'create-allowed' : 'create-not-allowed'" @click="addBoard">
           Create
         </button>
       </div>

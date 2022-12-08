@@ -14,11 +14,10 @@
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
     Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 
-  .icon,.fa-clock {
-    width: 14px;
-    height: 14px;
-    color: #5D6A83;
-    margin-inline-start: 2px;
+  .icon-actions {
+    font-size: 16px;
+    margin-left: 3px;
+    color: $clr27;
   }
 
   p {
@@ -26,13 +25,13 @@
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
   }
- 
+
   &:hover {
     background-color: #e2e4e9;
   }
 }
 
-.save-btn{
+.save-btn {
   box-shadow: none;
   border: none;
   background-color: $clr1;
@@ -41,12 +40,13 @@
   color: var(--ds-text-inverse, #ffffff);
   margin-bottom: 3px;
   border-radius: 3px;
-  &:hover{
+
+  &:hover {
     filter: contrast(85%);
   }
 }
 
-.remove-btn{
+.remove-btn {
   margin-bottom: 5px;
   box-shadow: none;
   border: none;
@@ -54,7 +54,8 @@
   padding: 6px 12px;
   font-size: 14px !important;
   color: $clr2;
-  &:hover{
+
+  &:hover {
     background-color: $clr24;
   }
 }

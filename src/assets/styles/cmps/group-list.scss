@@ -24,7 +24,6 @@
   .group-container {
     display: flex;
     padding: 0px 16px 8px 16px;
-
     @include for-mobile-layout {
       padding: 0px 3.5px;
     }
@@ -49,11 +48,15 @@
   }
 
   .task-list {
-    max-height: calc(100vh - 280px);
+    max-height: calc(100vh - 200px);
     min-height: 2px;
     overflow-y: auto;
     overflow-x: hidden;
     width: 268px;
+
+    &.task-list-open {
+      max-height: calc(100vh - 170px) !important;
+    }
 
     .cover {
       position: relative;
@@ -89,12 +92,16 @@
     .task-preview {
       .task-preview-info {
         margin-top: 10px;
-
+        height: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
         .task-preview-content {
           gap: 7px;
           float: left;
           display: flex;
-          margin-bottom: 10px;
+          margin-bottom: 0px;
 
           * {
             display: flex;
@@ -247,7 +254,7 @@
     background-color: $clr19;
     border-radius: 3px;
     margin-inline-end: 8px;
-
+    
     .group-title {
       height: 40px;
       display: flex;
@@ -347,10 +354,9 @@
     resize: none;
     display: flex;
     align-items: center;
-    width: 240px;
-    margin-inline: auto;
+    width: -webkit-fill-available;
+    margin: 0 4px 8px 8px;
     border: none;
-    padding: 6px 8px 2px;
     outline: none;
     border-radius: 3px;
     box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);

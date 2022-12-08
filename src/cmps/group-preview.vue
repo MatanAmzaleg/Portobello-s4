@@ -2,62 +2,19 @@
   <section class="group-preview">
     <div class="group">
       <div class="group-title">
-        <span
-          @input="changeGroupName(column)"
-          contenteditable
-          role="textbox"
-          class="text-lg"
-          ref="groupName"
-          >{{ column.title }}</span
-        >
-        <popperEditOptions
-          deleteTitle="Delete this list"
-          requestedTitle="List actions"
-          @delete="deleteGroup(column.id)"
-        />
+        <span @input="changeGroupName(column)" contenteditable role="textbox" class="text-lg" ref="groupName">{{
+            column.title
+        }}</span>
+        <popperEditOptions deleteTitle="Delete this list" requestedTitle="List actions"
+          @delete="deleteGroup(column.id)" />
         <!-- <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /> -->
       </div>
-      <!-- column -->
-      <task-list
-        @addBoard="addBoard"
-        :scene="scene"
-        :currBoard="currBoard"
-        :column="column"
-      ></task-list>
-      <textarea
-        ref="taskArea"
-        @keyup.enter="addTask"
-        v-if="column.id === currGroup"
-        class="textarea"
-        placeholder="Enter a title for this card"
-        cols="30"
-        rows="3"
-        v-model="newTaskTxt"
-      ></textarea>
+      <task-list @addTask="addTask" @addBoard="addBoard" :scene="scene" :currBoard="currBoard" :column="column" :currGroup="currGroup" @closeAddTask="closeAddTask"></task-list>
       <div class="card-composure flex">
-        <button
-          v-if="column.id !== currGroup"
-          class="add-task-btn"
-          @click="changeAddStatus(column.id)"
-        >
+        <button v-if="column.id !== currGroup" class="add-task-btn" @click="changeAddStatus(column.id)">
           <font-awesome-icon class="add-task-icon" icon="fa-solid fa-plus" />
           Add a card
         </button>
-        <div class="pressed-buttons">
-          <button
-            class="add-card-btn"
-            v-if="column.id === currGroup"
-            @click="addTask"
-          >
-            Add card
-          </button>
-          <button v-if="column.id === currGroup" @click="currGroup = null">
-            <font-awesome-icon
-              class="close-add-task-btn"
-              icon="fa-solid fa-xmark"
-            />
-          </button>
-        </div>
       </div>
     </div>
   </section>
@@ -81,7 +38,7 @@ export default {
     return {
       newScene: null,
       currGroup: null,
-      newTaskTxt: " ",
+      // newTaskTxt: " ",
       isAddNewGroup: false,
       newGroupTxt: " ",
     };
@@ -89,7 +46,7 @@ export default {
   async created() {
     try {
       this.$store.dispatch({ type: "loadBoards" });
-    } catch {}
+    } catch { }
   },
   components: {
     Container,
@@ -100,24 +57,24 @@ export default {
   },
   methods: {
     changeAddStatus(groupId) {
-      setTimeout(() => {
-        this.$refs.taskArea.focus();
-      }, 50);
       this.currGroup = groupId;
     },
-    addTask() {
-      if (this.newTaskTxt.trim(" ").length < 1) return;
-      console.log(this.newTaskTxt.length);
+    closeAddTask(){
+      this.currGroup = null
+    },
+    addTask(newTaskTxt) {
+      if (newTaskTxt.trim(" ").length < 1) return;
+      console.log(newTaskTxt.length);
       const board = JSON.parse(JSON.stringify(this.currBoard));
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup
       );
       let task = this.$store.getters.emptyTask;
       task.id = utilService.makeId();
-      task.title = this.newTaskTxt;
+      task.title = newTaskTxt;
       board.groups[groupIdx].tasks.push(task);
       this.$emit("addTask", board);
-      this.newTaskTxt = "";
+      // this.newTaskTxt = "";
     },
     addGroup() {
       const group = {
@@ -139,7 +96,7 @@ export default {
       board.groups.splice(groupIdx, 1);
       this.$store.dispatch({ type: "updateBoard", board });
     },
-    changeGroupName(group){
+    changeGroupName(group) {
       const updatedGroup = JSON.parse(JSON.stringify(this.column))
       updatedGroup.title = this.$refs.groupName.innerText;
       const board = JSON.parse(JSON.stringify(this.currBoard))
@@ -149,8 +106,12 @@ export default {
       this.$store.dispatch({ type: "updateBoard", board });
       // console.log(newBoard);
       // console.log(this.column);
-
     }
   },
+  computed: {
+    currentGroup() {
+      return column.id === currGroup
+    }
+  }
 };
 </script>
