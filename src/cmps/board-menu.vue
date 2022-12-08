@@ -26,6 +26,15 @@
           <span class="activity-icon"></span>
           <h4>Activity</h4>
         </div>
+        <div v-if="currBoard?.activities" v-for="activity in currBoard.activities" class="board-activity">
+            <img :src="activity?.byMember?.imgUrl" class="member-img">
+            <div class="activity-info">
+              <div class="member-info">
+                <p class="member-fullname">{{ activity?.byMember?.fullname}} {{activity?.msg }}</p>
+              </div>
+              <!-- <a>{{ getActivityTime(activity.createdAt) }}</a> -->
+            </div>
+          </div>
       </div>
     </section>
     <section class="other-sections">

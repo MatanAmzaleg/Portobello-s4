@@ -8,6 +8,11 @@ overflow-x: hidden;
   overflow: hidden;
   z-index: 10;
   
+  .board-activity{
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    grid-template-rows: 1fr;
+  }
 
   transition: 0.5s;
   
