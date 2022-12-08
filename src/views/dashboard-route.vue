@@ -18,13 +18,13 @@
         <div class="board-stats flex">
           <h1>Board stats:</h1>
           <div class="state flex">
-            <h2>Board members: {{ numOfMembers }}</h2>
+            <h2><font-awesome-icon icon="fa-solid fa-user" />  Board members: {{ numOfMembers }}</h2>
           </div>
           <div class="state flex">
-            <h2>Total lists: {{ numOfMembers }}</h2>
+            <h2><font-awesome-icon icon="fa-solid fa-list-check" /> Total lists: {{ numOfMembers }}</h2>
           </div>
           <div class="state flex">
-            <h2>Total tasks: {{ numOfTasks }}</h2>
+            <h2><font-awesome-icon icon="fa-solid fa-bars-progress" /> Total tasks: {{ numOfTasks }}</h2>
           </div>
         </div>
       </section>
