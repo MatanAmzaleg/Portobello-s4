@@ -22,9 +22,10 @@
   .main-task-members {
     display: flex;
     align-items: center;
+    height: 32px;
 
     >* {
-      margin-inline: 2px;
+      margin-inline-end: 3px;
     }
 
     ul {
@@ -37,6 +38,7 @@
       border-radius: 50%;
       position: relative;
       top: 3px;
+      margin-top: 1px;
       cursor: pointer;
     }
 
