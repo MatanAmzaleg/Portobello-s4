@@ -24,6 +24,7 @@
   .group-container {
     display: flex;
     padding: 0px 16px 8px 16px;
+
     @include for-mobile-layout {
       padding: 0px 3.5px;
     }
@@ -96,7 +97,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
+
         .task-preview-content {
           gap: 7px;
           float: left;
@@ -106,7 +107,8 @@
           * {
             display: flex;
             align-self: center;
-            // justify-self: center;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
           }
         }
 
@@ -254,7 +256,7 @@
     background-color: $clr19;
     border-radius: 3px;
     margin-inline-end: 8px;
-    
+
     .group-title {
       height: 40px;
       display: flex;

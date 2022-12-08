@@ -18,37 +18,37 @@
         <button @click="doLogout">Logout</button>
       </h3>
     </div>
-    <div v-else class="login">
+    <div v-if="isOnLogIn" class="login">
       <p>Log in to Portobello</p>
       <div class="login-form">
-        <input ref="usernameInput" @keyup.enter="continuToLogin" @input="updateUsernameInput"
+        <input ref="usernameInput" @keyup.enter="continueToLogin" @input="updateUsernameInput"
           placeholder="Enter username" />
-        <input type="password" v-if="showPasswordInput" ref="passwordInput" placeholder="Enter password" @keyup.enter="doLogin"
-          @input="updatePasswordInput" />
-        <button class="submit" @click="doLogin">{{ showPasswordInput ? 'Log in' : 'Continue' }}</button>
+        <input type="password" v-if="showPasswordInput" ref="passwordInput" placeholder="Enter password"
+          @keyup.enter="doLogin" @input="updatePasswordInput" />
+        <button class="submit" @click="doLogin">
+          {{ showPasswordInput ? 'Log in' : 'Continue' }}
+        </button>
+        <div class="go-signup">
+          <hr/>
+          <button class="signup-link" @click="toggleIsOnLogin">Sign up for an account</button>
+        </div>
       </div>
-      <!-- <p class="mute">user1 or admin, pass:123 </p> -->
     </div>
-    <form @submit.prevent="doSignup" class="login-form">
-      <h2>Signup</h2>
-      <input type="text" v-model="signupCred.fullname" placeholder="Your full name" />
-      <input type="text" v-model="signupCred.password" placeholder="Password" />
-      <input type="text" v-model="signupCred.username" placeholder="Username" />
-      <img-uploader @uploaded="onUploaded"></img-uploader>
-      <button>Signup</button>
-    </form>
+    <div v-else class="login">
+      <p>Signup</p>
+      <div class="login-form">
+        <input type="text" v-model="signupCred.fullname" placeholder="Your full name" />
+        <input type="text" v-model="signupCred.password" placeholder="Password" />
+        <input type="text" v-model="signupCred.username" placeholder="Username" />
+        <img-uploader class="upload-img" @uploaded="onUploaded"></img-uploader>
+        <button class="submit" @click="doSignup">Sign up</button>
+        <div class="go-signup">
+          <hr/>
+          <button class="signup-link" @click="toggleIsOnLogin">Already have an account? Log In</button>
+        </div>
+      </div>
+    </div>
     <hr />
-    <details>
-      <summary>
-        Admin Section
-      </summary>
-      <ul>
-        <li v-for="user in users" :key="user._id">
-          <pre>{{ user }}</pre>
-          <button @click="removeUser(user._id)">x</button>
-        </li>
-      </ul>
-    </details>
   </div>
 </template>
 
@@ -63,7 +63,8 @@ export default {
       msg: '',
       loginCred: { username: '', password: '' },
       signupCred: { username: '', password: '', fullname: '', imgUrl: '' },
-      showPasswordInput: false
+      showPasswordInput: false,
+      isOnLogIn: true
     }
   },
   computed: {
@@ -84,7 +85,7 @@ export default {
     updatePasswordInput(ev) {
       this.loginCred.password = ev.target.value
     },
-    continuToLogin() {
+    continueToLogin() {
       if (!this.loginCred.username) {
         this.msg = 'Please enter username/password'
         return
@@ -96,18 +97,31 @@ export default {
         }, 50)
       }
     },
+    toggleIsOnLogin(){
+      this.showPasswordInput = false
+      this.isOnLogIn = !this.isOnLogIn
+    },
     async doLogin() {
       if (!this.loginCred.username) {
         this.msg = 'Please enter username/password'
         return
       }
-      try {
+      if (!this.showPasswordInput) {
         this.showPasswordInput = true
-        await this.$store.dispatch({ type: "login", userCred: this.loginCred })
-        this.$router.push('/')
-      } catch (err) {
-        console.log(err)
-        this.msg = 'Failed to login'
+      } else {
+        if (!this.loginCred.password) {
+          this.msg = 'Please enter username/password'
+          return
+        } else {
+          try {
+            this.showPasswordInput = true
+            await this.$store.dispatch({ type: "login", userCred: this.loginCred })
+            this.$router.push('/')
+          } catch (err) {
+            console.log(err)
+            this.msg = 'Failed to login'
+          }
+        }
       }
     },
     doLogout() {
