@@ -33,7 +33,7 @@
     <div class="right-section">
       <button @click="goToDshboard" class="dashboard-btn">
         <font-awesome-icon
-        class="dashboard-icon"
+          class="dashboard-icon"
           :style="
             !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
           "
@@ -92,8 +92,12 @@
               <section class="members-filter">
                 <p class="mini-title">Members</p>
                 <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <p>photo</p>
+                  <input
+                    type="checkbox"
+                    :checked="filterBy['no-members']"
+                    @change="setFilter"
+                  />
+                  <span class="grey-icon icon-actions member-icon"></span>
                   <p>No members</p>
                 </label>
                 <label class="member-label" for="">
@@ -110,18 +114,45 @@
               <section class="date-filter">
                 <p class="mini-title">Due date</p>
                 <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <p>photo</p>
+                  <input
+                    type="checkbox"
+                    @change="setFilter"
+                    :checked="filterBy['no-dates']"
+                  />
+                  <div class="calender-div">
+                    <font-awesome-icon
+                      class="calender"
+                      icon="fa-solid fa-calendar-days"
+                    />
+                  </div>
                   <p>No dates</p>
                 </label>
                 <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <p>photo</p>
+                  <input
+                    type="checkbox"
+                    @change="setFilter"
+                    :checked="filterBy.overdue"
+                  />
+                  <div class="red-div">
+                    <font-awesome-icon
+                      class="clock"
+                      icon="fa-regular fa-clock"
+                    />
+                  </div>
                   <p>Overdue</p>
                 </label>
                 <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <p>photo</p>
+                  <input
+                    type="checkbox"
+                    @change="setFilter"
+                    :checked="filterBy['due-next-day']"
+                  />
+                  <div class="yellow-div">
+                    <font-awesome-icon
+                      class="clock"
+                      icon="fa-regular fa-clock"
+                    />
+                  </div>
                   <p>Due in the next day</p>
                 </label>
               </section>
@@ -129,8 +160,12 @@
               <section class="labels-filter">
                 <p class="mini-title">Labels</p>
                 <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <p>photo</p>
+                  <input
+                    type="checkbox"
+                    @change="setFilter"
+                    :checked="filterBy['no-labels']"
+                  />
+                  <span class="label-icon icon-actions grey-icon"></span>
                   <p>No labels</p>
                 </label>
                 <label class="member-label" for="">
@@ -195,6 +230,11 @@ export default {
       currBoard: null,
       filterBy: {
         txt: "",
+        "no-members": false,
+        "no-dates": false,
+        overdue: false,
+        "due-next-day": false,
+        "no-labels": false,
       },
       isModalOpen: false,
       boardName: "",
@@ -234,9 +274,10 @@ export default {
       console.log("boarddddddddddd", board);
       this.$store.dispatch({ type: "updateBoard", board });
     },
-    goToDshboard(){
-      this.$router.push(`/board/${this.board._id}/dashboard-route`)
-    }
+    goToDshboard() {
+      this.isModalOpen = false;
+      this.$router.push(`/board/${this.board._id}/dashboard-route`);
+    },
   },
   computed: {
     getBoardMembers() {

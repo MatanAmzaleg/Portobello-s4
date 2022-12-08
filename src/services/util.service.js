@@ -16,6 +16,7 @@ export const utilService = {
   getImgs,
   getCalculatedColor,
   lightOrDark,
+  filterBoard
 };
 
 const STORAGE_KEY = "imgsDb";
@@ -52,6 +53,14 @@ async function fetchListOfPhotos(query = "", page = "1") {
     console.log("Cannot load photos", err);
     throw err;
   }
+}
+
+function filterBoard(board, filterBy){
+
+  console.log(board);
+  console.log(filterBy);
+
+
 }
 
 function getImgs(query) {

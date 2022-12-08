@@ -1,5 +1,6 @@
 // import { boardService } from "../services/board.service.js";
 import { boardService } from "../services/board-service-local.js";
+import { utilService } from "../services/util.service.js";
 
 export const boardStore = {
   state: {
@@ -14,12 +15,12 @@ export const boardStore = {
     currBoard({ currBoard }) {
       return currBoard;
     },
-    emptyTask(){
-      return boardService.getEmptyTask()
+    emptyTask() {
+      return boardService.getEmptyTask();
     },
-    currTask({currTask}){
-      return currTask
-    }
+    currTask({ currTask }) {
+      return currTask;
+    },
   },
   mutations: {
     setBoards(state, { boards }) {
@@ -70,12 +71,12 @@ export const boardStore = {
     async createNewBoard(context, { board }) {
       try {
         const newBoard = await boardService.getEmptyBoard();
-        newBoard.title = board.title
-        newBoard.style = {
-          "bgColor": board.style.bgColor,
-          "imgUrl": board.style.imgUrl,
-        },
-        board = await boardService.save(newBoard);
+        newBoard.title = board.title;
+        (newBoard.style = {
+          bgColor: board.style.bgColor,
+          imgUrl: board.style.imgUrl,
+        }),
+          (board = await boardService.save(newBoard));
         context.commit({ type: "addBoard", board });
         // context.commit({type:"setCurrBoard", board})
         return board;
@@ -86,9 +87,9 @@ export const boardStore = {
     },
     async updateBoard(context, { board }) {
       try {
-        console.log('before save', board)
+        console.log("before save", board);
         board = await boardService.save(board);
-        console.log('after save', board)
+        console.log("after save", board);
         context.commit({ type: "updateBoard", board });
         // context.commit("setCurrBoard", board)
         return board;
@@ -139,13 +140,16 @@ export const boardStore = {
       try {
         const board = await boardService.getById(boardId);
         if (filterBy) {
+          console.log(filterBy);
+          const filteredBoard = utilService.filterBoard(board, filterBy);
+          return;
           const { txt } = filterBy;
           const regex = new RegExp(txt, "i");
           const filteredGroups = board.groups.filter((group) =>
             regex.test(group.title)
           );
           console.log(filteredGroups);
-          const filteredBoard = { ...board, groups: filteredGroups };
+          // const filteredBoard = { ...board, groups: filteredGroups };
           console.log(filteredBoard);
           commit({ type: "setCurrBoard", filteredBoard });
         } else commit({ type: "setCurrBoard", board });
