@@ -1,5 +1,5 @@
 <template>
-  <div class="popper-content">
+  <div class="popper-content popper-template">
     <popperModalHeaderVue
       title="Create board"
       :hasBackBtn="false"
