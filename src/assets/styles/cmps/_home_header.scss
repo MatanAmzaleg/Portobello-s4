@@ -36,6 +36,7 @@ header.home-header {
 
             .title {
                 color: #1d3557;
+                margin-top: 1px;
                 font-size: 26px;
                 font-family: NunitoSans-ExtraBold;
             }
@@ -74,7 +75,9 @@ header.home-header {
                 .user {
                     display: none;
                 }
-
+                .login-btn{
+                    display: none;
+                }
                 .humburger {
                     display: block;
                 }

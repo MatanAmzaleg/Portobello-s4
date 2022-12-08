@@ -4,9 +4,9 @@
       <div class="home-page-info">
         <div class="info">
           <h1>Portobello brings all your tasks, teammates, and tools together</h1>
-          <h3>Keep everything in the same place—even if your team isn’t.</h3>
+          <h3>Keep everything in the same place — even if your team isn’t.</h3>
           <div class="home-page-sign">
-            <router-link to="/board" class="btn-sign"><button>Start demo - it`s free!</button></router-link>
+            <router-link to="/board" class="btn-sign"><button>Start demo</button></router-link>
           </div>
         </div>
       </div>
