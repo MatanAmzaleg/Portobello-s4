@@ -136,6 +136,7 @@ async function remove(boardId) {
 async function save(board) {
   var savedBoard;
   if (board._id) {
+    console.log('before server',board)
     // savedBoard = await storageService.put(STORAGE_KEY, board);
     socketService.emit('update-board',board)
     savedBoard = await httpService.put(BASE_URL+`${board._id}`, board)

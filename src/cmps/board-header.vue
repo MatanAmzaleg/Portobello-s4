@@ -2,7 +2,7 @@
   <section v-if="board" class="board-header">
     <div class="left-section">
       <span
-        :style="!getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }"
+      :style="{ color: getCalcColor?.isDark ? 'white'  : 'black'}"
         class="board-name-input"
         role="textbox"
         ref="span"
@@ -233,6 +233,9 @@ export default {
     getCurrBoard() {
       return this.$store.getters.currBoard;
     },
+    getCalcColor() {
+      return this.$store.getters.currBoard?.style?.calcColor
+    }
   },
   components: {
     miniUsers,

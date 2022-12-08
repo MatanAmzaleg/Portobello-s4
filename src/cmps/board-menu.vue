@@ -102,11 +102,9 @@ export default {
     async setBoardBg(url) {
       try {
         const newBoard = JSON.parse(JSON.stringify(this.currBoard));
-        console.log('menu',url);
         newBoard.style = { imgUrl: url };
         const calcColor = await utilService.getCalculatedColor(newBoard.style.imgUrl);
         newBoard.style.calcColor = calcColor
-        console.log('newBoard style', newBoard.style)
         this.$emit("updateBoard", newBoard);
       }catch(err){
         console.log(err)

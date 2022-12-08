@@ -7,10 +7,10 @@
       <section class="trello">
         <router-link to="/board">
           <button class="logo">
-            <font-awesome-icon :style="!calculatedColor?.isDark ? { color: 'black' } : ''" class="icon" icon="fa-brands fa-trello" />
+            <font-awesome-icon :style="!getCalcColor?.isDark ? { color: 'black' } : ''" class="icon" icon="fa-brands fa-trello" />
             <span
               class="title"
-              :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
+              :style="!getCalcColor?.isDark ? { color: 'black' } : ''"
               >Portobello</span
             >
           </button>
@@ -18,9 +18,9 @@
         <section class="trello-actions">
           <Popper offsetSkid="110" class="popper-main">
             <button class="nav-item">
-              <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''">Boards</span>
+              <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''">Boards</span>
               <svg
-              :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
+              :style="!getCalcColor?.isDark ? { color: 'black' } : ''"
                 width="18"
                 height="18"
                 role="presentation"
@@ -68,7 +68,7 @@
             <button class="nav-item">
             <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''">Recent</span>
             <svg
-            :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
+            :style="!getCalcColor?.isDark ? { color: 'black' } : ''"
               width="18"
               height="18"
               role="presentation"
@@ -114,9 +114,9 @@
           </Popper>
           <Popper offsetSkid="110" class="popper-main">
             <button class="nav-item">
-              <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''">Starred</span>
+              <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''">Starred</span>
               <svg
-              :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
+              :style="!getCalcColor?.isDark ? { color: 'black' } : ''"
                 width="18"
                 height="18"
                 role="presentation"
@@ -188,9 +188,9 @@
         </section>
         <section class="trello-actions-more">
           <button class="nav-item">
-            <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''">More</span>
+            <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''">More</span>
             <svg
-            :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
+            :style="!getCalcColor?.isDark ? { color: 'black' } : ''"
               width="18"
               height="18"
               role="presentation"
@@ -213,7 +213,7 @@
           @close:popper="toggleModal"
         >
           <button class="btn-create">
-            <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''">Create</span>
+            <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''">Create</span>
           </button>
           <template #content="{ close }">
             <div>
@@ -226,14 +226,14 @@
         </Popper>
       </section>
       <button class="humburger">
-        <font-awesome-icon :style="!calculatedColor?.isDark ? { color: 'black' } : ''" icon="fa-solid fa-bars" class="icon" />
+        <font-awesome-icon :style="!getCalcColor?.isDark ? { color: 'black' } : ''" icon="fa-solid fa-bars" class="icon" />
       </button>
       <section class="user">
         <div class="search">
-          <input :style="!calculatedColor?.isDark ? { color: 'black' } : ''" type="search" placeholder="Search" />
-          <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''" class="icon">
+          <input :style="!getCalcColor?.isDark ? { color: 'black' } : ''" type="search" placeholder="Search" />
+          <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''" class="icon">
             <svg
-            :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
+            :style="!getCalcColor?.isDark ? { color: 'black' } : ''"
               class="icon-svg"
               width="24"
               height="24"
