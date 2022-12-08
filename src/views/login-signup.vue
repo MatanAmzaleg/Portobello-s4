@@ -12,11 +12,11 @@
     </div>
     <p>{{ msg }}</p>
     <div v-if="loggedinUser">
-      <!-- <h3>
+      <h3>
         Loggedin User:
         {{ loggedinUser.fullname }}
         <button @click="doLogout">Logout</button>
-      </h3> -->
+      </h3>
     </div>
     <div v-else class="login">
       <p>Log in to Portobello</p>
@@ -27,7 +27,7 @@
           @input="updatePasswordInput" />
         <button class="submit" @click="doLogin">{{ showPasswordInput ? 'Log in' : 'Continue' }}</button>
       </div>
-      <p class="mute">user1 or admin, pass:123 </p>
+      <!-- <p class="mute">user1 or admin, pass:123 </p> -->
     </div>
     <form @submit.prevent="doSignup" class="login-form">
       <h2>Signup</h2>
