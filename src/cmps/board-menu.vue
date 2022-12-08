@@ -5,6 +5,7 @@
       <h3 v-if="titleMode === 'changeBg'">Change background</h3>
       <h3 v-if="titleMode === 'unsplash'">Photos by Unsplash</h3>
       <h3 v-if="titleMode === 'colors'">Colors</h3>
+      <h3 v-if="titleMode === 'more'">More</h3>
     </div>
     <hr />
     <section v-if="titleMode === 'menu'" class="main-content">
