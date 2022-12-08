@@ -2,7 +2,7 @@
   <section v-if="board" class="board-header">
     <div class="left-section">
       <span
-      :style="{ color: getCalcColor?.isDark ? 'white'  : 'black'}"
+        :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }"
         class="board-name-input"
         role="textbox"
         ref="span"
@@ -31,6 +31,15 @@
       </button>
     </div>
     <div class="right-section">
+      <button @click="goToDshboard" class="dashboard-btn">
+        <font-awesome-icon
+        class="dashboard-icon"
+          :style="
+            !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
+          "
+          icon="fa-solid fa-chart-line"
+        />
+      </button>
       <popper>
         <button
           @click="changeIsModalOpen"
@@ -192,11 +201,11 @@ export default {
       calculatedColor: null,
     };
   },
-  created(){
-      eventBus.on("headerColor", this.updateHeaderColor);
+  created() {
+    eventBus.on("headerColor", this.updateHeaderColor);
   },
   mounted() {
-    console.log(this.members)
+    console.log(this.members);
   },
   methods: {
     setFilter() {
@@ -225,17 +234,20 @@ export default {
       console.log("boarddddddddddd", board);
       this.$store.dispatch({ type: "updateBoard", board });
     },
+    goToDshboard(){
+      this.$router.push(`/board/${this.board._id}/dashboard-route`)
+    }
   },
   computed: {
-    getBoardMembers(){
-      return this.board.members.map(member => member._id)
+    getBoardMembers() {
+      return this.board.members.map((member) => member._id);
     },
     getCurrBoard() {
       return this.$store.getters.currBoard;
     },
     getCalcColor() {
-      return this.$store.getters.currBoard?.style?.calcColor
-    }
+      return this.$store.getters.currBoard?.style?.calcColor;
+    },
   },
   components: {
     miniUsers,
