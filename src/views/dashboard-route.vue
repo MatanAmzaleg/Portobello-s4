@@ -58,7 +58,6 @@ export default {
     infoUsers() {
       if (!this.$store.getters.currBoard) return;
       const usersInfoMap = {Unassigned:{tasks:[]}};
-      console.log("userinfobeforeeeeee", usersInfoMap);
 
       this.currBoard.members.map((m) => {
         return this.currBoard.groups.map((g) =>
