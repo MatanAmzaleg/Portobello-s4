@@ -264,9 +264,9 @@ export default {
       calculatedColor: null,
     };
   },
-  created() {
-    eventBus.on("headerColor", this.updateHeaderColor);
-  },
+  // created() {
+  //   eventBus.on("headerColor", this.updateHeaderColor);
+  // },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;

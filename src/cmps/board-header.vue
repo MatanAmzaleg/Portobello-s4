@@ -2,7 +2,7 @@
   <section v-if="board" class="board-header">
     <div class="left-section">
       <span
-        :style="!getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }"
+      :style="{ color: getCalcColor?.isDark ? 'white'  : 'black'}"
         class="board-name-input"
         role="textbox"
         ref="span"
@@ -177,7 +177,6 @@ import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import popperAddMember from "./popper-add-member.vue";
 import memberPicker from "./member-picker.vue";
-import popperModal from "./popper-modal.vue";
 export default {
   props: {
     board: Object,
@@ -193,11 +192,11 @@ export default {
       calculatedColor: null,
     };
   },
-  created() {
-    eventBus.on("headerColor", this.updateHeaderColor);
+  created(){
+      eventBus.on("headerColor", this.updateHeaderColor);
   },
   mounted() {
-    console.log(this.members);
+    console.log(this.members)
   },
   methods: {
     setFilter() {
@@ -228,23 +227,21 @@ export default {
     },
   },
   computed: {
-    getBoardMembers() {
-      console.log(this.board);
-      return this.board.members.map((member) => member._id);
-    },
-    getCalcColor() {
-      return this.$store.getters.currBoard?.style?.calcColor;
+    getBoardMembers(){
+      return this.board.members.map(member => member._id)
     },
     getCurrBoard() {
       return this.$store.getters.currBoard;
     },
+    getCalcColor() {
+      return this.$store.getters.currBoard?.style?.calcColor
+    }
   },
   components: {
     miniUsers,
     memberPicker,
     miniUsersDesigned,
     popperAddMember,
-    popperModal
   },
 };
 </script>

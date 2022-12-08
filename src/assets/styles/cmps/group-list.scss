@@ -87,37 +87,43 @@
     .task-preview {
       .task-preview-info {
         margin-top: 10px;
-        font-family: trellicons;
         .task-preview-content {
-          display: flex;
-          align-items: center;
+          gap: 7px;
           float: left;
+          display: flex;
+          margin-bottom: 10px;
+          *{
+            display: flex;
+            align-self: center;
+            // justify-self: center;
+          }
         }
         .task-preview-users {
           float: right;
           padding: 5px;
         }
-        * {
-          font-size: 16px;
-          align-items: center;
-          display: flex;
-        }
         .checklist-icon span {
-          font-size: 12px;
+          font-size: 14px;
         }
         .task-preview-checklist {
           max-width: 45px;
           max-height: 20px;
           overflow: hidden;
-          display: flex;
-          justify-content: center;
-          align-items: center;
           padding: 2px;
           border-radius: 3px;
         }
         & .done {
           background-color: $clr29;
-          color: white;
+          span{
+            color: white ;
+          }
+        }
+        .watch-icon,.description-icon,.attachment-icon,.checklist-icon,.clock-icon{
+          font-family: trellicons !important;
+          font-size: 16px;
+        }
+        .watch-icon,.description-icon,.attachment-icon,.checklist-icon{
+          color: #5e6c84;
         }
         .watch-icon:before {
           content: "\e969";

@@ -1,5 +1,5 @@
-// import { boardService } from "../services/board.service.js";
-import { boardService } from "../services/board-service-local.js";
+import { boardService } from "../services/board.service.js";
+// import { boardService } from "../services/board-service-local.js";
 
 export const boardStore = {
   state: {
@@ -33,6 +33,7 @@ export const boardStore = {
       const idx = state.boards.findIndex((c) => c._id === board._id);
       state.boards.splice(idx, 1, board);
       state.currBoard = board;
+      console.log(state.currBoard);
     },
     updateRemoveStarredBoard(state, { board }) {
       const idx = state.boards.findIndex((c) => c._id === board._id);
@@ -85,7 +86,9 @@ export const boardStore = {
     },
     async updateBoard(context, { board }) {
       try {
+        console.log('before save', board)
         board = await boardService.save(board);
+        console.log('after save', board)
         context.commit({ type: "updateBoard", board });
         // context.commit("setCurrBoard", board)
         return board;

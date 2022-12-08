@@ -97,12 +97,11 @@ async function getCalculatedColor(url) {
   let calculateColor = {};
   try {
     const fac = new FastAverageColor();
-    fac.getColorAsync(url).then((color) => {
+    return fac.getColorAsync(url).then((color) => {
       calculateColor.calcColor = color.rgba;
       calculateColor.isDark = color.isDark;
-      console.log(calculateColor);
-      eventBus.emit("headerColor", calculateColor);
       return calculateColor
+      // eventBus.emit("headerColor", calculateColor);
     });
   } catch (err) {
     console.log(err);
