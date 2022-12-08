@@ -22,7 +22,6 @@
 
   .group-container {
     display: flex;
-    gap: 8px;
     padding: 0px 16px 8px 16px;
 
     @include for-mobile-layout {
