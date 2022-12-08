@@ -15,8 +15,7 @@
               ? { 'background-color': selectedBackground?.bgColor }
               : selectedBackground?.imgUrl
               ? {
-                  'background-image':
-                    'url( ' + selectedBackground?.imgUrl + ')',
+                  'background-image': 'url( ' + selectedBackground?.imgUrl + ')',
                   'background-size': 'cover',
                 }
               : ''
@@ -76,10 +75,7 @@
                 title="Custom image"
                 @click="updateUrlImg(img)"
               >
-                <span
-                  class="background-span"
-                  v-if="selectedBackground.imgUrl === img"
-                >
+                <span class="background-span" v-if="selectedBackground.imgUrl === img">
                   <selectedSvg />
                 </span>
               </button>
@@ -100,10 +96,7 @@
             >
               <button
                 class="color-button"
-                :title="
-                  colors[0].name.charAt(0).toUpperCase() +
-                  colors[0].name.slice(1)
-                "
+                :title="colors[0].name.charAt(0).toUpperCase() + colors[0].name.slice(1)"
                 @click="updateBgColor(colors[0])"
               >
                 <span
@@ -111,9 +104,8 @@
                   v-if="
                     !colors
                       .slice(1, 5)
-                      .find(
-                        (clr) => clr.color === selectedBackground.bgColor
-                      ) && selectedBackground.bgColor
+                      .find((clr) => clr.color === selectedBackground.bgColor) &&
+                    selectedBackground.bgColor
                   "
                 >
                   <selectedSvg />
@@ -217,9 +209,7 @@
                       >
                         <button
                           class="color-button"
-                          :title="
-                            clr.name.charAt(0).toUpperCase() + clr.name.slice(1)
-                          "
+                          :title="clr.name.charAt(0).toUpperCase() + clr.name.slice(1)"
                           @click="updateBgColor(clr.color)"
                         >
                           <span
@@ -300,11 +290,7 @@
       </div>
       <div class="board-title">
         <label>Board title <span>*</span></label>
-        <input
-          @keyup.enter="addBoard"
-          ref="boardName"
-          @input="updateBoardName"
-        />
+        <input @keyup.enter="addBoard" ref="boardName" @input="updateBoardName" />
       </div>
       <div class="board-create">
         <button
@@ -423,7 +409,10 @@ export default {
           type: "createNewBoard",
           board,
         });
-        showSuccessMsg("Board added");
+        this.$notify({
+          type: 'success',
+          title: "Board added!",
+        });
         this.$router.push(`/board/${newBoard._id}`);
         this.boardToAdd = boardService.getEmptyBoard();
         this.closeModal();
@@ -431,7 +420,10 @@ export default {
           utilService.getCalculatedColor(this.boardToAdd.style.imgUrl);
       } catch (err) {
         console.log(err);
-        showErrorMsg("Cannot add board");
+        this.$notify({
+          type: 'error',
+          title: "Could not add board!",
+        });
       }
     },
     closeModal() {
