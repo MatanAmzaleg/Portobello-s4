@@ -2,8 +2,19 @@
   <section class="group-preview">
     <div class="group">
       <div class="group-title">
-        <h2 class="text-lg">{{ column.title }}</h2>
-        <popperEditOptions deleteTitle="Delete this list" requestedTitle="List actions" @delete="deleteGroup(column.id)"/>
+        <span
+          @input="changeGroupName(column)"
+          contenteditable
+          role="textbox"
+          class="text-lg"
+          ref="groupName"
+          >{{ column.title }}</span
+        >
+        <popperEditOptions
+          deleteTitle="Delete this list"
+          requestedTitle="List actions"
+          @delete="deleteGroup(column.id)"
+        />
         <!-- <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /> -->
       </div>
       <!-- column -->
@@ -80,7 +91,13 @@ export default {
       this.$store.dispatch({ type: "loadBoards" });
     } catch {}
   },
-  components: { Container, Draggable, taskDetails, taskList, popperEditOptions },
+  components: {
+    Container,
+    Draggable,
+    taskDetails,
+    taskList,
+    popperEditOptions,
+  },
   methods: {
     changeAddStatus(groupId) {
       setTimeout(() => {
@@ -89,7 +106,7 @@ export default {
       this.currGroup = groupId;
     },
     addTask() {
-      if (this.newTaskTxt.trim(' ').length < 1) return
+      if (this.newTaskTxt.trim(" ").length < 1) return;
       console.log(this.newTaskTxt.length);
       const board = JSON.parse(JSON.stringify(this.currBoard));
       const groupIdx = board.groups.findIndex(
@@ -116,11 +133,23 @@ export default {
     addBoard(board) {
       this.$emit("addBoard", board);
     },
-    deleteGroup(groupId){
+    deleteGroup(groupId) {
       const board = JSON.parse(JSON.stringify(this.currBoard));
-      let groupIdx = board.groups.findIndex(group => group.id === groupId)
-      board.groups.splice(groupIdx,1)
-      this.$store.dispatch({type: 'updateBoard',board})
+      let groupIdx = board.groups.findIndex((group) => group.id === groupId);
+      board.groups.splice(groupIdx, 1);
+      this.$store.dispatch({ type: "updateBoard", board });
+    },
+    changeGroupName(group){
+      const updatedGroup = JSON.parse(JSON.stringify(this.column))
+      updatedGroup.title = this.$refs.groupName.innerText;
+      const board = JSON.parse(JSON.stringify(this.currBoard))
+      const groupIdx = board.groups.findIndex(g => g.id === updatedGroup.id)
+      board.groups[groupIdx] = updatedGroup
+      console.log(board);
+      this.$store.dispatch({ type: "updateBoard", board });
+      // console.log(newBoard);
+      // console.log(this.column);
+
     }
   },
 };

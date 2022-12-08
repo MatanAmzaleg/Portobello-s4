@@ -64,8 +64,9 @@
               </div>
             </template>
           </Popper>
-          <button class="nav-item">
-            <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''">Recent</span>
+          <Popper offsetSkid="110" class="popper-main">
+            <button class="nav-item">
+            <span :style="!getCalcColor?.isDark ? { color: 'black' } : ''">Recent</span>
             <svg
             :style="!calculatedColor?.isDark ? { color: 'black' } : ''"
               width="18"
@@ -81,6 +82,36 @@
               ></path>
             </svg>
           </button>
+            <template #content="{ close }">
+              <div class="popper-template">
+                <ul class="nav-item-content">
+                  <li v-for="board in getBoards">
+                    <div
+                      class="starred-board-container"
+                      @click="moveToBoard(board)"
+                    >
+                      <img
+                        v-if="board.style?.imgUrl"
+                        class="style-container"
+                        :src="board.style?.imgUrl"
+                        alt=""
+                      />
+                      <div
+                        v-if="board.style?.bgColor"
+                        class="style-container"
+                        :style="{ 'background-color': board.style?.bgColor }"
+                        alt=""
+                      ></div>
+                      <div class="board-name-container">
+                        <label class="title-1">{{ board.title }}</label>
+                        <label class="title-2">{{ board.title }} Board</label>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </template>
+          </Popper>
           <Popper offsetSkid="110" class="popper-main">
             <button class="nav-item">
               <span :style="!calculatedColor?.isDark ? { color: 'black' } : ''">Starred</span>

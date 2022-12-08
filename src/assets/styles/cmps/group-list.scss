@@ -26,8 +26,26 @@
     padding: 0px 16px 8px 16px;
 
     @include for-mobile-layout {
-      padding: 0px;
+      padding: 0px 3.5px;
     }
+  }
+
+  .text-lg{
+    justify-self: start;
+    color: #3e4e6b;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+      Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+      width: 84%;
+      padding-inline-start: 5px;
+
+      &:focus{
+        background-color: white;
+        outline: 2px solid $clr1;
+        border-radius: 3px;
+      }
   }
 
   .task-list {
@@ -212,7 +230,7 @@
       justify-content: space-between;
       cursor: pointer;
       line-height: 24px;
-      padding-inline: 16px 6px;
+      padding-inline: 12px 6px;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
 
@@ -222,6 +240,7 @@
         width: 15px;
         height: 13px;
         border-radius: 3px;
+        margin-top: 3px;
 
         &:hover {
           background-color: #dadbe2;
@@ -341,6 +360,10 @@
       background-color: rgba(202, 209, 220, 0.2);
     }
 
+    @include for-mobile-layout {
+      width: 96vw;
+    }
+
     .add-group-btn {
       display: flex;
       align-items: center;
@@ -353,6 +376,10 @@
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       font-weight: 400;
       color: white;
+
+      @include for-mobile-layout {
+        width: 98vw;
+      }
     }
 
     .add-task-icon2 {
