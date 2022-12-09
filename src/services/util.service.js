@@ -16,7 +16,7 @@ export const utilService = {
   getImgs,
   getCalculatedColor,
   lightOrDark,
-  filterBoard
+  filterBoard,
 };
 
 const STORAGE_KEY = "imgsDb";
@@ -55,12 +55,53 @@ async function fetchListOfPhotos(query = "", page = "1") {
   }
 }
 
-function filterBoard(board, filterBy){
+async function filterBoard(board, filterBy) {
+  try {
+    const { txt, noMembers, noDates, overdue, dueNextDay, noLabels } = filterBy;
+    const regex = new RegExp(txt, "i");
+    let filteredtasks = board.groups.map((group) =>
+      group.tasks.filter((task) => regex.test(task.title))
+    );
+    if (noMembers)
+      filteredtasks = filteredtasks.map((group) =>
+        group.filter((t) => !t.memberIds.length)
+      );
+    if (noDates)
+      filteredtasks = filteredtasks.map((group) =>
+        group.filter((t) => !t.dueDate)
+      );
+    else if (dueNextDay)
+      filteredtasks = filteredtasks.map((group) =>
+        group.filter(
+          (t) =>
+            new Date(t.dueDate).getTime() - Date.now() < 86349893 &&
+            new Date(t.dueDate).getTime() - Date.now() > 0
+        )
+      );
+    else if (overdue)
+      filteredtasks = filteredtasks.map((group) =>
+        group.filter(
+          (t) =>
+            new Date(t.dueDate).getTime() - Date.now() < 0 &&
+            t.status !== "completed"
+        )
+      );
+    if (noLabels)
+      filteredtasks = filteredtasks.map((group) =>
+        group.filter((t) => !t.labelIds.length)
+      );
+    console.log(filteredtasks);
 
-  console.log(board);
-  console.log(filterBy);
-
-
+    const filteredBoard = board;
+    let counter = 0;
+    filteredBoard.groups.forEach((group) => {
+      group.tasks = filteredtasks[counter];
+      counter++;
+    });
+    return filteredBoard;
+  } catch (err) {
+    console.log("couldn`t filter propperly", err);
+  }
 }
 
 function getImgs(query) {
@@ -109,7 +150,7 @@ async function getCalculatedColor(url) {
     return fac.getColorAsync(url).then((color) => {
       calculateColor.calcColor = color.rgba;
       calculateColor.isDark = color.isDark;
-      return calculateColor
+      return calculateColor;
       // eventBus.emit("headerColor", calculateColor);
     });
   } catch (err) {

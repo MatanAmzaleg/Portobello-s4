@@ -140,17 +140,7 @@ export const boardStore = {
       try {
         const board = await boardService.getById(boardId);
         if (filterBy) {
-          console.log(filterBy);
-          const filteredBoard = utilService.filterBoard(board, filterBy);
-          return;
-          const { txt } = filterBy;
-          const regex = new RegExp(txt, "i");
-          const filteredGroups = board.groups.filter((group) =>
-            regex.test(group.title)
-          );
-          console.log(filteredGroups);
-          // const filteredBoard = { ...board, groups: filteredGroups };
-          console.log(filteredBoard);
+          const filteredBoard = await utilService.filterBoard(board, filterBy);
           commit({ type: "setCurrBoard", filteredBoard });
         } else commit({ type: "setCurrBoard", board });
         return board;

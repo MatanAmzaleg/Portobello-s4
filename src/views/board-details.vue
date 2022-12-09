@@ -20,6 +20,7 @@
       "
     >
       <board-header
+      @closeBoardMenu="closeBoardMenu"
         @openBoardMenu="openBoardMenu"
         @updateBoard="updateBoard"
         @setFilter="setFilter"

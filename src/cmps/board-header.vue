@@ -94,8 +94,9 @@
                 <label class="member-label" for="">
                   <input
                     type="checkbox"
-                    :checked="filterBy['no-members']"
-                    @change="setFilter"
+                    :checked="filterBy.noMembers"
+                    v-model="filterBy.noMembers"
+                    @input="setFilter"
                   />
                   <span class="grey-icon icon-actions member-icon"></span>
                   <p>No members</p>
@@ -116,8 +117,9 @@
                 <label class="member-label" for="">
                   <input
                     type="checkbox"
+                    :checked="filterBy.noDates"
+                    v-model="filterBy.noDates"
                     @change="setFilter"
-                    :checked="filterBy['no-dates']"
                   />
                   <div class="calender-div">
                     <font-awesome-icon
@@ -130,8 +132,9 @@
                 <label class="member-label" for="">
                   <input
                     type="checkbox"
-                    @change="setFilter"
                     :checked="filterBy.overdue"
+                    v-model="filterBy.overdue"
+                    @change="setFilter"
                   />
                   <div class="red-div">
                     <font-awesome-icon
@@ -144,8 +147,9 @@
                 <label class="member-label" for="">
                   <input
                     type="checkbox"
+                    :checked="filterBy.dueNextDay"
+                    v-model="filterBy.dueNextDay"
                     @change="setFilter"
-                    :checked="filterBy['due-next-day']"
                   />
                   <div class="yellow-div">
                     <font-awesome-icon
@@ -162,8 +166,9 @@
                 <label class="member-label" for="">
                   <input
                     type="checkbox"
+                    :checked="filterBy.noLabels"
+                    v-model="filterBy.noLabels"
                     @change="setFilter"
-                    :checked="filterBy['no-labels']"
                   />
                   <span class="label-icon icon-actions grey-icon"></span>
                   <p>No labels</p>
@@ -230,11 +235,11 @@ export default {
       currBoard: null,
       filterBy: {
         txt: "",
-        "no-members": false,
-        "no-dates": false,
+        noMembers: false,
+        noDates: false,
         overdue: false,
-        "due-next-day": false,
-        "no-labels": false,
+        dueNextDay: false,
+        noLabels: false,
       },
       isModalOpen: false,
       boardName: "",
@@ -275,6 +280,7 @@ export default {
       this.$store.dispatch({ type: "updateBoard", board });
     },
     goToDshboard() {
+      this.$emit("closeBoardMenu")
       this.isModalOpen = false;
       this.$router.push(`/board/${this.board._id}/dashboard-route`);
     },
