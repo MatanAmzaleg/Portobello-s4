@@ -32,6 +32,7 @@
         will-change: top, left;
         top: 48px;
         left: 549px;
+        z-index: 60;
 
         &:hover {
             background-color: var(--ds-surface-overlay, #ffffff);

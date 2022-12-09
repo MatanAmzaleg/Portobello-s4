@@ -24,6 +24,7 @@
   .group-container {
     display: flex;
     padding: 0px 16px 8px 16px;
+
     @include for-mobile-layout {
       padding: 0px 3.5px;
     }
@@ -90,13 +91,34 @@
     }
 
     .task-preview {
+      position: relative;
+      .edit-icon:before {
+        display: none;
+      }
+
+      &:hover{
+        background-color: rgb(241, 247, 248);
+        box-shadow: #fff,0 15px 0 #091e4240;
+        .edit-icon:before {
+          content: "\e928";
+          display: block;
+          position: absolute;
+          top: 4px;
+          font-family: trellicons;
+          right: 6px;
+          &:hover{
+            background-color: #ebecf0;
+            opacity: 1;
+          }
+      }
+      }
       .task-preview-info {
         margin-top: 10px;
         height: 32px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        
+
         .task-preview-content {
           gap: 7px;
           float: left;
@@ -106,7 +128,8 @@
           * {
             display: flex;
             align-self: center;
-            // justify-self: center;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+              Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
           }
         }
 
@@ -254,7 +277,7 @@
     background-color: $clr19;
     border-radius: 3px;
     margin-inline-end: 8px;
-    
+
     .group-title {
       height: 40px;
       display: flex;

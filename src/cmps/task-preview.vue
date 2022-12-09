@@ -1,5 +1,5 @@
 <template>
-  <section class="task-preview">
+  <section v-if="!isQuickEdit" class="task-preview">
     <div
       class="cover"
       v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'"
@@ -70,9 +70,12 @@
         <mini-users-designed :memberIds="item.memberIds"></mini-users-designed>
       </div>
     </div>
+    <span class="edit-icon" @click.stop="isQuickEdit = true"></span>
   </section>
+    <taskQuickEdit v-else :item="item" />
 </template>
 <script>
+import taskQuickEdit from "./task-quick-edit.vue";
 import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import TaskDatePreview from "./task-date-preview.vue";
@@ -84,6 +87,7 @@ export default {
     return {
       isDone: null,
       isLabelsExtended: false,
+      isQuickEdit:null,
     };
   },
   methods: {
@@ -146,6 +150,7 @@ export default {
     miniUsers,
     TaskDatePreview,
     miniUsersDesigned,
+    taskQuickEdit
   },
 };
 </script>

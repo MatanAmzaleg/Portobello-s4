@@ -8,8 +8,8 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <input v-model="task.title" @input="updateTask" type="text" />
-          <p>in list {{ getTaskGroup }}</p>
+          <input v-model="task.title" @input="updateTask" class="task-title-input" type="text" />
+          <p>in list <span>{{ getTaskGroup }}</span></p>
         </div>
       </div>
       <section class="task-content">
@@ -300,7 +300,7 @@ export default {
           })
         )
         board.groups[groupIdx].tasks[taskIdx] = this.task
-        console.log(board.groups[groupIdx].tasks[taskIdx]);
+        if(this?.task?.lastActivity) board.activities.unshift(this.task.lastActivity)
         await this.$store.dispatch({ type: "updateBoard", board })
       } catch (err) {
         console.log("cant Update task", err)
@@ -311,15 +311,18 @@ export default {
     },
     addLabel(labels) {
       this.task.labels = labels
+      this.task.lastActivity = {msg:`Edited ${this.task.title} labels`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     archiveTask() {
       this.task.archivedAt = Date.now()
+      this.task.lastActivity = {msg:`Archived ${this.task.title} `,byMember:this.$store.getters.loggedinUser,date:Date.now()}      
       this.updateTask()
     },
     restoreTask() {
       delete this.task.archivedAt
-      this.updateTask()
+      this.task.lastActivity = {msg:`Sent ${this.task.title} back to board`,byMember:this.$store.getters.loggedinUser,date:Date.now()}     
+       this.updateTask()
     },
     async deleteTask() {
       try {
@@ -333,6 +336,7 @@ export default {
     addAttachment(attachment) {
       if (!this.task.attachments) this.task.attachments = []
       this.task.attachments.push(attachment)
+      this.task.lastActivity = {msg:`Added attachment to ${this.task.title} `,byMember:this.$store.getters.loggedinUser,date:Date.now()}      
       this.updateTask()
     },
     addMember(members) {
@@ -347,8 +351,7 @@ export default {
     saveTaskCover(color, mode = "") {
       if (color.charAt(0) === '#') this.task.style = { bgColor: color , mode}
       else this.task.style = { imgUrl: color , mode}
-      // console.log(color);
-      // this.task.style = { bgColor: color }
+      this.task.lastActivity = {msg:`Added cover to ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     updateTaskStatus(status) {
@@ -357,14 +360,17 @@ export default {
     },
     saveTaskMembers(members) {
       this.task.memberIds = members
+      this.task.lastActivity = {msg:`Edited ${this.task.title} Members`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     saveTaskDate(date) {
       this.task.dueDate = date
+      this.task.lastActivity = {msg:`Added Due Date to ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask();
     },
     removeTaskDate(date) {
       this.task.dueDate = ''
+      this.task.lastActivity = {msg:`Removed Due Date to ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask();
     },
     addChecklist(checklistsTitle) {
@@ -374,16 +380,19 @@ export default {
         todos: []
       }
       this.task.checklists.push(checklist)
+      this.task.lastActivity = {msg:`Added Checklist to ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     deleteChecklist(checklistsId) {
       const idx = this.task.checklists.findIndex(checklist => checklist.id === checklistsId)
       this.task.checklists.splice(idx, 1)
+      this.task.lastActivity = {msg:`Removed checklist from ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     deleteChecklistTodo(checklistsId, todoId) {
       const idx = this.task.checklists.find(checklist => checklist.id === checklistsId).todos.findIndex(todo => todo.id === todoId)
       this.task.checklists.find(checklist => checklist.id === checklistsId).todos.splice(idx, 1)
+      this.task.lastActivity = {msg:`Deleted todo from ${this.task.title} `,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     addChecklistTodo() {
@@ -398,6 +407,7 @@ export default {
       setTimeout(() => {
         this.$refs.todoTxtarea[0].focus()
       }, 50)
+      this.task.lastActivity = {msg:`Added todo to ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.currChecklist.task = ""
       this.updateTask()
     },
@@ -450,6 +460,7 @@ export default {
     updateCurrTodoTitle(checklistId, todoId) {
       this.task.checklists.find(checklist => checklist.id === checklistId).todos.find(todo => todo.id === todoId).title = this.currChecklist.todo.title
       this.currChecklist.todo.isEditTodo = false
+      this.task.lastActivity = {msg:`Edited todo on ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     onTodoIsDoneChanged(checklistId, todoId, ev) {
@@ -476,12 +487,15 @@ export default {
     removeAttachment(attachId){
       const attachIdx =  this.task.attachments.findIndex(attach => attach.id === attachId)
       this.task.attachments.splice(attachIdx,1)
+      this.task.lastActivity = {msg:`Removed attachment from ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
+
       this.updateTask()
     },
     updateAttachment(attachment){
       console.log(attachment);
       const attachIdx =  this.task.attachments.findIndex(attach => attach.id === attachment.id)
       this.task.attachments.splice(attachIdx,1,attachment)
+      this.task.lastActivity = {msg:`Edited attachment on ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     toggleWatch(){
@@ -490,11 +504,9 @@ export default {
     },
     descriptionEditMode() {
       this.isEdit = true
-      console.log('entered refs')
       this.updateInputFocus
     },
     updateInputFocus() {
-      console.log('entered refs 2')
       setTimeout(() => {
         this.$refs.focusInput.focus();
       }, 50);
@@ -509,6 +521,7 @@ export default {
         createdAt: Date.now(),
         byMember : this.$store.getters.loggedinUser
       }
+      this.task.lastActivity = {msg:`Added comment to ${this.task.title}`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.task.comments.push(msg)
       this.updateTask()
     }

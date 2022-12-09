@@ -236,6 +236,10 @@
   }
 }
 
+.user-popper {
+  height: 32px;
+}
+
 // button 
 
 .el-button {
@@ -253,4 +257,12 @@
       padding: 0 24px !important;
     }
   }
+}
+
+.user-img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin-inline-end: 4px;
+  object-fit: cover;
 }
