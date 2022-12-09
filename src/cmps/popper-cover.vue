@@ -1,8 +1,9 @@
 <template>
   <div v-if="!isSearchMode" class="cover-reg-mode">
     <div class="popper-content cover-picker">
-      <popperModal :title="titleMode" @closeModal="closeModal"></popperModal>
+      <popperModal :title="titleMode" @closeModal="closeModal" ></popperModal>
       <div class="cover-section">
+      <p class="mini-title1">Size</p>
         <div class="half-cover-container">
           <div @click="updateCoverMode('half')" class="cover-option"
             :class="currStyle?.mode === 'half' ? 'selected-cover' : ''">
@@ -47,6 +48,9 @@
             </div>
           </div>
         </div>
+        <button @click="removeCover" class="search-btn">
+          Remove cover
+        </button>
         <p class="mini-title1">Colors</p>
         <div class="colors">
           <span v-for="cover in covers" @click="setCover(cover.color)" class="cover-color"
@@ -54,7 +58,7 @@
             :style="{ 'background-color': cover.color }"></span>
         </div>
         <p class="mini-title1">Attachments</p>
-        <button class="upload-btn">Upload a cover image</button>
+        <label class="upload-btn"><input type="file" @change="uploadAttachment" hidden>Upload a cover image</label>
         <p class="mini-title1">Photos from unsplash</p>
         <div class="background-imgs">
           <span v-for="img in imgs" @click="setCover(img)" class="unsplash-img" :style="{
@@ -110,10 +114,12 @@
 <script>
 import popperModal from "./popper-modal.vue";
 import { utilService } from "../services/util.service";
+import { uploadService } from "../services/upload.service";
 export default {
   props: {
     style: Object
   },
+  emits: ["setCover","closeModal"],
   data() {
     return {
       currBoard: null,
@@ -176,6 +182,19 @@ export default {
     },
     closeModal() {
       this.$emit("closeModal");
+    },
+    removeCover(){
+      this.$emit("setCover", '');
+    },
+    async uploadAttachment(ev) {
+      this.$notify({type:'success',title:'Uploading files'})
+      try {
+        const { secure_url } = await uploadService.uploadImg(ev)
+        this.setCover(secure_url)
+      }
+      catch (err) {
+        console.log(err)
+      }
     },
   },
   computed: {

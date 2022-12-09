@@ -63,7 +63,6 @@ function getTaskById(board, taskId) {
       }
     })
   });
-  console.log('service task', task)
   return task
 }
 function removeTask(board, taskId) {

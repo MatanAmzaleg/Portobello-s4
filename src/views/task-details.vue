@@ -1,12 +1,12 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div v-if="task" class="task-edit-container" @click.stop>
-      <div v-if="task.style && Object.keys(task.style).length !== 0" class="task-cover" :style="
+      <div v-if="isCover" class="task-cover" :style="
         task.style?.bgColor
           ? { 'background-color': task.style.bgColor }
           : { 'background-image': 'url( ' + task.style.imgUrl + ')' }
       ">
-        <Popper placement="top" @open:popper="addFocus">
+        <Popper offsetDistance="-2" offsetSkid="62" placement="top" >
           <div class="task-cover-add-cover">
             <span class="add-cover-icon"></span>
             <p>Cover</p>
@@ -75,7 +75,7 @@
                   <p>
                     Created at {{ getCreatedTime(attachment.createdAy) }}
                     <Popper class="popper-btn delete-popper" offsetSkid="116">
-                      <button>Remove</button>
+                      <button class="attachment-btn">Delete</button>
                       <template #content="{ close }">
                         <div class="popper-content popper-template">
                           <popperModal :title="'Delete Checklist?'" @closeModal="close" />
@@ -92,7 +92,7 @@
                       </template>
                     </Popper>
                     <Popper>
-                      <button>Edit</button>
+                      <button class="attachment-btn">Edit</button>
                       <template #content="{ close }">
                         <div class="popper-content popper-template label-picker">
                           <popperModal :title="'Edit Attachment'" @closeModal="close" />
@@ -221,7 +221,7 @@
                   showComments ? "Hide Details" : "Show details"
               }}</el-button>
             </div>
-            <font-awesome-icon icon="fa-regular fa-user" />
+            <img :src="this.$store.getters.loggedinUser?.imgUrl" class="member-img" />
             <div>
               <input @click="toggleComment" v-model="userInput" placeholder="Write a comment..." spellcheck="false"
                 class="activity-comment" :class="isComment ? 'open' : ''" />
@@ -247,7 +247,7 @@
             <checkList @addchecklist="addChecklist" />
             <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
             <addAttachment @addAttachment="addAttachment" />
-            <coverPicker :style="getTaskStyle" @setCover="saveTaskCover" />
+            <coverPicker v-if="!task.style?.mode" :style="getTaskStyle" @setCover="saveTaskCover" />
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
             <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched ? 'watched' : ''">
               <span class="watch-icon icon-actions"></span>
@@ -261,11 +261,7 @@
       </section>
 
       <span @click="exitTask" class="task-exit-btn">
-        <svg class="margin" width="18" height="18" viewBox="0 0 20 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M5.58579 7L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683418 0.292893 0.292893C0.683418 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L7 5.58579L12.2929 0.292893C12.6834 -0.0976311 13.3166 -0.0976311 13.7071 0.292893C14.0976 0.683418 14.0976 1.31658 13.7071 1.70711L8.41421 7L13.7071 12.2929C14.0976 12.6834 14.0976 13.3166 13.7071 13.7071C13.3166 14.0976 12.6834 14.0976 12.2929 13.7071L7 8.41421L1.70711 13.7071C1.31658 14.0976 0.683418 14.0976 0.292893 13.7071C-0.0976311 13.3166 -0.0976311 12.6834 0.292893 12.2929L5.58579 7Z"
-            fill="grey"></path>
-        </svg>
+      <span class="task-exit-icon"></span>
       </span>
     </div>
   </div>
@@ -585,6 +581,7 @@ export default {
       const doneTasks = this.task.checklists
         .find((checklist) => checklist.id === checklistId)
         .todos.filter((todo) => todo.isDone).length;
+      if(!Math.round((doneTasks / allTasks) * 100)) return 0
       return Math.round((doneTasks / allTasks) * 100);
     },
     getCommentTime(ts) {
@@ -676,6 +673,9 @@ export default {
       });
       return group?.title;
     },
+    isCover(){
+      return this.task.style && Object.keys(this.task.style).length !== 0
+    }
   },
   components: {
     labelPicker,

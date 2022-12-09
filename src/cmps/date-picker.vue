@@ -27,11 +27,12 @@ import popperModal from "./popper-modal.vue";
 
 export default {
   props: {
-    taskDate: String
+    taskDate: Number
   },
   methods: {
     saveDate(date) {
-      this.$emit('save-date', date)
+      const newDate =  new Date(date) 
+      this.$emit('save-date', newDate.getTime())
     },
     removeDate() {
       this.$emit('remove-date')
@@ -46,7 +47,6 @@ export default {
 <style lang="scss">
 .date-picker {
   background-color: white;
-
   .el-button+.el-button {
     margin-left: 0px;
     margin-top: 5px;

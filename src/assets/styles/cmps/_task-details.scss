@@ -48,7 +48,14 @@
     gap: 15px;
     font-family: trellicons;
     color: $clr21;
-
+    .attachment-btn{
+      font-size: 14px;
+      color: #5e6c84;
+      text-decoration: underline;
+      &:hover{
+        color: black;
+      }
+    }
     .attachment-info p {
       display: flex;
       gap: 5px;
@@ -520,15 +527,26 @@
       &-add-cover {
         background-color: rgb(255 255 255 / 20%);
         border-radius: 3px;
-        padding: 6px 12px 6px 6px;
-    
         position: absolute;
         bottom: 0;
         right: 10px;
-        display: flex;
+          display: flex;
         align-items: center;
+        justify-content: center;
+        gap: 4px;
+        cursor: pointer;
+        height: 32px;
+        width: 80px;
+        margin-bottom: 8px;
+      }
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+      .add-cover-icon{
+        padding-top: 3.4px;
       }
       .add-cover-icon:before {
+        font-size: 16px;
         font-family: trellicons;
           content: "\e914";
       }
@@ -578,7 +596,6 @@
 
       .content {
         flex: 1;
-
         .task-section {
           .task-info-wrapper {
             display: flex;
@@ -684,11 +701,16 @@
       width: 32px;
       z-index: 2;
       display: grid;
-      place-content: center;
+      place-items: center;
       cursor: pointer;
-
+      background-color: rgba(255, 255, 255, 0.2);
+      .task-exit-icon:before {
+        font-size: 20px;
+        font-family: trellicons;
+        content: "\e91c";
+      }
       &:hover {
-        background-color: rgba(172, 171, 171, 0.2);
+        background-color: rgba(255, 255, 255, 0.3);
       }
 
       .margin {

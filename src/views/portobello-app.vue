@@ -131,7 +131,6 @@
 <script>
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service";
 import { boardService } from "../services/board.service.js";
-// import { getActionRemoveBoard, getActionUpdateBoard, getActionAddBoardMsg } from '../store/board.store'
 import boardDetails from "./board-details.vue";
 import createBoardPopperTemplateVue from "../cmps/create-board-popper-template.vue";
 
@@ -153,7 +152,6 @@ export default {
       return "Your Boards".toUpperCase();
     },
     starredBoards(){
-      console.log(this.boards);
       return this.boards.filter(board=> board.isStarred)
     }
   },
@@ -162,7 +160,6 @@ export default {
       this.$store.dispatch({ type: "loadBoards" });
       const { boardId } = this.$route.params;
       if (boardId) {
-        console.log("ok");
         const board = await this.$store.dispatch({
           type: "setCurrBoard",
           boardId,
@@ -201,7 +198,8 @@ export default {
         showSuccessMsg("Board removed");
       } catch (err) {
         console.log(err);
-        showErrorMsg("Cannot remove board");
+        this.$notify({type:'error',title:'Could not remove board'})
+
       }
     },
     async updateBoard(board) {
@@ -219,19 +217,6 @@ export default {
         });
       }
     },
-    // async addBoardMsg(boardId) {
-    //   try {
-    //     await this.$store.dispatch({type:"addBoard",boardId})
-    //     showSuccessMsg('Board msg added')
-    //   } catch(err) {
-    //     console.log(err)
-    //     showErrorMsg('Cannot add board msg')
-    //   }
-    // },
-
-    printBoardToConsole(board) {
-      console.log("Board msgs:", board.msgs);
-    },
     moveToBoard(board) {
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`);
@@ -247,7 +232,6 @@ export default {
       this.$store.dispatch({ type: "updateBoard", board: boardToUpdate });
     },
   },
-
   components: {
     boardDetails,
     createBoardPopperTemplateVue,

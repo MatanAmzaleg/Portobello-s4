@@ -64,7 +64,8 @@ export default {
         showSuccessMsg('Review added')
         this.reviewToEdit = {txt: '', aboutUserId: null}
       } catch(err) {
-        showErrorMsg('Cannot add review')
+        this.$notify({type:'error',title:'Cant add review'})
+
       }
     }
   }

@@ -226,6 +226,7 @@ import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import popperAddMember from "./popper-add-member.vue";
 import memberPicker from "./member-picker.vue";
+import popperModal from "./popper-modal.vue";
 export default {
   props: {
     board: Object,
@@ -248,9 +249,6 @@ export default {
   },
   created() {
     eventBus.on("headerColor", this.updateHeaderColor);
-  },
-  mounted() {
-    console.log(this.members);
   },
   methods: {
     setFilter() {
@@ -276,7 +274,6 @@ export default {
       this.calculatedColor = calcColor;
       const board = JSON.parse(JSON.stringify(this.getCurrBoard));
       board.style.calcColor = calcColor;
-      console.log("boarddddddddddd", board);
       this.$store.dispatch({ type: "updateBoard", board });
     },
     goToDshboard() {
@@ -301,6 +298,7 @@ export default {
     memberPicker,
     miniUsersDesigned,
     popperAddMember,
+    popperModal
   },
 };
 </script>

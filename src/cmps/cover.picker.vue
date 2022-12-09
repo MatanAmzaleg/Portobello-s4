@@ -5,7 +5,7 @@
       <p>Cover</p>
     </div>
     <template #content="{ close }" class="cover-container">
-      <popperCover @closeModal="close" @setCover="setCover" @updateCover="updateCoverMode"  :style="style" />
+      <popperCover @closeModal="close" @setCover="setCover" :style="style" />
     </template>
   </Popper>
 </template>

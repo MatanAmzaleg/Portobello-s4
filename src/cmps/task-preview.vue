@@ -58,6 +58,11 @@
             :taskId="item.id"
           />
           <span v-if="item.description?.length" class="description-icon"></span>
+          <div class="task-preview-checklist" >
+            <span v-if="item.comments?.length" class="comments-icon">
+            </span>
+              <span class="comments-span">{{item.comments.length}}</span>
+          </div>
           <span v-if="item.attachments" class="attachment-icon">{{
             item.attachments.length
           }}</span>

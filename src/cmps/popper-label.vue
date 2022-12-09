@@ -63,7 +63,6 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.getCurrBoard))
     this.filteredLabels = this.currBoard.labels
-    console.log('first')
     eventBus.on('update-focus', this.updateInputFocus)
   },
   methods: {
@@ -82,18 +81,13 @@ export default {
     },
     goEditMode(label) {
       this.chosenLabel = label;
-      console.log(this.chosenLabel);
       this.isEditMode = true;
-      console.log();
     },
     goCreateMode() {
       this.chosenLabel = this.chosenLabel = { color: "#DFE1E6", title: "" };
-      console.log(this.chosenLabel);
       this.isEditMode = true;
-      console.log();
     },
     setLabelColor(color) {
-      console.log(color);
       this.chosenLabel.color = color
     },
     onRemoveColor() {
@@ -132,10 +126,8 @@ export default {
       }
     },
     filterLabels() {
-      console.log(this.filterBy.txt);
       const regex = new RegExp(this.filterBy.txt, "i")
       this.filteredLabels = this.currBoard.labels.filter(l => regex.test(l.title))
-      console.log(this.filteredLabels);
     },
     closeModal() {
       this.$emit("closeModal");
