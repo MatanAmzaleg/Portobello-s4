@@ -6,7 +6,8 @@
           <h1>Portobello brings all your tasks, teammates, and tools together</h1>
           <h3>Keep everything in the same place — even if your team isn’t.</h3>
           <div class="home-page-sign">
-            <router-link to="/board" class="btn-sign"><button>Start demo</button></router-link>
+            <button class="btn-sign" @click="doLogin">Start demo</button>
+            <!-- <router-link to="/board" class="btn-sign"><button click="doLogin">Start demo</button></router-link> -->
           </div>
         </div>
       </div>
@@ -46,6 +47,7 @@ export default {
   name: "home-page",
   data() {
     return {
+      loginCred: { username: 'Guest', password: '123456' },
       guide: {
         imgs: [
           "https://res.cloudinary.com/ca-cloud/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1669886243/Trello/guide-01_reaa50.jpg",
@@ -77,6 +79,14 @@ export default {
     }
   },
   methods: {
+    async doLogin() {
+      try {
+        await this.$store.dispatch({ type: "login", userCred: this.loginCred })
+        this.$router.push('/board')
+      } catch (err) {
+        console.log(err)
+      }
+    },
     setSelectedGuide(guide) {
       this.guide.selectedGuide = guide
       switch (guide) {
