@@ -20,7 +20,7 @@
           <h4>More</h4>
         </div>
       </div>
-      <hr />
+      <hr class="hr-between-sections"/>
       <div class="activity-section">
         <div class="menu-opt">
           <span class="activity-icon"></span>
