@@ -75,6 +75,7 @@ export const boardStore = {
         (newBoard.style = {
           bgColor: board.style.bgColor,
           imgUrl: board.style.imgUrl,
+          calcColor: board.style.calcColor
         }),
           (board = await boardService.save(newBoard));
         context.commit({ type: "addBoard", board });

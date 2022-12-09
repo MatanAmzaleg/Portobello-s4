@@ -177,9 +177,6 @@ export default {
       calculatedColor: null,
     };
   },
-  // created() {
-  //   eventBus.on("headerColor", this.updateHeaderColor);
-  // },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;
@@ -194,6 +191,9 @@ export default {
       return this.$store.getters.currBoard;
     },
     getCalcColor() {
+    if(this.$route.path === '/board'){
+      return {color: 'black',isDark:true}
+    }
       return this.$store.getters.currBoard?.style?.calcColor;
     },
   },

@@ -299,6 +299,10 @@ export default {
           title: this.boardTitle,
           style: this.selectedBackground,
         };
+        const styleToSend = (this.selectedBackground.bgColor !== '') ? this.selectedBackground.bgColor : this.selectedBackground.imgUrl  
+        console.log(styleToSend);
+        board.style.calcColor = await utilService.getCalculatedColor(styleToSend);
+        console.log(board.style);
         const newBoard = await this.$store.dispatch({
           type: "createNewBoard",
           board,
@@ -307,11 +311,9 @@ export default {
           type: 'success',
           title: "Board added!",
         });
-        this.$router.push(`/board/${newBoard._id}`);
         this.boardToAdd = boardService.getEmptyBoard();
         this.closeModal();
-        if (this.selectedBackground.imgUrl !== "")
-          utilService.getCalculatedColor(this.boardToAdd.style.imgUrl);
+        this.$router.push(`/board/${newBoard._id}`);
       } catch (err) {
         console.log(err);
         this.$notify({
