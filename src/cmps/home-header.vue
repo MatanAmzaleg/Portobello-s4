@@ -33,7 +33,7 @@
                     </router-link>
                     <section class="user">
                         <router-link to="/board" class="btn-start">
-                            <button class="btn-start">
+                            <button class="btn-start" @click="doLogin">
                                 Get Portobello for free
                             </button>
                         </router-link>
@@ -47,10 +47,21 @@
 import notifications from './notifications.vue';
 import hamburger from './hamburger.vue';
 export default {
-    data(){
-        return{
-            isHamburgerMode:false
+    data() {
+        return {
+            isHamburgerMode: false,
+            loginCred: { username: 'Guest', password: '123456' },
         }
+    },
+    methods: {
+        async doLogin() {
+            try {
+                await this.$store.dispatch({ type: "login", userCred: this.loginCred })
+                this.$router.push('/board')
+            } catch (err) {
+                console.log(err)
+            }
+        },
     },
     computed: {
         loggedInUser() {

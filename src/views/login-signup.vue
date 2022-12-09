@@ -116,7 +116,7 @@ export default {
           try {
             this.showPasswordInput = true
             await this.$store.dispatch({ type: "login", userCred: this.loginCred })
-            this.$router.push('/')
+            this.$router.push('/board')
           } catch (err) {
             console.log(err)
             this.msg = 'Failed to login'
