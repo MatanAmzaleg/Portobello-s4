@@ -63,6 +63,7 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.getCurrBoard))
     this.filteredLabels = this.currBoard.labels
+    console.log('first')
     eventBus.on('update-focus', this.updateInputFocus)
   },
   methods: {

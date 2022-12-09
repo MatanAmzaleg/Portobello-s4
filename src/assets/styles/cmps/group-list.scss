@@ -91,6 +91,27 @@
     }
 
     .task-preview {
+      position: relative;
+      .edit-icon:before {
+        display: none;
+      }
+
+      &:hover{
+        background-color: rgb(241, 247, 248);
+        box-shadow: #fff,0 15px 0 #091e4240;
+        .edit-icon:before {
+          content: "\e928";
+          display: block;
+          position: absolute;
+          top: 4px;
+          font-family: trellicons;
+          right: 6px;
+          &:hover{
+            background-color: #ebecf0;
+            opacity: 1;
+          }
+      }
+      }
       .task-preview-info {
         margin-top: 10px;
         height: 32px;
@@ -321,7 +342,7 @@
     justify-content: space-between;
 
     .add-task-btn {
-      width: 80%;
+      width: 94%;
       text-align: left;
       height: 28px;
       font-size: 14px;

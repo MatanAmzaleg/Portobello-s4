@@ -8,8 +8,8 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <input v-model="task.title" @input="updateTask" type="text" />
-          <p>in list {{ getTaskGroup }}</p>
+          <input v-model="task.title" @input="updateTask" class="task-title-input" type="text" />
+          <p>in list <span>{{ getTaskGroup }}</span></p>
         </div>
       </div>
       <section class="task-content">
@@ -311,7 +311,7 @@ export default {
     },
     addLabel(labels) {
       this.task.labels = labels
-      this.task.lastActivity = {msg:`Edited ${this.task.title} labels`,byMember:this.$store.getters.loggedinUser}
+      this.task.lastActivity = {msg:`Edited ${this.task.title} labels`,byMember:this.$store.getters.loggedinUser,date:Date.now()}
       this.updateTask()
     },
     archiveTask() {

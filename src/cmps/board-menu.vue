@@ -26,15 +26,17 @@
           <span class="activity-icon"></span>
           <h4>Activity</h4>
         </div>
+        <div class="board-activities">
         <div v-if="currBoard?.activities" v-for="activity in currBoard.activities" class="board-activity">
             <img :src="activity?.byMember?.imgUrl" class="member-img">
             <div class="activity-info">
               <div class="member-info">
-                <p class="member-fullname">{{ activity?.byMember?.fullname}} {{activity?.msg }}</p>
+                <p class="member-fullname"><span>{{ activity?.byMember?.fullname}}</span> {{activity?.msg }}</p>
               </div>
-              <!-- <a>{{ getActivityTime(activity.createdAt) }}</a> -->
+              <a>{{ getActivityTime(activity?.date) }}</a>
             </div>
           </div>
+        </div>
       </div>
     </section>
     <section class="other-sections">
@@ -91,6 +93,8 @@
 </template>
 
 <script>
+import dateFormat, { masks } from "dateformat";
+
 import { utilService } from "../services/util.service";
 export default {
   name: "board-menu",
@@ -134,6 +138,10 @@ export default {
       this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 14);
       console.log(this.searchedImgs);
     },
+    getActivityTime(ts) {
+      if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(new Date(ts), "'Before' H 'hours'");
+      return dateFormat(new Date(ts), "mmm dd 'at' HH:MM");
+    }
   },
   computed: {
     imgs() {

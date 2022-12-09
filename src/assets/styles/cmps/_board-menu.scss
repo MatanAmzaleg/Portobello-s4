@@ -8,10 +8,33 @@ overflow-x: hidden;
   overflow: hidden;
   z-index: 10;
   
-  .board-activity{
-    display: grid;
-    grid-template-columns: 50px 1fr;
-    grid-template-rows: 1fr;
+  .board-activities{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    .board-activity{
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 7px;
+      grid-template-rows: 1fr;
+      .activity-info{
+        display: flex;
+        flex-direction: column;
+      }
+      a{
+        color: #5e6c84;
+        font-size: 12px;
+      }
+      .member-fullname{
+        font-family: -apple-system,BlinkMacSystemFont;
+        font-size: 14px;
+        color: hsl(220,4.3%,8.5%);
+        span{
+          font-weight: bold;
+        }
+      }
+    }
   }
 
   transition: 0.5s;
