@@ -15,7 +15,7 @@
         &:hover{
           filter: contrast(60%);
         }
-        &:active {
+        &.selected-cover {
           box-shadow: 0 0 0 2px var(--ds-border-inverse, #FFFFFF), 0 0 0 4px var(--ds-border-brand, #0079BF);
           border-radius: 3px;
         }
