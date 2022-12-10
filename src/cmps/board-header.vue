@@ -185,18 +185,17 @@
         :memberIds="getBoardMembers"
       ></mini-users-designed>
       <Popper>
-        <el-button
+        <button
+        class="share-button"
           :style="
             !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
           "
-          >Share</el-button
+          >Share</button
         >
         <template #content="{ close }">
           <popperAddMember @closeModal="close" />
         </template>
       </Popper>
-      |
-
       <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
         <font-awesome-icon
           :style="

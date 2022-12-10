@@ -5,6 +5,8 @@
       group-name="cols"
       tag="div"
       orientation="horizontal"
+      drag-class="card-ghost"
+      drop-class="card-ghost-drop"
       @drop="onColumnDrop($event)"
     >
       <Draggable v-for="column in scene.groups" :key="column.id">

@@ -2,10 +2,10 @@
   <section class="left-slider">
     <div class="header flex">
       <div class="trello-icon flex">
-        <h1>T</h1>
+        <h1>P</h1>
       </div>
       <div class="titles flex">
-        <h3>Trello Workspace</h3>
+        <h3>Portobello Workspace</h3>
         <p>Free</p>
       </div>
       <button class="left-arrow" @click="$emit('closeSliderMenu')">
@@ -32,9 +32,9 @@
     <div class="your-boards-section">
       <div class="mini-header flex">
         <p>Your boards</p>
-        <button class="plus">
-          <font-awesome-icon class="icon-plus-bigger" icon="fa-solid fa-plus" />
-        </button>
+                <button class="plus">
+                 <font-awesome-icon class="icon-plus-bigger" icon="fa-solid fa-plus" />
+            </button>    
       </div>
       <ul class="nav-item-content">
         <li v-for="board in boards" :style="getCurrBoard?._id === board._id ? {'background-color' : 'rgba(208, 208, 208, 0.395)'} :  {'background-color' : 'inherit'}">
@@ -63,13 +63,15 @@
 </template>
 
 <script>
+import createBoardPopperTemplate from './create-board-popper-template.vue';
 export default {
     data(){
         return{
             boards:null
         }
     },
-    created(){
+    async created(){
+        await this.$store.dispatch({type:'loadBoards'})
         this.boards = this.getBoards 
     },
     methods: {
@@ -90,5 +92,8 @@ export default {
         return this.$store.getters.currBoard;
     }
   },
+  components:{
+    createBoardPopperTemplate
+  }
 };
 </script>
