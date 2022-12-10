@@ -1,25 +1,38 @@
 <template>
   <div class="task-edit-screen" @click="exitTask">
     <div v-if="task" class="task-edit-container" @click.stop>
-      <div v-if="isCover" class="task-cover" :style="
-        task.style?.bgColor
-          ? { 'background-color': task.style.bgColor }
-          : { 'background-image': 'url( ' + task.style.imgUrl + ')' }
-      ">
-        <Popper offsetDistance="-2" offsetSkid="62" placement="top" >
+      <div
+        v-if="isCover"
+        class="task-cover"
+        :style="
+          task.style?.bgColor
+            ? { 'background-color': task.style.bgColor }
+            : { 'background-image': 'url( ' + task.style.imgUrl + ')' }
+        "
+      >
+        <Popper offsetDistance="-2" offsetSkid="62" placement="top">
           <div class="task-cover-add-cover">
             <span class="add-cover-icon"></span>
             <p>Cover</p>
           </div>
           <template #content="{ close }">
-            <popperCover @closeModal="close" @setCover="saveTaskCover" :style="task.style" />
+            <popperCover
+              @closeModal="close"
+              @setCover="saveTaskCover"
+              :style="task.style"
+            />
           </template>
         </Popper>
       </div>
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <input v-model="task.title" @input="updateTask" class="task-title-input" type="text" />
+          <input
+            v-model="task.title"
+            @input="updateTask"
+            class="task-title-input"
+            type="text"
+          />
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>
@@ -29,32 +42,71 @@
         <section class="content">
           <div class="task-section task-info">
             <span></span>
-            <div class="task-info-wrapper" v-if="getTaskLabels?.length || getTaskMembers?.length">
-              <miniUsers @addMember="saveTaskMembers" v-if="task.memberIds?.length" :memberIds="getTaskMembers" />
-              <labelsPreview @updateBoard="updateBoard" @saveLabel="saveTaskLabels" v-if="task.labelIds?.length"
-                :currBoard="currBoard" :labelIds="getTaskLabels" />
+            <div
+              class="task-info-wrapper"
+              v-if="getTaskLabels?.length || getTaskMembers?.length"
+            >
+              <miniUsers
+                @addMember="saveTaskMembers"
+                v-if="task.memberIds?.length"
+                :memberIds="getTaskMembers"
+              />
+              <labelsPreview
+                @updateBoard="updateBoard"
+                @saveLabel="saveTaskLabels"
+                v-if="task.labelIds?.length"
+                :currBoard="currBoard"
+                :labelIds="getTaskLabels"
+              />
             </div>
           </div>
           <div class="task-section">
             <span></span>
-            <datePreview v-if="task.dueDate" :dueDate="task.dueDate" :status="task.status"
-              @changeStatus="updateTaskStatus" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
+            <datePreview
+              v-if="task.dueDate"
+              :dueDate="task.dueDate"
+              :status="task.status"
+              @changeStatus="updateTaskStatus"
+              @saveDate="saveTaskDate"
+              @removeDate="removeTaskDate"
+            />
           </div>
           <div class="task-section task-description">
             <span class="description-icon"></span>
             <div class="task-description-wrapper">
               <div class="task-description-title">
                 <h3 class="task-mini-title">Description</h3>
-                <el-button v-if="task.description?.length" @click="isEdit = true" class="task-btn">Edit</el-button>
+                <el-button
+                  v-if="task.description?.length"
+                  @click="isEdit = true"
+                  class="task-btn"
+                  >Edit</el-button
+                >
               </div>
-              <p v-if="!isEdit" contenteditable="true" spellcheck="false" @click="descriptionEditMode"
-                class="description-info" :class="descriptionTxtAreaClass">
+              <p
+                v-if="!isEdit"
+                contenteditable="true"
+                spellcheck="false"
+                @click="descriptionEditMode"
+                class="description-info"
+                :class="descriptionTxtAreaClass"
+              >
                 {{ task.description }}
               </p>
               <div v-else class="details-edit">
-                <textarea ref="focusInput" @input="updateTask" v-model="task.description" class="textarea-edit"
-                  placeholder="Add a more detailed description..."></textarea>
-                <el-button class="add-save-btn" @click="isEdit = false" type="primary">Save</el-button>
+                <textarea
+                  ref="focusInput"
+                  @input="updateTask"
+                  v-model="task.description"
+                  class="textarea-edit"
+                  placeholder="Add a more detailed description..."
+                ></textarea>
+                <el-button
+                  class="add-save-btn"
+                  @click="isEdit = false"
+                  type="primary"
+                  >Save</el-button
+                >
                 <el-button @click="isEdit = false">Cancel</el-button>
               </div>
             </div>
@@ -63,7 +115,10 @@
             <span class="attachments-icon"></span>
             <div class="task-attachments">
               <h3 class="task-mini-title">Attachments</h3>
-              <div v-for="attachment in task.attachments" class="task-attachment-preview">
+              <div
+                v-for="attachment in task.attachments"
+                class="task-attachment-preview"
+              >
                 <div v-if="attachment.type" class="img-preview">
                   <img class="attachment-img" :src="attachment.link" />
                 </div>
@@ -78,13 +133,19 @@
                       <button class="attachment-btn">Delete</button>
                       <template #content="{ close }">
                         <div class="popper-content popper-template">
-                          <popperModal :title="'Delete Checklist?'" @closeModal="close" />
+                          <popperModal
+                            :title="'Delete Checklist?'"
+                            @closeModal="close"
+                          />
                           <div class="content">
                             <p>
-                              Deleting a attachment is permanent and there is no way to
-                              get it back.
+                              Deleting a attachment is permanent and there is no
+                              way to get it back.
                             </p>
-                            <el-button @click="removeAttachment(attachment.id)" class="task-btn delete-btn">
+                            <el-button
+                              @click="removeAttachment(attachment.id)"
+                              class="task-btn delete-btn"
+                            >
                               Delete attachment
                             </el-button>
                           </div>
@@ -94,14 +155,28 @@
                     <Popper>
                       <button class="attachment-btn">Edit</button>
                       <template #content="{ close }">
-                        <div class="popper-content popper-template label-picker">
-                          <popperModal :title="'Edit Attachment'" @closeModal="close" />
+                        <div
+                          class="popper-content popper-template label-picker"
+                        >
+                          <popperModal
+                            :title="'Edit Attachment'"
+                            @closeModal="close"
+                          />
                           <div class="content add-attachment">
-                            <input class="attach-link-input" v-model="attachment.link" />
+                            <input
+                              class="attach-link-input"
+                              v-model="attachment.link"
+                            />
                             <p>Link name (optional)</p>
-                            <input class="attach-link-input" v-model="attachment.name" />
-                            <el-button class="attach-link-button"
-                              @click="updateAttachment(attachment)">Update</el-button>
+                            <input
+                              class="attach-link-input"
+                              v-model="attachment.name"
+                            />
+                            <el-button
+                              class="attach-link-button"
+                              @click="updateAttachment(attachment)"
+                              >Update</el-button
+                            >
                           </div>
                         </div>
                       </template>
@@ -111,148 +186,288 @@
               </div>
             </div>
           </div>
-          <div v-if="task.checklists" v-for="checklist in task.checklists" class="task-section task-todo checklist">
-            <span class="checklist-icon"></span>
-            <div class="task-mini-title checklist-title">
-              <div v-if="currChecklist.id === checklist.id && currChecklist.isEditTitle" class="todo-edit">
-                <textarea class="textarea-edit-checklist" v-model="currChecklist.title" ref="checklistTitle"
-                  @input="updateCurrChecklisInput" @keyup.enter="updateCurrChecklisTitle(checklist.id)">
-                </textarea>
-                <div class="edit-checklist">
-                  <el-button @click="updateCurrChecklisTitle(checklist.id)" class="add-save-btn" type="primary">
-                    Save
-                  </el-button>
-                  <button>
-                    <font-awesome-icon @click="openEditChecklist(checklist.id, false)" class="close-add-task-btn"
-                      icon="fa-solid fa-xmark" />
-                  </button>
-                </div>
-              </div>
-              <div v-else class="task-checklist-title">
-                <h3 @click="openEditChecklist(checklist.id, true)" class="task-mini-title checklist-title">
-                  {{ checklist.title }}
-                </h3>
-                <Popper class="popper-btn delete-popper" offsetSkid="116">
-                  <el-button class="task-btn">Delete</el-button>
-                  <template #content="{ close }">
-                    <div class="popper-content popper-template">
-                      <popperModal :title="'Delete Checklist?'" @closeModal="close" />
-                      <div class="content">
-                        <p>
-                          Deleting a checklist is permanent and there is no way to get it
-                          back.
-                        </p>
-                        <el-button @click="deleteChecklist(checklist.id)" class="task-btn delete-btn">
-                          Delete checklist
-                        </el-button>
-                      </div>
-                    </div>
-                  </template>
-                </Popper>
-              </div>
-            </div>
-            <div class="progress-container">
-              <el-progress :percentage="checklistPercentage(checklist.id)"
-                :color="checklistPercentage(checklist.id) === 100 ? '#61bd4f' : '#5ba4cf'" :width="200">
-              </el-progress>
-            </div>
-            <ul class="checklist">
-              <li v-for="todo in checklist.todos" :key="todo.id" class="todo">
-                <input class="checkbox-helper" type="checkbox" :checked="todo.isDone"
-                  @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)" />
-                <div class="todo-content" :class="
-                  currChecklist.todo.isEditTodo && currChecklist.todo.id === todo.id
-                    ? 'edit-todo-content'
-                    : ''
-                ">
-                  <div v-if="
-                    currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo
-                  " class="todo-edit">
-                    <textarea class="textarea-edit-checklist edit-todo" v-model="currChecklist.todo.title"
-                      ref="checklistTodoTitle" @input="updateCurrTodoTitleInput"
-                      @keyup.enter="updateCurrTodoTitle(checklist.id, todo.id)">
-                    </textarea>
-                  </div>
-                  <div class="edit-checklist" v-if="
-                    currChecklist.todo.id === todo.id && currChecklist.todo.isEditTodo
-                  ">
-                    <el-button @click="updateCurrTodoTitle(checklist.id, todo.id)" class="add-save-btn" type="primary">
+          <Container @drop="onColumnDrop($event, task.checklists)">
+            <Draggable
+              v-if="task.checklists"
+              v-for="checklist in task.checklists"
+              class="task-section task-todo checklist"
+            >
+              <span class="checklist-icon"></span>
+              <div class="task-mini-title checklist-title">
+                <div
+                  v-if="
+                    currChecklist.id === checklist.id &&
+                    currChecklist.isEditTitle
+                  "
+                  class="todo-edit"
+                >
+                  <textarea
+                    class="textarea-edit-checklist"
+                    v-model="currChecklist.title"
+                    ref="checklistTitle"
+                    @input="updateCurrChecklisInput"
+                    @keyup.enter="updateCurrChecklisTitle(checklist.id)"
+                  >
+                  </textarea>
+                  <div class="edit-checklist">
+                    <el-button
+                      @click="updateCurrChecklisTitle(checklist.id)"
+                      class="add-save-btn"
+                      type="primary"
+                    >
                       Save
                     </el-button>
                     <button>
-                      <font-awesome-icon @click="onEditChecklistTodo(checklist.id, todo.id, false)"
-                        class="close-add-task-btn" icon="fa-solid fa-xmark" />
+                      <font-awesome-icon
+                        @click="openEditChecklist(checklist.id, false)"
+                        class="close-add-task-btn"
+                        icon="fa-solid fa-xmark"
+                      />
                     </button>
                   </div>
-                  <div v-if="
-                    !currChecklist.todo.id ||
-                    currChecklist.todo.id !== todo.id ||
-                    (currChecklist.todo.id === todo.id &&
-                      !currChecklist.todo.isEditTodo)
-                  " @click="onEditChecklistTodo(checklist.id, todo.id, true)" class="todo-edit">
-                    <p :style="todo.isDone ? { textDecoration: 'line-through' } : ''">
-                      {{ todo.title }}
-                    </p>
-                  </div>
-                  <popperEditOptions deleteTitle="Delete" requestedTitle="Item actions"
-                    @delete="deleteChecklistTodo(checklist.id, todo.id)" />
                 </div>
-              </li>
-              <button v-if="
-                (currChecklist.id === checklist.id && !currChecklist.isAddItem) ||
-                currChecklist.id !== checklist.id
-              " class="btn-add" @click="updateTxtAddTodo(checklist.id, true)">
-                Add an item
-              </button>
-              <div v-if="currChecklist.id === checklist.id && currChecklist.isAddItem" class="todo-edit add-todo">
-                <textarea @keyup.enter="addChecklistTodo()" class="textarea-edit" v-model="currChecklist.task"
-                  ref="todoTxtarea" @input="updateCurrTaskInfo" placeholder="Add an item">
-                </textarea>
-                <el-button class="add-save-btn" @click="addChecklistTodo()" type="primary">Add</el-button>
-                <el-button @click="updateTxtAddTodo(checklist.id, false)">Cancel</el-button>
+                <div v-else class="task-checklist-title">
+                  <h3
+                    @click="openEditChecklist(checklist.id, true)"
+                    class="task-mini-title checklist-title"
+                  >
+                    {{ checklist.title }}
+                  </h3>
+                  <Popper class="popper-btn delete-popper" offsetSkid="116">
+                    <el-button class="task-btn">Delete</el-button>
+                    <template #content="{ close }">
+                      <div class="popper-content popper-template">
+                        <popperModal
+                          :title="'Delete Checklist?'"
+                          @closeModal="close"
+                        />
+                        <div class="content">
+                          <p>
+                            Deleting a checklist is permanent and there is no
+                            way to get it back.
+                          </p>
+                          <el-button
+                            @click="deleteChecklist(checklist.id)"
+                            class="task-btn delete-btn"
+                          >
+                            Delete checklist
+                          </el-button>
+                        </div>
+                      </div>
+                    </template>
+                  </Popper>
+                </div>
               </div>
-            </ul>
-          </div>
+              <div class="progress-container">
+                <el-progress
+                  :percentage="checklistPercentage(checklist.id)"
+                  :color="
+                    checklistPercentage(checklist.id) === 100
+                      ? '#61bd4f'
+                      : '#5ba4cf'
+                  "
+                  :width="200"
+                >
+                </el-progress>
+              </div>
+              <Container
+                class="checklist flex-grow overflow-y-auto overflow-x-hidden"
+                orientation="vertical"
+                :get-child-payload="getCardPayload(checklist.id)"
+                :drop-placeholder="{
+                  className: `bg-primary bg-opacity-20  
+            border-dotted border-2 
+            border-primary rounded-lg mx-4 my-2`,
+                  animationDuration: '200',
+                  showOnTop: true,
+                }"
+                drag-class="bg-primary dark:bg-primary 
+            border-2 border-primary-hover text-white 
+            transition duration-100 ease-in z-50
+            transform rotate-6 scale-110"
+                drop-class="transition duration-100 
+            ease-in z-50 transform 
+            -rotate-2 scale-90"
+                @drop="(e) => onCardDrop(checklist.id, e)"
+              >
+                <Draggable
+                  v-for="todo in checklist.todos"
+                  :key="todo.id"
+                  class="todo"
+                >
+                  <input
+                    class="checkbox-helper"
+                    type="checkbox"
+                    :checked="todo.isDone"
+                    @input="onTodoIsDoneChanged(checklist.id, todo.id, $event)"
+                  />
+                  <div
+                    class="todo-content"
+                    :class="
+                      currChecklist.todo.isEditTodo &&
+                      currChecklist.todo.id === todo.id
+                        ? 'edit-todo-content'
+                        : ''
+                    "
+                  >
+                    <div
+                      v-if="
+                        currChecklist.todo.id === todo.id &&
+                        currChecklist.todo.isEditTodo
+                      "
+                      class="todo-edit"
+                    >
+                      <textarea
+                        class="textarea-edit-checklist edit-todo"
+                        v-model="currChecklist.todo.title"
+                        ref="checklistTodoTitle"
+                        @input="updateCurrTodoTitleInput"
+                        @keyup.enter="
+                          updateCurrTodoTitle(checklist.id, todo.id)
+                        "
+                      >
+                      </textarea>
+                    </div>
+                    <div
+                      class="edit-checklist"
+                      v-if="
+                        currChecklist.todo.id === todo.id &&
+                        currChecklist.todo.isEditTodo
+                      "
+                    >
+                      <el-button
+                        @click="updateCurrTodoTitle(checklist.id, todo.id)"
+                        class="add-save-btn"
+                        type="primary"
+                      >
+                        Save
+                      </el-button>
+                      <button>
+                        <font-awesome-icon
+                          @click="
+                            onEditChecklistTodo(checklist.id, todo.id, false)
+                          "
+                          class="close-add-task-btn"
+                          icon="fa-solid fa-xmark"
+                        />
+                      </button>
+                    </div>
+                    <div
+                      v-if="
+                        !currChecklist.todo.id ||
+                        currChecklist.todo.id !== todo.id ||
+                        (currChecklist.todo.id === todo.id &&
+                          !currChecklist.todo.isEditTodo)
+                      "
+                      @click="onEditChecklistTodo(checklist.id, todo.id, true)"
+                      class="todo-edit"
+                    >
+                      <p
+                        :style="
+                          todo.isDone ? { textDecoration: 'line-through' } : ''
+                        "
+                      >
+                        {{ todo.title }}
+                      </p>
+                    </div>
+                    <popperEditOptions
+                      deleteTitle="Delete"
+                      requestedTitle="Item actions"
+                      @delete="deleteChecklistTodo(checklist.id, todo.id)"
+                    />
+                  </div>
+                </Draggable>
+                <button
+                  v-if="
+                    (currChecklist.id === checklist.id &&
+                      !currChecklist.isAddItem) ||
+                    currChecklist.id !== checklist.id
+                  "
+                  class="btn-add"
+                  @click="updateTxtAddTodo(checklist.id, true)"
+                >
+                  Add an item
+                </button>
+                <div
+                  v-if="
+                    currChecklist.id === checklist.id && currChecklist.isAddItem
+                  "
+                  class="todo-edit add-todo"
+                >
+                  <textarea
+                    @keyup.enter="addChecklistTodo()"
+                    class="textarea-edit"
+                    v-model="currChecklist.task"
+                    ref="todoTxtarea"
+                    @input="updateCurrTaskInfo"
+                    placeholder="Add an item"
+                  >
+                  </textarea>
+                  <el-button
+                    class="add-save-btn"
+                    @click="addChecklistTodo()"
+                    type="primary"
+                    >Add</el-button
+                  >
+                  <el-button @click="updateTxtAddTodo(checklist.id, false)"
+                    >Cancel</el-button
+                  >
+                </div>
+              </Container>
+            </Draggable>
+          </Container>
           <div class="task-section task-activity">
             <span class="activity-icon"></span>
             <div class="task-activity-wrapper">
               <h3 class="task-mini-title">Activity</h3>
-              <el-button class="task-btn" @click="showComments = !showComments">{{
-                  showComments ? "Hide Details" : "Show details"
-              }}</el-button>
+              <el-button
+                class="task-btn"
+                @click="showComments = !showComments"
+                >{{ showComments ? "Hide Details" : "Show details" }}</el-button
+              >
             </div>
-            <img :src="this.$store.getters.loggedinUser?.imgUrl" class="member-img" />
+            <img
+              :src="this.$store.getters.loggedinUser?.imgUrl"
+              class="member-img"
+            />
             <div>
-            <div class="add-comment-frame">
-            <div class="add-comment-box">
-              <Mentionable
-                :keys="['@']"
-                 :items="boardMembers"
-                  insert-space
+              <div class="add-comment-frame">
+                <div class="add-comment-box">
+                  <Mentionable :keys="['@']" :items="boardMembers" insert-space>
+                    <textarea
+                      @click="toggleComment"
+                      v-model="userInput"
+                      placeholder="Write a comment..."
+                      class="activity-comment"
+                      :class="isComment ? 'open' : ''"
+                    />
+                    <template #no-result>
+                      <div class="dim">No result</div>
+                    </template>
+                    <template #item-@="{ item }">
+                      <div class="mention-user">
+                        <img class="member-img" :src="item.imgUrl" />
+                        {{ item.fullname }}
+                        <span class="dim"> ({{ item.value }}) </span>
+                      </div>
+                    </template>
+                  </Mentionable>
+                  <el-button
+                    @click="addComment"
+                    class="btn"
+                    :class="getBtnClass"
+                    v-if="isComment"
+                    >Save</el-button
                   >
-              <textarea @click="toggleComment" v-model="userInput" placeholder="Write a comment..." 
-                class="activity-comment" :class="isComment ? 'open' : ''" />
-                <template #no-result>
-      <div class="dim">
-        No result
-      </div>
-    </template>
-    <template #item-@="{ item }">
-      <div class="mention-user">
-      <img class="member-img" :src="item.imgUrl">
-        {{ item.fullname }}
-        <span class="dim">
-          ({{ item.value }})
-        </span>
-      </div>
-    </template>
-                </Mentionable>
-              <el-button @click="addComment" class="btn" :class="getBtnClass" v-if="isComment">Save</el-button>
-            </div>
-            </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div v-for="comment in task.comments" v-if="showComments" class="task-section">
+          <div
+            v-for="comment in task.comments"
+            v-if="showComments"
+            class="task-section"
+          >
             <img :src="comment.byMember.imgUrl" class="member-img" />
             <div class="task-comment">
               <div class="member-info">
@@ -266,27 +481,49 @@
         <section class="actions">
           <h3 class="mini-title">Add to card</h3>
           <div class="task-actions">
-            <memberPicker @addMember="saveTaskMembers" :members="getTaskMembers" />
-            <labelPicker @updateBoard="updateBoard" @saveLabel="saveTaskLabels" :labelIds="getTaskLabels" />
+            <memberPicker
+              @addMember="saveTaskMembers"
+              :members="getTaskMembers"
+            />
+            <labelPicker
+              @updateBoard="updateBoard"
+              @saveLabel="saveTaskLabels"
+              :labelIds="getTaskLabels"
+            />
             <checkList @addchecklist="addChecklist" />
-            <datePicker :taskDate="getTaskDate" @saveDate="saveTaskDate" @removeDate="removeTaskDate" />
+            <datePicker
+              :taskDate="getTaskDate"
+              @saveDate="saveTaskDate"
+              @removeDate="removeTaskDate"
+            />
             <addAttachment @addAttachment="addAttachment" />
-            <coverPicker v-if="!task.style?.mode" :style="getTaskStyle" @setCover="saveTaskCover" />
-            <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
-            <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched ? 'watched' : ''">
+            <coverPicker
+              v-if="!task.style?.mode"
+              :style="getTaskStyle"
+              @setCover="saveTaskCover"
+            />
+            <archiveTask
+              @archiveTask="archiveTask"
+              @deleteTask="deleteTask"
+              @restoreTask="restoreTask"
+              :task="task"
+            />
+            <div
+              @click="toggleWatch"
+              class="task-option-btn"
+              :class="task.isWatched ? 'watched' : ''"
+            >
               <span class="watch-icon icon-actions"></span>
               <div class="watch-container">
-              <p>
-                Watch
-              </p>
-                <span  v-if="task.isWatched" class="check-icon"></span>
+                <p>Watch</p>
+                <span v-if="task.isWatched" class="check-icon"></span>
               </div>
             </div>
           </div>
         </section>
       </section>
       <span @click="exitTask" class="task-exit-btn">
-      <span class="task-exit-icon"></span>
+        <span class="task-exit-icon"></span>
       </span>
     </div>
   </div>
@@ -309,8 +546,9 @@ import { utilService } from "../services/util.service";
 import popperModal from "../cmps/popper-modal.vue";
 import popperEditOptions from "../cmps/popper-edit-options.vue";
 import { now } from "lodash";
-import { Mentionable } from 'vue-mention'
-
+import { Mentionable } from "vue-mention";
+import { Container, Draggable } from "vue3-smooth-dnd";
+import { applyDrag, generateItems, generateWords } from "../utils/helpers";
 
 export default {
   props: {
@@ -364,7 +602,8 @@ export default {
           })
         );
         board.groups[groupIdx].tasks[taskIdx] = this.task;
-        if (this?.task?.lastActivity) board.activities.unshift(this.task.lastActivity);
+        if (this?.task?.lastActivity)
+          board.activities.unshift(this.task.lastActivity);
         await this.$store.dispatch({ type: "updateBoard", board });
       } catch (err) {
         console.log("cant Update task", err);
@@ -413,17 +652,17 @@ export default {
       };
       this.updateTask();
     },
-    saveTaskLabels({labels,msg}) {
-      console.log(labels,msg);
+    saveTaskLabels({ labels, msg }) {
+      console.log(labels, msg);
       this.task.labelIds = labels;
-            this.task.lastActivity = {
+      this.task.lastActivity = {
         msg: msg + this.task.title,
         byMember: this.$store.getters.loggedinUser,
         date: Date.now(),
       };
       this.updateTask();
     },
-    saveTaskCover({color, mode}) {
+    saveTaskCover({ color, mode }) {
       if (color?.charAt(0) === "#") this.task.style = { bgColor: color, mode };
       else this.task.style = { imgUrl: color, mode };
       this.task.lastActivity = {
@@ -437,8 +676,8 @@ export default {
       this.task.status = status;
       this.updateTask();
     },
-    saveTaskMembers({members,msg}) {
-      console.log(members,msg);
+    saveTaskMembers({ members, msg }) {
+      console.log(members, msg);
       this.task.memberIds = members;
       this.task.lastActivity = {
         msg: msg + this.task.title,
@@ -579,7 +818,8 @@ export default {
     updateCurrTodoTitle(checklistId, todoId) {
       this.task.checklists
         .find((checklist) => checklist.id === checklistId)
-        .todos.find((todo) => todo.id === todoId).title = this.currChecklist.todo.title;
+        .todos.find((todo) => todo.id === todoId).title =
+        this.currChecklist.todo.title;
       this.currChecklist.todo.isEditTodo = false;
       this.task.lastActivity = {
         msg: `Edited todo on ${this.task.title}`,
@@ -602,7 +842,7 @@ export default {
       const doneTasks = this.task.checklists
         .find((checklist) => checklist.id === checklistId)
         .todos.filter((todo) => todo.isDone).length;
-      if(!Math.round((doneTasks / allTasks) * 100)) return 0
+      if (!Math.round((doneTasks / allTasks) * 100)) return 0;
       return Math.round((doneTasks / allTasks) * 100);
     },
     getCommentTime(ts) {
@@ -641,7 +881,7 @@ export default {
       this.updateTask();
     },
     toggleWatch() {
-      let msg = this.task.isWatched ? 'Removed watch from ' : 'Added watch to '
+      let msg = this.task.isWatched ? "Removed watch from " : "Added watch to ";
       this.task.isWatched = !this.task.isWatched;
       this.task.lastActivity = {
         msg: msg + this.task.title,
@@ -674,10 +914,43 @@ export default {
         byMember: this.$store.getters.loggedinUser,
         date: Date.now(),
       };
-      this.isComment = false
-      this.userInput = ''
+      this.isComment = false;
+      this.userInput = "";
       this.task.comments.push(msg);
       this.updateTask();
+    },
+    onColumnDrop(dropResult, checkLists) {
+      this.task.checklists = applyDrag(this.task.checklists, dropResult);
+      let board = JSON.parse(JSON.stringify(this.currBoard));
+      let taskIdx;
+      let groupIdx = board.groups.findIndex((group) =>
+        group.tasks.some((task, idx) => {
+          if (task.id === this.task.id) taskIdx = idx;
+          return task.id === this.task.id;
+        })
+      );
+      board.groups[groupIdx].tasks[taskIdx] = this.task;
+      this.$store.dispatch({ type: "updateBoard", board });
+    },
+    onCardDrop(columnId, dropResult) {
+      let board = JSON.parse(JSON.stringify(this.currBoard));
+      let taskIdx;
+      let groupIdx = board.groups.findIndex((group) =>
+        group.tasks.some((task, idx) => {
+          if (task.id === this.task.id) taskIdx = idx;
+          return task.id === this.task.id;
+        })
+      );
+      let checklistIdx = this.task.checklists.findIndex(
+        (cL) => cL.id === columnId
+      );
+      let newChecklist = this.task.checklists[checklistIdx];
+      newChecklist.todos = applyDrag(newChecklist.todos, dropResult);
+      board.groups[groupIdx].tasks[taskIdx] = this.task;
+      this.$store.dispatch({ type: "updateBoard", board });
+    },
+    getCardPayload (columnId) {
+      return
     },
   },
   computed: {
@@ -702,17 +975,17 @@ export default {
       });
       return group?.title;
     },
-    isCover(){
-      return this.task.style && Object.keys(this.task.style).length !== 0
+    isCover() {
+      return this.task.style && Object.keys(this.task.style).length !== 0;
     },
-    getBtnClass(){
-      return this.userInput?.length > 0 ? 'active' : ''
+    getBtnClass() {
+      return this.userInput?.length > 0 ? "active" : "";
     },
-    boardMembers(){
-      let boardMembers = JSON.parse(JSON.stringify(this.currBoard.members))
-      boardMembers.map(member => member.value = member.username)
-      return boardMembers
-    }
+    boardMembers() {
+      let boardMembers = JSON.parse(JSON.stringify(this.currBoard.members));
+      boardMembers.map((member) => (member.value = member.username));
+      return boardMembers;
+    },
   },
   components: {
     labelPicker,
@@ -728,11 +1001,11 @@ export default {
     popperModal,
     popperEditOptions,
     popperCover,
-    Mentionable
+    Mentionable,
+    Container,
+    Draggable,
   },
 };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

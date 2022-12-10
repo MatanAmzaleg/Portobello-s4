@@ -1,34 +1,63 @@
 <template>
-  <section ref="scroll1" class="task-list" :class="currGroup ? 'task-list-open' : ''">
-    <Container ref="scroll2" class="flex-grow overflow-y-auto overflow-x-hidden task-list task-list-scroll"
-      :class="currGroup ? 'task-list-open' : ''" orientation="vertical" group-name="col-items" :shouldAcceptDrop="
+  <section
+    ref="scroll1"
+    class="task-list"
+    :class="currGroup ? 'task-list-open' : ''"
+  >
+    <Container
+      ref="scroll2"
+      class="flex-grow overflow-y-auto overflow-x-hidden task-list task-list-scroll"
+      :class="currGroup ? 'task-list-open' : ''"
+      orientation="vertical"
+      group-name="col-items"
+      :shouldAcceptDrop="
         (e, payload) => e.groupName === 'col-items' && !payload.loading
-      " :get-child-payload="getCardPayload(column.id)" :drop-placeholder="{
-  className: `bg-primary bg-opacity-20  
+      "
+      :get-child-payload="getCardPayload(column.id)"
+      :drop-placeholder="{
+        className: `bg-primary bg-opacity-20  
                     border-dotted border-2 
                     border-primary mx-4 my-2`,
-  animationDuration: '200',
-  showOnTop: true,
-}" drag-class="bg-primary dark:bg-primary 
+        animationDuration: '200',
+        showOnTop: true,
+      }"
+      drag-class="bg-primary dark:bg-primary 
             border-2 border-primary-hover text-white 
             transition duration-100 ease-in z-50
-            transform rotate-6 scale-110" drop-class="transition duration-100 
+            transform rotate-6 scale-110"
+      drop-class="transition duration-100 
             ease-in z-50 transform 
-            -rotate-2 scale-90" @drop="(e) => onCardDrop(column.id, e)">
+            -rotate-2 scale-90"
+      @drop="(e) => onCardDrop(column.id, e)"
+    >
       <!-- Items -->
-      <Draggable @click="goToTask(item.id)" v-for="item in column.tasks" :key="item.id" :item="item"
-        class="task rotate-6">
+      <Draggable
+        @click="goToTask(item.id)"
+        v-for="item in column.tasks"
+        :key="item.id"
+        :item="item"
+        class="task rotate-6"
+      >
         <task-preview :item="item"></task-preview>
       </Draggable>
-      <textarea ref="taskArea" v-if="column.id === currGroup" @keyup.enter="addTask" class="textarea"
-        placeholder="Enter a title for this card" cols="30" rows="3" v-model="newTaskTxt"></textarea>
+      <textarea
+        ref="taskArea"
+        v-if="column.id === currGroup"
+        @keyup.enter="addTask"
+        class="textarea"
+        placeholder="Enter a title for this card"
+        cols="30"
+        rows="3"
+        v-model="newTaskTxt"
+      ></textarea>
       <div class="card-composure flex" v-if="column.id === currGroup">
         <div class="pressed-buttons">
-          <button class="add-card-btn" @click="addTask">
-            Add card
-          </button>
+          <button class="add-card-btn" @click="addTask">Add card</button>
           <button @click="closeAddTask">
-            <font-awesome-icon class="close-add-task-btn" icon="fa-solid fa-xmark" />
+            <font-awesome-icon
+              class="close-add-task-btn"
+              icon="fa-solid fa-xmark"
+            />
           </button>
         </div>
       </div>
@@ -48,12 +77,12 @@ export default {
     column: Object,
     currBoard: Object,
     scene: Object,
-    currGroup: String
+    currGroup: String,
   },
   data() {
     return {
       newTaskTxt: " ",
-    }
+    };
   },
   components: {
     Container,
@@ -96,17 +125,17 @@ export default {
       };
     },
     closeAddTask() {
-      this.$emit('closeAddTask')
+      this.$emit("closeAddTask");
     },
-    addTask(){
-      console.log('addTask')
-      this.$emit('addTask', this.newTaskTxt)
-      this.newTaskTxt = ""
-    }
+    addTask() {
+      console.log("addTask");
+      this.$emit("addTask", this.newTaskTxt);
+      this.newTaskTxt = "";
+    },
   },
   watch: {
     currGroup(newVal, oldVal) {
-      console.log('this.$refs', this.$refs)
+      console.log("this.$refs", this.$refs);
       if (newVal) {
         setTimeout(() => {
           this.$refs.taskArea.focus();
@@ -114,19 +143,19 @@ export default {
       }
 
       const el = this.$refs.scroll1;
-      const el2= this.$refs.scroll2;
-      console.log('el', el2)
+      const el2 = this.$refs.scroll2;
+      console.log("el", el2);
       // console.log('el2', el2)
 
       if (el2) {
         // Use el.scrollIntoView() to instantly scroll to the element
         // el.scrollTop = el.scrollHeight
         setTimeout(() => {
-          el2.scrollTop = el.scrollHeight
-        },0)
+          el2.scrollTop = el.scrollHeight;
+        }, 0);
         // el2.scrollIntoView({block: "end"});
       }
-    }
-  }
+    },
+  },
 };
 </script>

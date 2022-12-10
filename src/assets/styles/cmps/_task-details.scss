@@ -577,7 +577,7 @@
         gap: 4px;
         cursor: pointer;
         height: 32px;
-        width: 80px;
+        width: 77px;
         margin-bottom: 8px;
       }
       &:hover{
@@ -757,7 +757,7 @@
       display: grid;
       place-items: center;
       cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0);
       .task-exit-icon:before {
         font-size: 20px;
         font-family: trellicons;
