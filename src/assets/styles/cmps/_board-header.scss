@@ -121,7 +121,6 @@
   }
 
   .filter-popper {
-    max-height: 780px;
     width: 360px;
     padding-inline: 12px;
     background-color: #ffffff;
@@ -243,6 +242,8 @@
   }
 
   .labels-filter{
+    overflow-y: scroll;
+    max-height: 300px;
     button{
         width: 320px;
     }

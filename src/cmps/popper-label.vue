@@ -122,7 +122,6 @@ export default {
         let idx = this.labelIds.findIndex(l => l.id === this.chosenLabel.id)
         this.labelIds.splice(idx, 1)
         this.$emit('saveLabels', this.labelIds)
-
         let idx1 = this.currBoard.labels.findIndex(l => l.id === this.chosenLabel.id)
         this.currBoard.labels.splice(idx1, 1)
         const newBoard = this.currBoard.groups.map(group => {
