@@ -373,15 +373,6 @@ export default {
     closeModal() {
       this.$router.push("/board");
     },
-    addLabel(labels) {
-      this.task.labels = labels;
-      this.task.lastActivity = {
-        msg: `Edited ${this.task.title} labels`,
-        byMember: this.$store.getters.loggedinUser,
-        date: Date.now(),
-      };
-      this.updateTask();
-    },
     archiveTask() {
       this.task.archivedAt = Date.now();
       this.task.lastActivity = {
@@ -422,12 +413,14 @@ export default {
       };
       this.updateTask();
     },
-    addMember(members) {
-      this.task.members = members;
-      this.updateTask();
-    },
-    saveTaskLabels(labels) {
+    saveTaskLabels({labels,msg}) {
+      console.log(labels,msg);
       this.task.labelIds = labels;
+            this.task.lastActivity = {
+        msg: msg + this.task.title,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
       this.updateTask();
     },
     saveTaskCover({color, mode}) {
@@ -444,10 +437,11 @@ export default {
       this.task.status = status;
       this.updateTask();
     },
-    saveTaskMembers(members) {
+    saveTaskMembers({members,msg}) {
+      console.log(members,msg);
       this.task.memberIds = members;
       this.task.lastActivity = {
-        msg: `Edited ${this.task.title} Members`,
+        msg: msg + this.task.title,
         byMember: this.$store.getters.loggedinUser,
         date: Date.now(),
       };

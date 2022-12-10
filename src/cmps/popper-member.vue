@@ -46,18 +46,18 @@ export default {
       if(!this.members){
         this.members = []
         this.$emit('add-member', this.members)
-
-        // this.members.push(memberId)
-        // return
       } 
       let memberIdx = this.members.findIndex(id => id === memberId)
+      let msg =''
       if (memberIdx === -1) {
         this.members.push(memberId)
+        msg = `Added ${this.getMemberName(memberId)} to `
       }
       else {
         this.members.splice(memberIdx, 1)
+        msg = `Removed ${this.getMemberName(memberId)} from `
       }
-      this.$emit('add-member', this.members)
+      this.$emit('add-member', {members:this.members,msg})
     },
     closeModal() {
       this.$emit('closeModal')

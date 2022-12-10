@@ -68,12 +68,22 @@ export default {
   methods: {
     addLabel(labelId) {
       let labelIdx = this.labelIds.findIndex((id) => id === labelId);
+      let msg = ''
       if (labelIdx === -1) {
+        msg = 'Added label ' + `'${this.labelText(labelId)}'` + ' to '
         this.labelIds.push(labelId);
       } else {
-        this.labelIds.splice(labelIdx, 1);
+        msg = 'Removed label ' + `'${this.labelText(labelId)}'` + ' from '
+        this.labelIds.splice(labelIdx);
       }
-      this.$emit("save-label", this.labelIds);
+      this.$emit("save-label", {labels:this.labelIds,msg});
+    },
+    labelText(id) {
+      const label = this.filteredLabels.find(
+        (l) => l.id === id
+      );
+      if (!label) return;
+      return label.title;
     },
     checkLabel(id) {
       if (!this.labelIds?.length) return
