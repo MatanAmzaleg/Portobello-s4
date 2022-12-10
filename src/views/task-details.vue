@@ -223,9 +223,33 @@
             </div>
             <img :src="this.$store.getters.loggedinUser?.imgUrl" class="member-img" />
             <div>
-              <input @click="toggleComment" v-model="userInput" placeholder="Write a comment..." spellcheck="false"
+            <div class="add-comment-frame">
+            <div class="add-comment-box">
+              <Mentionable
+                :keys="['@']"
+                 :items="boardMembers"
+                  insert-space
+                  >
+              <textarea @click="toggleComment" v-model="userInput" placeholder="Write a comment..." 
                 class="activity-comment" :class="isComment ? 'open' : ''" />
-              <el-button @click="addComment" v-if="isComment">Send</el-button>
+                <template #no-result>
+      <div class="dim">
+        No result
+      </div>
+    </template>
+    <template #item-@="{ item }">
+      <div class="mention-user">
+      <img class="member-img" :src="item.imgUrl">
+        {{ item.fullname }}
+        <span class="dim">
+          ({{ item.value }})
+        </span>
+      </div>
+    </template>
+                </Mentionable>
+              <el-button @click="addComment" class="btn" :class="getBtnClass" v-if="isComment">Save</el-button>
+            </div>
+            </div>
             </div>
           </div>
           <div v-for="comment in task.comments" v-if="showComments" class="task-section">
@@ -259,7 +283,6 @@
           </div>
         </section>
       </section>
-
       <span @click="exitTask" class="task-exit-btn">
       <span class="task-exit-icon"></span>
       </span>
@@ -284,6 +307,8 @@ import { utilService } from "../services/util.service";
 import popperModal from "../cmps/popper-modal.vue";
 import popperEditOptions from "../cmps/popper-edit-options.vue";
 import { now } from "lodash";
+import { Mentionable } from 'vue-mention'
+
 
 export default {
   props: {
@@ -647,6 +672,8 @@ export default {
         byMember: this.$store.getters.loggedinUser,
         date: Date.now(),
       };
+      this.isComment = false
+      this.userInput = ''
       this.task.comments.push(msg);
       this.updateTask();
     },
@@ -675,6 +702,14 @@ export default {
     },
     isCover(){
       return this.task.style && Object.keys(this.task.style).length !== 0
+    },
+    getBtnClass(){
+      return this.userInput?.length > 0 ? 'active' : ''
+    },
+    boardMembers(){
+      let boardMembers = JSON.parse(JSON.stringify(this.currBoard.members))
+      boardMembers.map(member => member.value = member.username)
+      return boardMembers
     }
   },
   components: {
@@ -691,6 +726,7 @@ export default {
     popperModal,
     popperEditOptions,
     popperCover,
+    Mentionable
   },
 };
 </script>

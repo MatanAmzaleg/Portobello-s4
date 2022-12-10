@@ -1,6 +1,41 @@
 .header-icon {
   margin-top: 1px;
 }
+.add-comment-frame{
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow :0 1px 2px -1px #091e4240,0 0 0 1px #091e4214;
+  margin: 4px 4px 12px 0;
+  overflow: hidden;
+  position: relative;
+  transition: box-shadow 85ms ease;
+  .add-comment-box{
+    padding: 0px 12px 0px;
+  position: relative;
+  transition-duration: 85ms;
+  transition-property: padding-bottom;
+  transition-timing-function: ease;
+  .btn{
+    border: none;
+    // padding: 4px 4px 4px;
+    margin: 14px 0px 7px;
+    &.active{
+      background-color: $clr1 !important;
+      border: none !important;
+      border-radius: 3px !important;
+      color: white;
+    }
+  }
+  .save-comment-btn{
+    margin-top: 12px;
+    margin-left: 4px;
+    border: none;
+    padding: 20px 10px;
+    background-color: 091e420a;
+    }
+  }
+  }
+
 
 .activity-comment {
   border: none;
@@ -12,26 +47,29 @@
   width: calc(100% - 24px);
   border-radius: 3px;
   outline: none;
-  padding: 8px 12px;
-  box-shadow: 0 1px 2px -1px $clr26, 0 0 0 1px $clr25;
+  padding: 5px 0px 0px;
   word-wrap: break-word;
   resize: none;
   font-size: 14px;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue,
     sans-serif;
   background-color: white;
+  
+}
+.mention-item {
+  padding: 4px 10px;
+  font-size: 14px;
+  border-radius: 4px;
+}
 
-  &.open {
-    background-color: white;
+.mention-user{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 
-    &:hover {
-      background-color: white;
-    }
-  }
-
-  &:hover {
-    background-color: #ebecf0;
-  }
+.mention-selected {
+  background: $clr1;
 }
 
 .task-attachments {
@@ -513,7 +551,10 @@
       align-items: center;
       width: 100%;
       margin-bottom: 12px;
+      
     }
+
+
 
     .task-cover {
       height: 117px;

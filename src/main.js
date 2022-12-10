@@ -15,6 +15,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import 'v-calendar/dist/style.css';
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import FloatingVue from 'floating-vue'
+import 'floating-vue/dist/style.css'
 
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -39,6 +41,7 @@ app.use(router)
 app.component('Datepicker', Datepicker);
 app.use(VCalendar, {})
 app.use(store)
+app.use(FloatingVue)
 app.use(ElementPlus)
 app.component("Popper", Popper);
 
