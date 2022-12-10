@@ -23,7 +23,7 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-for="board in getBoards">
+                  <li v-for="board in boards">
                     <div class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="" />
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -51,7 +51,7 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-for="board in getBoards">
+                  <li v-for="board in boards">
                     <div class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="" />
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -80,8 +80,8 @@
               <div class="popper-template">
                 <ul class="nav-item-content">
                   <li v-if="
-                    getBoards?.filter((board) => board.isStarred).length > 0
-                  " v-for="board in getBoards?.filter(
+                    boards?.filter((board) => board.isStarred).length > 0
+                  " v-for="board in boards?.filter(
   (board) => board.isStarred
 )">
                     <div v-if="board.isStarred" class="starred-board-container" @click="moveToBoard(board)">
@@ -175,28 +175,16 @@ export default {
     return {
       isModalOpen: false,
       calculatedColor: null,
+      boards:null
     };
   },
-  computed: {
-    loggedInUser() {
-      return this.$store.getters.loggedinUser;
-    },
-    popperClass() {
-      return this.isModalOpen ? "popper-opened" : "popper-closed";
-    },
-    getBoards() {
-      return this.$store.getters.boards;
-    },
-    getCurrBoard() {
-      return this.$store.getters.currBoard;
-    },
-    getCalcColor() {
-    if(this.$route.path === '/board' || '/login'){
-      return {color: 'black',isDark:true}
-    }
-      return this.$store.getters.currBoard?.style?.calcColor;
-    },
+  created(){
+    this.boards = this.$store.getters.boards
+    console.log(this.boards);
+    console.log(this.$store.getters.boards);
+    console.log("yeahhhhhhhhh");
   },
+
   methods: {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
@@ -224,6 +212,26 @@ export default {
     doLogout() {
       this.$store.dispatch({ type: 'logout' })
       this.$router.push('/')
+    },
+  },
+  computed: {
+    loggedInUser() {
+      return this.$store.getters.loggedinUser;
+    },
+    popperClass() {
+      return this.isModalOpen ? "popper-opened" : "popper-closed";
+    },
+    getBoards() {
+      return this.$store.getters.boards;
+    },
+    getCurrBoard() {
+      return this.$store.getters.currBoard;
+    },
+    getCalcColor() {
+    if(this.$route.path === '/board'){
+      return {color: 'black',isDark:true}
+    }
+      return this.$store.getters.currBoard?.style?.calcColor;
     },
   },
   components: {

@@ -1,6 +1,9 @@
 <template>
   <section v-if="board" class="board-header">
     <div class="left-section">
+      <div v-if="!isSliderOpen" @click="$emit('openSliderMenu')" class="right-arrow">
+        <font-awesome-icon  :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }" class="right-arrow-icon" icon="fa-solid fa-angle-right" />
+      </div>
       <span
         :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }"
         class="board-name-input"
@@ -222,6 +225,7 @@ import popperModal from "./popper-modal.vue";
 export default {
   props: {
     board: Object,
+    isSliderOpen:Boolean,
   },
   data() {
     return {
@@ -301,9 +305,9 @@ export default {
     getCalcColor() {
       return this.$store.getters.currBoard?.style?.calcColor;
     },
-    userImg(){
-      return this.$store.getters.loggedinUser.imgUrl
-    }
+    // userImg(){
+    //   return this.$store.getters.loggedinUser.imgUrl
+    // }
   },
   components: {
     miniUsers,
