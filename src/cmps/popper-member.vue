@@ -45,7 +45,6 @@ export default {
       return member.imgUrl;
     },
     filterMembers(){
-      console.log('filter');
       const regex = new RegExp(this.input, 'i'); 
       this.membersToShow = this.boardMembers.filter(member => regex.test(member.fullname) )
     },
