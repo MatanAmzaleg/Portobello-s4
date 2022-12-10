@@ -39,6 +39,20 @@
     align-items: center;
     justify-content: center;
 
+    .right-arrow{
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: rgba(200, 206, 214, 0.2);
+      .right-arrow-icon{
+        height: 12px;
+        width: 12px;
+      }
+    }
+
     > * {
       margin: 2px;
     }

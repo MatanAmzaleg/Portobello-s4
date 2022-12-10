@@ -1,5 +1,6 @@
 .board-details {
   width: 100%;
+  transition: width 0.6s;
 
   .group-list {
     overflow-x: auto;

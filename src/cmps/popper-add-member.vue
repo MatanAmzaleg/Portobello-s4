@@ -4,6 +4,7 @@
     <div class="members-section">
       <input
         v-focus
+        @input="filterMembers"
         v-model="input"
         class="members-input-search"
         type="search"
@@ -14,7 +15,7 @@
         <div class="board-members">
           <div
             @click="addMember(member)"
-            v-for="member in boardMembers"
+            v-for="member in membersToShow"
             class="member"
           >
             <img class="member-img" :src="member.imgUrl" />
@@ -51,15 +52,21 @@ import { socketService } from '../services/socket.service'
 export default {
  created() {
    this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members));
-   this.members = this.$store.getters.users.filter(user => !this.boardMembers.includes(user.username))
+   this.membersToShow = this.boardMembers
+   this.members = this.$store.getters.users
   },
   data() {
     return {
       boardMembers: [],
       input: "",
+      membersToShow: []
     };
   },
   methods: {
+    filterMembers(){
+      const regex = new RegExp(this.input, 'i'); 
+      this.membersToShow = this.boardMembers.filter(member => regex.test(member.fullname) )
+    },
     getMemberName(id) {
       const member = this.boardMembers.find((m) => m._id === id);
       return member.fullname;
@@ -71,13 +78,15 @@ export default {
     addMember(member) {
       let memberIdx = this.boardMembers.findIndex(m => m._id === member._id);
       let username = this.$store.getters.loggedinUser.fullname
-      let notification = ''
+      let notification = {}
       if (memberIdx === -1) {
         this.boardMembers.push(member);
-        notification = `${username} Added you to board ` + this.$store.getters.currBoard.title
+        notification.msg = `${username} Added you to board ` + this.$store.getters.currBoard.title
+        notification.imgUrl = this.$store.getters.loggedinUser.imgUrl
       } else {
         this.boardMembers.splice(memberIdx, 1);
-        notification = `${username} Removed you from board ` + this.$store.getters.currBoard.title
+        notification.msg = `${username} Removed you from board ` + this.$store.getters.currBoard.title
+        notification.imgUrl = this.$store.getters.loggedinUser.imgUrl
       }
       socketService.emit('notification',{notification,to:member._id})
       let newBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))

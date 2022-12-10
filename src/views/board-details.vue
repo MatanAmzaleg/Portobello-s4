@@ -1,5 +1,6 @@
 <template>
-  <section class="full-board flex" :class="{ 'is-menu-open': isMenuOpen }">
+  <section class="full-board flex" :class="{ 'is-menu-open': isMenuOpen , 'is-slider-open':isSliderOpen}">
+    <left-slider @closeSliderMenu="closeSliderMenu"></left-slider>
     <board-menu
       @updateBoard="updateBoard"
       :currBoard="getCurrBoard"
@@ -20,7 +21,9 @@
       "
     >
       <board-header
-      @closeBoardMenu="closeBoardMenu"
+      :isSliderOpen="isSliderOpen"
+        @openSliderMenu="openSliderMenu"
+        @closeBoardMenu="closeBoardMenu"
         @openBoardMenu="openBoardMenu"
         @updateBoard="updateBoard"
         @setFilter="setFilter"
@@ -39,6 +42,7 @@
 </template>
 
 <script>
+import leftSlider from "../cmps/left-slider.vue";
 import { utilService } from "../services/util.service";
 import boardMenu from "../cmps/board-menu.vue";
 import boardHeader from "../cmps/board-header.vue";
@@ -51,12 +55,13 @@ export default {
     return {
       filterBy: { txt: "", labels: null },
       isMenuOpen: false,
+      isSliderOpen: false,
       calculateColor: {},
     };
   },
   async created() {
     try {
-      await this.$store.dispatch({type:'loadUsers'})
+      await this.$store.dispatch({ type: "loadUsers" });
       eventBus.on("toggleTask", this.updateTaskStatus);
       const { boardId } = this.$route.params;
       this.$store.dispatch({ type: "setCurrBoard", boardId });
@@ -75,7 +80,7 @@ export default {
     },
     updateBoard(board) {
       this.currBoard = board;
-      console.log('board test', board)
+      console.log("board test", board);
       this.$store.dispatch({
         type: "updateBoard",
         board,
@@ -100,6 +105,12 @@ export default {
     closeBoardMenu() {
       this.isMenuOpen = false;
     },
+    openSliderMenu() {
+      this.isSliderOpen = true;
+    },
+    closeSliderMenu() {
+      this.isSliderOpen = false;
+    },
   },
   computed: {
     getBoards() {
@@ -109,6 +120,6 @@ export default {
       return this.$store.getters.currBoard;
     },
   },
-  components: { boardHeader, groupList, boardMenu },
+  components: { boardHeader, groupList, boardMenu, leftSlider },
 };
 </script>

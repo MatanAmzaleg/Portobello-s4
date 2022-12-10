@@ -6,7 +6,7 @@
       <div class="members">
         <h5 class="board-members-title">Board members</h5>
         <div class="board-members">
-          <div @click="addMember(member._id)" v-for="member in boardMembers" class="member">
+          <div @click="addMember(member._id)" v-for="member in membersToShow" class="member">
             <img class="member-img" :src="member.imgUrl">
             <p class="member-name">{{member.fullname}}</p>
             <font-awesome-icon v-if="members?.includes(member._id)" class="checkedIcon" icon="fa-solid fa-check" />
@@ -25,11 +25,13 @@ export default {
   },
   created() {
     this.boardMembers = this.$store.getters.currBoard.members
+    this.membersToShow = this.boardMembers
     eventBus.on('update-focus', this.updateInputFocus)
   },
   data() {
     return {
       boardMembers: [],
+      membersToShow:[],
       input: ''
     }
   },
@@ -41,6 +43,10 @@ export default {
     getMemberImg(id) {
       const member = this.boardMembers.find((m) => m._id === id);
       return member.imgUrl;
+    },
+    filterMembers(){
+      const regex = new RegExp(this.input, 'i'); 
+      this.membersToShow = this.boardMembers.filter(member => regex.test(member.fullname) )
     },
     addMember(memberId) {
       if(!this.members){
