@@ -37,7 +37,7 @@
         </button>
       </div>
       <ul class="nav-item-content">
-        <li v-for="board in getBoards" :style="getCurrBoard._id === board._id ? {'background-color' : 'rgba(208, 208, 208, 0.395)'} :  {'background-color' : 'inherit'}">
+        <li v-for="board in boards" :style="getCurrBoard?._id === board._id ? {'background-color' : 'rgba(208, 208, 208, 0.395)'} :  {'background-color' : 'inherit'}">
           <div class="starred-board-container" @click="moveToBoard(board)">
             <img
               v-if="board.style?.imgUrl"
@@ -64,6 +64,14 @@
 
 <script>
 export default {
+    data(){
+        return{
+            boards:null
+        }
+    },
+    created(){
+        this.boards = this.getBoards 
+    },
     methods: {
         moveToBoard(board) {
       console.log("move board");
