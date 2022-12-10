@@ -1,9 +1,16 @@
 .left-slider {
-  width: 0px;
+  width: 0;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  left: 0;
   color: white;
   background-color: hsl(220, 4.3%, 8.5%);
+  overflow-x: hidden;
+  height: calc(100vh - 44px);
+  overflow: hidden;
+  z-index: 10;
+  transition: 0.6s;
 
   .header {
     height: 42px;
@@ -37,8 +44,8 @@
       height: 28px;
       width: 28px;
       border-radius: 3px;
-    //   position: relative;
-    //   left: 20px;
+      position: relative;
+      left: 62px;
       color: #ffffff;
 
       &:hover {
@@ -90,8 +97,8 @@
         width: 24px;
         height: 24px;
         border-radius: 3px;
-        // position: relative;
-        // left: 86px;
+        position: relative;
+        left: 126px;
         &:hover {
           background-color: rgba(208, 208, 208, 0.395);
         }
@@ -103,8 +110,8 @@
       }
     }
     .members {
-    //   position: relative;
-    //   right: 6px;
+      position: relative;
+      right: 6px;
     }
   }
 
@@ -123,8 +130,8 @@
         width: 24px;
         height: 24px;
         border-radius: 3px;
-        // position: relative;
-        // left: 93px;
+        position: relative;
+        left: 133px;
         &:hover {
           background-color: rgba(208, 208, 208, 0.395);
         }
@@ -152,5 +159,6 @@
   
     .left-slider {
       width: 260px;
+      transition: 0.6s;
     }
   }
