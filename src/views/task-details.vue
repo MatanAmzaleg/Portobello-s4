@@ -456,7 +456,7 @@ export default {
       };
       this.updateTask();
     },
-    removeTaskDate(date) {
+    removeTaskDate() {
       this.task.dueDate = "";
       this.task.lastActivity = {
         msg: `Removed Due Date to ${this.task.title}`,
@@ -641,7 +641,13 @@ export default {
       this.updateTask();
     },
     toggleWatch() {
+      let msg = this.task.isWatched ? 'Removed watch from ' : 'Added watch to '
       this.task.isWatched = !this.task.isWatched;
+      this.task.lastActivity = {
+        msg: msg + this.task.title,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
       this.updateTask();
     },
     descriptionEditMode() {
