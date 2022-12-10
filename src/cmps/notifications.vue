@@ -1,27 +1,31 @@
 <template>
-  <button @click="toggleNotifications">
+  <Popper class="user-popper" >
+            <button @click="toggleNotifications">
     <font-awesome-icon icon="fa-solid fa-bell" />
   </button>
-  <section v-if="isShown" class="notifications">
-    <h4>Notifications</h4>
-    <div v-for="notification in user.Notifications" @click="openNotifications(notification)" >
-      <h4>Username</h4>
-      <h5 @click="openTaskDetails(notification)">{{ notification.taskTitle }}</h5>
-      <small>5 hours ago</small>
-    </div>
-  </section>
+          <template #content="{ close }">
+            <div class="popper-template user-popper-info">
+              <h1>Notifications</h1>
+              <span class="line"></span>
+              <button class="btn-logout" @click="doLogout">Log out</button>
+            </div>
+            <div class="notification" v-for="notification in notifications">
+            
+            </div>
+          </template>
+        </Popper>
 </template>
 <script>
 export default {
   name: "notification",
   data() {
     return {
-      user: {},
+      notifications:[],
       isShown: false,
     };
   },
   created() {
-    //Get user
+   this.notifications = this.$store.getters.notifications
   },
   methods: {
     toggleNotifications(){

@@ -20,7 +20,6 @@ export default {
   created() {
     console.log('Running Portobello!')
     const user = userService.getLoggedinUser()
-    this.$store.dispatch({type:'loadUsers'})
     if (user)  store.commit({type: 'setLoggedinUser', user})
     utilService.fetchListOfPhotos('random')
     utilService.fetchListOfPhotos('random', '2')

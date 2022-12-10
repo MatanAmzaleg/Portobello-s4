@@ -8,14 +8,20 @@ export const userStore = {
     state: {
         loggedinUser: null,
         users: [],
-        watchedUser: null
+        watchedUser: null,
+        notifications:[],
     },
     getters: {
         users({ users }) { return users },
         loggedinUser({ loggedinUser }) { return loggedinUser },
-        watchedUser({ watchedUser }) { return watchedUser }
+        watchedUser({ watchedUser }) { return watchedUser },
+        notifications({notifications}) {return notifications}
     },
     mutations: {
+        addNotification(state, {notification}){
+            console.log(notification);
+            state.notifications.push(notification)
+        },
         setLoggedinUser(state, { user }) {
             // Yaron: needed this workaround as for score not reactive from birth
             state.loggedinUser = (user)? {...user} : null
