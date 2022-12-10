@@ -204,6 +204,12 @@
   div:first-child {
     height: 100%;
   }
+
+  &.edit-popper{
+    position: absolute;
+    z-index: 10;
+    right: 5px;
+  }
 }
 
 .popper-btn {
