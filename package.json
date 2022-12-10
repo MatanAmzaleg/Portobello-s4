@@ -32,6 +32,7 @@
     "vue-chart-3": "^3.1.8",
     "vue-mention": "^2.0.0-alpha.3",
     "vue-router": "^4.1.2",
+    "vue3-google-login": "^2.0.12",
     "vue3-popper": "^1.5.0",
     "vue3-smooth-dnd": "^0.0.2",
     "vuex": "^4.0.2"

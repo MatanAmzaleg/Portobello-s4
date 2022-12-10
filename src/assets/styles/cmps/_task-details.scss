@@ -681,18 +681,31 @@
 
         .task-option-btn {
           position: relative;
-
+          .watch-container{
+            display: flex;
+            width: 100%;
+            position: relative;
+            justify-content: space-between;
+            align-items: center;
+          }
           .check-icon:before {
-            background-color: #61bd4f;
             font-family: trellicons;
             width: 20px;
             justify-self: center;
             content: "\e916";
-            padding-left: 2px;
-            padding-right: 2px;
             color: white;
+            background-color: #61bd4f;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 700;
+            height: 20px;
+            line-height: 20px;
+            margin: 0;
+            padding: 2px 4px;
             position: absolute;
-            left: 85%;
+            right: -4px;
+            text-align: center;
+            top: -1px;
           }
 
           &.btn-members {

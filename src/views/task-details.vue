@@ -275,10 +275,12 @@
             <archiveTask @archiveTask="archiveTask" @deleteTask="deleteTask" @restoreTask="restoreTask" :task="task" />
             <div @click="toggleWatch" class="task-option-btn" :class="task.isWatched ? 'watched' : ''">
               <span class="watch-icon icon-actions"></span>
+              <div class="watch-container">
               <p>
                 Watch
-                <span class="check-icon-container" v-if="task.isWatched"><span class="check-icon"></span></span>
               </p>
+                <span  v-if="task.isWatched" class="check-icon"></span>
+              </div>
             </div>
           </div>
         </section>

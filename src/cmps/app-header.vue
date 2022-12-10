@@ -145,7 +145,7 @@
           </span>
         </div>
         <notifications />
-        <Popper class="user-popper">
+        <Popper offsetDistance="0" class="user-popper">
           <img v-if="loggedInUser" class="user-img" :src="loggedInUser?.imgUrl" alt="member" />
           <template #content="{ close }">
             <div class="popper-template user-popper-info">
