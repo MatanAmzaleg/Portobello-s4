@@ -163,6 +163,7 @@
     }
 
     .nav-item-content {
+        margin-top: 10px;
         display: flex;
         flex-direction: column;
         list-style: none;
@@ -172,7 +173,6 @@
         li {
             height: 32px;
             width: 100%;
-            cursor: pointer;
             &:hover{
                 background-color: rgba(208, 208, 208, 0.395);
             }
@@ -207,7 +207,7 @@
                 .style-container {
                     height: 17px;
                     width: 26px;
-                    border-radius: 3px;
+                    border-radius: 2px;
                 }
             }
         }
