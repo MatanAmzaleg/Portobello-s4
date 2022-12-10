@@ -1,6 +1,4 @@
 import { userService } from '../services/user.service'
-// import { socketService, SOCKET_EMIT_USER_WATCH, SOCKET_EVENT_USER_UPDATED } from '../services/socket.service'
-
 // var localLoggedinUser = null
 // if (sessionStorage.user) localLoggedinUser = JSON.parse(sessionStorage.user || null)
 
@@ -18,9 +16,8 @@ export const userStore = {
         notifications({notifications}) {return notifications}
     },
     mutations: {
-        addNotification(state, {notification}){
-            console.log(notification);
-            state.notifications.push(notification)
+        addNotification(state, {msg}){
+            state.notifications.push(msg)
         },
         setLoggedinUser(state, { user }) {
             // Yaron: needed this workaround as for score not reactive from birth
@@ -125,3 +122,4 @@ export const userStore = {
 
     }
 }
+

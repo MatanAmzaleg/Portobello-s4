@@ -7,10 +7,9 @@
             <div class="popper-template user-popper-info">
               <h1>Notifications</h1>
               <span class="line"></span>
-              <button class="btn-logout" @click="doLogout">Log out</button>
+              <div class="notification" v-for="notification in notifications">
+              <h1>{{notification}}</h1>
             </div>
-            <div class="notification" v-for="notification in notifications">
-            
             </div>
           </template>
         </Popper>

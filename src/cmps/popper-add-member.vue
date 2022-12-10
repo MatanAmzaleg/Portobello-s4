@@ -79,7 +79,7 @@ export default {
         this.boardMembers.splice(memberIdx, 1);
         notification = `${username} Removed you from board ` + this.$store.getters.currBoard.title
       }
-      socketService.emit('notification',notification)
+      socketService.emit('notification',{notification,to:member._id})
       let newBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
       newBoard.members = this.boardMembers
       this.$store.dispatch({type:"updateBoard", board:newBoard});
