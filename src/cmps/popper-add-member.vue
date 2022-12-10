@@ -53,7 +53,7 @@ export default {
  created() {
    this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members));
    this.membersToShow = this.boardMembers
-   this.members = this.$store.getters.users.filter(user = {})
+   this.members = this.$store.getters.users
   },
   data() {
     return {

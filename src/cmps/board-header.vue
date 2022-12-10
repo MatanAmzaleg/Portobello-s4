@@ -109,11 +109,6 @@
                   <img :src="userImg" class="member-img-card">
                   <p>Cards assigned to me</p>
                 </label>
-                <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <p>photo</p>
-                  <p>Select members</p>
-                </label>
               </section>
               <section class="date-filter">
                 <p class="mini-title">Due date</p>
@@ -305,9 +300,9 @@ export default {
     getCalcColor() {
       return this.$store.getters.currBoard?.style?.calcColor;
     },
-    // userImg(){
-    //   return this.$store.getters.loggedinUser.imgUrl
-    // }
+    userImg(){
+      return this.$store.getters.loggedinUser.imgUrl
+    }
   },
   components: {
     miniUsers,
