@@ -1,5 +1,6 @@
 <template>
   <section>
+    <div v-if="poperIsOpen" class="background-cover-black" @click="(poperIsOpen = false)"></div>
     <notifications />
     <home-header v-if="routeIsHome"/>
     <app-header v-else/>
@@ -16,8 +17,14 @@ import userMsg from './cmps/user-msg.vue'
 import { userService } from './services/user.service'
 import { utilService } from './services/util.service'
 import { socketService } from './services/socket.service'
+import { eventBus } from './services/event-bus.service'
 
 export default {
+  data() {
+    return {
+      poperIsOpen: false
+    }
+  },
   created() {
     console.log('Running Portobello!')
     socketService.on('new-notification',this.addNotification)
@@ -25,8 +32,12 @@ export default {
     if (user)  store.commit({type: 'setLoggedinUser', user})
     utilService.fetchListOfPhotos('random')
     utilService.fetchListOfPhotos('random', '2')
+    eventBus.on('updatePoperIsOpen', this.updatePoper)
   },
   methods:{
+    updatePoper(isOpen) {
+      this.poperIsOpen = isOpen
+    },
     addNotification(msg){
       console.log(msg)
       this.$store.commit({type:'addNotification',msg})

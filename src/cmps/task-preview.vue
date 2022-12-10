@@ -1,7 +1,7 @@
 <template>
   <section class="task-preview">
-    <VDropdown placement="bottom" :distance="6">
-      <span class="edit-icon" @click.stop="isQuickEdit = true"></span>
+    <VDropdown placement="bottom" :distance="0" :skidding="102">
+      <span class="edit-icon" @click.stop="updatePopperMode"></span>
       <template #popper>
         <taskQuickEdit 
           :item="item">
@@ -64,13 +64,13 @@
       </div>
     </div>
   </section>
-  <!-- <taskQuickEdit v-else :item="item" /> -->
 </template>
 <script>
 import taskQuickEdit from "./task-quick-edit.vue";
 import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import TaskDatePreview from "./task-date-preview.vue";
+import { eventBus } from "../services/event-bus.service";
 export default {
   props: {
     item: Object,
@@ -83,6 +83,9 @@ export default {
     };
   },
   methods: {
+    updatePopperMode(){
+      eventBus.emit('updatePoperIsOpen', true)
+    },
     labelColor(id) {
       const label = this.$store.getters.currBoard.labels.find((l) => {
         return l.id === id;
