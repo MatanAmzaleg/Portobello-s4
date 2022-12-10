@@ -74,7 +74,7 @@ export default {
   },
   data() {
     return {
-      newTaskTxt: " ",
+      newTaskTxt: "",
     };
   },
   components: {

@@ -1,70 +1,58 @@
 <template>
-  <section v-if="!isQuickEdit" class="task-preview">
-    <div
-      class="cover"
-      v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'"
-      :style="
-        item.style?.bgColor
-          ? { 'background-color': item.style.bgColor }
-          : {
-              'background-image': 'url( ' + item.style.imgUrl + ')',
-              height: '80px',
-              'background-position': 'center',
-              'background-size': 'cover',
-            }
-      "
-    ></div>
-    <div
-      class="cover"
-      v-if="item.style?.mode === 'full'"
-      :style="
-        item.style?.bgColor
-          ? { 'background-color': item.style.bgColor, height: '56px' }
-          : {
-              'background-image': 'url( ' + item.style.imgUrl + ')',
-              height: '256px',
-              'background-position': 'center',
-              'background-size': 'cover',
-            }
-      "
-    >
+  <section class="task-preview">
+    <VDropdown placement="bottom" :distance="0" :skidding="102">
+      <span class="edit-icon" @click.stop="updatePopperMode"></span>
+      <template #popper>
+        <taskQuickEdit 
+          :item="item">
+        </taskQuickEdit> 
+      </template>
+    </VDropdown>
+    <div class="cover" v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'" :style="
+      item.style?.bgColor
+        ? { 'background-color': item.style.bgColor }
+        : {
+          'background-image': 'url( ' + item.style.imgUrl + ')',
+          height: '80px',
+          'background-position': 'center',
+          'background-size': 'cover',
+        }
+    "></div>
+    <div class="cover" v-if="item.style?.mode === 'full'" :style="
+      item.style?.bgColor
+        ? { 'background-color': item.style.bgColor, height: '56px' }
+        : {
+          'background-image': 'url( ' + item.style.imgUrl + ')',
+          height: '256px',
+          'background-position': 'center',
+          'background-size': 'cover',
+        }
+    ">
       <p class="item-title-full">{{ item.title }}</p>
     </div>
     <div v-if="item.style?.mode !== 'full'" class="padded-section">
       <div class="labels" v-if="item.labelIds?.length > 0">
-        <span
-          @click.stop="openLabelExtended"
-          class="label"
-          :class="labelExtendedClass"
-          v-for="label in item.labelIds"
-          :style="{ 'background-color': labelColor(label) }"
-          ><div
-            class="circle"
-            :style="{ 'background-color': labelColor(label) }"
-          ></div>
-            <span class="label-title" v-if="isLabelsExtended">{{
+        <span @click.stop="openLabelExtended" class="label" :class="labelExtendedClass" v-for="label in item.labelIds"
+          :style="{ 'background-color': labelColor(label) }">
+          <div class="circle" :style="{ 'background-color': labelColor(label) }"></div>
+          <span class="label-title" v-if="isLabelsExtended">{{
               getLabelTitle(label)
-            }}</span>
+          }}</span>
         </span>
       </div>
       <span class="task-router-link">{{ item.title }}</span>
       <div v-if="taskExtra(item)" class="task-preview-info">
         <div class="task-preview-content">
           <span v-if="item.isWatched" class="watch-icon"></span>
-          <TaskDatePreview
-            v-if="item.dueDate"
-            :status="item.status"
-            :date="item.dueDate"
-            :taskId="item.id"
-          />
+          <TaskDatePreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" :taskId="item.id" />
           <span v-if="item.description?.length" class="description-icon"></span>
-          <div v-if="item.comments.length > 0" class="task-preview-checklist" >
+          <div v-if="item.comments.length > 0" class="task-preview-checklist">
             <span class="comments-icon">
             </span>
-              <span class="comments-span">{{item.comments.length}}</span>
+            <span class="comments-span">{{ item.comments.length }}</span>
           </div>
           <span v-if="item.attachments" class="attachment-icon">{{
-            item.attachments.length
+              item.attachments.length
           }}</span>
           <div class="task-preview-checklist" :class="isDone ? 'done' : ''">
             <span v-if="item.checklists?.length" class="checklist-icon">
@@ -75,15 +63,14 @@
         <mini-users-designed :memberIds="item.memberIds"></mini-users-designed>
       </div>
     </div>
-    <span class="edit-icon" @click.stop="isQuickEdit = true"></span>
   </section>
-    <taskQuickEdit v-else :item="item" />
 </template>
 <script>
 import taskQuickEdit from "./task-quick-edit.vue";
 import miniUsersDesigned from "./mini-users-designed.vue";
 import miniUsers from "./mini-users.vue";
 import TaskDatePreview from "./task-date-preview.vue";
+import { eventBus } from "../services/event-bus.service";
 export default {
   props: {
     item: Object,
@@ -92,10 +79,13 @@ export default {
     return {
       isDone: null,
       isLabelsExtended: false,
-      isQuickEdit:null,
+      isQuickEdit: null,
     };
   },
   methods: {
+    updatePopperMode(){
+      eventBus.emit('updatePoperIsOpen', true)
+    },
     labelColor(id) {
       const label = this.$store.getters.currBoard.labels.find((l) => {
         return l.id === id;
@@ -141,6 +131,9 @@ export default {
       console.log(label);
       return label.title;
     },
+    updateQuickEdit() {
+      this.$emit('updateQuickEdit', item.id)
+    }
   },
   computed: {
     currBoard() {

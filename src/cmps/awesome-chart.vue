@@ -5,12 +5,12 @@
       <DoughnutChart :chartData="TasksPerUsers" />
     </div>
     <div class="chart">
-      <h1 title="chart-title">Most effective user</h1>
-      <BarChart class="bar-chart" :chartData="mostEffective" />
+      <h1 title="chart-title">Most tasks accomplished</h1>
+      <BarChart class="bar-chart" :chartData="mostEffective" :options="options" />
     </div>
     <div class="chart">
-      <h1 title="chart-title">Most uneffective user</h1>
-      <BarChart class="bar-chart" :chartData="mostUneffective" />
+      <h1 title="chart-title">Most unfinished tasks</h1>
+      <BarChart class="bar-chart" :chartData="mostUneffective" :options="options" />
     </div>
     <div class="chart">
       <h1 title="chart-title">All tasks status</h1>
@@ -33,6 +33,17 @@ export default defineComponent({
     data: Object,
     userEffectiveness: Object,
     tasksStatus: Object,
+  },
+  data(){
+    return{
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+      },
+    }
   },
   created() {
     console.log(this.TasksPerUsers);

@@ -41,7 +41,7 @@
 
   .group-container {
     display: flex;
-    padding: 0px 16px 8px 16px;
+    padding: 0px 15px 8px 43px;
 
     @include for-mobile-layout {
       padding: 0px 3.5px;
@@ -110,13 +110,16 @@
 
     .task-preview {
       position: relative;
+
       .edit-icon:before {
         display: none;
+        z-index: 20;
       }
 
-      &:hover{
+      &:hover {
         background-color: rgb(241, 247, 248);
-        box-shadow: #fff,0 15px 0 #091e4240;
+        box-shadow: #fff, 0 15px 0 #091e4240;
+
         .edit-icon:before {
           content: "\e928";
           display: block;
@@ -124,12 +127,14 @@
           top: 4px;
           font-family: trellicons;
           right: 6px;
-          &:hover{
+
+          &:hover {
             background-color: #ebecf0;
             opacity: 1;
           }
+        }
       }
-      }
+
       .task-preview-info {
         margin-top: 10px;
         height: 32px;
@@ -142,6 +147,7 @@
           display: flex;
           margin-bottom: 0px;
           height: -webkit-fill-available;
+          
           * {
             display: flex;
             align-self: center;
@@ -167,13 +173,15 @@
           border-radius: 3px;
           display: flex;
           gap: 5px;
-          .comments-span{
+
+          .comments-span {
             font-size: 12px;
           }
         }
 
         & .done {
           background-color: $clr29;
+
           span {
             color: white;
           }
@@ -196,9 +204,11 @@
         .comments-icon {
           color: #5e6c84;
         }
-        .comments-icon:before{
-            content: "\e91e";
+
+        .comments-icon:before {
+          content: "\e91e";
         }
+
         .watch-icon:before {
           content: "\e969";
         }
@@ -361,6 +371,10 @@
     cursor: pointer;
     border-radius: 3px;
     box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
+
+    &:hover {
+      background-color: rgb(241, 247, 248);
+    }
   }
 
   .card-composure {
@@ -404,6 +418,8 @@
     align-items: center;
     width: -webkit-fill-available;
     margin: 0 4px 8px 8px;
+    padding-inline-start: 5px;
+    padding-top: 5px;
     border: none;
     outline: none;
     border-radius: 3px;

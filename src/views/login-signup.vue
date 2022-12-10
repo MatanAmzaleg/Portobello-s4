@@ -132,14 +132,15 @@ export default {
         this.signupCred.imgUrl = userData.picture
         this.signupCred.fullname = userData.name
         this.signupCred.username = userData.name.trim()
-        this.signupCred.password = ""
+        this.signupCred.password = "google"
         this.doSignup()
     },
     googleLogin(res){
       const userData = decodeCredential(res.credential);
       this.loginCred.fullname = userData.name
-      this.loginCred.password = ""
+      this.loginCred.password = "google"
       this.doLogin()
+      this.$router.push("/board");
     },
     async doLogin() {
       if (!this.loginCred.username) {

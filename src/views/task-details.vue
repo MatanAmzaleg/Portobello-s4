@@ -27,12 +27,9 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <input
-            v-model="task.title"
+          <textarea  v-model="task.title"
             @input="updateTask"
-            class="task-title-input"
-            type="text"
-          />
+            class="task-title-input"></textarea>
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>
@@ -549,6 +546,20 @@ import { now } from "lodash";
 import { Mentionable } from "vue-mention";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
+
+// export const functionsTaskDetails = {
+//   saveTaskMembers,
+//   getTaskMembers,
+//   updateBoard,
+//   saveTaskLabels,
+//   getTaskLabels,
+//   getTaskDate,
+//   saveTaskDate,
+//   removeTaskDate,
+//   getTaskStyle,
+//   saveTaskCover,
+//   deleteTask,
+// }
 
 export default {
   props: {
