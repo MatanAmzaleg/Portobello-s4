@@ -40,7 +40,7 @@ export default {
       currGroup: null,
       // newTaskTxt: " ",
       isAddNewGroup: false,
-      newGroupTxt: " ",
+      newGroupTxt: "",
     };
   },
   async created() {
