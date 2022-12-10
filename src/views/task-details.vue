@@ -27,12 +27,9 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <input
-            v-model="task.title"
+          <textarea  v-model="task.title"
             @input="updateTask"
-            class="task-title-input"
-            type="text"
-          />
+            class="task-title-input"></textarea>
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>

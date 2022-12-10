@@ -24,7 +24,7 @@
 
   .group-container {
     display: flex;
-    padding: 0px 16px 8px 16px;
+    padding: 0px 15px 8px 43px;
 
     @include for-mobile-layout {
       padding: 0px 3.5px;
@@ -387,6 +387,8 @@
     align-items: center;
     width: -webkit-fill-available;
     margin: 0 4px 8px 8px;
+    padding-inline-start: 5px;
+    padding-top: 5px;
     border: none;
     outline: none;
     border-radius: 3px;
