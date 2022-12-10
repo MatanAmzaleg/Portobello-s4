@@ -44,7 +44,6 @@ import boardMenu from "../cmps/board-menu.vue";
 import boardHeader from "../cmps/board-header.vue";
 import groupList from "../cmps/group-list.vue";
 import { eventBus } from "../services/event-bus.service";
-import { socketService, SOCKET_EMIT_SEND_MSG } from '../services/socket.service'
 
 export default {
   name: "board-details",
@@ -57,6 +56,7 @@ export default {
   },
   async created() {
     try {
+      await this.$store.dispatch({type:'loadUsers'})
       eventBus.on("toggleTask", this.updateTaskStatus);
       const { boardId } = this.$route.params;
       this.$store.dispatch({ type: "setCurrBoard", boardId });

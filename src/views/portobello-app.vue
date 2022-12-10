@@ -157,7 +157,7 @@ export default {
   },
   async created() {
     try {
-      this.$store.dispatch({ type: "loadBoards" });
+      await this.$store.dispatch({ type: "loadBoards" });
       const { boardId } = this.$route.params;
       if (boardId) {
         const board = await this.$store.dispatch({

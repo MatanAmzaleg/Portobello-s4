@@ -15,15 +15,22 @@ import homeHeader from './cmps/home-header.vue'
 import userMsg from './cmps/user-msg.vue'
 import { userService } from './services/user.service'
 import { utilService } from './services/util.service'
+import { socketService } from './services/socket.service'
 
 export default {
   created() {
     console.log('Running Portobello!')
+    socketService.on('new-notification',this.addNotification)
     const user = userService.getLoggedinUser()
-    this.$store.dispatch({type:'loadUsers'})
     if (user)  store.commit({type: 'setLoggedinUser', user})
     utilService.fetchListOfPhotos('random')
     utilService.fetchListOfPhotos('random', '2')
+  },
+  methods:{
+    addNotification(msg){
+      console.log(msg)
+      this.$store.commit({type:'addNotification',msg})
+    }
   },
   computed: {
     routeIsHome() {

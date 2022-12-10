@@ -46,10 +46,12 @@
 </template>
 <script>
 import popperModal from "./popper-modal.vue";
+import { socketService } from '../services/socket.service'
+
 export default {
-  created() {
-    this.members = this.$store.getters.users
-    this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members));
+ created() {
+   this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members));
+   this.members = this.$store.getters.users.filter(user => !this.boardMembers.includes(user.username))
   },
   data() {
     return {
@@ -67,12 +69,17 @@ export default {
       return member.imgUrl;
     },
     addMember(member) {
-      let memberIdx = this.members.findIndex((id) => id === member._id);
+      let memberIdx = this.boardMembers.findIndex(m => m._id === member._id);
+      let username = this.$store.getters.loggedinUser.fullname
+      let notification = ''
       if (memberIdx === -1) {
         this.boardMembers.push(member);
+        notification = `${username} Added you to board ` + this.$store.getters.currBoard.title
       } else {
         this.boardMembers.splice(memberIdx, 1);
+        notification = `${username} Removed you from board ` + this.$store.getters.currBoard.title
       }
+      socketService.emit('notification',{notification,to:member._id})
       let newBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
       newBoard.members = this.boardMembers
       this.$store.dispatch({type:"updateBoard", board:newBoard});

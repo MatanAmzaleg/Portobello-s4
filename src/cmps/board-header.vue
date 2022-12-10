@@ -284,7 +284,7 @@ export default {
   },
   computed: {
     getBoardMembers() {
-      return this.board.members.map((member) => member._id);
+      return this.$store.getters.currBoard.members.map((member) => member._id);
     },
     getCurrBoard() {
       return this.$store.getters.currBoard;
