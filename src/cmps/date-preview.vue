@@ -4,7 +4,7 @@
               <input @click.stop @input="changeStatus" v-model="isDone" type="checkbox" class="checkbox-helper date-input" />
               <div class="task-option-btn large">
               <p>{{date}}</p>
-              <p class="task-status" v-if="status" :class="status">{{status}}</p>
+              <p class="task-status" v-if="getStatus" :class="getStatus">{{getStatus}}</p>
               </div>
               </div>
       <template #content="{close}">
@@ -21,7 +21,7 @@ import popperCalendar from './popper-calendar.vue'
 import popperModal from "./popper-modal.vue";
 export default {
     props:{
-        dueDate:String,
+        dueDate:Number,
         status: String,
     },
     created(){
@@ -47,7 +47,7 @@ export default {
         }
     },
     computed:{
-        status(){
+        getStatus(){
             const isoDate = new Date(this.dueDate);
             if(this.isDone) return 'completed'
             if(isoDate.getTime() - Date.now() >= 86349893) return null 

@@ -63,18 +63,27 @@ export default {
   created() {
     this.currBoard = JSON.parse(JSON.stringify(this.getCurrBoard))
     this.filteredLabels = this.currBoard.labels
-    console.log('first')
     eventBus.on('update-focus', this.updateInputFocus)
   },
   methods: {
     addLabel(labelId) {
       let labelIdx = this.labelIds.findIndex((id) => id === labelId);
+      let msg = ''
       if (labelIdx === -1) {
+        msg = 'Added label ' + `'${this.labelText(labelId)}'` + ' to '
         this.labelIds.push(labelId);
       } else {
-        this.labelIds.splice(labelIdx, 1);
+        msg = 'Removed label ' + `'${this.labelText(labelId)}'` + ' from '
+        this.labelIds.splice(labelIdx);
       }
-      this.$emit("save-label", this.labelIds);
+      this.$emit("save-label", {labels:this.labelIds,msg});
+    },
+    labelText(id) {
+      const label = this.filteredLabels.find(
+        (l) => l.id === id
+      );
+      if (!label) return;
+      return label.title;
     },
     checkLabel(id) {
       if (!this.labelIds?.length) return
@@ -82,18 +91,13 @@ export default {
     },
     goEditMode(label) {
       this.chosenLabel = label;
-      console.log(this.chosenLabel);
       this.isEditMode = true;
-      console.log();
     },
     goCreateMode() {
       this.chosenLabel = this.chosenLabel = { color: "#DFE1E6", title: "" };
-      console.log(this.chosenLabel);
       this.isEditMode = true;
-      console.log();
     },
     setLabelColor(color) {
-      console.log(color);
       this.chosenLabel.color = color
     },
     onRemoveColor() {
@@ -132,10 +136,8 @@ export default {
       }
     },
     filterLabels() {
-      console.log(this.filterBy.txt);
       const regex = new RegExp(this.filterBy.txt, "i")
       this.filteredLabels = this.currBoard.labels.filter(l => regex.test(l.title))
-      console.log(this.filteredLabels);
     },
     closeModal() {
       this.$emit("closeModal");

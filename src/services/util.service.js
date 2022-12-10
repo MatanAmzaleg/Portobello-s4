@@ -145,16 +145,21 @@ function lightOrDark(color) {
 
 async function getCalculatedColor(url) {
   let calculateColor = {};
-  try {
-    const fac = new FastAverageColor();
-    return fac.getColorAsync(url).then((color) => {
-      calculateColor.calcColor = color.rgba;
-      calculateColor.isDark = color.isDark;
-      return calculateColor;
-      // eventBus.emit("headerColor", calculateColor);
-    });
-  } catch (err) {
-    console.log(err);
+  if(url[0] === '#'){
+    calculateColor.isDark = true
+    calculateColor.calcColor = url
+    return calculateColor
+  } else {
+    try {
+      const fac = new FastAverageColor();
+      return fac.getColorAsync(url).then((color) => {
+        calculateColor.calcColor = color.rgba;
+        calculateColor.isDark = color.isDark;
+        return calculateColor;
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
 

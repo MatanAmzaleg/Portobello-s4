@@ -18,7 +18,7 @@ import { utilService } from './services/util.service'
 
 export default {
   created() {
-    console.log('Vue App created')
+    console.log('Running Portobello!')
     const user = userService.getLoggedinUser()
     this.$store.dispatch({type:'loadUsers'})
     if (user)  store.commit({type: 'setLoggedinUser', user})

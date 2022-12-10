@@ -20,7 +20,7 @@
           <h4>More</h4>
         </div>
       </div>
-      <hr />
+      <hr class="hr-between-sections"/>
       <div class="activity-section">
         <div class="menu-opt">
           <span class="activity-icon"></span>
@@ -123,11 +123,18 @@ export default {
         console.log(err)
       }
     },
-    setBoardCover(cover) {
-      const newBoard = JSON.parse(JSON.stringify(this.currBoard));
-      console.log(newBoard);
-      newBoard.style = { bgColor: cover.color };
-      this.$emit("updateBoard", newBoard);
+    async setBoardCover(cover) {
+      try{
+        const newBoard = JSON.parse(JSON.stringify(this.currBoard));
+        console.log(newBoard);
+        newBoard.style = { bgColor: cover.color };
+        const calcColor = await utilService.getCalculatedColor(newBoard.style.bgColor);
+        newBoard.style.calcColor = calcColor
+        this.$emit("updateBoard", newBoard);
+      }
+      catch(err){
+        console.log(err)
+      }
     },
     async sendApiReq() {
       if (!this.searchWord) {

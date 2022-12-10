@@ -34,7 +34,6 @@ export const boardStore = {
       const idx = state.boards.findIndex((c) => c._id === board._id);
       state.boards.splice(idx, 1, board);
       state.currBoard = board;
-      console.log(state.currBoard);
     },
     updateRemoveStarredBoard(state, { board }) {
       const idx = state.boards.findIndex((c) => c._id === board._id);
@@ -61,7 +60,6 @@ export const boardStore = {
       try {
         board = await boardService.save(board);
         context.commit({ type: "addBoard", board });
-        // context.commit("setCurrBoard", board)
         return board;
       } catch (err) {
         console.log("boardStore: Error in addBoard", err);
@@ -75,10 +73,10 @@ export const boardStore = {
         (newBoard.style = {
           bgColor: board.style.bgColor,
           imgUrl: board.style.imgUrl,
+          calcColor: board.style.calcColor
         }),
           (board = await boardService.save(newBoard));
         context.commit({ type: "addBoard", board });
-        // context.commit({type:"setCurrBoard", board})
         return board;
       } catch (err) {
         console.log("boardStore: Error in addBoard", err);
@@ -87,11 +85,8 @@ export const boardStore = {
     },
     async updateBoard(context, { board }) {
       try {
-        console.log("before save", board);
         board = await boardService.save(board);
-        console.log("after save", board);
         context.commit({ type: "updateBoard", board });
-        // context.commit("setCurrBoard", board)
         return board;
       } catch (err) {
         console.log("boardStore: Error in updateBoard", err);

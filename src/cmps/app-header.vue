@@ -145,17 +145,20 @@
           </span>
         </div>
         <notifications />
-        <Popper class="user-popper">
+        <Popper offsetDistance="0" class="user-popper">
           <img v-if="loggedInUser" class="user-img" :src="loggedInUser?.imgUrl" alt="member" />
           <template #content="{ close }">
-            <div class="popper-template">
+            <div class="popper-template user-popper-info">
               <h1>Account</h1>
-              <div>
+              <div class="user-info">
                 <img v-if="loggedInUser" class="user-img" :src="loggedInUser?.imgUrl" alt="member" />
-                <p>{{loggedInUser?.fullname}}</p>
-                <p>{{loggedInUser?.username}}</p>
-                <button>Logout</button>
+                <div class="user-info-detailes">
+                  <p>{{loggedInUser?.fullname}}</p>
+                  <p class="username">{{loggedInUser?.username}}</p>
+                </div>
               </div>
+              <span class="line"></span>
+              <button class="btn-logout" @click="doLogout">Log out</button>
             </div>
           </template>
         </Popper>
@@ -174,9 +177,6 @@ export default {
       calculatedColor: null,
     };
   },
-  // created() {
-  //   eventBus.on("headerColor", this.updateHeaderColor);
-  // },
   computed: {
     loggedInUser() {
       return this.$store.getters.loggedinUser;
@@ -191,6 +191,9 @@ export default {
       return this.$store.getters.currBoard;
     },
     getCalcColor() {
+    if(this.$route.path === '/board'){
+      return {color: 'black',isDark:true}
+    }
       return this.$store.getters.currBoard?.style?.calcColor;
     },
   },
@@ -217,6 +220,10 @@ export default {
       console.log("move board");
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`);
+    },
+    doLogout() {
+      this.$store.dispatch({ type: 'logout' })
+      this.$router.push('/')
     },
   },
   components: {

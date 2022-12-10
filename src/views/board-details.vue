@@ -60,15 +60,8 @@ export default {
       eventBus.on("toggleTask", this.updateTaskStatus);
       const { boardId } = this.$route.params;
       this.$store.dispatch({ type: "setCurrBoard", boardId });
-      utilService.getCalculatedColor(this.getCurrBoard.style.imgUrl);
     } catch (err) {
       console.log(err);
-    }
-  },
-  mounted() {
-    if (this.getCurrBoard?.style.imgUrl) {
-      utilService.getCalculatedColor(this.getCurrBoard.style.imgUrl);
-    } else {
     }
   },
   methods: {

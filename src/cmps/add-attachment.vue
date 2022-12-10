@@ -45,6 +45,7 @@ export default {
       this.$emit('addAttachment', attachment)
     },
     async uploadAttachment(ev) {
+      this.$notify({type:'success',title:'Uploading files'})
       try {
         const { secure_url } = await uploadService.uploadImg(ev)
         this.link = secure_url

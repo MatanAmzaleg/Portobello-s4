@@ -148,11 +148,15 @@
           overflow: hidden;
           padding: 2px;
           border-radius: 3px;
+          display: flex;
+          gap: 5px;
+          .comments-span{
+            font-size: 12px;
+          }
         }
 
         & .done {
           background-color: $clr29;
-
           span {
             color: white;
           }
@@ -162,7 +166,8 @@
         .description-icon,
         .attachment-icon,
         .checklist-icon,
-        .clock-icon {
+        .clock-icon,
+        .comments-icon {
           font-family: trellicons !important;
           font-size: 16px;
         }
@@ -170,10 +175,13 @@
         .watch-icon,
         .description-icon,
         .attachment-icon,
-        .checklist-icon {
+        .checklist-icon,
+        .comments-icon {
           color: #5e6c84;
         }
-
+        .comments-icon:before{
+            content: "\e91e";
+        }
         .watch-icon:before {
           content: "\e969";
         }
@@ -390,7 +398,7 @@
     margin-inline: 8px;
 
     .add-card-btn {
-      width: 70px;
+      width: 82px;
       height: 32px;
       margin: 5px 10px 5px 0px;
       border-radius: 3px;
