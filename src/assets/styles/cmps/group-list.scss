@@ -93,13 +93,16 @@
 
     .task-preview {
       position: relative;
+
       .edit-icon:before {
         display: none;
+        z-index: 20;
       }
 
-      &:hover{
+      &:hover {
         background-color: rgb(241, 247, 248);
-        box-shadow: #fff,0 15px 0 #091e4240;
+        box-shadow: #fff, 0 15px 0 #091e4240;
+
         .edit-icon:before {
           content: "\e928";
           display: block;
@@ -107,12 +110,14 @@
           top: 4px;
           font-family: trellicons;
           right: 6px;
-          &:hover{
+
+          &:hover {
             background-color: #ebecf0;
             opacity: 1;
           }
+        }
       }
-      }
+
       .task-preview-info {
         margin-top: 10px;
         height: 32px;
@@ -125,6 +130,7 @@
           display: flex;
           margin-bottom: 0px;
           height: -webkit-fill-available;
+
           * {
             display: flex;
             align-self: center;
@@ -150,13 +156,15 @@
           border-radius: 3px;
           display: flex;
           gap: 5px;
-          .comments-span{
+
+          .comments-span {
             font-size: 12px;
           }
         }
 
         & .done {
           background-color: $clr29;
+
           span {
             color: white;
           }
@@ -179,9 +187,11 @@
         .comments-icon {
           color: #5e6c84;
         }
-        .comments-icon:before{
-            content: "\e91e";
+
+        .comments-icon:before {
+          content: "\e91e";
         }
+
         .watch-icon:before {
           content: "\e969";
         }
