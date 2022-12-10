@@ -191,7 +191,7 @@ export default {
       return this.$store.getters.currBoard;
     },
     getCalcColor() {
-    if(this.$route.path === '/board'){
+    if(this.$route.path === '/board' || '/login'){
       return {color: 'black',isDark:true}
     }
       return this.$store.getters.currBoard?.style?.calcColor;

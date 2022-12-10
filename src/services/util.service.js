@@ -50,7 +50,7 @@ async function fetchListOfPhotos(query = "", page = "1") {
     });
     saveToStorage(STORAGE_KEY, imgs);
   } catch (err) {
-    console.log("Cannot load photos", err);
+  console.log("Cannot load photos", err);
     throw err;
   }
 }
