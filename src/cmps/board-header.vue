@@ -106,7 +106,7 @@
                 </label>
                 <label class="member-label" for="">
                   <input type="checkbox" />
-                  <p>photo</p>
+                  <img :src="userImg" class="member-img-card">
                   <p>Cards assigned to me</p>
                 </label>
                 <label class="member-label" for="">
@@ -164,8 +164,8 @@
                 </label>
               </section>
 
-              <section class="labels-filter">
                 <p class="mini-title">Labels</p>
+              <section class="labels-filter">
                 <label class="member-label" for="">
                   <input
                     type="checkbox"
@@ -176,17 +176,9 @@
                   <span class="label-icon icon-actions grey-icon"></span>
                   <p>No labels</p>
                 </label>
-                <label class="member-label" for="">
+                <label v-for="label in labelsToShow" class="member-label" for="">
                   <input type="checkbox" />
-                  <button class="label-btn"></button>
-                </label>
-                <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <button class="label-btn"></button>
-                </label>
-                <label class="member-label" for="">
-                  <input type="checkbox" />
-                  <button class="label-btn"></button>
+                  <button class="label-btn" :style="{ 'background-color': labelColor(label) }"></button>
                 </label>
               </section>
             </section>
@@ -249,10 +241,20 @@ export default {
       isModalOpen: false,
       boardName: "",
       calculatedColor: null,
+      labelsToShow:null,
     };
   },
   created() {
-    eventBus.on("headerColor", this.updateHeaderColor);
+    let board = JSON.parse(JSON.stringify(this.getCurrBoard))
+    let labelsToShow = []
+    board.groups.map(group => {
+          return group.tasks.map(task => 
+          {
+            if(task.labelIds?.length)labelsToShow.push(...task.labelIds)
+            return task
+          })
+        })
+        this.labelsToShow = labelsToShow
   },
   methods: {
     setFilter() {
@@ -285,6 +287,13 @@ export default {
       this.isModalOpen = false;
       this.$router.push(`/board/${this.board._id}/dashboard-route`);
     },
+    labelColor(id) {
+      const label = this.$store.getters.currBoard.labels.find((l) => {
+        return l.id === id;
+      });
+      if (!label) return;
+      return label.color;
+    },
   },
   computed: {
     getBoardMembers() {
@@ -296,6 +305,9 @@ export default {
     getCalcColor() {
       return this.$store.getters.currBoard?.style?.calcColor;
     },
+    userImg(){
+      return this.$store.getters.loggedinUser.imgUrl
+    }
   },
   components: {
     miniUsers,
