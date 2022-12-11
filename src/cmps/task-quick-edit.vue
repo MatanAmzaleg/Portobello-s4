@@ -1,5 +1,5 @@
 <template>
-  <section class="quick-edit">
+  <section class="quick-edit" v-if="isQuickEditOpen">
     <div>
       <section class="task-list">
         <div class="cover" v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'" :style="
@@ -75,7 +75,7 @@
         <template #content="{ close }">
           <div class="quick-popper-left">
             <popperLabel @closeModal="close" @updateBoard="updateBoard" @saveLabel="saveLabel"
-            :labelIds="getTaskLabels" />
+              :labelIds="getTaskLabels" />
           </div>
         </template>
       </Popper>
@@ -135,6 +135,7 @@ import TaskDatePreview from "./task-date-preview.vue";
 import popperMember from "./popper-member.vue";
 import popperLabel from "./popper-label.vue";
 import popperCover from "./popper-cover.vue";
+import { eventBus } from "../services/event-bus.service";
 
 // export const functionsTaskDetails = {
 //   saveTaskMembers,
@@ -158,15 +159,21 @@ export default {
     return {
       task: {},
       taskTitle: '',
-      currBoard: {}
+      currBoard: {},
+      isQuickEditOpen: false
     };
   },
   created() {
     this.taskTitle = this.item?.title
     this.task = this.item
     this.currBoard = this.getCurrBoard
+    eventBus.on('updateQuickIsOpen', this.updateIsOpen)
   },
   methods: {
+    updateIsOpen(isOpen) {
+      console.log('isOPen', isOpen)
+      this.isQuickEditOpen = isOpen
+    },
     labelColor(id) {
       const label = this.$store.getters.currBoard.labels.find((l) => {
         return l.id === id;
@@ -192,9 +199,10 @@ export default {
         item.isWatched
       );
     },
-    gotoTask(taskId){
+    gotoTask(taskId) {
       const boardId = this.$store.getters.currBoard._id
       this.$router.push(`${boardId}/task/${taskId}`)
+      eventBus.emit('updatePoperIsOpen', false)
     },
     getTodoStatus(checklists) {
       if (!checklists.length) return;

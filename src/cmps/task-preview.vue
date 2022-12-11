@@ -84,6 +84,7 @@ export default {
   },
   methods: {
     updatePopperMode(){
+      console.log('click open')
       eventBus.emit('updatePoperIsOpen', true)
     },
     labelColor(id) {
