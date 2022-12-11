@@ -548,20 +548,6 @@ import { Mentionable } from "vue-mention";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
 
-// export const functionsTaskDetails = {
-//   saveTaskMembers,
-//   getTaskMembers,
-//   updateBoard,
-//   saveTaskLabels,
-//   getTaskLabels,
-//   getTaskDate,
-//   saveTaskDate,
-//   removeTaskDate,
-//   getTaskStyle,
-//   saveTaskCover,
-//   deleteTask,
-// }
-
 export default {
   props: {
     currBoard: Object,
@@ -666,7 +652,6 @@ export default {
       this.updateTask();
     },
     saveTaskLabels({ labels, msg }) {
-      console.log(labels, msg);
       this.task.labelIds = labels;
       this.task.lastActivity = {
         msg: msg + this.task.title,
@@ -690,7 +675,6 @@ export default {
       this.updateTask();
     },
     saveTaskMembers({ members, msg }) {
-      console.log(members, msg);
       this.task.memberIds = members;
       this.task.lastActivity = {
         msg: msg + this.task.title,

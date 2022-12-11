@@ -163,7 +163,6 @@ export const boardStore = {
       }
     },
     async deleteTask({ commit }, { board, taskId }) {
-      console.log(taskId);
       try {
         const newBoard = await boardService.removeTask(board, taskId);
         commit({ type: "updateBoard", board: newBoard });

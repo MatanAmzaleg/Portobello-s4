@@ -23,8 +23,6 @@
 import { defineComponent } from "vue";
 import { DoughnutChart, BarChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
-import TaskList from "./task-list.vue";
-
 Chart.register(...registerables);
 
 export default defineComponent({
@@ -45,13 +43,8 @@ export default defineComponent({
       },
     }
   },
-  created() {
-    console.log(this.TasksPerUsers);
-    console.log(this.userEffectiveness);
-  },
   computed: {
     TasksPerUsers() {
-      console.log(this.data);
       const TasksPerUsersToSend = { labels: [], datasets: [{ data: [] }] };
       for (const m in this.data) {
         TasksPerUsersToSend.labels.push(m);
@@ -91,14 +84,11 @@ export default defineComponent({
         ],
       };
       for (const userE in this.userEffectiveness) {
-        console.log(this.userEffectiveness[userE]);
         userEffectiveness.labels.push(userE);
         userEffectiveness.datasets[0].data.push(
           this.userEffectiveness[userE].completed
         );
-        console.log(userEffectiveness.labels);
       }
-      console.log(userEffectiveness);
       return userEffectiveness;
     },
     mostUneffective() {
@@ -118,18 +108,14 @@ export default defineComponent({
         ],
       };
       for (const userE in this.userEffectiveness) {
-        console.log(this.userEffectiveness[userE]);
         userEffectiveness.labels.push(userE);
         userEffectiveness.datasets[0].data.push(
           this.userEffectiveness[userE].uncompleted
         );
-        console.log(userEffectiveness.labels);
       }
-      console.log(userEffectiveness);
       return userEffectiveness;
     },
     getTasksStatus() {
-      console.log(this.tasksStatus);
       const tasksStatuses = {
         labels: [],
         datasets: [
@@ -148,7 +134,6 @@ export default defineComponent({
       for (const status in this.tasksStatus) {
         tasksStatuses.labels.push(status);
         tasksStatuses.datasets[0].data.push(this.tasksStatus[status]);
-        console.log(tasksStatuses);
       }
       return tasksStatuses;
     },
@@ -156,5 +141,3 @@ export default defineComponent({
   components: { DoughnutChart, BarChart },
 });
 </script>
-
-<style></style>

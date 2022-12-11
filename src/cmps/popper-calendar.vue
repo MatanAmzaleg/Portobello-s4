@@ -20,6 +20,7 @@ export default {
   methods: {
     saveDate() {
       this.$emit("save-date", this.date);
+      this.$emit("closeModal");
     },
     removeDate() {
       this.$emit("remove-date");

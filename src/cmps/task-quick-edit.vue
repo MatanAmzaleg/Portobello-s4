@@ -154,13 +154,14 @@ import { eventBus } from "../services/event-bus.service";
 export default {
   props: {
     item: Object,
+    isLabelsExtended: Boolean
   },
   data() {
     return {
       task: {},
       taskTitle: '',
       currBoard: {},
-      isQuickEditOpen: false
+      isQuickEditOpen: false,
     };
   },
   async created() {
@@ -185,7 +186,6 @@ export default {
       eventBus.emit('updatePoperIsOpen', false)
     },
     updateIsOpen(isOpen) {
-      console.log('isOPen', isOpen)
       this.isQuickEditOpen = isOpen
     },
     labelColor(id) {
@@ -193,7 +193,6 @@ export default {
         return l.id === id;
       });
       if (!label) return;
-      console.log('label.color', label.color)
       return label.color;
     },
     labelText(id) {
@@ -229,21 +228,15 @@ export default {
       this.isDone = allTasks === doneTasks ? true : false;
       return `${doneTasks}/${allTasks}`;
     },
-    openLabelExtended() {
-      this.isLabelsExtended = !this.isLabelsExtended;
-      this.labelExtendedClass;
-    },
     getLabelTitle(labelId) {
       const boardLabels = this.currBoard.labels;
       const label = boardLabels.find((l) => l.id === labelId);
-      console.log(label);
       return label.title;
     },
     updateQuickEdit() {
       this.$emit('updateQuickEdit', item.id)
     },
     async updateBoard(board) {
-      console.log('newBoard', board)
       await this.$store.dispatch({ type: "updateBoard", board });
     },
     async updateTask() {
@@ -265,7 +258,6 @@ export default {
       }
     },
     addMember({ members, msg }) {
-      console.log('test');
       this.task.memberIds = members;
       this.task.lastActivity = {
         msg: msg + this.task.title,
@@ -275,11 +267,41 @@ export default {
       this.updateTask()
     },
     saveLabel({ labels, msg }) {
-      console.log('entered!', labels)
-      console.log(labels, msg);
       this.task.labelIds = labels;
       this.task.lastActivity = {
         msg: msg + this.task.title,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
+      this.updateTask();
+    },
+    setCover({ color, mode }) {
+      if (color?.charAt(0) === "#") this.task.style = { bgColor: color, mode };
+      else this.task.style = { imgUrl: color, mode };
+      this.task.lastActivity = {
+        msg: `Added cover to ${this.task.title}`,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
+      this.updateTask();
+    },
+    openLabelExtended(){
+      console.log('openLabelExtended')
+      this.$emit('openLabelExtended')
+    },
+    removeDate() {
+      this.task.dueDate = "";
+      this.task.lastActivity = {
+        msg: `Removed Due Date to ${this.task.title}`,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
+      this.updateTask();
+    },
+    saveDate(date) {
+      this.task.dueDate = date;
+      this.task.lastActivity = {
+        msg: `Added Due Date to ${this.task.title}`,
         byMember: this.$store.getters.loggedinUser,
         date: Date.now(),
       };
@@ -289,7 +311,6 @@ export default {
   computed: {
     getTaskLabels() {
       const labels = JSON.parse(JSON.stringify(this.task.labelIds))
-      console.log('all Labels', labels)
       return labels;
     },
     getTaskMembers() {
@@ -301,6 +322,13 @@ export default {
     },
     getCurrBoard() {
       return this.$store.getters.currBoard;
+    },
+    style() {
+      return this.task.style;
+    },
+    labelExtendedClass() {
+      if (this.isLabelsExtended) return "label-extended";
+      return "label";
     },
   },
   components: {

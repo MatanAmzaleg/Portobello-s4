@@ -290,7 +290,6 @@ export default {
       this.boardTitle = ev.target.value;
     },
     updatemoreMode(currModal) {
-      console.log("currModal", currModal);
       this.moreMode = currModal;
     },
     async addBoard() {
@@ -300,9 +299,7 @@ export default {
           style: this.selectedBackground,
         };
         const styleToSend = (this.selectedBackground.bgColor !== '') ? this.selectedBackground.bgColor : this.selectedBackground.imgUrl  
-        console.log(styleToSend);
         board.style.calcColor = await utilService.getCalculatedColor(styleToSend);
-        console.log(board.style);
         const newBoard = await this.$store.dispatch({
           type: "createNewBoard",
           board,

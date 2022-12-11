@@ -80,7 +80,6 @@ export default {
     },
     updateBoard(board) {
       this.currBoard = board;
-      console.log("board test", board);
       this.$store.dispatch({
         type: "updateBoard",
         board,

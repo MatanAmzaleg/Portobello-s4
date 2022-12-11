@@ -15,7 +15,7 @@
     <template #content="{ close }">
       <div class="popper-content label-picker date-picker">
         <popper-modal title="Dates" @closeModal="close" />
-        <popper-calendar @removeDate="removeDate" @saveDate="saveDate" />
+        <popper-calendar @removeDate="removeDate" @saveDate="saveDate" @closeModal="close"/>
       </div>
     </template>
   </Popper>

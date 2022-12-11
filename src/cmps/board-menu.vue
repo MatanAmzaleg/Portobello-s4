@@ -127,7 +127,6 @@ export default {
     async setBoardCover(cover) {
       try{
         const newBoard = JSON.parse(JSON.stringify(this.currBoard));
-        console.log(newBoard);
         newBoard.style = { bgColor: cover.color };
         const calcColor = await utilService.getCalculatedColor(newBoard.style.bgColor);
         newBoard.style.calcColor = calcColor
@@ -144,7 +143,6 @@ export default {
       }
       await utilService.fetchListOfPhotos(this.searchWord);
       this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 14);
-      console.log(this.searchedImgs);
     },
     getActivityTime(ts) {
       if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(new Date(ts), "'Before' H 'hours'");
