@@ -2,6 +2,7 @@ import { ACCES_KEY } from "../../secret.js";
 import { storageService } from "./async-storage.service.js";
 import { eventBus } from "./event-bus.service";
 import { FastAverageColor } from "fast-average-color";
+import { store } from "../store/store.js"
 
 export const utilService = {
   makeId,
@@ -57,11 +58,16 @@ async function fetchListOfPhotos(query = "", page = "1") {
 
 async function filterBoard(board, filterBy) {
   try {
-    const { txt, noMembers, noDates, overdue, dueNextDay, noLabels } = filterBy;
+    const { txt, noMembers, noDates, overdue, dueNextDay, noLabels,byMe,labels } = filterBy;
     const regex = new RegExp(txt, "i");
+    let loggedInId = store?.getters?.loggedinUser._id
+    console.log(loggedInId)
     let filteredtasks = board.groups.map((group) =>
       group.tasks.filter((task) => regex.test(task.title))
     );
+    if(byMe)
+      filteredtasks = filteredtasks.map((group) =>
+      group.filter((t) => t.memberIds.includes(loggedInId)))
     if (noMembers)
       filteredtasks = filteredtasks.map((group) =>
         group.filter((t) => !t.memberIds.length)
@@ -86,6 +92,10 @@ async function filterBoard(board, filterBy) {
             t.status !== "completed"
         )
       );
+    if(labels)
+    filteredtasks = filteredtasks.map((group) =>
+    group.filter((t) => t.labelIds.filter(labelId => labels.includes(labelId)))
+    )
     if (noLabels)
       filteredtasks = filteredtasks.map((group) =>
         group.filter((t) => !t.labelIds.length)

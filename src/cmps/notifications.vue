@@ -48,10 +48,6 @@ export default {
     cleanNotifications(){
       this.isNewNotification = false
       this.unread = 0
-      // setTimeout(() => [
-      //   this.$store.commit({type:'cleanNotification'})
-
-      // ])
     }
   },
   computed: {

@@ -111,7 +111,10 @@
                   <p>No members</p>
                 </label>
                 <label class="member-label" for="">
-                  <input type="checkbox" />
+                  <input type="checkbox"                     
+                    :checked="filterBy.byMe"
+                    v-model="filterBy.byMe"
+                    @input="setFilter"/>
                   <img :src="userImg" class="member-img-card" />
                   <p>Cards assigned to me</p>
                 </label>
@@ -182,7 +185,10 @@
                   class="member-label"
                   for=""
                 >
-                  <input type="checkbox" />
+                  <input type="checkbox"
+                    :checked="filterBy.labels"
+                    v-model="filterBy.labels"
+                    @change="setFilter" />
                   <button
                     class="label-btn"
                     :style="{ 'background-color': labelColor(label) }"
@@ -245,6 +251,8 @@ export default {
         overdue: false,
         dueNextDay: false,
         noLabels: false,
+        byMe:false,
+        labels:[],
       },
       isModalOpen: false,
       boardName: "",
