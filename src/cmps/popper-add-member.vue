@@ -30,7 +30,7 @@
       <div class="members">
         <h5 class="board-members-title">Members</h5>
         <div class="board-members">
-          <div @click="addMember(member)" v-for="member in members" class="member">
+          <div @click="addMember(member)" v-for="member in filteredMembers" class="member">
             <img class="member-img" :src="member.imgUrl" />
             <p class="member-name">{{ member.fullname }}</p>
             <font-awesome-icon
@@ -53,6 +53,7 @@ export default {
    this.boardMembers = JSON.parse(JSON.stringify(this.$store.getters.currBoard.members));
    this.membersToShow = this.boardMembers
    this.members = this.$store.getters.users
+   this.filteredMembers
   },
   data() {
     return {
@@ -94,6 +95,15 @@ export default {
     },closeModal() {
       this.$emit("closeModal");
     },
+  },
+  computed: {
+    filteredMembers(){
+      return(this.members.filter(member => {
+    return !this.membersToShow.some(m => {
+      return member._id === m._id;
+    });
+  }))
+    }
   },
   components: {
     popperModal,
