@@ -7,12 +7,14 @@
   height: calc(100vh - 44px);
   overflow: hidden;
   z-index: 10;
-
   .board-activities {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-height: 50px;
     margin-top: 15px;
+    // flex-wrap: wrap;
+    overflow-y:scroll;
 
     .board-activity {
       display: grid;

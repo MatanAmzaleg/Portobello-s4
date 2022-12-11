@@ -17,7 +17,7 @@ export const userStore = {
     },
     mutations: {
         addNotification(state, {msg}){
-            state.notifications.push(msg)
+            state.notifications.unshift(msg)
         },
         setLoggedinUser(state, { user }) {
             // Yaron: needed this workaround as for score not reactive from birth

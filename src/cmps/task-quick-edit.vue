@@ -63,7 +63,7 @@
       <button class="save-btn">Save</button>
     </div>
     <div class="actions-quick">
-      <button class="button-quick-edit">
+      <button @click="gotoTask(item.id)" class="button-quick-edit">
         <span class="header-icon icon-actions"></span>
         Open card
       </button>
@@ -191,6 +191,10 @@ export default {
         item.dueDate ||
         item.isWatched
       );
+    },
+    gotoTask(taskId){
+      const boardId = this.$store.getters.currBoard._id
+      this.$router.push(`${boardId}/task/${taskId}`)
     },
     getTodoStatus(checklists) {
       if (!checklists.length) return;

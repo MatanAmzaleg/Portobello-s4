@@ -19,6 +19,7 @@
 <script>
 import popperModal from './popper-modal.vue';
 import { eventBus } from '../services/event-bus.service';
+import { socketService } from '../services/socket.service';
 export default {
   props: {
     members: Array
@@ -55,14 +56,22 @@ export default {
       } 
       let memberIdx = this.members.findIndex(id => id === memberId)
       let msg =''
+      let notification = {}
+      let username = this.$store.getters.loggedinUser.fullname
       if (memberIdx === -1) {
         this.members.push(memberId)
         msg = `Added ${this.getMemberName(memberId)} to `
+        notification.msg = `${username} Added you to task ` + this.$store.getters.currTask.title
+        notification.imgUrl = this.$store.getters.loggedinUser.imgUrl
       }
       else {
         this.members.splice(memberIdx, 1)
         msg = `Removed ${this.getMemberName(memberId)} from `
+        notification.msg = `${username} Removed you from task ` + this.$store.getters.currTask.title
+        notification.imgUrl = this.$store.getters.loggedinUser.imgUrl
       }
+      socketService.emit('notification',{notification,to:memberId})
+      console.log(notification);
       this.$emit('add-member', {members:this.members,msg})
     },
     closeModal() {

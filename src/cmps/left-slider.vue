@@ -5,7 +5,7 @@
         <h1>P</h1>
       </div>
       <div class="titles flex">
-        <h3>Portobello Workspace</h3>
+        <h3>Portobello workspace</h3>
         <p>Free</p>
       </div>
       <button class="left-arrow" @click="$emit('closeSliderMenu')">
@@ -27,6 +27,16 @@
         <button class="plus">
           <font-awesome-icon class="icon-plus" icon="fa-solid fa-plus" />
         </button>
+        <!-- <Popper :append-to-body="true" @open:popper="addFocus">
+    <div>
+      <button class="plus">
+          <font-awesome-icon class="icon-plus" icon="fa-solid fa-plus" />
+        </button>
+    </div>
+    <template #content="{ close }">
+      <popperMember @closeModal="close" @addMember="addMember" :members="currBoard?.members" />
+    </template>
+  </Popper> -->
       </div>
     </div>
     <div class="your-boards-section">
@@ -64,19 +74,21 @@
 
 <script>
 import createBoardPopperTemplate from './create-board-popper-template.vue';
+import popperMember from './popper-member.vue';
 export default {
     data(){
         return{
-            boards:null
+            boards:null,
+            currBoard:null,
         }
     },
     async created(){
         await this.$store.dispatch({type:'loadBoards'})
         this.boards = this.getBoards 
+        this.currBoard = this.getCurrBoard
     },
     methods: {
         moveToBoard(board) {
-      console.log("move board");
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`);
     },
@@ -93,7 +105,8 @@ export default {
     }
   },
   components:{
-    createBoardPopperTemplate
+    createBoardPopperTemplate,
+    popperMember
   }
 };
 </script>

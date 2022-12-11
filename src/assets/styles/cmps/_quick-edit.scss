@@ -62,7 +62,7 @@
 
     .task-preview {
         position: relative;
-
+        min-height: max-content;
         .edit-icon:before {
             display: none;
             z-index: 60;
@@ -117,10 +117,10 @@
             }
 
             .task-preview-checklist {
-                max-width: 45px;
+                width: 45px;
                 max-height: 20px;
                 overflow: hidden;
-                padding: 2px;
+                padding: 2px 8px 2px;
                 border-radius: 3px;
                 display: flex;
                 gap: 5px;

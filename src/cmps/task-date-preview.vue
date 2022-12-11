@@ -54,9 +54,9 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2px;
+    gap: 3px;
+    padding: 2px 5px 2px;
     border-radius: 3px;
-
     &:hover {
         filter: contrast(80%);
 
@@ -67,8 +67,7 @@ export default {
     }
 
     a {
-        margin-left: 2px;
-        font-size: 13px !important;
+        font-size: 12px !important;
     }
 
     .clock-icon:before {
