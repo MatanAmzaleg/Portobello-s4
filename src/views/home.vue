@@ -4,7 +4,7 @@
       <div class="home-page-info">
         <div class="info">
           <h1>Portobello brings all your tasks, teammates, and tools together</h1>
-          <h3>Keep everything in the same place — even if your team isn’t.</h3>
+          <h3>Keep everything in the same place-even if your team isn’t.</h3>
           <div class="home-page-sign">
             <button class="btn-sign" @click="doLogin">Start demo</button>
             <!-- <router-link to="/board" class="btn-sign"><button click="doLogin">Start demo</button></router-link> -->
