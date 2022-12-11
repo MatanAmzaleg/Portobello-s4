@@ -36,7 +36,11 @@ export default {
   },
   methods:{
     updatePoper(isOpen) {
+      console.log('isOpen root', isOpen)
       this.poperIsOpen = isOpen
+      setTimeout(() => {
+        eventBus.emit('updateQuickIsOpen', isOpen)
+      }, 50)
     },
     addNotification(msg){
       console.log(msg)
