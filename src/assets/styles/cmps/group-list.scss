@@ -1,19 +1,19 @@
 .card-ghost {
   transition: transform 0.18s ease;
   transform: rotateZ(5deg);
- }
- .card-ghost-drop {
+}
+.card-ghost-drop {
   transition: transform 0.18s ease-in-out;
   transform: rotateZ(0deg);
- }
+}
 .card-ghost2 {
   transition: transform 0.18s ease;
   transform: rotateZ(20deg);
- }
- .card-ghost2-drop {
+}
+.card-ghost2-drop {
   transition: transform 0.18s ease-in-out;
   transform: rotateZ(0deg);
- }
+}
 
 .board-details {
   width: 100%;
@@ -56,8 +56,8 @@
     font-size: 14px;
     line-height: 24px;
     font-weight: 600;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-      Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     width: 84%;
     padding-inline-start: 5px;
 
@@ -102,11 +102,13 @@
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
         background: rgb(255, 255, 255);
-        background: linear-gradient(180deg,
-            rgba(255, 255, 255, 0.053658963585434205) 0%,
-            rgba(255, 255, 255, 0.40379901960784315) 34%,
-            rgba(255, 255, 255, 0.6979166666666667) 67%,
-            rgba(255, 255, 255, 0.8491771708683473) 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.053658963585434205) 0%,
+          rgba(255, 255, 255, 0.40379901960784315) 34%,
+          rgba(255, 255, 255, 0.6979166666666667) 67%,
+          rgba(255, 255, 255, 0.8491771708683473) 100%
+        );
       }
     }
 
@@ -144,14 +146,14 @@
         align-items: center;
         display: flow-root;
         height: fit-content;
-        
+
         .task-preview-content {
           gap: 7px;
           float: left;
           display: flex;
           margin-bottom: 0px;
           height: -webkit-fill-available;
-          
+
           * {
             display: flex;
             align-self: center;
@@ -294,7 +296,7 @@
 
     &::-webkit-scrollbar-thumb {
       border-radius: 5px;
-      background-color: #BFC4CE;
+      background-color: #bfc4ce;
       margin-inline-end: 2px;
     }
 
@@ -380,8 +382,8 @@
       background-color: rgb(241, 247, 248);
     }
   }
-  .task:last-child{
-    margin-bottom: 1px;
+  .task:first-child {
+    margin-top: 1px;
   }
 
   .card-composure {
@@ -420,6 +422,7 @@
   .textarea {
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
       Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    height: 52px;
     resize: none;
     display: flex;
     align-items: center;

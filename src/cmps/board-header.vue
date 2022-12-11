@@ -1,8 +1,16 @@
 <template>
   <section v-if="board" class="board-header">
     <div class="left-section">
-      <div v-if="!isSliderOpen" @click="$emit('openSliderMenu')" class="right-arrow">
-        <font-awesome-icon  :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }" class="right-arrow-icon" icon="fa-solid fa-angle-right" />
+      <div
+        v-if="!isSliderOpen"
+        @click="$emit('openSliderMenu')"
+        class="right-arrow"
+      >
+        <font-awesome-icon
+          :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }"
+          class="right-arrow-icon"
+          icon="fa-solid fa-angle-right"
+        />
       </div>
       <span
         :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }"
@@ -24,9 +32,7 @@
           icon="fa-regular fa-star"
         />
         <font-awesome-icon
-          :style="
-            !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
-          "
+          :style="{ color: '#F2D600' }"
           v-if="board.isStarred"
           class="yellow-star"
           icon="fa-solid fa-star"
@@ -106,7 +112,7 @@
                 </label>
                 <label class="member-label" for="">
                   <input type="checkbox" />
-                  <img :src="userImg" class="member-img-card">
+                  <img :src="userImg" class="member-img-card" />
                   <p>Cards assigned to me</p>
                 </label>
               </section>
@@ -159,7 +165,7 @@
                 </label>
               </section>
 
-                <p class="mini-title">Labels</p>
+              <p class="mini-title">Labels</p>
               <section class="labels-filter">
                 <label class="member-label" for="">
                   <input
@@ -171,9 +177,16 @@
                   <span class="label-icon icon-actions grey-icon"></span>
                   <p>No labels</p>
                 </label>
-                <label v-for="label in labelsToShow" class="member-label" for="">
+                <label
+                  v-for="label in labelsToShow"
+                  class="member-label"
+                  for=""
+                >
                   <input type="checkbox" />
-                  <button class="label-btn" :style="{ 'background-color': labelColor(label) }"></button>
+                  <button
+                    class="label-btn"
+                    :style="{ 'background-color': labelColor(label) }"
+                  ></button>
                 </label>
               </section>
             </section>
@@ -186,12 +199,13 @@
       ></mini-users-designed>
       <Popper>
         <button
-        class="share-button"
+          class="share-button"
           :style="
             !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
           "
-          >Share</button
         >
+          Share
+        </button>
         <template #content="{ close }">
           <popperAddMember @closeModal="close" />
         </template>
@@ -219,7 +233,7 @@ import popperModal from "./popper-modal.vue";
 export default {
   props: {
     board: Object,
-    isSliderOpen:Boolean,
+    isSliderOpen: Boolean,
   },
   data() {
     return {
@@ -235,20 +249,19 @@ export default {
       isModalOpen: false,
       boardName: "",
       calculatedColor: null,
-      labelsToShow:null,
+      labelsToShow: null,
     };
   },
   created() {
-    let board = JSON.parse(JSON.stringify(this.getCurrBoard))
-    let labelsToShow = []
-    board.groups.map(group => {
-          return group.tasks.map(task => 
-          {
-            if(task.labelIds?.length)labelsToShow.push(...task.labelIds)
-            return task
-          })
-        })
-        this.labelsToShow = labelsToShow
+    let board = JSON.parse(JSON.stringify(this.getCurrBoard));
+    let labelsToShow = [];
+    board.groups.map((group) => {
+      return group.tasks.map((task) => {
+        if (task.labelIds?.length) labelsToShow.push(...task.labelIds);
+        return task;
+      });
+    });
+    this.labelsToShow = labelsToShow;
   },
   methods: {
     setFilter() {
@@ -277,7 +290,7 @@ export default {
       this.$store.dispatch({ type: "updateBoard", board });
     },
     goToDshboard() {
-      this.$emit("closeBoardMenu")
+      this.$emit("closeBoardMenu");
       this.isModalOpen = false;
       this.$router.push(`/board/${this.board._id}/dashboard-route`);
     },
@@ -299,16 +312,16 @@ export default {
     getCalcColor() {
       return this.$store.getters.currBoard?.style?.calcColor;
     },
-    userImg(){
-      return this.$store.getters.loggedinUser.imgUrl
-    }
+    userImg() {
+      return this.$store.getters.loggedinUser.imgUrl;
+    },
   },
   components: {
     miniUsers,
     memberPicker,
     miniUsersDesigned,
     popperAddMember,
-    popperModal
+    popperModal,
   },
 };
 </script>
