@@ -92,7 +92,7 @@ function removeTask(board, taskId) {
       return task.id === taskId
     }))
     boardCopy.groups[groupIdx].tasks.splice(taskIdx,1)
-    return httpService.put(STORAGE_KEY, boardCopy)
+    return httpService.put(BASE_URL+`${boardCopy._id}`, boardCopy)
 }
 
 function getTask(boardId, groupId, taskId) {

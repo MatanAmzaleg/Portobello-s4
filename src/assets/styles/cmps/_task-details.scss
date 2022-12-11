@@ -1,6 +1,9 @@
 .header-icon {
   margin-top: 1px;
 }
+.btn-details{
+  color: #606266 !important;
+}
 .add-comment-frame{
   background-color: #fff;
   border-radius: 3px;
@@ -347,7 +350,7 @@
 
 .description-info {
   margin-top: 12px;
-  padding: 7px 0px !important;
+  padding: 7px 12px !important;
   color: $clr5;
   border-radius: 4px;
   font-size: 14px;

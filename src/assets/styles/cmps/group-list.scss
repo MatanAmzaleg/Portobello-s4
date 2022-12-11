@@ -1,3 +1,20 @@
+.card-ghost {
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg);
+ }
+ .card-ghost-drop {
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg);
+ }
+.card-ghost2 {
+  transition: transform 0.18s ease;
+  transform: rotateZ(20deg);
+ }
+ .card-ghost2-drop {
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg);
+ }
+
 .board-details {
   width: 100%;
   transition: width 0.6s;
@@ -123,7 +140,9 @@
         height: 32px;
         justify-content: space-between;
         align-items: center;
-
+        display: flow-root;
+        height: fit-content;
+        
         .task-preview-content {
           gap: 7px;
           float: left;

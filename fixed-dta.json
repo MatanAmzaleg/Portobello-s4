@@ -92,26 +92,7 @@
             }
         ],
         "members": [
-            {
-                "_id": "6390f5c1ba306ac05af209e5",
-                "username": "Matan",
-                "fullname": "Matan Amzaleg",
-                "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
-            },
-            {
-                "_id": "6390f857ba306ac05af209e6",
-                "username": "Lior Queen",
-                "fullname": "Lior Atar",
-                "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
 
-            },
-            {
-                "_id":  "6390f873ba306ac05af209e7",
-                "username": "Bar",
-                "fullname": "Bar Zaken",
-                "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
-
-            }
         ],
         "groups": [
             {

@@ -74,7 +74,7 @@
               <div class="task-description-title">
                 <h3 class="task-mini-title">Description</h3>
                 <el-button
-                  v-if="task.description?.length"
+                  v-if="(task.description?.length > 0)"
                   @click="isEdit = true"
                   class="task-btn"
                   >Edit</el-button
@@ -418,7 +418,7 @@
             <div class="task-activity-wrapper">
               <h3 class="task-mini-title">Activity</h3>
               <el-button
-                class="task-btn"
+                class="task-btn btn-details"
                 @click="showComments = !showComments"
                 >{{ showComments ? "Hide Details" : "Show details" }}</el-button
               >
