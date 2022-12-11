@@ -2,19 +2,11 @@
   <section class="option-charts">
     <div class="chart">
       <h1 title="chart-title">Tasks per user</h1>
-      <DoughnutChart :chartData="TasksPerUsers" />
-    </div>
-    <div class="chart">
-      <h1 title="chart-title">Most tasks accomplished</h1>
-      <BarChart class="bar-chart" :chartData="mostEffective" :options="options" />
-    </div>
-    <div class="chart">
-      <h1 title="chart-title">Most unfinished tasks</h1>
-      <BarChart class="bar-chart" :chartData="mostUneffective" :options="options" />
+      <BarChart :chartData="TasksPerUsers" :options="options" />
     </div>
     <div class="chart">
       <h1 title="chart-title">All tasks status</h1>
-      <DoughnutChart :chartData="getTasksStatus" />
+      <BarChart :chartData="getTasksStatus" :options="options" />
     </div>
   </section>
 </template>
@@ -46,12 +38,9 @@ export default defineComponent({
     }
   },
   created() {
-    console.log(this.TasksPerUsers);
-    console.log(this.userEffectiveness);
   },
   computed: {
     TasksPerUsers() {
-      console.log(this.data);
       const TasksPerUsersToSend = { labels: [], datasets: [{ data: [] }] };
       for (const m in this.data) {
         TasksPerUsersToSend.labels.push(m);
@@ -66,7 +55,7 @@ export default defineComponent({
       });
       TasksPerUsersToSend.datasets[0].data = data;
       TasksPerUsersToSend.datasets[0].backgroundColor = [
-        "#FF6464",
+        "#FAF8F1",
         "#0079AF",
         "#123E6B",
         "#97B0C4",
@@ -91,14 +80,11 @@ export default defineComponent({
         ],
       };
       for (const userE in this.userEffectiveness) {
-        console.log(this.userEffectiveness[userE]);
         userEffectiveness.labels.push(userE);
         userEffectiveness.datasets[0].data.push(
           this.userEffectiveness[userE].completed
         );
-        console.log(userEffectiveness.labels);
       }
-      console.log(userEffectiveness);
       return userEffectiveness;
     },
     mostUneffective() {
@@ -136,10 +122,10 @@ export default defineComponent({
           {
             data: [],
             backgroundColor: [
-              "#D8D9CF",
-              "#B3FFAE",
-              "#FF6464",
-              "#FFE9A0",
+              "#F5EBE0",
+              "#678983",
+              "#B73E3E",
+              "#F7D716",
               "#0F3460",
             ],
           },
@@ -148,7 +134,6 @@ export default defineComponent({
       for (const status in this.tasksStatus) {
         tasksStatuses.labels.push(status);
         tasksStatuses.datasets[0].data.push(this.tasksStatus[status]);
-        console.log(tasksStatuses);
       }
       return tasksStatuses;
     },

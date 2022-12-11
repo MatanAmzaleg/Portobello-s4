@@ -374,6 +374,11 @@
   }
 
   .padded-section {
+
+    .main-task-member-img{
+      margin-inline-end: 2px;
+    }
+
     // padding: 5px 8px 5px;
     padding: 5px 8px 8px;
   }
@@ -392,6 +397,9 @@
     &:hover {
       background-color: rgb(241, 247, 248);
     }
+  }
+  .task:last-child {
+    margin-bottom: 1px;
   }
   .task:first-child {
     margin-top: 1px;
