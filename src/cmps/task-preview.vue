@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     updatePopperMode(){
-      console.log('click open')
       eventBus.emit('updatePoperIsOpen', true)
     },
     labelColor(id) {
@@ -129,7 +128,6 @@ export default {
     getLabelTitle(labelId) {
       const boardLabels = this.currBoard.labels;
       const label = boardLabels.find((l) => l.id === labelId);
-      console.log(label);
       return label.title;
     },
     updateQuickEdit() {

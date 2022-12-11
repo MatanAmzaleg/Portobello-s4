@@ -664,7 +664,6 @@ export default {
       this.updateTask();
     },
     saveTaskLabels({ labels, msg }) {
-      console.log(labels, msg);
       this.task.labelIds = labels;
       this.task.lastActivity = {
         msg: msg + this.task.title,
@@ -688,7 +687,6 @@ export default {
       this.updateTask();
     },
     saveTaskMembers({ members, msg }) {
-      console.log(members, msg);
       this.task.memberIds = members;
       this.task.lastActivity = {
         msg: msg + this.task.title,

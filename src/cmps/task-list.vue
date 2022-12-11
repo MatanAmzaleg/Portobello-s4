@@ -121,32 +121,23 @@ export default {
       this.$emit("closeAddTask");
     },
     addTask() {
-      console.log("addTask");
       this.$emit("addTask", this.newTaskTxt);
       this.newTaskTxt = "";
     },
   },
   watch: {
     currGroup(newVal, oldVal) {
-      console.log("this.$refs", this.$refs);
       if (newVal) {
         setTimeout(() => {
           this.$refs.taskArea.focus();
         }, 50);
       }
-
       const el = this.$refs.scroll1;
       const el2 = this.$refs.scroll2;
-      console.log("el", el2);
-      // console.log('el2', el2)
-
       if (el2) {
-        // Use el.scrollIntoView() to instantly scroll to the element
-        // el.scrollTop = el.scrollHeight
         setTimeout(() => {
           el2.scrollTop = el.scrollHeight;
         }, 0);
-        // el2.scrollIntoView({block: "end"});
       }
     },
   },

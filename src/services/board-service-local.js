@@ -46,11 +46,9 @@ function getById(boardId) {
 async function getGroupById(boardId, groupId) {
   try {
     const board = await getById(boardId)
-    console.log(board);
     return board.groups.find(group => group.id === groupId)
-
-  } catch {
-
+  } catch(err) {
+    console.log(err)
   }
 }
 

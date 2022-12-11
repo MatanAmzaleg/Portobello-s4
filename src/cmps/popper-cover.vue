@@ -162,10 +162,9 @@ export default {
       }
     },
     async sendApiReq(sug = "") {
-      console.log("🚀 ~ file: cover.picker.vue:144 ~ sendApiReq ~ sug", sug);
       if (sug) this.searchWord = sug;
       await utilService.fetchListOfPhotos(this.searchWord);
-      this.searchedImgs = utilService.getImgs(this.searchWord).slice(0, 10);
+      this.searchedImgs = utilService.getImgs(this.searchWord)?.slice(0, 10);
     },
     restartParam(close) {
       close;

@@ -61,7 +61,6 @@ async function filterBoard(board, filterBy) {
     const { txt, noMembers, noDates, overdue, dueNextDay, noLabels,byMe,labels } = filterBy;
     const regex = new RegExp(txt, "i");
     let loggedInId = store?.getters?.loggedinUser._id
-    console.log(loggedInId)
     let filteredtasks = board.groups.map((group) =>
       group.tasks.filter((task) => regex.test(task.title))
     );
@@ -100,8 +99,6 @@ async function filterBoard(board, filterBy) {
       filteredtasks = filteredtasks.map((group) =>
         group.filter((t) => !t.labelIds.length)
       );
-    console.log(filteredtasks);
-
     const filteredBoard = board;
     let counter = 0;
     filteredBoard.groups.forEach((group) => {

@@ -1,5 +1,5 @@
-// import { boardService } from "../services/board.service.js";
-import { boardService } from "../services/board-service-local.js";
+import { boardService } from "../services/board.service.js";
+// import { boardService } from "../services/board-service-local.js";
 import { utilService } from "../services/util.service.js";
 
 export const boardStore = {
@@ -154,7 +154,6 @@ export const boardStore = {
       }
     },
     async deleteTask({ commit }, { board, taskId }) {
-      console.log(taskId);
       try {
         const newBoard = await boardService.removeTask(board, taskId);
         commit({ type: "updateBoard", board: newBoard });

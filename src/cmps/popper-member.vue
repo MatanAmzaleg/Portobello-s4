@@ -71,7 +71,6 @@ export default {
         notification.imgUrl = this.$store.getters.loggedinUser.imgUrl
       }
       socketService.emit('notification',{notification,to:memberId})
-      console.log(notification);
       this.$emit('add-member', {members:this.members,msg})
     },
     closeModal() {

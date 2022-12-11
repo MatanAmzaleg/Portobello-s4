@@ -7,9 +7,7 @@ import { store } from "../store/store"
 import { socketService, SOCKET_EVENT_BOARD_UPDATED } from "./socket.service.js";
 import data from '../../fixed-dta.json' assert {type: 'json'};
 
-
 const STORAGE_KEY = "board";
-
 const BASE_URL = "board/"
 
 export const boardService = {
@@ -100,12 +98,12 @@ function getTask(boardId, groupId, taskId) {
     .then(board => board.groups.find(group => group.id === groupId))
     .then(group => group.tasks.find(task => task.id === taskId))
 }
+
 // function removeTask(boardId, groupId, taskId) {
 //   return storageService.remove(STORAGE_KEY, boardId)
 //     .then(board => board.groups.find(group => group.id === groupId))
 //     .then(group => group.tasks.find(task => task.id === taskId))
 // }
-
 
 function saveTask(boardId, groupId, taskToSave) {
   if (taskToSave.id) {
@@ -136,18 +134,15 @@ async function remove(boardId) {
 async function save(board) {
   var savedBoard;
   if (board._id) {
-    console.log('before server',board)
     // savedBoard = await storageService.put(STORAGE_KEY, board);
     socketService.emit('update-board',board)
     savedBoard = await httpService.put(BASE_URL+`${board._id}`, board)
-    console.log('board in service', savedBoard)
   } else {
     // Later, owner is set by the backend
     board.owner = userService.getLoggedinUser()._id;
     // savedBoard = await storageService.post(STORAGE_KEY, board);
     // savedBoard = await httpService.post(BASE_URL, board)
     savedBoard = await httpService.post(BASE_URL, board)
-
   }
   return savedBoard;
 }
@@ -156,7 +151,6 @@ async function addBoardMsg(boardId, txt) {
   const savedMsg = await httpService.post(`board/${boardId}/msg`, { txt });
   return savedMsg;
 }
-
 
 function getEmptyTask() {
   return {
