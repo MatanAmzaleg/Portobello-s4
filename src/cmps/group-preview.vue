@@ -9,12 +9,14 @@
           @delete="deleteGroup(column.id)" />
         <!-- <font-awesome-icon class="ellipsis-icon" icon="fa-solid fa-ellipsis" /> -->
       </div>
-      <task-list @addTask="addTask" @addBoard="addBoard" :scene="scene" :currBoard="currBoard" :column="column" :currGroup="currGroup" @closeAddTask="closeAddTask"></task-list>
-      <div class="card-composure flex">
-        <button v-if="column.id !== currGroup" class="add-task-btn" @click="changeAddStatus(column.id)">
-          <font-awesome-icon class="add-task-icon" icon="fa-solid fa-plus" />
-          Add a card
-        </button>
+      <div class="scroller">
+        <task-list @addTask="addTask" @addBoard="addBoard" :scene="scene" :currBoard="currBoard" :column="column" :currGroup="currGroup" @closeAddTask="closeAddTask"></task-list>
+        <div class="card-composure flex">
+          <button v-if="column.id !== currGroup" class="add-task-btn" @click="changeAddStatus(column.id)">
+            <font-awesome-icon class="add-task-icon" icon="fa-solid fa-plus" />
+            Add a card
+          </button>
+        </div>
       </div>
     </div>
   </section>
