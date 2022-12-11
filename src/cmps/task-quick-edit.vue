@@ -1,7 +1,7 @@
 <template>
   <section class="quick-edit" v-if="isQuickEditOpen">
     <div>
-      <section class="task-list">
+      <section class="task-list task-list-quick">
         <div class="cover" v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'" :style="
           item.style?.bgColor
             ? { 'background-color': item.style.bgColor }
@@ -24,7 +24,7 @@
         ">
         </div>
         <section class="task-preview">
-          <div v-if="item.style?.mode !== 'full'" class="padded-section">
+          <div class="padded-section">
             <div class="labels" v-if="getTaskLabels?.length > 0">
               <span @click.stop="openLabelExtended" class="label" :class="labelExtendedClass"
                 v-for="label in getTaskLabels" :style="{ 'background-color': labelColor(label) }">
@@ -34,7 +34,6 @@
                 }}</span>
               </span>
             </div>
-            <!-- <span class="task-router-link">{{ item.title }}</span> -->
             <textarea class="textarea" @input="updateCurrTaskTitle($event)">{{ item.title }}</textarea>
             <div v-if="taskExtra(item)" class="task-preview-info">
               <div class="task-preview-content">
@@ -115,7 +114,7 @@
           Edit dates
         </button>
         <template #content="{ close }">
-          <div class="quick-popper-left">
+          <div class="popper-content label-picker quick-popper-left">
             <popper-calendar @closeModal="close" @removeDate="removeDate" @saveDate="saveDate" />
           </div>
         </template>
@@ -136,20 +135,6 @@ import popperMember from "./popper-member.vue";
 import popperLabel from "./popper-label.vue";
 import popperCover from "./popper-cover.vue";
 import { eventBus } from "../services/event-bus.service";
-
-// export const functionsTaskDetails = {
-//   saveTaskMembers,
-//   getTaskMembers,
-//   updateBoard,
-//   saveTaskLabels,
-//   getTaskLabels,
-//   getTaskDate,
-//   saveTaskDate,
-//   removeTaskDate,
-//   getTaskStyle,
-//   saveTaskCover,
-//   deleteTask,
-// }
 
 export default {
   props: {

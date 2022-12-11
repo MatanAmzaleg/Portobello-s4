@@ -1,21 +1,22 @@
 .quick-edit {
     display: flex;
     min-width: 460px;
+    // background-color: white;
 
     .save-btn {
         margin-top: 15px;
     }
-    
+
     .icon-actions {
         font-size: 16px;
         height: 20.8px;
         color: $clr4;
     }
-    
+
     .quick-popper-left {
         left: 0px !important;
     }
-    
+
     .actions-quick {
         display: flex;
         flex-direction: column;
@@ -40,9 +41,13 @@
     overflow-y: auto;
     overflow-x: hidden;
     width: 256px;
-    background-color: white;
+    // background-color: white;
     border-radius: 3px;
     height: fit-content;
+
+    &.task-list-quick {
+        background-color: white;
+    }
 
     &.task-list-open {
         max-height: calc(100vh - 170px) !important;
