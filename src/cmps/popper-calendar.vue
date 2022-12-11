@@ -1,13 +1,16 @@
 <template>
-  <div class="popper-content date-picker"> 
-    <v-date-picker class="date-picker"  mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
+  <div class="popper-content date-picker">
+    <popper-modal title="Dates" @closeModal="closeModal" />
+    <v-date-picker class="date-picker" mode="dateTime" is24hr locale="en" is-expanded v-model="date" />
     <!-- <Datepicker v-model="date" :is-24="true" inline auto-apply/> -->
-
     <button @click="saveDate" class="save-btn" type="primary">Save</button>
-    <button @click="removeDate" class="remove-btn">Remove</button> 
+    <button @click="removeDate" class="remove-btn">Remove</button>
   </div>
 </template>
+
 <script>
+import popperModal from "./popper-modal.vue";
+
 export default {
   created() {
     this.date = this.getTask
@@ -25,6 +28,9 @@ export default {
     removeDate() {
       this.$emit("remove-date");
     },
+    closeModal() {
+      this.$emit("closeModal");
+    }
   },
   computed: {
     getTask() {
@@ -36,7 +42,10 @@ export default {
       this.date = newTask.dueDate
     }
   },
-};
+  components: {
+    popperModal
+  }
+}
 </script>
 <style lang="scss">
 
