@@ -154,13 +154,14 @@ import { eventBus } from "../services/event-bus.service";
 export default {
   props: {
     item: Object,
+    isLabelsExtended: Boolean
   },
   data() {
     return {
       task: {},
       taskTitle: '',
       currBoard: {},
-      isQuickEditOpen: false
+      isQuickEditOpen: false,
     };
   },
   async created() {
@@ -227,10 +228,6 @@ export default {
       this.isDone = allTasks === doneTasks ? true : false;
       return `${doneTasks}/${allTasks}`;
     },
-    openLabelExtended() {
-      this.isLabelsExtended = !this.isLabelsExtended;
-      this.labelExtendedClass;
-    },
     getLabelTitle(labelId) {
       const boardLabels = this.currBoard.labels;
       const label = boardLabels.find((l) => l.id === labelId);
@@ -288,6 +285,28 @@ export default {
       };
       this.updateTask();
     },
+    openLabelExtended(){
+      console.log('openLabelExtended')
+      this.$emit('openLabelExtended')
+    },
+    removeDate() {
+      this.task.dueDate = "";
+      this.task.lastActivity = {
+        msg: `Removed Due Date to ${this.task.title}`,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
+      this.updateTask();
+    },
+    saveDate(date) {
+      this.task.dueDate = date;
+      this.task.lastActivity = {
+        msg: `Added Due Date to ${this.task.title}`,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
+      this.updateTask();
+    },
   },
   computed: {
     getTaskLabels() {
@@ -306,6 +325,10 @@ export default {
     },
     style() {
       return this.task.style;
+    },
+    labelExtendedClass() {
+      if (this.isLabelsExtended) return "label-extended";
+      return "label";
     },
   },
   components: {

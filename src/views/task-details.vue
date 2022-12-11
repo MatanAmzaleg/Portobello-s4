@@ -547,20 +547,6 @@ import { Mentionable } from "vue-mention";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
 
-// export const functionsTaskDetails = {
-//   saveTaskMembers,
-//   getTaskMembers,
-//   updateBoard,
-//   saveTaskLabels,
-//   getTaskLabels,
-//   getTaskDate,
-//   saveTaskDate,
-//   removeTaskDate,
-//   getTaskStyle,
-//   saveTaskCover,
-//   deleteTask,
-// }
-
 export default {
   props: {
     currBoard: Object,
