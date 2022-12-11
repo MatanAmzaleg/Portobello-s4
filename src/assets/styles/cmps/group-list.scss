@@ -21,21 +21,23 @@
 
   .group-list {
     overflow-x: auto;
+    overflow-y: hidden;
     height: calc(100vh - 92px);
 
     &::-webkit-scrollbar-track {
-      border-radius: 10px;
-      background-color: #f5f5f55c;
+      border-radius: 20px;
+      background-color: #f5f5f500;
     }
 
     &::-webkit-scrollbar {
-      width: 10px;
-      background-color: #f5f5f52e;
+      width: 7px;
+      border-radius: 20px;
+      background-color: #f2f2f221;
     }
 
     &::-webkit-scrollbar-thumb {
       border-radius: 20px;
-      background-color: rgb(240, 240, 240);
+      background-color: #7575769b;
     }
   }
 
@@ -378,6 +380,9 @@
       background-color: rgb(241, 247, 248);
     }
   }
+  .task:last-child{
+    margin-bottom: 1px;
+  }
 
   .card-composure {
     justify-content: space-between;
@@ -387,7 +392,7 @@
       text-align: left;
       height: 28px;
       font-size: 14px;
-      margin: 1px 0 8px 8px;
+      margin: 8px 0 8px 8px;
       padding: 4px 8px;
       border-radius: 3px;
       color: #7e8a9d;
