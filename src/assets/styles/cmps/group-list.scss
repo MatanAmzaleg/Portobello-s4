@@ -140,7 +140,9 @@
         height: 32px;
         justify-content: space-between;
         align-items: center;
-
+        display: flow-root;
+        height: fit-content;
+        
         .task-preview-content {
           gap: 7px;
           float: left;

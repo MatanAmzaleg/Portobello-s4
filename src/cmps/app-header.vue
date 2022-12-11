@@ -153,8 +153,8 @@
               <div class="user-info">
                 <img v-if="loggedInUser" class="user-img" :src="loggedInUser?.imgUrl" alt="member" />
                 <div class="user-info-detailes">
-                  <p>{{loggedInUser?.fullname}}</p>
-                  <p class="username">{{loggedInUser?.username}}</p>
+                  <p>{{ loggedInUser?.fullname }}</p>
+                  <p class="username">{{ loggedInUser?.username }}</p>
                 </div>
               </div>
               <span class="line"></span>
@@ -175,10 +175,10 @@ export default {
     return {
       isModalOpen: false,
       calculatedColor: null,
-      boards:null
+      boards: null
     };
   },
-  created(){
+  created() {
     this.boards = this.$store.getters.boards
     console.log(this.boards);
     console.log(this.$store.getters.boards);
@@ -228,9 +228,9 @@ export default {
       return this.$store.getters.currBoard;
     },
     getCalcColor() {
-    if(this.$route.path === '/board'){
-      return {color: 'black',isDark:true}
-    }
+      if (this.$route.path === '/board') {
+        return { color: 'black', isDark: true }
+      }
       return this.$store.getters.currBoard?.style?.calcColor;
     },
   },
