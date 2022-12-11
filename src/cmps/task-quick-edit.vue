@@ -35,7 +35,7 @@
               </span>
             </div>
             <!-- <span class="task-router-link">{{ item.title }}</span> -->
-            <textarea class="textarea">{{ item.title }}</textarea>
+            <textarea class="textarea" @input="updateCurrTaskTitle($event)">{{ item.title }}</textarea>
             <div v-if="taskExtra(item)" class="task-preview-info">
               <div class="task-preview-content">
                 <span v-if="item.isWatched" class="watch-icon"></span>
@@ -60,14 +60,14 @@
           </div>
         </section>
       </section>
-      <button class="save-btn">Save</button>
+      <button class="save-btn" @click="updateTaskTitle">Save</button>
     </div>
     <div class="actions-quick">
       <button @click="gotoTask(item.id)" class="button-quick-edit">
         <span class="header-icon icon-actions"></span>
         Open card
       </button>
-      <Popper @open:popper="addFocus">
+      <Popper @open:popper="addFocus" placement="right">
         <button class="button-quick-edit">
           <span class="label-icon icon-actions"></span>
           Edit labels
@@ -79,7 +79,7 @@
           </div>
         </template>
       </Popper>
-      <Popper @open:popper="addFocus">
+      <Popper @open:popper="addFocus" placement="right">
         <button class="button-quick-edit">
           <span class="icon-actions member-icon"></span>
           Change Members
@@ -90,7 +90,7 @@
           </div>
         </template>
       </Popper>
-      <Popper @open:popper="addFocus">
+      <Popper @open:popper="addFocus" placement="right">
         <button class="button-quick-edit">
           <span class="card-cover-icon icon-actions"></span>
           Change cover
@@ -101,7 +101,7 @@
           </div>
         </template>
       </Popper>
-      <Popper @open:popper="addFocus">
+      <Popper @open:popper="addFocus" placement="right">
         <button class="button-quick-edit">
           <svg class="icon-actions" width="16" height="16" role="presentation" focusable="false" viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg">
@@ -176,6 +176,14 @@ export default {
     this.task = JSON.parse(JSON.stringify(task));
   },
   methods: {
+    updateCurrTaskTitle(ev) {
+      this.taskTitle = ev.target.value
+    },
+    updateTaskTitle() {
+      this.task.title = this.taskTitle
+      this.updateTask()
+      eventBus.emit('updatePoperIsOpen', false)
+    },
     updateIsOpen(isOpen) {
       console.log('isOPen', isOpen)
       this.isQuickEditOpen = isOpen
