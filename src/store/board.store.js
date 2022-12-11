@@ -1,5 +1,5 @@
-// import { boardService } from "../services/board.service.js";
-import { boardService } from "../services/board-service-local.js";
+import { boardService } from "../services/board.service.js";
+// import { boardService } from "../services/board-service-local.js";
 import { utilService } from "../services/util.service.js";
 
 export const boardStore = {
@@ -148,6 +148,15 @@ export const boardStore = {
       try {
         const task = await boardService.getTaskById(board, taskId);
         commit({ type: "setTask", task });
+        return task;
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    async updateTask({ commit }, { boardId, task }) {
+      try {
+        const newBoard = await boardService.updateTask(boardId, task);
+        commit({ type: "setCurrBoard", newBoard });
         return task;
       } catch (err) {
         console.log(err);

@@ -24,7 +24,7 @@ export const boardService = {
   getGroupById,
   saveTask,
   getEmptyTask,
-  removeTask
+  removeTask,
 };
 window.boardService = boardService;
 
@@ -51,6 +51,7 @@ async function getById(boardId) {
   try{
     socketService.off(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
     socketService.on(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
+    socketService.emit('set-board',boardId)
     return httpService.get(BASE_URL+`${boardId}`)   
   }
   catch(err){
@@ -82,6 +83,12 @@ function getTaskById(board, taskId) {
   });
   return task
 }
+
+// async function updateTask(boardId,task){
+//   socketService.emit('update-task',boardId,task)
+//   let task = await httpService.put(BASE_URL+`${boardId}/${task._id}`, boardId,task)
+//   return task
+// }
 
 function removeTask(board, taskId) {
   let boardCopy = JSON.parse(JSON.stringify(board))
