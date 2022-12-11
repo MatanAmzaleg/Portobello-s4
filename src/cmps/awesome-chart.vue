@@ -35,11 +35,8 @@ export default defineComponent({
       },
     }
   },
-<<<<<<< HEAD
   created() {
   },
-=======
->>>>>>> 15b948831630649736c3f7ce6b341079be5d4f8d
   computed: {
     TasksPerUsers() {
       const TasksPerUsersToSend = { labels: [], datasets: [{ data: [] }] };
