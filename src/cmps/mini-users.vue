@@ -1,5 +1,5 @@
 <template>
-  <div class="main-task-members-container">
+  <div v-if="this.memberIds" class="main-task-members-container">
     <p v-if="!noHeader" class="main-task-members-header">Members</p>
     <div class="main-task-members">
       <ul>

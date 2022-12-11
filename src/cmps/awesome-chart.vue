@@ -15,8 +15,6 @@
 import { defineComponent } from "vue";
 import { DoughnutChart, BarChart } from "vue-chart-3";
 import { Chart, registerables } from "chart.js";
-import TaskList from "./task-list.vue";
-
 Chart.register(...registerables);
 
 export default defineComponent({
@@ -37,8 +35,11 @@ export default defineComponent({
       },
     }
   },
+<<<<<<< HEAD
   created() {
   },
+=======
+>>>>>>> 15b948831630649736c3f7ce6b341079be5d4f8d
   computed: {
     TasksPerUsers() {
       const TasksPerUsersToSend = { labels: [], datasets: [{ data: [] }] };
@@ -104,18 +105,14 @@ export default defineComponent({
         ],
       };
       for (const userE in this.userEffectiveness) {
-        console.log(this.userEffectiveness[userE]);
         userEffectiveness.labels.push(userE);
         userEffectiveness.datasets[0].data.push(
           this.userEffectiveness[userE].uncompleted
         );
-        console.log(userEffectiveness.labels);
       }
-      console.log(userEffectiveness);
       return userEffectiveness;
     },
     getTasksStatus() {
-      console.log(this.tasksStatus);
       const tasksStatuses = {
         labels: [],
         datasets: [
@@ -141,5 +138,3 @@ export default defineComponent({
   components: { DoughnutChart, BarChart },
 });
 </script>
-
-<style></style>

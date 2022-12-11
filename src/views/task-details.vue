@@ -27,9 +27,10 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <textarea  v-model="task.title"
+          <!-- <textarea  v-model="task.title"
             @input="updateTask"
-            class="task-title-input"></textarea>
+            class="task-title-input"></textarea> -->
+            <input type="text"  v-model="task.title" @input="updateTask" class="task-title-input">
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>
@@ -547,20 +548,6 @@ import { Mentionable } from "vue-mention";
 import { Container, Draggable } from "vue3-smooth-dnd";
 import { applyDrag, generateItems, generateWords } from "../utils/helpers";
 
-// export const functionsTaskDetails = {
-//   saveTaskMembers,
-//   getTaskMembers,
-//   updateBoard,
-//   saveTaskLabels,
-//   getTaskLabels,
-//   getTaskDate,
-//   saveTaskDate,
-//   removeTaskDate,
-//   getTaskStyle,
-//   saveTaskCover,
-//   deleteTask,
-// }
-
 export default {
   props: {
     currBoard: Object,
@@ -616,6 +603,7 @@ export default {
         if (this?.task?.lastActivity)
           board.activities.unshift(this.task.lastActivity);
         await this.$store.dispatch({ type: "updateBoard", board });
+        // await this.$store.dispatch({type:'updateTask',boardId:this.currBoard._id,task: this.task})
       } catch (err) {
         console.log("cant Update task", err);
       }
@@ -664,7 +652,6 @@ export default {
       this.updateTask();
     },
     saveTaskLabels({ labels, msg }) {
-      console.log(labels, msg);
       this.task.labelIds = labels;
       this.task.lastActivity = {
         msg: msg + this.task.title,
@@ -688,7 +675,6 @@ export default {
       this.updateTask();
     },
     saveTaskMembers({ members, msg }) {
-      console.log(members, msg);
       this.task.memberIds = members;
       this.task.lastActivity = {
         msg: msg + this.task.title,

@@ -4,8 +4,11 @@
       <span class="edit-icon" @click.stop="updatePopperMode"></span>
       <template #popper>
         <taskQuickEdit 
-          :item="item">
-        </taskQuickEdit> 
+          :isLabelsExtended="isLabelsExtended" 
+          :item="item"
+          @openLabelExtended="openLabelExtended"
+        >
+        </taskQuickEdit>
       </template>
     </VDropdown>
     <div class="cover" v-if="Object.keys(item.style).length !== 0 && item.style?.mode !== 'full'" :style="
@@ -52,8 +55,8 @@
             <span class="comments-span">{{ item.comments.length }}</span>
           </div>
           <span v-if="item.attachments" class="attachment-icon">
-          <span>{{item.attachments.length}}</span>
-        </span>
+            <span>{{ item.attachments.length }}</span>
+          </span>
           <div class="task-preview-checklist" :class="isDone ? 'done' : ''">
             <span v-if="item.checklists?.length" class="checklist-icon">
               <span>{{ getTodoStatus(item.checklists) }}</span>
@@ -83,8 +86,7 @@ export default {
     };
   },
   methods: {
-    updatePopperMode(){
-      console.log('click open')
+    updatePopperMode() {
       eventBus.emit('updatePoperIsOpen', true)
     },
     labelColor(id) {
@@ -129,7 +131,6 @@ export default {
     getLabelTitle(labelId) {
       const boardLabels = this.currBoard.labels;
       const label = boardLabels.find((l) => l.id === labelId);
-      console.log(label);
       return label.title;
     },
     updateQuickEdit() {

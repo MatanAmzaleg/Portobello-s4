@@ -180,11 +180,7 @@ export default {
   },
   created() {
     this.boards = this.$store.getters.boards
-    console.log(this.boards);
-    console.log(this.$store.getters.boards);
-    console.log("yeahhhhhhhhh");
   },
-
   methods: {
     toggleModal() {
       this.isModalOpen = !this.isModalOpen;
@@ -194,7 +190,6 @@ export default {
       const board = JSON.parse(JSON.stringify(this.getCurrBoard));
       board.style.calcColor = calcColor;
       this.$store.dispatch({ type: "updateBoard", board });
-      console.log(this.calculatedColor);
     },
     removerStarred(board) {
       const boardToUpdate = JSON.parse(JSON.stringify(board));
@@ -205,7 +200,6 @@ export default {
       });
     },
     moveToBoard(board) {
-      console.log("move board");
       this.$store.dispatch({ type: "setCurrBoard", boardId: board._id });
       this.$router.push(`/board/${board._id}`);
     },
@@ -228,7 +222,7 @@ export default {
       return this.$store.getters.currBoard;
     },
     getCalcColor() {
-      if (this.$route.path === '/board') {
+      if (this.$route.path === '/board' || this.$route.path === '/login') {
         return { color: 'black', isDark: true }
       }
       return this.$store.getters.currBoard?.style?.calcColor;

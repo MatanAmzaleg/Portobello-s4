@@ -5,9 +5,9 @@
         "isStarred": false,
         "archivedAt": 1589983468418,
         "owner": {
-            "_id": "u101",
-            "fullname": "David Beckham",
-            "imgUrl": "https://media.gq.com/photos/56e853e7161e63486d04d6c8/4:3/w_1600,h_1200,c_limit/david-beckham-gq-0416-2.jpg"
+            "_id": "",
+            "fullname": "",
+            "imgUrl": ""
         },
         "style": {
             "bgColor": "#75151E"
@@ -246,7 +246,7 @@
                                 "txt": "also @yaronb please CR this",
                                 "createdAt": 1590999817436,
                                 "byMember": {
-                                    "_id":  "6390f873ba306ac05af209e7",
+                                    "_id":  "6395096727a1c44d26468a9b",
                                     "fullname": "Bar Zaken",
                                     "imgUrl": "https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png"
                                 }

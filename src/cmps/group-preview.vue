@@ -66,7 +66,6 @@ export default {
     },
     addTask(newTaskTxt) {
       if (newTaskTxt.trim(" ").length < 1) return;
-      console.log(newTaskTxt.length);
       const board = JSON.parse(JSON.stringify(this.currBoard));
       const groupIdx = board.groups.findIndex(
         (group) => group.id === this.currGroup
@@ -104,10 +103,7 @@ export default {
       const board = JSON.parse(JSON.stringify(this.currBoard))
       const groupIdx = board.groups.findIndex(g => g.id === updatedGroup.id)
       board.groups[groupIdx] = updatedGroup
-      console.log(board);
       this.$store.dispatch({ type: "updateBoard", board });
-      // console.log(newBoard);
-      // console.log(this.column);
     }
   },
   computed: {
