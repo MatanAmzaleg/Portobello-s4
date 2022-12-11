@@ -236,6 +236,7 @@
         object-fit: contain;
         margin-top: 0px;
         padding: 1rem;
+        margin-bottom: 100px;
 
         @include for-min-wide-layout {
             width: 920px;
