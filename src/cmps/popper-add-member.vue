@@ -88,6 +88,7 @@ export default {
         notification.msg = `${username} Removed you from board ` + this.$store.getters.currBoard.title
         notification.imgUrl = this.$store.getters.loggedinUser.imgUrl
       }
+      console.log(notification.msg)
       socketService.emit('notification',{notification,to:member._id})
       let newBoard = JSON.parse(JSON.stringify(this.$store.getters.currBoard))
       newBoard.members = this.boardMembers
