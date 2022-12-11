@@ -7,6 +7,15 @@
   height: calc(100vh - 44px);
   overflow: hidden;
   z-index: 10;
+
+
+  .activity-section{
+    padding-top: 15px;
+    overflow-y: scroll;
+    min-height: auto;
+    max-height: 1800px;
+    padding-inline-start: 4px;
+  }
   .board-activities {
     display: flex;
     flex-direction: column;
@@ -14,7 +23,6 @@
     min-height: 50px;
     margin-top: 15px;
     // flex-wrap: wrap;
-    overflow-y:scroll;
 
     .board-activity {
       display: grid;
@@ -92,7 +100,7 @@
     color: #42526E;
 
     .hr-between-sections {
-      margin: 16px 0;
+      margin-top: 16px ;
     }
 
     .menu-opt {
