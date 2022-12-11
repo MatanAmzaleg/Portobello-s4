@@ -71,6 +71,7 @@
           }">
           </span>
         </div>
+        <img v-if="!searchedImgs" src="../assets/icons/loader.svg" alt="">
       </div>
       <div v-if="titleMode === 'colors'" class="unsplash-section">
         <div class="background-imgs">
