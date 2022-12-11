@@ -2,7 +2,7 @@
   <Popper class="user-popper" offsetSkid="-210" >
             <div @click="cleanNotifications" class="notifications-bell-container">
             <font-awesome-icon icon="fa-solid fa-bell" />
-            <div v-if="isNewNotification" class="new-notification-container"><span class="new-notifications">{{userNotifications.length}}</span></div>
+            <div v-if="isNewNotification" class="new-notification-container"><span class="new-notifications">{{unread}}</span></div>
             </div>
           <template #content="{ close }" >
             <div class="popper-template notifications-popper">
@@ -13,7 +13,7 @@
               <div class="notification-container" v-if="(userNotifications.length > 0)">
               <div class="notification" v-for="notification in notifications">
               <img :src="notification.imgUrl" class="member-img-card">
-              <h1>{{notification.msg}}</h1>
+              <h1>{{notification.msg}}''</h1>
             </div>
               </div>
               <div v-else class="no-notification">
@@ -26,21 +26,32 @@
         </Popper>
 </template>
 <script>
+import { normalizeStyle } from 'vue';
+
 export default {
   name: "notification",
   data() {
     return {
       notifications:[],
       isNewNotification:false,
+      unread:0,
     };
   },
   created() {
-    socketService.on('new-notification',() => this.isNewNotification = true)
+    socketService.on('new-notification',() => {
+      this.isNewNotification = true
+      this.unread++
+    })
     this.notifications = this.userNotifications
   },
   methods: {
     cleanNotifications(){
       this.isNewNotification = false
+      this.unread = 0
+      // setTimeout(() => [
+      //   this.$store.commit({type:'cleanNotification'})
+
+      // ])
     }
   },
   computed: {
