@@ -27,9 +27,10 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <textarea  v-model="task.title"
+          <!-- <textarea  v-model="task.title"
             @input="updateTask"
-            class="task-title-input"></textarea>
+            class="task-title-input"></textarea> -->
+            <input type="text"  v-model="task.title" @input="updateTask" class="task-title-input">
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>
@@ -602,6 +603,7 @@ export default {
         if (this?.task?.lastActivity)
           board.activities.unshift(this.task.lastActivity);
         await this.$store.dispatch({ type: "updateBoard", board });
+        // await this.$store.dispatch({type:'updateTask',boardId:this.currBoard._id,task: this.task})
       } catch (err) {
         console.log("cant Update task", err);
       }

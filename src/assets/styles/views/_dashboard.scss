@@ -3,8 +3,8 @@
   inset: 0;
   width: 100%;
   margin: auto;
-  height:100vh;
-  background-color: rgba(221, 220, 220, 0.87);
+  height: 100vh;
+  background-color: rgba(221, 220, 220, 0.938);
   border-radius: 3px;
 
   .close-add-task-btn {
@@ -19,40 +19,184 @@
     border-radius: 3px;
     transition: 0.6s;
 
-    &:hover{
-        background-color: #bbbabaa8;
-        color: #505050a8;
+    &:hover {
+      background-color: #bbbabaa8;
+      color: #505050a8;
     }
   }
 
-  .awesome{
+  .awesome {
     width: 70%;
   }
-
-  .board-stats{
-    width: 30%;
-    flex-direction: column;
-    gap: 15px;
-    margin-inline-start: 40px;
-
-    h1{
-        font-size:2.3rem;
-        color: rgb(45, 45, 45);
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-        text-decoration: underline;
-        
-    }
-
-    .state{
-        h2{
-            color: rgb(45, 45, 45);
-            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  .main-conatiner{
+    height: 80%;
+    
+    .user-and-board-container {
+      width: 60%;
+      margin-inline: auto;
+      
+          .user-details {
+            width: 90%;
+            margin-inline: auto;
+            display: flex;
+            align-items: center;
+      
+            .content {
+              margin-inline-start: 10px;
+      
+              > * {
+                margin-block: 5px;
+              }
+              h3 {
+                color: rgb(50, 50, 50);
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                  Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+                font-size: 2.2rem;
+              }
+              h4 {
+                color: rgb(50, 50, 50);
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                  Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+                font-size: 1.4rem;
+              }
+            }
+      
+            .img-div {
+              display: grid;
+              place-items: center;
+              width: 110px;
+              height: 110px;
+              // background-color: rgba(199, 199, 199, 0.782);
+              border-radius: 9px;
+      
+              img {
+                width: 110px;
+                height: 110px;
+                border-radius: 50%;
+              }
+            }
+          }
+      
+          .user-stats {
+            text-align: left;
+            width: 90%;
+            margin-inline: auto;
+            margin-block: 60px;
+            flex-direction: column;
+            gap: 15px;
+      
+            > *:not(first-child) {
+              margin-block: 15px;
+            }
+      
+            h1 {
+              font-size: 1.8rem;
+              color: rgb(45, 45, 45);
+              font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+              margin-bottom: 20px;
+            }
+            h3 {
+              width: 40%;
+              color: rgb(90, 90, 90);
+              font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+              font-size: 1.3rem;
+              text-align: left;
+              margin-inline-end: 40px;
+      
+              span {
+                margin-inline-start: 5px;
+                font-size: 1.5rem;
+              }
+            }
+            .progress {
+              .progress-container {
+                display: flex;
+                align-items: center;
+                grid-column: 1 / span 2;
+                margin-bottom: 3px;
+                margin-top: 6px;
+      
+                .el-progress {
+                  flex-direction: row-reverse;
+      
+                  .el-progress-bar__outer {
+                    height: 18px !important;
+                    width: 300px;
+                  }
+      
+                  .el-progress__text {
+                    margin-bottom: 2px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 13px !important;
+                    font-weight: 600;
+                    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                      Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+                  }
+                }
+              }
+            }
+          }
+      
+          .board-stats {
+            text-align: left;
+            width: 90%;
+            margin-inline: auto;
+            flex-direction: column;
+            gap: 15px;
+      
+            h1 {
+              font-size: 1.8rem;
+              color: rgb(45, 45, 45);
+              font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+            }
+      
+            .states-container {
+              gap: 15px;
+            }
+      
+            .state {
+              position: relative;
+              text-align: left;
+              height: 150px;
+              width: 150px;
+              display: flex;
+              justify-content: space-evenly;
+              align-items: center;
+              border: 1px solid silver;
+              border-radius: 6px;
+              background-color: rgba(232, 229, 229, 0.938);
+              padding: 10px;
+              box-shadow: 10px 10px 21px -5px rgba(0, 0, 0, 0.54);
+      
+              .icon {
+                width: 30px;
+                height: 30px;
+                font-size: 30px;
+                color: rgb(23, 23, 23);
+              }
+              h3 {
+                color: rgb(90, 90, 90);
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                  Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+                font-size: 1.1rem;
+                text-align: center;
+              }
+              h2 {
+                font-size: 1.7rem;
+                color: rgb(45, 45, 45);
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+                  Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+              }
+            }
+          }
         }
-    }
-
   }
+  
 
   header {
     width: 100%;
@@ -62,11 +206,11 @@
     justify-content: center;
     margin-bottom: 20px;
 
-    .dashboard-icon{
-        color: rgb(45, 45, 45);
-        margin-inline-start: 10px;
-        width: 40px;
-        height: 40px;
+    .dashboard-icon {
+      color: rgb(45, 45, 45);
+      margin-inline-start: 10px;
+      width: 40px;
+      height: 40px;
     }
 
     h1 {
@@ -74,26 +218,29 @@
       font-size: 3rem;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-        padding-bottom: 4px;
+      padding-bottom: 4px;
     }
   }
 
   .option-charts {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     place-items: center;
     gap: 10px;
-    grid-template-columns: 1fr 1fr ;
-    height: 50%;
-    width: 59%;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    width: 35%;
 
     .chart {
       text-align: center;
       width: 70%;
+      height: 100%;
 
       h1 {
         color: rgb(45, 45, 45);
         font-size: 1.5rem;
-        font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+          Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       }
     }
   }
