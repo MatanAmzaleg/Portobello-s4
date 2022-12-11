@@ -2,7 +2,7 @@
   <section class="mini-users-designed">
     <ul>
       <li v-for="user in usersToShow">
-        <img v-if="user?.imgUrl"  class="main-task-member-img" :src="user.imgUrl" alt="member" />
+        <img v-if="user?.imgUrl"  class="main-task-member-img" :src="user?.imgUrl" alt="member" />
       </li>
     </ul>
   </section>

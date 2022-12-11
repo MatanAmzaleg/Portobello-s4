@@ -2,7 +2,7 @@
   <div class="popper-content member-picker">
     <popperModal title="Members" @closeModal="closeModal"/>
     <div class="members-section">
-      <input ref="focusInput" v-focus @input="filterMembers" v-model="input" class="members-input-search" type="search" placeholder="Search Members"/>
+      <input ref="focusInput" @input="filterMembers" v-model="input" class="members-input-search" type="search" placeholder="Search Members"/>
       <div class="members">
         <h5 class="board-members-title">Board members</h5>
         <div class="board-members">

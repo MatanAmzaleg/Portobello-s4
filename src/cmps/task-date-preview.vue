@@ -55,7 +55,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap: 3px;
-    padding: 2px 5px 2px;
+    padding: 2px 5px;
     border-radius: 3px;
     &:hover {
         filter: contrast(80%);

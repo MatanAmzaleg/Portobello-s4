@@ -3,7 +3,6 @@
     <popperModal title="Members" @closeModal="closeModal" />
     <div class="members-section">
       <input
-        v-focus
         @input="filterMembers"
         v-model="input"
         class="members-input-search"

@@ -41,14 +41,14 @@
                 <span v-if="item.isWatched" class="watch-icon"></span>
                 <TaskDatePreview v-if="item.dueDate" :status="item.status" :date="item.dueDate" :taskId="item.id" />
                 <span v-if="item.description?.length" class="description-icon"></span>
-                <div v-if="item.comments.length > 0" class="task-preview-checklist">
+                <div v-if="item.comments.length > 0" class="task-preview-comments">
                   <span class="comments-icon">
                   </span>
                   <span class="comments-span">{{ item.comments.length }}</span>
                 </div>
-                <span v-if="item.attachments" class="attachment-icon">{{
-                    item.attachments.length
-                }}</span>
+                <span v-if="item.attachments" class="attachment-icon">
+                  <span>{{ item.attachments.length }}</span>
+                </span>
                 <div class="task-preview-checklist" :class="isDone ? 'done' : ''">
                   <span v-if="item.checklists?.length" class="checklist-icon">
                     <span>{{ getTodoStatus(item.checklists) }}</span>
@@ -163,11 +163,17 @@ export default {
       isQuickEditOpen: false
     };
   },
-  created() {
+  async created() {
     this.taskTitle = this.item?.title
     this.task = this.item
     this.currBoard = this.getCurrBoard
     eventBus.on('updateQuickIsOpen', this.updateIsOpen)
+    let task = await this.$store.dispatch({
+      type: "loadTask",
+      board: this.currBoard,
+      taskId: this.task.id,
+    });
+    this.task = JSON.parse(JSON.stringify(task));
   },
   methods: {
     updateIsOpen(isOpen) {

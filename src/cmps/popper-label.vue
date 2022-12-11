@@ -143,7 +143,7 @@ export default {
     },
     updateInputFocus() {
       setTimeout(() => {
-        this.$refs.focusInput.focus();
+        this.$refs?.focusInput?.focus();
       }, 50);
     }
   },
