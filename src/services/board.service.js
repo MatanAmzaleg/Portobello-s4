@@ -52,8 +52,9 @@ async function getById(boardId) {
 }
 
 function onTaskUpdate({boardId,task}){  
-  console.log('SOCKET',boardId,task)
-  store.dispatch({ type: 'updateTask',  boardId,task})
+  console.log("🚀 ~ file: board.service.js:55 ~ onTaskUpdate ~ boardId,task", boardId,task)
+  console.log('onTaskUpdate');
+  store.commit({ type: 'updateTask',  boardId,newTask:task})
 }
 
 
@@ -83,9 +84,13 @@ function getTaskById(board, taskId) {
 }
 
 async function updateTask(boardId,task){
-  socketService.emit('update-task',{boardId,task})
-  let newTask = await httpService.put(BASE_URL+`${boardId}/${task.id}`, {boardId,task})
-  return newTask
+  try{
+    let newTask = await httpService.put(BASE_URL+`${boardId}/${task.id}`, {boardId,task})
+    socketService.emit('update-task',{boardId,task})
+    return newTask
+  }catch(err){
+    console.log(err)
+  }
 }
 
 

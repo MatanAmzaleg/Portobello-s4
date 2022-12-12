@@ -54,11 +54,18 @@ export const boardStore = {
     setTask(state, { task }) {
       state.currTask = task;
     },
-    updateTask(state, { newTask }) {
-      const groupIdx = state.currBoard.groups.findIndex(g => g.tasks.findIndex(t => t.id === newTask.id))
-      const taskIdx = state.currBoard.groups[groupIdx].tasks.findIndex(t => t.id === newTask.id)
-      state.currBoard.groups[groupIdx].tasks.splice(taskIdx,1,newTask)
-      console.log('Updated Task!');
+    updateTask(state, {boardId,newTask }) {
+    console.log("🚀 ~ file: board.store.js:58 ~ updateTask ~ boardId,newTask", boardId,newTask)
+      const newBoard = JSON.parse(JSON.stringify(state.currBoard))
+      const groupIdx = newBoard.groups.findIndex(g =>  {
+        console.log(g.tasks);
+        return g.tasks.find(t => t.id === newTask.id)
+      })
+      console.log(groupIdx)
+      const taskIdx = newBoard.groups[groupIdx].tasks.findIndex(t => t.id === newTask.id)
+      console.log(groupIdx,taskIdx);
+      newBoard.groups[groupIdx].tasks.splice(taskIdx,1,newTask)
+      state.currBoard = newBoard
     },
   },
   actions: {

@@ -151,6 +151,7 @@ export default {
   },
   watch: {
     currBoard(newBoard, oldBoard) {
+      console.log('making new scene');
       this.makeScene();
     },
   },
