@@ -113,13 +113,21 @@
         display: flex;
         flex-direction: column;
         gap: 2px;
+        margin-top: 5px;
     }
     .notification{
         background-color: white;
-        padding: 010px 20px 4px;
+        padding: 5px 20px 5px;
         display: flex;
-        width: 85%;
+        align-items: center;
+        width: 90%;
         gap: 8px;
+        border-bottom: 1px solid rgb(230, 230, 230);
+
+        img{
+            width: 35px;
+            height: 35px;
+        }
     }
     .notifications-header{
         display: flex;
