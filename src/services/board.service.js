@@ -23,7 +23,8 @@ export const boardService = {
   saveTask,
   getEmptyTask,
   removeTask,
-  updateTask
+  updateTask,
+  aiQuery
 };
 window.boardService = boardService;
 
@@ -37,7 +38,6 @@ async function query(filterBy = { txt: "", userId: userService.getLoggedinUser()
   }
 }
 async function getById(boardId) {
-  // return storageService.get(STORAGE_KEY, boardId);
   try{
     socketService.off('task-updated', onTaskUpdate)
     socketService.on('task-updated', onTaskUpdate)
@@ -52,13 +52,12 @@ async function getById(boardId) {
 }
 
 function onTaskUpdate({boardId,task}){  
-  console.log("🚀 ~ file: board.service.js:55 ~ onTaskUpdate ~ boardId,task", boardId,task)
-  console.log('onTaskUpdate');
   store.commit({ type: 'updateTask',  boardId,newTask:task})
 }
 
 
 function onBoardUpdate(board){  
+  // store.commit({ type: 'setCurrBoard', boardId:board._id,filterBy: {}})
   store.dispatch({ type: 'setCurrBoard', boardId:board._id,filterBy: {}})
 }
 
@@ -93,6 +92,10 @@ async function updateTask(boardId,task){
   }
 }
 
+async function aiQuery(item){
+  const response = await httpService.get(`openAi`, {item:item})
+  return response
+}
 
 function removeTask(board, taskId) {
   let boardCopy = JSON.parse(JSON.stringify(board))

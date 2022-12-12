@@ -489,6 +489,7 @@
               :labelIds="getTaskLabels"
             />
             <checkList @addchecklist="addChecklist" />
+            <smartList @addSmartList="addSmartList" />
             <datePicker
               :taskDate="getTaskDate"
               @saveDate="saveTaskDate"
@@ -540,6 +541,7 @@ import addAttachment from "../cmps/add-attachment.vue";
 import labelsPreview from "../cmps/labels-preview.vue";
 import archiveTask from "../cmps/archive-task.vue";
 import datePreview from "../cmps/date-preview.vue";
+import smartList from "../cmps/smart-list.vue";
 import { utilService } from "../services/util.service";
 import popperModal from "../cmps/popper-modal.vue";
 import popperEditOptions from "../cmps/popper-edit-options.vue";
@@ -707,6 +709,15 @@ export default {
         title: checklistsTitle,
         todos: [],
       };
+      this.task.checklists.push(checklist);
+      this.task.lastActivity = {
+        msg: `Added Checklist to ${this.task.title}`,
+        byMember: this.$store.getters.loggedinUser,
+        date: Date.now(),
+      };
+      this.updateTask();
+    },
+    addSmartList(checklist) {
       this.task.checklists.push(checklist);
       this.task.lastActivity = {
         msg: `Added Checklist to ${this.task.title}`,
@@ -1001,6 +1012,7 @@ export default {
     Mentionable,
     Container,
     Draggable,
+    smartList
   },
 };
 </script>

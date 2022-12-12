@@ -3,7 +3,6 @@ import { storageService } from "./async-storage.service.js";
 import { eventBus } from "./event-bus.service";
 import { FastAverageColor } from "fast-average-color";
 import { store } from "../store/store.js"
-
 export const utilService = {
   makeId,
   makeLorem,
