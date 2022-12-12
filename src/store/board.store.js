@@ -54,6 +54,12 @@ export const boardStore = {
     setTask(state, { task }) {
       state.currTask = task;
     },
+    updateTask(state, { newTask }) {
+      const groupIdx = state.currBoard.groups.findIndex(g => g.tasks.findIndex(t => t.id === newTask.id))
+      const taskIdx = state.currBoard.groups[groupIdx].tasks.findIndex(t => t.id === newTask.id)
+      state.currBoard.groups[groupIdx].tasks.splice(taskIdx,1,newTask)
+      console.log('Updated Task!');
+    },
   },
   actions: {
     async addBoard(context, { board }) {
@@ -153,10 +159,18 @@ export const boardStore = {
         console.log(err);
       }
     },
+    // async updateTask({ commit }, { boardId, task }) {
+    //   try {
+    //     const newTas = await boardService.updateTask(boardId, task);
+    //     commit({ type: "updateTask", newBoard });
+    //     return task;
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
     async updateTask({ commit }, { boardId, task }) {
       try {
-        const newBoard = await boardService.updateTask(boardId, task);
-        commit({ type: "setCurrBoard", newBoard });
+        const newTask = await boardService.updateTask(boardId, task);
+        commit({ type: "updateTask", newTask });
         return task;
       } catch (err) {
         console.log(err);
