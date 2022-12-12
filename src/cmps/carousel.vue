@@ -21,7 +21,6 @@ export default {
     carouselActiveItem(newValue, old){
       this.$refs.carousel.setActiveItem(newValue.toString())
     },
-    deep:true
   }
 }
 </script>

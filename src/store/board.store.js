@@ -55,15 +55,11 @@ export const boardStore = {
       state.currTask = task;
     },
     updateTask(state, {boardId,newTask }) {
-    console.log("🚀 ~ file: board.store.js:58 ~ updateTask ~ boardId,newTask", boardId,newTask)
       const newBoard = JSON.parse(JSON.stringify(state.currBoard))
       const groupIdx = newBoard.groups.findIndex(g =>  {
-        console.log(g.tasks);
         return g.tasks.find(t => t.id === newTask.id)
       })
-      console.log(groupIdx)
       const taskIdx = newBoard.groups[groupIdx].tasks.findIndex(t => t.id === newTask.id)
-      console.log(groupIdx,taskIdx);
       newBoard.groups[groupIdx].tasks.splice(taskIdx,1,newTask)
       state.currBoard = newBoard
     },
