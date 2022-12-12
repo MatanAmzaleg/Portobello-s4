@@ -234,7 +234,7 @@ export default {
       for (const tasks in this.loggedInUserStates) {
         tasksSum += this.loggedInUserStates[tasks]
       }
-      return (this.loggedInUserStates.uncompleted / tasksSum) * 100;
+      return (this.loggedInUserStates?.uncompleted / tasksSum) * 100;
     },
     getTotalTasks() {
       let tasksSum = 0;
@@ -248,7 +248,7 @@ export default {
       for (const tasks in this.loggedInUserStates) {
         tasksSum += this.loggedInUserStates[tasks]
       }
-      return (this.loggedInUserStates.completed / tasksSum) * 100;
+      return (this.loggedInUserStates?.completed / tasksSum) * 100;
     },
 },
   components: {
