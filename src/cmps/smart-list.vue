@@ -22,6 +22,7 @@
   </Popper>
 </template>
 <script>
+import popperModal from './popper-modal.vue'
 import {boardService} from '../services/board.service.js'
 import { utilService } from '../services/util.service'
 export default {
@@ -33,7 +34,6 @@ export default {
     methods:{
         async createChecklist(){
             const checklist = await boardService.aiQuery(this.userInput)
-            console.log('FROM OPENAI' ,checklist.result);
             const todos = checklist.result.split(/\r?\n/);
             todos.splice(0,2)
             const todosToAdd = todos.map(todo => ({id:utilService.makeId(), title:todo, isDone:false}))
@@ -42,9 +42,11 @@ export default {
               id:utilService.makeId(),
               todos:todosToAdd
             }
-            console.log(newChecklist);
             this.$emit('addSmartList',newChecklist)
         }
+    },
+    components:{
+      popperModal
     }
     
 }
