@@ -14,7 +14,7 @@
     </div>
     <template #content="{ close }">
       <div class="popper-content label-picker date-picker">
-        <popper-modal title="Dates" @closeModal="close" />
+        <!-- <popper-modal title="Dates" @closeModal="close" /> -->
         <popper-calendar @removeDate="removeDate" @saveDate="saveDate" @closeModal="close"/>
       </div>
     </template>
@@ -23,7 +23,7 @@
 
 <script>
 import popperCalendar from './popper-calendar.vue'
-import popperModal from "./popper-modal.vue";
+// import popperModal from "./popper-modal.vue";
 
 export default {
   props: {
@@ -40,7 +40,7 @@ export default {
   },
   components: {
     popperCalendar,
-    popperModal
+    // popperModal
   }
 }
 </script>

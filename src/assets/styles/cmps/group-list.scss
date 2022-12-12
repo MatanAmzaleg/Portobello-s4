@@ -2,6 +2,7 @@
   transition: transform 0.18s ease;
   transform: rotateZ(5deg);
 }
+
 .card-ghost-drop {
   transition: transform 0.18s ease-in-out;
   transform: rotateZ(0deg);
@@ -94,13 +95,11 @@
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
         background: rgb(255, 255, 255);
-        background: linear-gradient(
-          180deg,
-          rgba(255, 255, 255, 0.053658963585434205) 0%,
-          rgba(255, 255, 255, 0.40379901960784315) 34%,
-          rgba(255, 255, 255, 0.6979166666666667) 67%,
-          rgba(255, 255, 255, 0.8491771708683473) 100%
-        );
+        background: linear-gradient(180deg,
+            rgba(255, 255, 255, 0.053658963585434205) 0%,
+            rgba(255, 255, 255, 0.40379901960784315) 34%,
+            rgba(255, 255, 255, 0.6979166666666667) 67%,
+            rgba(255, 255, 255, 0.8491771708683473) 100%);
       }
     }
 
@@ -152,7 +151,7 @@
             align-self: center;
             font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
               Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-              font-size: 12px;
+            font-size: 12px;
           }
         }
 
@@ -374,6 +373,11 @@
   }
 
   .padded-section {
+
+    .main-task-member-img{
+      margin-inline-end: 2px;
+    }
+
     // padding: 5px 8px 5px;
     padding: 5px 8px 8px;
   }
@@ -393,6 +397,9 @@
       background-color: rgb(241, 247, 248);
     }
   }
+  .task:last-child {
+    margin-bottom: 1px;
+  }
   .task:first-child {
     margin-top: 1px;
   }
@@ -411,125 +418,128 @@
       color: #7e8a9d;
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-
-      .add-task-icon {
-        // margin-inline-end: 3px;
-        width: 16px;
-        height: 16px;
-      }
-
-      &:hover {
-        background-color: #dadbe2;
-      }
-    }
-  }
-
-  .task-router-link {
-    color: #67748a;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-  }
-
-  .textarea {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
-      Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-    height: 52px;
-    resize: none;
-    display: flex;
-    align-items: center;
-    width: -webkit-fill-available;
-    margin: 0 4px 8px 8px;
-    padding-inline-start: 5px;
-    padding-top: 5px;
-    border: none;
-    outline: none;
-    border-radius: 3px;
-    box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
-  }
-
-  .pressed-buttons {
-    display: flex;
-    margin-inline: 8px;
-
-    .add-card-btn {
-      width: 82px;
-      height: 32px;
-      margin: 5px 10px 5px 0px;
-      border-radius: 3px;
-      color: #ffffff;
-      background-color: $clr9;
-
-      &:hover {
-        background-color: $clr20;
-      }
-    }
-  }
-
-  .add-group {
-    display: flex;
-    flex-direction: column;
-    width: 276px;
-    height: fit-content;
-    background-color: rgb(181 191 207 / 20%);
-    border-radius: 4px;
-
-    &:hover {
-      background-color: rgba(202, 209, 220, 0.2);
-    }
-
-    @include for-mobile-layout {
-      width: 96vw;
-    }
-
-    .add-group-btn {
       display: flex;
       align-items: center;
-      text-align: left;
-      background-color: inherit;
-      padding: 14px 16px;
-      border-radius: 2px;
-      width: 276px;
-      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-      font-weight: 400;
-      color: white;
+      gap: 4px;
 
-      @include for-mobile-layout {
-        width: 98vw;
-      }
-    }
-
-    .add-task-icon2 {
-      padding-inline-end: 3px;
-      height: 16px;
+    .add-task-icon {
+      // margin-inline-end: 3px;
       width: 16px;
+      height: 16px;
     }
 
-    .add-group-input {
-      width: 240px;
-      height: 32px;
-      outline: 1px solid $clr9;
-      margin: auto;
-      margin-top: 5px;
-      padding-inline: 7px;
-
-      @include for-mobile-layout {
-        width: -webkit-fill-available;
-        margin: 2px;
-      }
-    }
-
-    .add-task-btn {
-      width: 80px;
-      height: 32px;
-      margin: 8px 10px 8px 0px;
-      border-radius: 3px;
-      color: #ffffff;
-      background-color: $clr9;
-
-      &:hover {
-        background-color: $clr20;
-      }
+    &:hover {
+      background-color: #dadbe2;
     }
   }
+}
+
+.task-router-link {
+  color: #67748a;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.textarea {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans,
+    Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+  height: 52px;
+  resize: none;
+  display: flex;
+  align-items: center;
+  width: -webkit-fill-available;
+  margin: 0 4px 8px 8px;
+  padding-inline-start: 5px;
+  padding-top: 5px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px 0px rgba(154, 154, 154, 0.75);
+}
+
+.pressed-buttons {
+  display: flex;
+  margin-inline: 8px;
+
+  .add-card-btn {
+    width: 82px;
+    height: 32px;
+    margin: 5px 10px 5px 0px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: $clr9;
+
+    &:hover {
+      background-color: $clr20;
+    }
+  }
+}
+
+.add-group {
+  display: flex;
+  flex-direction: column;
+  width: 276px;
+  height: fit-content;
+  background-color: rgb(181 191 207 / 20%);
+  border-radius: 4px;
+
+  &:hover {
+    background-color: rgba(202, 209, 220, 0.2);
+  }
+
+  @include for-mobile-layout {
+    width: 96vw;
+  }
+
+  .add-group-btn {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    background-color: inherit;
+    padding: 14px 16px;
+    border-radius: 2px;
+    width: 276px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+      Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
+    font-weight: 400;
+    color: white;
+
+    @include for-mobile-layout {
+      width: 98vw;
+    }
+  }
+
+  .add-task-icon2 {
+    padding-inline-end: 3px;
+    height: 16px;
+    width: 16px;
+  }
+
+  .add-group-input {
+    width: 240px;
+    height: 32px;
+    outline: 1px solid $clr9;
+    margin: auto;
+    margin-top: 5px;
+    padding-inline: 7px;
+
+    @include for-mobile-layout {
+      width: -webkit-fill-available;
+      margin: 2px;
+    }
+  }
+
+  .add-task-btn {
+    width: 80px;
+    height: 32px;
+    margin: 8px 10px 8px 0px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: $clr9;
+
+    &:hover {
+      background-color: $clr20;
+    }
+  }
+}
 }
