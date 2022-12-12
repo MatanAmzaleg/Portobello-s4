@@ -1,7 +1,9 @@
 <template>
   <section class="task-preview">
     <VDropdown placement="center" :distance="0">
-      <span class="edit-icon" @click.stop="updatePopperMode"></span>
+      <div class="edit-icon-container" @click.stop="updatePopperMode">
+        <span class="edit-icon"></span>
+      </div>
       <template #popper>
         <taskQuickEdit 
           :isLabelsExtended="isLabelsExtended" 
