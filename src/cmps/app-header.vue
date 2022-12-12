@@ -23,7 +23,7 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-for="board in boards">
+                  <li v-for="board in getBoards">
                     <div class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="" />
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -179,10 +179,7 @@ export default {
     };
   },
   created() {
-    setTimeout(() => {
-      this.boards = this.$store.getters.boards
-      console.log('boards', this.boards)
-    },1000)
+    this.boards = this.getBoards
   },
   methods: {
     toggleModal() {
