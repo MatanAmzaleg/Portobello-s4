@@ -1,21 +1,22 @@
 .left-slider {
-  width: 0;
+  width: 260px;
   display: flex;
   flex-direction: column;
   position: fixed;
-  left: 0;
+  left: -260px;
   color: white;
   background-color: hsl(220, 4.3%, 8.5%);
   overflow-x: hidden;
   height: calc(100vh - 44px);
   overflow: hidden;
-  z-index: 10;
-  transition: 0.6s;
+  z-index: 20;
+  transition: left 0.3s;
 
   .header {
     height: 42px;
     align-items: center;
     padding: 14px 12px;
+
     .trello-icon {
       display: grid;
       place-items: center;
@@ -29,17 +30,21 @@
       color: #ffffff;
       margin-inline-end: 6px;
     }
+
     .titles {
       font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       flex-direction: column;
+
       h3 {
         font-size: 13px;
       }
+
       p {
         font-size: 11px;
       }
     }
+
     .left-arrow {
       height: 28px;
       width: 28px;
@@ -62,6 +67,7 @@
 
   .first-section {
     margin-top: 12px;
+
     .icon {
       margin-inline-end: 12px;
       font-size: 14px;
@@ -86,11 +92,13 @@
       &:hover {
         background-color: rgba(208, 208, 208, 0.395);
       }
+
       p {
         font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
           Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
         font-size: 13px;
       }
+
       .plus {
         display: grid;
         place-items: center;
@@ -99,6 +107,7 @@
         border-radius: 3px;
         position: relative;
         left: 126px;
+
         &:hover {
           background-color: rgba(208, 208, 208, 0.395);
         }
@@ -109,107 +118,114 @@
         }
       }
     }
+
     .members {
       position: relative;
       right: 6px;
     }
   }
 
-  .your-boards-section{
+  .your-boards-section {
     margin-inline-start: 12px;
     margin-top: 12px;
-    p{
-        font-size: 14px;
-        font-weight: 600;
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+
+    p {
+      font-size: 14px;
+      font-weight: 600;
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
         Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     }
-    .plus {
-        display: grid;
-        place-items: center;
-        width: 24px;
-        height: 24px;
-        border-radius: 3px;
-        position: relative;
-        left: 133px;
-        &:hover {
-          background-color: rgba(208, 208, 208, 0.395);
-        }
 
-        .icon-plus-bigger {
-          font-size: 14px;
-          color: #ffffff;
-        }
+    .plus {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 3px;
+      position: relative;
+      left: 133px;
+
+      &:hover {
+        background-color: rgba(208, 208, 208, 0.395);
       }
+
+      .icon-plus-bigger {
+        font-size: 14px;
+        color: #ffffff;
+      }
+    }
   }
 }
 
 
 
 .is-slider-open {
-    .board-header {
-      margin-inline-start: 260px;
-      transition: 0.6s;
-    }
-  
-    .group-list {
-        margin-inline-start: 260px;
-      transition: 0.6s;
-    }
-  
-    .left-slider {
-      width: 260px;
-      transition: 0.6s;
+  .board-header {
+    margin-inline-start: 260px;
+    transition: 0.6s;
+  }
+
+  .group-list {
+    margin-inline-start: 260px;
+    transition: 0.6s;
+  }
+
+  .left-slider {
+    width: 260px;
+    left: 0px;
+    transition: left 0.3s;
+  }
+}
+
+.nav-item-content {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+
+  li {
+    height: 32px;
+    width: 100%;
+
+    &:hover {
+      background-color: rgba(208, 208, 208, 0.395);
     }
 
-    .nav-item-content {
-        margin-top: 10px;
+    .starred-board-container {
+      display: flex;
+      align-items: center;
+      height: 32px;
+
+      .board-name-container {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        list-style: none;
+        padding: 0 0 0 8px;
 
-     
-
-        li {
-            height: 32px;
-            width: 100%;
-            &:hover{
-                background-color: rgba(208, 208, 208, 0.395);
-            }
-            .starred-board-container {
-                display: flex;
-                align-items: center;
-                height: 32px;
-
-                .board-name-container {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    padding: 0 0 0 8px;
-
-                    .title-1 {
-                        font-size: 14px;
-                        color: white;
-                        line-height: 14px;
-                        font-weight: 500;
-                        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-                        Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
-                    }
-
-                    .title-2 {
-                        font-size: 12px;
-                        color: #5E6C84;
-                        font-weight: 400;
-                        line-height: 16px;
-                    }
-                }
-
-                .style-container {
-                    height: 17px;
-                    width: 26px;
-                    border-radius: 2px;
-                }
-            }
+        .title-1 {
+          font-size: 14px;
+          color: white;
+          line-height: 14px;
+          font-weight: 500;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
         }
+
+        .title-2 {
+          font-size: 12px;
+          color: #5E6C84;
+          font-weight: 400;
+          line-height: 16px;
+        }
+      }
+
+      .style-container-left {
+        height: 17px;
+        width: 26px;
+        border-radius: 2px;
+      }
     }
   }
+}
+
+// }

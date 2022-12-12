@@ -51,13 +51,13 @@
           <div class="starred-board-container" @click="moveToBoard(board)">
             <img
               v-if="board.style?.imgUrl"
-              class="style-container"
+              class="style-container-left"
               :src="board.style?.imgUrl"
               alt=""
             />
             <div
               v-if="board.style?.bgColor"
-              class="style-container"
+              class="style-container-left"
               :style="{ 'background-color': board.style?.bgColor }"
               alt=""
             ></div>

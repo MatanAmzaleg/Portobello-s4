@@ -2,11 +2,11 @@
   <section class="option-charts">
     <div class="chart">
       <h1 title="chart-title">Tasks per user</h1>
-      <BarChart :chartData="TasksPerUsers" :options="options" />
+      <BarChart :chartData="TasksPerUsers" :options="options" style="max-height: 90%;"/>
     </div>
     <div class="chart">
       <h1 title="chart-title">All tasks status</h1>
-      <BarChart :chartData="getTasksStatus" :options="options" />
+      <BarChart :chartData="getTasksStatus" :options="options"  style="max-height: 90%;"/>
     </div>
   </section>
 </template>

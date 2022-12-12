@@ -1,9 +1,12 @@
 <template>
   <section v-if="board" class="board-header">
     <div class="left-section">
-      <div v-if="!isSliderOpen" @click="$emit('openSliderMenu')" class="right-arrow">
-        <font-awesome-icon :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }" class="right-arrow-icon"
-          icon="fa-solid fa-angle-right" />
+      <div class="left-menu-style" v-if="!isSliderOpen" @click="$emit('openSliderMenu')">
+        <div class="open-menu-side"></div>
+        <div class="right-arrow">
+          <font-awesome-icon :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }" class="right-arrow-icon"
+            icon="fa-solid fa-angle-right" />
+        </div>
       </div>
       <span :style="{ color: getCalcColor?.isDark ? 'white' : 'black' }" class="board-name-input" role="textbox"
         ref="span" @input="changeBoardName" contenteditable>
@@ -125,7 +128,7 @@
       </Popper>
       <button @click="$emit('openBoardMenu')" class="ellipsis-btn">
         <font-awesome-icon :style="
-          !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
+  !getCalcColor?.isDark ? { color: 'black' } : { color: 'white' }
         " class="ellipsis-icon" icon="fa-solid fa-ellipsis" />
       </button>
     </div>
