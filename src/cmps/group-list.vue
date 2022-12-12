@@ -91,7 +91,7 @@ export default {
       this.$store.dispatch({ type: "updateBoard", board });
     },
     addBoard(board) {
-      this.$store.dispatch({ type: "addBoard", board });
+      this.$store.dispatch({ type: "updateBoard", board });
     },
     addTask(board) {
       this.$emit("addTask", board);

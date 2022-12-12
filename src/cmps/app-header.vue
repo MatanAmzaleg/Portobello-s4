@@ -23,7 +23,7 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-for="board in boards">
+                  <li v-for="board in getBoards">
                     <div class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="" />
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -51,7 +51,7 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-for="board in boards">
+                  <li v-for="board in getBoards.slice(0, 4)">
                     <div class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="" />
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -79,11 +79,8 @@
             <template #content="{ close }">
               <div class="popper-template">
                 <ul class="nav-item-content">
-                  <li v-if="
-                    boards?.filter((board) => board.isStarred).length > 0
-                  " v-for="board in boards?.filter(
-  (board) => board.isStarred
-)">
+                  <li v-if="staredBoards" 
+                  v-for="board in getBoards?.filter((board) => board.isStarred)">
                     <div v-if="board.isStarred" class="starred-board-container" @click="moveToBoard(board)">
                       <img v-if="board.style?.imgUrl" class="style-container" :src="board.style?.imgUrl" alt="" />
                       <div v-if="board.style?.bgColor" class="style-container"
@@ -179,10 +176,7 @@ export default {
     };
   },
   created() {
-    setTimeout(() => {
-      this.boards = this.$store.getters.boards
-      console.log('boards', this.boards)
-    },1000)
+    this.boards = this.getBoards
   },
   methods: {
     toggleModal() {
@@ -230,6 +224,9 @@ export default {
       }
       return this.$store.getters.currBoard?.style?.calcColor;
     },
+    staredBoards(){
+      return this.getBoards?.filter((board) => board.isStarred).length > 0
+    }
   },
   components: {
     notifications,
