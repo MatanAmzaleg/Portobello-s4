@@ -23,6 +23,7 @@ export const boardService = {
   saveTask,
   getEmptyTask,
   removeTask,
+  updateTask
 };
 window.boardService = boardService;
 
@@ -34,19 +35,12 @@ async function query(filterBy = { txt: "", userId: userService.getLoggedinUser()
   catch(err){
     console.log(err)
   }
-  // return boards
-  // var boards = await storageService.query(STORAGE_KEY)
-  // if (filterBy.txt) {
-  //     const regex = new RegExp(filterBy.txt, 'i')
-  //     boards = boards.filter(board => regex.test(board.title) || regex.test(board.description))
-  // }
-  // if (filterBy.price) {
-  //     boards = boards.filter(board => board.price <= filterBy.price)
-  // }
 }
 async function getById(boardId) {
   // return storageService.get(STORAGE_KEY, boardId);
   try{
+    socketService.off('task-updated', onTaskUpdate)
+    socketService.on('task-updated', onTaskUpdate)
     socketService.off(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
     socketService.on(SOCKET_EVENT_BOARD_UPDATED, onBoardUpdate)
     socketService.emit('set-board',boardId)
@@ -56,6 +50,13 @@ async function getById(boardId) {
     console.log(err)
   }
 }
+
+function onTaskUpdate({boardId,task}){  
+  console.log("🚀 ~ file: board.service.js:55 ~ onTaskUpdate ~ boardId,task", boardId,task)
+  console.log('onTaskUpdate');
+  store.commit({ type: 'updateTask',  boardId,newTask:task})
+}
+
 
 function onBoardUpdate(board){  
   store.dispatch({ type: 'setCurrBoard', boardId:board._id,filterBy: {}})
@@ -82,11 +83,16 @@ function getTaskById(board, taskId) {
   return task
 }
 
-// async function updateTask(boardId,task){
-//   socketService.emit('update-task',boardId,task)
-//   let task = await httpService.put(BASE_URL+`${boardId}/${task._id}`, boardId,task)
-//   return task
-// }
+async function updateTask(boardId,task){
+  try{
+    let newTask = await httpService.put(BASE_URL+`${boardId}/${task.id}`, {boardId,task})
+    socketService.emit('update-task',{boardId,task})
+    return newTask
+  }catch(err){
+    console.log(err)
+  }
+}
+
 
 function removeTask(board, taskId) {
   let boardCopy = JSON.parse(JSON.stringify(board))

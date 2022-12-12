@@ -1,5 +1,6 @@
 .board-header {
   background-color: transparent;
+
   .mini-title {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
@@ -23,6 +24,7 @@
   justify-content: space-between;
   padding-inline: 8px;
   cursor: default;
+
   button {
     height: 32px;
     background-color: rgba(181, 191, 207, 0.2);
@@ -33,12 +35,13 @@
       background-color: rgba(202, 209, 220, 0.2);
     }
   }
+
   .left-section {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .right-arrow{
+    .right-arrow {
       display: grid;
       place-items: center;
       cursor: pointer;
@@ -46,20 +49,21 @@
       height: 32px;
       border-radius: 50%;
       background-color: rgba(200, 206, 214, 0.2);
-      .right-arrow-icon{
+
+      .right-arrow-icon {
         height: 12px;
         width: 12px;
       }
     }
 
-    > * {
+    >* {
       margin: 2px;
     }
 
     .is-starred {
       width: 32px;
 
-      .yellow-star{
+      .yellow-star {
         width: 14px;
         height: 14px;
       }
@@ -69,15 +73,16 @@
           color: #F2D600 !important;
           scale: 1.2;
         }
-        .yellow-star{
+
+        .yellow-star {
           color: #F2D600 !important;
           scale: 1.2;
         }
       }
     }
 
-    .board-name-input{
-      font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Noto Sans,Ubuntu,Droid Sans,Helvetica Neue,sans-serif;
+    .board-name-input {
+      font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
       display: flex;
       align-items: center;
       border: none;
@@ -87,12 +92,13 @@
       font-weight: bold;
       border-radius: 3px;
       cursor: pointer;
-      margin-inline-end:4px;
-      
-      &:hover{
+      margin-inline-end: 4px;
+
+      &:hover {
         background-color: #3787b564;
       }
-      &:focus{
+
+      &:focus {
         outline: 2px solid $clr9;
         background-color: #fff;
         height: 28px;
@@ -101,13 +107,14 @@
 
     }
   }
+
   .right-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    
 
-    > * {
+
+    >* {
       margin: 5px;
       margin-inline-start: 10px;
     }
@@ -117,6 +124,7 @@
       align-items: center;
       justify-content: center;
       width: 72px;
+
       .filter-icon {
         position: relative;
         bottom: 1px;
@@ -198,7 +206,8 @@
       }
     }
   }
-  .grey-icon{
+
+  .grey-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,7 +218,7 @@
     background-color: #dfe2e7;
   }
 
-  .calender-div{
+  .calender-div {
     border-radius: 50%;
     background-color: #dfe2e7;
     display: flex;
@@ -217,31 +226,34 @@
     justify-content: center;
     height: 24px;
     width: 24px;
-    .calender{
+
+    .calender {
       font-size: 14px;
     }
 
   }
 
-  .yellow-div{
+  .yellow-div {
     border-radius: 50%;
-    background-color:#F2D600 ;
+    background-color: #F2D600;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 24px;
     width: 24px;
   }
-  .red-div{
+
+  .red-div {
     border-radius: 50%;
-    background-color:#EB5A46 ;
+    background-color: #EB5A46;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 24px;
     width: 24px;
   }
-  .clock{
+
+  .clock {
     font-style: 14px;
     color: white;
   }
@@ -256,37 +268,57 @@
 
   }
 
-  .labels-filter{
+  .labels-filter {
     overflow-y: scroll;
     max-height: 300px;
-    button{
-        width: 320px;
+
+    button {
+      width: 320px;
     }
+
     margin-bottom: 5px;
   }
 
-  label{
+  label {
     display: flex;
     align-items: center;
-    > * {
+
+    >* {
       margin: 4px;
       color: #616F86;
     }
   }
 
-  .users{
+  .users {
     height: 32px;
     display: flex;
     margin-bottom: 0.7rem;
   }
 }
 
-.share-button{
-  padding: 10px !important;
-  background-color:  #FFFFFF !important;
+.share-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px !important;
+  padding-left: 8px !important;
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Noto Sans', 'Ubuntu', 'Droid Sans', 'Helvetica Neue', sans-serif;
   color: #000000 !important;
+  background-color: #FFFFFF !important;
+
+  svg {
+    overflow: hidden;
+    pointer-events: none;
+    max-height: 100%;
+    height: 16px;
+    width: 16px;
+    vertical-align: bottom;
+  }
 }
 
-.seperator{
+.seperator {
   color: white;
 }

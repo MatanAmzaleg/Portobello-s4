@@ -179,7 +179,10 @@ export default {
     };
   },
   created() {
-    this.boards = this.$store.getters.boards
+    setTimeout(() => {
+      this.boards = this.$store.getters.boards
+      console.log('boards', this.boards)
+    },1000)
   },
   methods: {
     toggleModal() {
