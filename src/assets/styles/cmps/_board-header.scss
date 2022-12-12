@@ -22,7 +22,7 @@
   height: 48px;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 8px;
+  padding-inline: 6px;
   cursor: default;
 
   button {
@@ -41,14 +41,41 @@
     align-items: center;
     justify-content: center;
 
+    .left-menu-style {
+      margin: 0px;
+
+      &:hover {
+
+        .open-menu-side {
+          background-color: rgba(200, 206, 214, 0.518);
+        }
+
+        .right-arrow {
+          background-color: rgba(200, 206, 214, 0.518);
+        }
+      }
+    }
+
+    .open-menu-side{
+      height: calc(100% - 44px);
+      width: 16px;
+      position: fixed;
+      left: 0px;
+      top: 44px;
+      margin: 0px;
+      background-color: rgba(200, 206, 214, 0.293);
+      z-index: 10;
+    }
+
     .right-arrow {
       display: grid;
       place-items: center;
       cursor: pointer;
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
+      margin: 0px;
       border-radius: 50%;
-      background-color: rgba(200, 206, 214, 0.2);
+      background-color: rgba(200, 206, 214, 0.293);
 
       .right-arrow-icon {
         height: 12px;
