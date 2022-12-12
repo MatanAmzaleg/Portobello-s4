@@ -237,7 +237,8 @@ export default {
         board.groups[groupIdx].tasks[taskIdx] = this.task;
         if (this?.task?.lastActivity)
           board.activities.unshift(this.task.lastActivity);
-        await this.$store.dispatch({ type: "updateBoard", board });
+        // await this.$store.dispatch({ type: "updateBoard", board });
+        await this.$store.dispatch({ type: "updateTask", boardId:board._id,task:this.task });
       } catch (err) {
         console.log("cant Update task", err);
       }
@@ -284,7 +285,8 @@ export default {
       this.updateTask();
     },
     saveDate(date) {
-      this.task.dueDate = date;
+      const newDate = newDate(date)
+      this.task.dueDate = newDate.getTime();
       this.task.lastActivity = {
         msg: `Added Due Date to ${this.task.title}`,
         byMember: this.$store.getters.loggedinUser,
