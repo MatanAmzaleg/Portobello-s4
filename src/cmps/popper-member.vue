@@ -25,7 +25,7 @@ export default {
     members: Array
   },
   created() {
-    this.boardMembers = this.$store.getters.currBoard.members
+    this.boardMembers = this.$store.getters.currBoard?.members
     this.membersToShow = this.boardMembers
     eventBus.on('update-focus', this.updateInputFocus)
   },

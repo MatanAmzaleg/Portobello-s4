@@ -74,7 +74,7 @@ export default {
         this.labelIds.push(labelId);
       } else {
         msg = 'Removed label ' + `'${this.labelText(labelId)}'` + ' from '
-        this.labelIds.splice(labelIdx);
+        this.labelIds.splice(labelIdx, 1);
       }
       this.$emit("save-label", {labels:this.labelIds,msg});
     },

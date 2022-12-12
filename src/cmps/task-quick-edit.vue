@@ -119,9 +119,9 @@
           </div>
         </template>
       </Popper>
-      <button class="button-quick-edit">
+      <button class="button-quick-edit" @click="deleteTask">
         <span class="archive-icon icon-actions"></span>
-        Archive
+        Delete
       </button>
     </div>
   </section>
@@ -146,6 +146,7 @@ export default {
       task: {},
       taskTitle: '',
       currBoard: {},
+      isDone: null,
       isQuickEditOpen: false,
     };
   },
@@ -162,6 +163,18 @@ export default {
     this.task = JSON.parse(JSON.stringify(task));
   },
   methods: {
+    async deleteTask() {
+      try {
+        await this.$store.dispatch({
+          type: "deleteTask",
+          board: this.currBoard,
+          taskId: this.task.id,
+        });
+        eventBus.emit('updatePoperIsOpen', false)
+      } catch (err) {
+        console.log(err);
+      }
+    },
     updateCurrTaskTitle(ev) {
       this.taskTitle = ev.target.value
     },
@@ -285,7 +298,7 @@ export default {
       this.updateTask();
     },
     saveDate(date) {
-      const newDate = newDate(date)
+      const newDate = new Date(date)
       this.task.dueDate = newDate.getTime();
       this.task.lastActivity = {
         msg: `Added Due Date to ${this.task.title}`,
@@ -293,6 +306,9 @@ export default {
         date: Date.now(),
       };
       this.updateTask();
+    },
+    addFocus() {
+      eventBus.emit('update-focus')
     },
   },
   computed: {
