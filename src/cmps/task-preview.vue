@@ -1,6 +1,6 @@
 <template>
   <section class="task-preview">
-    <VDropdown placement="bottom" :distance="0" :skidding="102">
+    <VDropdown placement="center" :distance="0">
       <span class="edit-icon" @click.stop="updatePopperMode"></span>
       <template #popper>
         <taskQuickEdit 
