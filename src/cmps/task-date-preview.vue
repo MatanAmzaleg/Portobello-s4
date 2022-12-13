@@ -13,6 +13,9 @@ export default {
         status: String,
         taskId: String
     },
+    created(){
+        console.log(this.date);
+    },
     methods: {
         toggleTask() {
             eventBus.emit('toggleTask', { taskId: this.taskId, status: this.status })
@@ -20,10 +23,9 @@ export default {
     },
     computed: {
         statusComputed() {
-            const isoDate = new Date(this.date);
             if (this.status === 'completed') return 'completed'
-            if (isoDate.getTime() - Date.now() >= 86349893) return 'regular'
-            if (isoDate.getTime() - Date.now() < 86349893 && isoDate.getTime() - Date.now() > 0) return 'due-soon'
+            if (this.date - Date.now() >= 86349893) return 'regular'
+            if (this.date - Date.now() < 86349893 && this.date - Date.now() > 0) return 'due-soon'
             return 'overdue'
         },
         dateComputed() {
