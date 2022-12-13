@@ -97,10 +97,6 @@
                   <span class="label-icon icon-actions grey-icon"></span>
                   <p>No labels</p>
                 </label>
-                <label v-for="label in labelsToShow" class="member-label" for="">
-                  <input type="checkbox" :checked="filterBy.labels" v-model="filterBy.labels" @change="setFilter" />
-                  <button class="label-btn" :style="{ 'background-color': labelColor(label) }"></button>
-                </label>
               </section>
             </section>
           </div>
