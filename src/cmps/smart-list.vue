@@ -1,5 +1,5 @@
 <template lang="">
- <Popper @open:popper="updateInputFocus">
+ <Popper @open:popper="updateInputFocus"  offsetSkid="69" offsetDistance="5" >
     <div class="task-option-btn">
       <span class="checklist-icon icon-actions"></span>
       <p>Smart Checklist</p>
