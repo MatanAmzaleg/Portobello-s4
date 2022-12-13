@@ -30,8 +30,8 @@ export default {
   },
   methods: {
     saveDate(date) {
-      const newDate =  new Date(date) 
-      this.$emit('save-date', newDate.getTime())
+      const newDate =  new Date(date).getTime() 
+      this.$emit('save-date', newDate)
     },
     removeDate() {
       this.$emit('remove-date')

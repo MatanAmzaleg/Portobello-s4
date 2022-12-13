@@ -23,6 +23,7 @@ export default {
     },
     computed: {
         statusComputed() {
+            console.log(this.date);
             if (this.status === 'completed') return 'completed'
             if (this.date - Date.now() >= 86349893) return 'regular'
             if (this.date - Date.now() < 86349893 && this.date - Date.now() > 0) return 'due-soon'

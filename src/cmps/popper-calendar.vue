@@ -12,7 +12,7 @@ import popperModal from "./popper-modal.vue";
 
 export default {
   created() {
-    this.date = this.getTask
+    this.date = this.getTask.dueDate
   },
   data() {
     return {

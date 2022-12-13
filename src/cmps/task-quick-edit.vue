@@ -286,8 +286,9 @@ export default {
       this.updateTask();
     },
     saveDate(date) {
-      const newDate = new Date(date)
-      this.task.dueDate = newDate.getTime();
+      console.log(date);
+      const newDate = new Date(date).getTime()
+      this.task.dueDate = newDate
       this.task.lastActivity = {
         msg: `Added Due Date to ${this.task.title}`,
         byMember: this.$store.getters.loggedinUser,
