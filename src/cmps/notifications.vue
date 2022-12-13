@@ -20,7 +20,7 @@
         <div class="notification-container" v-if="userNotifications.length > 0">
           <div class="notification" v-for="notification in notifications">
             <img :src="notification.imgUrl" class="member-img-card" />
-            <h1>{{ notification.msg }}''</h1>
+            <h1>{{ notification.msg }}</h1>
           </div>
         </div>
         <div v-else class="no-notification">

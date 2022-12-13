@@ -1,5 +1,5 @@
 <template>
-  <Popper placement="top" offsetDistance="-100">
+  <Popper placement="top" offsetDistance="-100"  offsetSkid="69">
     <div class="task-option-btn">
       <svg  class="icon-actions" width="16" height="16" role="presentation" focusable="false" viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg">
