@@ -72,7 +72,7 @@ export default {
         width: fit-content;
     }
 .task-status{
-    font-size: 12px;
+    font-size: 12px !important;
     color: white !important;
     line-height: 16px;
     padding: 0 4px;

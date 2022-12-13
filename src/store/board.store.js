@@ -167,7 +167,6 @@ export const boardStore = {
       try {
         const newTask = await boardService.updateTask(boardId, task);
         commit({ type: "updateTask", newTask });
-        commit({type: 'addActivity',activity:task.lastActivity})
         return task;
       } catch (err) {
         console.log(err);

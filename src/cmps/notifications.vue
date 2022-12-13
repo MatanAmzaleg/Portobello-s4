@@ -1,5 +1,5 @@
 <template>
-  <Popper class="user-popper" offsetSkid="-210">
+  <Popper class="user-popper" offsetSkid="-219">
     <div @click="cleanNotifications" class="notifications-bell-container">
       <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
         <path
