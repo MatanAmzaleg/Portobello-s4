@@ -27,9 +27,6 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <!-- <textarea  v-model="task.title"
-            @input="updateTask"
-            class="task-title-input"></textarea> -->
           <input
             type="text"
             v-model="task.title"
