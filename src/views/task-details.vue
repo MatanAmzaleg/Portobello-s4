@@ -64,7 +64,7 @@
             <span></span>
             <datePreview
               v-if="task.dueDate"
-              :dueDate="task.dueDate"
+              :dueDate="getTaskDate"
               :status="task.status"
               @changeStatus="updateTaskStatus"
               @saveDate="saveTaskDate"

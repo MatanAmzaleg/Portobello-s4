@@ -146,7 +146,7 @@ export default {
     },
     getActivityTime(ts) {
       if (ts - Date.now() < 86349893 && ts - Date.now() > 0) return dateFormat(new Date(ts), "'Before' H 'hours'");
-      return dateFormat(new Date(ts), "mmm dd 'at' HH:MM");
+      return dateFormat(ts, "mmm dd 'at' HH:MM");
     }
   },
   computed: {

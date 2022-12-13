@@ -115,7 +115,7 @@
         </button>
         <template #content="{ close }">
           <div class="popper-content label-picker quick-popper-left">
-            <popper-calendar @closeModal="close" @removeDate="removeDate" @saveDate="saveDate" />
+            <popper-calendar @closeModal="close" @removeDate="removeDate" @saveDate="saveDate" :taskDate="task.dueDate" />
           </div>
         </template>
       </Popper>
@@ -286,9 +286,7 @@ export default {
       this.updateTask();
     },
     saveDate(date) {
-      console.log(date);
-      const newDate = new Date(date).getTime()
-      this.task.dueDate = newDate
+      this.task.dueDate = date
       this.task.lastActivity = {
         msg: `Added Due Date to ${this.task.title}`,
         byMember: this.$store.getters.loggedinUser,

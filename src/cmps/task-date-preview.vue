@@ -13,9 +13,6 @@ export default {
         status: String,
         taskId: String
     },
-    created(){
-        console.log(this.date);
-    },
     methods: {
         toggleTask() {
             eventBus.emit('toggleTask', { taskId: this.taskId, status: this.status })

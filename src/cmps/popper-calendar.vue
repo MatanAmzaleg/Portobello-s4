@@ -11,8 +11,11 @@
 import popperModal from "./popper-modal.vue";
 
 export default {
+  props:{
+    taskDate:Number
+  },
   created() {
-    this.date = this.getTask.dueDate
+    this.date = this.taskDate
   },
   data() {
     return {
@@ -21,7 +24,8 @@ export default {
   },
   methods: {
     saveDate() {
-      this.$emit("save-date", this.date);
+      const date = new Date(this.date).getTime()
+      this.$emit("save-date", date);
       this.$emit("closeModal");
     },
     removeDate() {
@@ -29,16 +33,6 @@ export default {
     },
     closeModal() {
       this.$emit("closeModal");
-    }
-  },
-  computed: {
-    getTask() {
-      return this.$store.getters.currTask;
-    },
-  },
-  watch: {
-    getTask(newTask, oldTask) {
-      this.date = newTask.dueDate
     }
   },
   components: {

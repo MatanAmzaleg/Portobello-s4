@@ -15,7 +15,7 @@
     <template #content="{ close }">
       <div class="popper-content label-picker date-picker">
         <!-- <popper-modal title="Dates" @closeModal="close" /> -->
-        <popper-calendar @removeDate="removeDate" @saveDate="saveDate" @closeModal="close"/>
+        <popper-calendar @removeDate="removeDate" :taskDate="taskDate" @saveDate="saveDate" @closeModal="close"/>
       </div>
     </template>
   </Popper>
@@ -23,15 +23,13 @@
 
 <script>
 import popperCalendar from './popper-calendar.vue'
-
 export default {
   props: {
     taskDate: Number
   },
   methods: {
     saveDate(date) {
-      const newDate =  new Date(date).getTime() 
-      this.$emit('save-date', newDate)
+      this.$emit('save-date', date)
     },
     removeDate() {
       this.$emit('remove-date')

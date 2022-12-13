@@ -9,8 +9,7 @@
               </div>
       <template #content="{close}">
         <div class="popper-content label-picker date-picker"> 
-        <popper-modal title="Dates" @closeModal="close"/>
-        <popper-calendar color="grey" @removeDate="removeDate" @saveDate="saveDate"/>
+        <popper-calendar color="grey" @removeDate="removeDate" @saveDate="saveDate" :taskDate="dueDate"/>
         </div>
       </template>
     </Popper>
@@ -48,14 +47,13 @@ export default {
     },
     computed:{
         getStatus(){
-            const isoDate = new Date(this.dueDate);
             if(this.isDone) return 'completed'
-            if(isoDate.getTime() - Date.now() >= 86349893) return null 
-            if(isoDate.getTime() - Date.now() < 86349893 && isoDate.getTime() - Date.now() > 0) return 'due-soon' 
+            if(this.dueDate - Date.now() >= 86349893) return null 
+            if(this.dueDate - Date.now() < 86349893 && this.dueDate - Date.now() > 0) return 'due-soon' 
             return 'overdue'
         },
         date(){
-            return dateFormat(new Date(this.dueDate), "mmm dd 'at' HH:MM");
+            return dateFormat(this.dueDate, "mmm dd 'at' HH:MM");
         }
     },
     components:{
