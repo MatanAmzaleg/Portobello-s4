@@ -62,7 +62,6 @@
           </div>
         </li>
       </ul>
-      <!-- PUT BOARD LIST HERE -->
     </div>
   </section>
 </template>
