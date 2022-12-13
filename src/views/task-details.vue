@@ -30,7 +30,12 @@
           <!-- <textarea  v-model="task.title"
             @input="updateTask"
             class="task-title-input"></textarea> -->
-            <input type="text"  v-model="task.title" @input="updateTask" class="task-title-input">
+          <input
+            type="text"
+            v-model="task.title"
+            @input="updateTask"
+            class="task-title-input"
+          />
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>
@@ -605,7 +610,11 @@ export default {
         if (this?.task?.lastActivity)
           board.activities.unshift(this.task.lastActivity);
         // await this.$store.dispatch({ type: "updateBoard", board });
-        await this.$store.dispatch({type:'updateTask',boardId:this.currBoard._id,task: this.task})
+        await this.$store.dispatch({
+          type: "updateTask",
+          boardId: this.currBoard._id,
+          task: this.task,
+        });
       } catch (err) {
         console.log("cant Update task", err);
       }
@@ -957,8 +966,8 @@ export default {
       board.groups[groupIdx].tasks[taskIdx] = this.task;
       this.$store.dispatch({ type: "updateBoard", board });
     },
-    getCardPayload (columnId) {
-      return
+    getCardPayload(columnId) {
+      return;
     },
   },
   computed: {
@@ -1012,9 +1021,7 @@ export default {
     Mentionable,
     Container,
     Draggable,
-    smartList
+    smartList,
   },
 };
 </script>
-
-
