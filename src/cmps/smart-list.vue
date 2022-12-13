@@ -2,7 +2,8 @@
  <Popper @open:popper="updateInputFocus"  offsetSkid="69" offsetDistance="5" >
     <div class="task-option-btn">
       <span class="checklist-icon icon-actions"></span>
-      <p>Smart Checklist</p>
+      <p>SmartList</p>
+      <span class="smart-list-new">New!</span>
     </div>
     <template #content="{ close }">
       <div class="popper-content label-picker">
@@ -52,5 +53,4 @@ export default {
 }
 </script>
 <style lang="">
-    
 </style>
