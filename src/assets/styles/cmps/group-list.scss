@@ -37,7 +37,7 @@
   .group-container {
     width: fit-content;
     display: flex;
-    padding: 0px 15px 8px 43px;
+    padding: 0px 15px 8px 28px;
 
     @include for-mobile-layout {
       padding: 0px 3.5px;
@@ -109,7 +109,6 @@
 
       .edit-icon:before {
         display: none;
-        z-index: 20;
       }
 
       &:hover {

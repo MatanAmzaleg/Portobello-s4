@@ -1,6 +1,6 @@
 <template>
   <section class="task-preview">
-    <VDropdown placement="center" :distance="0">
+    <VDropdown placement='center' :distance="0">
       <div class="edit-icon-container" @click.stop="updatePopperMode">
         <span class="edit-icon"></span>
       </div>
@@ -152,7 +152,7 @@ export default {
     miniUsers,
     TaskDatePreview,
     miniUsersDesigned,
-    taskQuickEdit
+    taskQuickEdit,
   },
 };
 </script>

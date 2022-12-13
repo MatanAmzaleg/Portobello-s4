@@ -598,23 +598,7 @@ export default {
     },
     async updateTask() {
       try {
-        let board = JSON.parse(JSON.stringify(this.currBoard));
-        let taskIdx;
-        let groupIdx = board.groups.findIndex((group) =>
-          group.tasks.some((task, idx) => {
-            if (task.id === this.task.id) taskIdx = idx;
-            return task.id === this.task.id;
-          })
-        );
-        board.groups[groupIdx].tasks[taskIdx] = this.task;
-        if (this?.task?.lastActivity)
-          board.activities.unshift(this.task.lastActivity);
-        // await this.$store.dispatch({ type: "updateBoard", board });
-        await this.$store.dispatch({
-          type: "updateTask",
-          boardId: this.currBoard._id,
-          task: this.task,
-        });
+        await this.$store.dispatch({type:'updateTask',boardId:this.currBoard._id,task: this.task})
       } catch (err) {
         console.log("cant Update task", err);
       }

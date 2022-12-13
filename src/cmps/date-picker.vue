@@ -23,7 +23,6 @@
 
 <script>
 import popperCalendar from './popper-calendar.vue'
-// import popperModal from "./popper-modal.vue";
 
 export default {
   props: {
@@ -40,7 +39,6 @@ export default {
   },
   components: {
     popperCalendar,
-    // popperModal
   }
 }
 </script>
