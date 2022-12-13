@@ -27,10 +27,12 @@
       <div class="task-section task-title">
         <span class="header-icon"></span>
         <div class="task-title-wrapper">
-          <!-- <textarea  v-model="task.title"
+          <input
+            type="text"
+            v-model="task.title"
             @input="updateTask"
-            class="task-title-input"></textarea> -->
-            <input type="text"  v-model="task.title" @input="updateTask" class="task-title-input">
+            class="task-title-input"
+          />
           <p>
             in list <span>{{ getTaskGroup }}</span>
           </p>
@@ -945,8 +947,8 @@ export default {
       board.groups[groupIdx].tasks[taskIdx] = this.task;
       this.$store.dispatch({ type: "updateBoard", board });
     },
-    getCardPayload (columnId) {
-      return
+    getCardPayload(columnId) {
+      return;
     },
   },
   computed: {
@@ -1000,9 +1002,7 @@ export default {
     Mentionable,
     Container,
     Draggable,
-    smartList
+    smartList,
   },
 };
 </script>
-
-
