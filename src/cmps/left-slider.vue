@@ -29,7 +29,7 @@
           </div>
           <template #content="{ close }">
             <div class="label-picker">
-              <popperMember @closeModal="close" @addMember="addMember" :members="currBoard?.members" />
+              <popperMember @closeModal="close" @addMember="addMember" :members="getCurrBoard?.members" />
             </div>
           </template>
         </Popper>
@@ -62,7 +62,6 @@
           </div>
         </li>
       </ul>
-      <!-- PUT BOARD LIST HERE -->
     </div>
   </section>
 </template>

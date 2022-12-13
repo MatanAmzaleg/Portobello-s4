@@ -1,5 +1,5 @@
 <template>
-  <Popper placement="auto">
+  <Popper offsetSkid="69" offsetDistance="-120">
     <div class="task-option-btn">
       <span class="card-cover-icon icon-actions"></span>
       <p>Cover</p>

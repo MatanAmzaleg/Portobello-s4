@@ -1,5 +1,5 @@
 <template>
-  <Popper @open:popper="addFocus">
+  <Popper @open:popper="addFocus" offsetSkid="69" offsetDistance="5">
     <div class="task-option-btn btn-members">
       <span class="icon-actions member-icon"></span>
       <p>Members</p>
