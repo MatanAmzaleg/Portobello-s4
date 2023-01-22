@@ -12,17 +12,19 @@
         <div class="user-and-board-container flex column">
           <div class="user-details">
             <div class="img-div">
-              <img :src="loggedInUser.imgUrl" alt="">
+              <img :src="loggedInUser.imgUrl" alt="" />
             </div>
             <div class="content flex column">
-              <h3>{{loggedInUser.fullname}}</h3>
-              <h4>{{loggedInUser.username}}</h4>
+              <h3>{{ loggedInUser.fullname }}</h3>
+              <h4>{{ loggedInUser.username }}</h4>
             </div>
           </div>
           <div class="user-stats">
             <h1>Tasks assigned to me:</h1>
             <div class="progress flex">
-              <h3>Total tasks: <span>{{getTotalTasks}}</span></h3>
+              <h3>
+                Total tasks: <span>{{ getTotalTasks }}</span>
+              </h3>
             </div>
             <div class="progress flex">
               <h3>Unfinished tasks:</h3>
@@ -40,7 +42,13 @@
               <div class="progress-container">
                 <el-progress
                   :percentage="getFinishedTask"
-                  :color="getUnfinishedTask === 0 ? '#CC3636' : getUnfinishedTask === 100 ? '#61bd4f' : '#5ba4cf'"
+                  :color="
+                    getUnfinishedTask === 0
+                      ? '#CC3636'
+                      : getUnfinishedTask === 100
+                      ? '#61bd4f'
+                      : '#5ba4cf'
+                  "
                   :width="200"
                 >
                 </el-progress>
@@ -142,6 +150,8 @@ export default {
 
       const loggedInUserP = this.loggedInUser._id;
       this.loggedInUserStates = userEffectiveness[loggedInUserP];
+      if (!this.loggedInUserStates)
+        this.loggedInUserStates = { completed: 0, uncompleted: 0 };
       console.log(this.loggedInUserStates);
     },
   },
@@ -232,25 +242,41 @@ export default {
     getUnfinishedTask() {
       let tasksSum = 0;
       for (const tasks in this.loggedInUserStates) {
-        tasksSum += this.loggedInUserStates[tasks]
+        tasksSum += this.loggedInUserStates[tasks];
       }
-      return Math.round(this.loggedInUserStates?.uncompleted / tasksSum * 100) ;
+      switch (this.loggedInUserStates?.uncompleted) {
+        case 0:
+          return 0;
+          break;
+        default:
+          return Math.round(
+            (this.loggedInUserStates?.uncompleted / tasksSum) * 100
+          );
+      }
     },
     getTotalTasks() {
       let tasksSum = 0;
       for (const tasks in this.loggedInUserStates) {
         tasksSum += this.loggedInUserStates[tasks];
       }
-      return tasksSum
-  },
-  getFinishedTask() {
+      return tasksSum;
+    },
+    getFinishedTask() {
       let tasksSum = 0;
       for (const tasks in this.loggedInUserStates) {
-        tasksSum += this.loggedInUserStates[tasks]
+        tasksSum += this.loggedInUserStates[tasks];
       }
-      return Math.round((this.loggedInUserStates?.completed / tasksSum) * 100);
+      switch (this.loggedInUserStates?.completed) {
+        case 0:
+          return 0;
+          break;
+        default:
+          return Math.round(
+            (this.loggedInUserStates?.completed / tasksSum) * 100
+          );
+      }
     },
-},
+  },
   components: {
     awesomeChart,
   },
